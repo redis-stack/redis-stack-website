@@ -1,0 +1,23 @@
+name: Deploy website
+on:
+  repository_dispatch:
+    types: [source-updated]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ github.event.client_payload }}
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: Build website
+        run: make build
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl public-read --follow-symlinks
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DEST_DIR: ${{ secrets.AWS_S3_DIR }}
+          SOURCE_DIR: 'redis-stack-website/public'
