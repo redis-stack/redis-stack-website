@@ -10,11 +10,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
+      - name: Prepare website
+        run: make prepare
       - uses: jakejarvis/hugo-build-action@v0.88.1
         with:
           args: --minify --buildDrafts --source ./redis-stack-website
-      - name: Build website
-        run: make build
       - uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks
