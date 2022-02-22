@@ -19,4 +19,4 @@ redisjson:
 
 .PHONY: prepare
 prepare:
-	REDIS_DOC=/tmp/redis-doc make -C redis-stack-website sources theme all
+	REDIS_DOC=/tmp/redis-doc make -C redis-stack-website theme sources all
