@@ -12,9 +12,12 @@ jobs:
           submodules: true
       - name: Prepare website
         run: make prepare
-      - uses: jakejarvis/hugo-build-action@v0.88.1
-        with:
-          args: --minify --buildDrafts --source ./redis-stack-website
+      - name: Get Hugo
+        run: wget https://github.com/gohugoio/hugo/releases/download/v0.88.1/hugo_extended_0.88.1_Linux-64bit.deb; dpkg -i hugo_extended_0.88.1_Linux-64bit.deb
+      - name: Install stuff
+        run: cd redis-stack-website; npm install
+      - name: Run Hugo
+        run: hugo --source ./redis-stack-website --gc --minify
       - uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks
