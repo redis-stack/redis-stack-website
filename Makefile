@@ -17,6 +17,6 @@ redisjson:
 	cp -r ../redisjson/docs/* $(CONTENT)/redisjson/
 	python3 $(DEST)/build/process_commands.py "$(CONTENT)/redisjson/commands.json" "$(CONTENT)/redisjson/commands"
 
-.PHONY: build
-build:
-	make -C redis-stack-website netlify
+.PHONY: prepare
+prepare:
+	REDIS_DOC=/tmp/redis-doc make -C redis-stack-website sources theme commands
