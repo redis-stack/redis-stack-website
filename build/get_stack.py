@@ -31,7 +31,7 @@ def merge_module_commands(module: str, dest: str, src: str) -> None:
     # TODO: prevent command name collisions
     s = json.load(open(src, 'r'))
     for c in s:
-        s[c]['module'] = module.lower()
+        s[c]['module'] = module
     d = json.load(open(dest, 'r'))
     d.update(s)
     json.dump(d, open(dest, 'w'), indent=4)
@@ -88,6 +88,7 @@ if __name__ == '__main__':
             # TODO: fix this in new JS filter
             # merge_module_groups(args.groups_json, module, name, piece.pop('description', ''))
             merge_module_groups(args.groups_json, 'module', 'RedisStack', piece.pop('description', 'TBD'))
+
             # Fetch release tags
             out = do_or_die(['git', 'tag'], cwd=repo_path)
             repo_tags = out.decode('utf-8').split('\n')
