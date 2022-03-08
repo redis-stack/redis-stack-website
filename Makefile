@@ -1,5 +1,6 @@
 DEST = ./website
 CONTENT = $(DEST)/content/en
+IP ?= 127.0.0.1
 
 .PHONY: init
 init:
@@ -14,7 +15,7 @@ stack:
 
 .PHONY: serve
 serve:
-	cd $(DEST); hugo server --disableFastRender --debug
+	cd $(DEST); hugo server --disableFastRender --debug -b http://$(IP) server --bind $(IP)
 
 .PHONY: clean
 clean:
