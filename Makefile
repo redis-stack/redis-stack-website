@@ -1,32 +1,41 @@
-DEST = ./website
+DEST = website
 CONTENT = $(DEST)/content/en
 IP ?= 0.0.0.0
 
-.PHONY: init
+.PHONY: all init stack build serve up clean docker docker-sh
+
+ifeq ($(DEBUG),1)
+HUGO_DEBUG=--debug
+endif
+
+DOCKER_IMAGE=redis-stack-docs
+DOCKER_PORT=-p 1313:1313
+
+all: init build
+
 init:
 	@git submodule update --init --recursive
 	@mkdir -p $(CONTENT)
 
-.PHONY: stack
-stack:
+stack build:
 	@cd $(DEST); git restore .
 	@python3 build/get_stack.py
 	@make -C $(DEST) commands
 
-.PHONY: serve
-serve:
-	@cd $(DEST); hugo server --disableFastRender --debug -b http://$(IP) --bind $(IP)
+serve up:
+	@cd $(DEST); hugo server --disableFastRender $(HUGO_DEBUG) -b http://$(IP) --bind $(IP)
 
-.PHONY: clean
 clean:
 	@cd $(DEST); git restore .
 	@rm -rf $(CONTENT)
 
-.PHONY: docker
 docker:
-	@docker build -t redis-stack-docs .
-	@docker run -it -p 1313:1313 redis-stack-docs
+	@docker build -t $(DOCKER_IMAGE) .
+	@docker run -it $(DOCKER_PORT) $(DOCKER_IMAGE)
 
-.PHONY: docker-sh
+ifneq ($(VOL),)
+DOCKER_VOL=-v $(VOL):$(VOL)
+endif
+
 docker-sh:
-	@docker run -it -p 1313:1313 redis-stack-docs bash
+	@docker run -it $(DOCKER_PORT) $(DOCKER_VOL) $(DOCKER_IMAGE) bash

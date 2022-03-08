@@ -5,8 +5,8 @@ ADD . /build
 WORKDIR /build
 
 RUN cd website; npm install
-RUN make init stack
+RUN make init build
 
 EXPOSE 1313
 
-CMD ["make", "serve"]
+CMD ["make", "up"]
