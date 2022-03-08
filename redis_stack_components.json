@@ -9,6 +9,7 @@
     {
         "name": "RedisJSON",
         "type": "module",
+        "module": "ReJSON",
         "description": "JSON data type",
         "git_url": "https://github.com/redisjson/redisjson",
         "docs_path": "docs",

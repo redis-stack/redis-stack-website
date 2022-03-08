@@ -8,13 +8,15 @@ init:
 
 .PHONY: stack
 stack:
+	cd $(DEST); git restore .
 	python3 build/get_stack.py
-	make -C website commands
+	make -C $(DEST) commands
 
 .PHONY: serve
 serve:
-	cd website; hugo server --disableFastRender --debug
+	cd $(DEST); hugo server --disableFastRender --debug
 
 .PHONY: clean
 clean:
+	cd $(DEST); git restore .
 	rm -rf $(CONTENT)

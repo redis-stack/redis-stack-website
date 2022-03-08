@@ -85,8 +85,9 @@ if __name__ == '__main__':
             merge_module_commands(name.lower(
             ), f'{args.content_dir}/commands/commands.json', f'{repo_path}/commands.json')
 
-            merge_module_groups(args.groups_json, module, name, piece.pop('description', ''))
-
+            # TODO: fix this in new JS filter
+            # merge_module_groups(args.groups_json, module, name, piece.pop('description', ''))
+            merge_module_groups(args.groups_json, 'module', 'RedisStack', piece.pop('description', 'TBD'))
             # Fetch release tags
             out = do_or_die(['git', 'tag'], cwd=repo_path)
             repo_tags = out.decode('utf-8').split('\n')
