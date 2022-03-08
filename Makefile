@@ -1,10 +1,15 @@
-DEST = ./redis-stack-website
+DEST = ./website
 CONTENT = $(DEST)/content/en
 
 .PHONY: all
-all: redis redisjson
+all: init redis redisjson
 	cd $(DEST); hugo
 	#  redisearch redisgraph redistimeseries redisbloom redisbloom
+
+.PHONY: init
+init:
+	git submodule update --init --recursive
+	mkdir -p $(CONTENT)
 
 .PHONY: redis
 redis:
