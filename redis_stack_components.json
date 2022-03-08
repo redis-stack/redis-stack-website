@@ -17,5 +17,17 @@
         "docs_branch_postfix": "-newdocs",
         "release_tag_regex": "v[0-9]+\\.[0-9]+.[0-9]+",
         "exclude_tag_regexes": []
+    },
+    {
+        "name": "RedisTimeSeries",
+        "type": "module",
+        "module": "timeseries",
+        "description": "Time Series data type",
+        "git_url": "file:///Users/ofirmoskovich/RedisTimeSeries",
+        "docs_path": "docs",
+        "docs_branch": "master",
+        "docs_branch_postfix": "-newdocs",
+        "release_tag_regex": "v[0-9]+\\.[0-9]+.[0-9]+",
+        "exclude_tag_regexes": []
     }
 ]
