@@ -24,11 +24,12 @@ def do_or_die(args: list, cwd='./') -> bytes:
 def merge_module_groups(dest: str, name: str, display: str, description: str) -> None:
     with open(dest, 'r') as file:
         d = json.load(file)
-        d[name] = {
-            'display': display,
-            'description': description,
-        }
-        json.dump(d, open(dest, 'w'), indent=4)
+    d[name] = {
+        'display': display,
+        'description': description,
+    }
+    with open(dest, 'w') as file:
+        json.dump(d, file, indent=4)
 
 
 def merge_module_commands(module: str, dest: str, src: str) -> None:
