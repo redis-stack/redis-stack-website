@@ -1,97 +1,121 @@
 import argparse
-from dis import dis
-from platform import release
 import json
 import logging
-from operator import mod
-from pydoc import doc
 import re
 import subprocess
+import sys
+
+from os import environ
 from urllib.parse import urlparse
 
+def log_func(args):
+    caller = sys._getframe(1).f_code.co_name
+    logging.debug('called %s(%s)', caller, args)
 
 def do_or_die(args: list, cwd='./') -> bytes:
-    sp = subprocess.run(
+    log_func(locals())
+    sp = subprocess.Popen(
         args, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    out, err = sp.communicate()
     if sp.returncode != 0:
-        exit(sp)
-    return sp.stdout
+        logging.error(err.decode('utf-8'))
+        exit(sp.returncode)
+    return out.decode('utf-8')
 
 
 def merge_module_groups(dest: str, name: str, display: str, description: str) -> None:
-    d = json.load(open(dest, 'r'))
+    log_func(locals())
+    with open(dest, 'r') as file:
+        d = json.load(file)
     d[name] = {
         'display': display,
         'description': description,
     }
-    json.dump(d, open(dest, 'w'), indent=4)
+    with open(dest, 'w') as file:
+        json.dump(d, file, indent=4)
 
 
 def merge_module_commands(module: str, dest: str, src: str) -> None:
+    log_func(locals())
     # TODO: prevent command name collisions
-    s = json.load(open(src, 'r'))
+    with open(src, 'r') as file:
+        s = json.load(file)
     for c in s:
         s[c]['module'] = module
-    d = json.load(open(dest, 'r'))
+    with open(dest, 'r') as file:
+        d = json.load(file)
     d.update(s)
-    json.dump(d, open(dest, 'w'), indent=4)
+    with open(dest, 'w') as file:
+        json.dump(d, file, indent=4)
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--stack_json', type=str,
-                        default='./redis_stack_components.json')
-    parser.add_argument('--content_dir', type=str,
-                        default='./website/content/en')
-    parser.add_argument('--commands_json', type=str,
-                        default='./website/data/commands.json')
-    parser.add_argument('--groups_json', type=str,
-                        default='./website/data/groups.json')
-    parser.add_argument('--tmp_dir', type=str,
+    parser.add_argument('-c', '--components', type=str,
+                        default='redis_stack_components.json',
+                        help='path to components file')
+    parser.add_argument('--content', type=str,
+                        help='path to website content',
+                        default='website/content/en')
+    parser.add_argument('--commands', type=str,
+                        default='website/data/commands.json',
+                        help='path to commands.json')
+    parser.add_argument('--groups', type=str,
+                        default='website/data/groups.json',
+                        help='path to groups.json')
+    parser.add_argument('--tmp', type=str,
                         help='temporary path', default='/tmp')
     args = parser.parse_args()
 
-    stack = json.load(open(args.stack_json, 'r'))
+    LOGLEVEL = environ.get('LOGLEVEL', 'INFO').upper()
+    logging.basicConfig(level=LOGLEVEL)
+
+    with open(args.components, 'r') as file:
+        stack = json.load(file)
     for piece in stack:
         name = piece.pop('name')
         type = piece.pop('type')
+        logging.info(f'Processing {name} ...')
+        repo_path = f'{args.tmp}/{name.lower()}'
+
         git_url = urlparse(piece.pop('git_url'))
-        docs_git_url = urlparse(piece.pop('docs_git_url', git_url.geturl()))
-        docs_branch = piece.pop('docs_branch', 'master')
+        docs_git_url = urlparse(piece.pop('docs_git_url'))
+        docs_branch = piece.pop('docs_branch')
+        docs_branch_postfix = piece.pop('docs_branch_postfix', '')
 
         if docs_git_url.scheme == 'https':
-            repo_path = f'{args.tmp_dir}/{name.lower()}'
+            repo_path = f'{args.tmp}/{name.lower()}'
             do_or_die(['rm', '-rf', repo_path])
             do_or_die(['git', 'clone', docs_git_url.geturl(), repo_path])
         elif docs_git_url.scheme == 'file':
             repo_path = docs_git_url.path
+        else:
+            logging.error("Cannot determine git repo - aborting.")
+            exit(1)
 
-        docs_branch_postfix = piece.pop('docs_branch_postfix', '')
-        do_or_die(
-            ['git', 'checkout', f'origin/{docs_branch}{docs_branch_postfix}'], cwd=repo_path)
+        do_or_die(['git', 'checkout', f'origin/{docs_branch}{docs_branch_postfix}'], cwd=repo_path)
 
         if type == 'core':
-            do_or_die(['rsync', '-av', '--exclude=".*"',
-                      f'{repo_path}/', args.content_dir])
+            do_or_die(['rsync', '-av', '--no-owner', '--no-group', '--exclude=".*"',
+                       f'{repo_path}/', args.content])
         elif type == 'module':
-            docs_path = piece.pop('docs_path', '')
-            piece_content_dir = f'{args.content_dir}/{name.lower()}'
+            docs_path = piece.get('docs_path', '')
+            piece_content = f'{args.content}/{name.lower()}'
             module = piece.pop('module')
-            do_or_die(['mkdir', '-p', piece_content_dir])
-            do_or_die(
-                ['rsync', '-av', f'{repo_path}/{docs_path}/docs/', piece_content_dir])
-            do_or_die(
-                ['rsync', '-av', f'{repo_path}/{docs_path}/commands/', f'{args.content_dir}/commands'])
-            merge_module_commands(name.lower(
-            ), f'{args.content_dir}/commands/commands.json', f'{repo_path}/commands.json')
+            do_or_die(['mkdir', '-p', piece_content])
+            do_or_die(['rsync', '-av', '--no-owner', '--no-group', 
+                       f'{repo_path}/{docs_path}/docs/', piece_content])
+            do_or_die(['rsync', '-av', '--no-owner', '--no-group', 
+                       f'{repo_path}/{docs_path}/commands/', f'{args.content}/commands'])
+            merge_module_commands(name.lower(), f'{args.content}/commands/commands.json', f'{repo_path}/commands.json')
 
             # TODO: fix this in new JS filter
-            # merge_module_groups(args.groups_json, module, name, piece.pop('description', ''))
-            merge_module_groups(args.groups_json, 'module', 'RedisStack', piece.pop('description', 'TBD'))
+            # merge_module_groups(args.groups, module, name, piece.pop('description', ''))
+            merge_module_groups(args.groups, 'module', 'RedisStack', piece.pop('description', 'TBD'))
 
             # Fetch release tags
             out = do_or_die(['git', 'tag'], cwd=repo_path)
-            repo_tags = out.decode('utf-8').split('\n')
+            repo_tags = out.split('\n')
             release_tag_regex = re.compile(piece['release_tag_regex'])
             release_tags = [
                 tag for tag in repo_tags if release_tag_regex.match(tag)]
