@@ -1,3 +1,11 @@
+# Prereqs
+git
+python3
+make
+hugo
+npm
+
+
 After cloning `redis-stack-website`, run `make docker` to build and run a container that serves hugo on `localhost:1313` with the components defined in `redis_stack_components.yml`.
 The site is generated inside the container.
 In order to invoke a short-loop of changes, it's possible to `make docker-sh VOL=/home/repos` (replace `/home/repos` with your repo directory), which will run the container (assuming you've already generated it).

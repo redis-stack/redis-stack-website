@@ -1,0 +1,17 @@
+node_modules/
+
+# vim temporary files
+*~
+*.sw?
+
+# system files
+.DS_Store
+
+# IDE files
+.idea
+.vscode
+
+data/groups.json
+content/**
+public/**
+resources/**

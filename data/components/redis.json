@@ -1,0 +1,29 @@
+{
+    "id": "redis",
+    "type": "core",
+    "name": "Redis",
+    "description": "Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker. Redis provides data structures such as strings, hashes, lists, sets, sorted sets with range queries, bitmaps, hyperloglogs, geospatial indexes, and streams. Redis has built-in replication, Lua scripting, LRU eviction, transactions, and different levels of on-disk persistence, and provides high availability via Redis Sentinel and automatic partitioning with Redis Cluster",
+    "repository": {
+        "git_uri": "https://github.com/redis/redis",
+        "dev_branch": "unstable"
+    },
+    "docs": {
+        "git_uri": "https://github.com/redis/redis-doc",
+        "dev_branch": "new-structure",
+        "path": "/",
+        "commands": "commands/commands.json",
+        "copy": [
+            "_index.html",
+            "clients",
+            "community",
+            "modules",
+            "tools"
+        ]
+    },
+    "releases": {
+        "source": "repository",
+        "tags": false,
+        "include_branch_regex": "([0-9]+\\.[0-9])",
+        "exclude_branch_regexes": []
+    }
+}

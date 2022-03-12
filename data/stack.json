@@ -1,0 +1,19 @@
+{
+    "id": "redis_stack",
+    "name": "Redis Stack",
+    "description": "Redis Stack",
+    "pieces": [
+            "redis.json",
+            "stack_docs.json",
+            "redisjson.json",
+            "redisearch.json",
+            "redisgraph.json",
+            "redistimeseries.json",
+            "redisbloom.json"
+    ],
+    "website": {
+        "path": "./",
+        "content": "content/en",
+        "stack_docs": "stack"
+    }
+}

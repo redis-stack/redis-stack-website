@@ -1,0 +1,26 @@
+{
+    "id": "redistimeseries",
+    "module_id": "timeseries",
+    "type": "module",
+    "name": "Time series",
+    "description": "Time Series data structure",
+    "stack_path": "timeseries",
+    "repository": {
+        "git_uri": "https://github.com/redistimeseries/redistimeseries"
+    },
+    "docs": {
+        "git_uri": "https://github.com/redistimeseries/redistimeseries",
+        "dev_branch": "master",
+        "branches_postfix": "-newdocs",
+        "path": "/docs",
+        "commands": "/commands.json"
+    },
+    "releases": {
+        "source": "docs",
+            "tags": true,
+        "include_tag_regex": "v([0-9]+\\.[0-9]+\\.[0-9]+)",
+        "exclude_tag_regexes": [],
+        "include_branch_regex": "([0-9]+\\.[0-9])",
+        "exclude_branch_regexes": []
+    }
+}
