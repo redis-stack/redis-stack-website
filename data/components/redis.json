@@ -19,11 +19,5 @@
             "modules",
             "tools"
         ]
-    },
-    "releases": {
-        "source": "repository",
-        "tags": false,
-        "include_branch_regex": "([0-9]+\\.[0-9])",
-        "exclude_branch_regexes": []
     }
 }

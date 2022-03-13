@@ -1,6 +1,7 @@
 {
     "id": "stack_docs",
     "type": "docs",
+    "name": "Redis Stack",
     "description": "Redis Stack docs",
     "stack_path": "",
     "docs": {

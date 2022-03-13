@@ -2,18 +2,18 @@
     "id": "redis_stack",
     "name": "Redis Stack",
     "description": "Redis Stack",
-    "pieces": [
-            "redis.json",
-            "stack_docs.json",
-            "redisjson.json",
-            "redisearch.json",
-            "redisgraph.json",
-            "redistimeseries.json",
-            "redisbloom.json"
+    "type": "stack",
+    "components": [
+            "components/redis",
+            "components/stack_docs",
+            "components/redisearch",
+            "components/redisjson",
+            "components/redisgraph",
+            "components/redistimeseries",
+            "components/redisbloom"
     ],
     "website": {
         "path": "./",
-        "content": "content/en",
-        "stack_docs": "stack"
+        "content": "content/en"
     }
 }
