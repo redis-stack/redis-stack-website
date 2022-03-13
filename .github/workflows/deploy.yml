@@ -16,11 +16,11 @@ jobs:
       - name: Get Hugo
         run: wget https://github.com/gohugoio/hugo/releases/download/v0.88.1/hugo_extended_0.88.1_Linux-64bit.deb; sudo dpkg -i hugo_extended_0.88.1_Linux-64bit.deb
       - name: Install stuff
-        run: cd website; npm install
+        run: npm install
       - name: Prepare website
-        run: make init stack
-      - name: Run Hugo
-        run: hugo --source ./website --gc --minify
+        run: make init all
+      - name: Generate website
+        run: hugo --gc --minify
       - uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks
