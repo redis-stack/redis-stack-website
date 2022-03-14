@@ -1,0 +1,16 @@
+<nav class="command-filter">
+    <div class="container justify-content-center d-flex align-items-center">
+        <label>
+            <select id="group-filter">
+                <option value="" disabled selected >Filter by group...</option>
+                <option value="">All</option>
+                {{- range $id, $group := .Site.Data.groups -}}
+                <option value="{{ $id }}">{{ $group.display }}</option>
+                {{ end }}
+            </select>
+        </label>
+        <label for="name-filter">
+            <input id="name-filter" type="search" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus="" placeholder="Search" spellcheck="false">
+        </label>
+    </div>
+</nav>

@@ -7,3 +7,9 @@
 [submodule "themes/redis"]
 	path = themes/redis
 	url = https://github.com/redis/redis-website.git
+[submodule "redis_stack"]
+	path = redis_stack
+	url = https://github.com/redis-stack/redis-website-new-design
+[submodule "themes/redis_stack"]
+	path = themes/redis_stack
+	url = https://github.com/redis-stack/redis-website-new-design

@@ -19,21 +19,19 @@ DOCKER_PORT=-p 1313:1313
 all: init build
 
 init:
-	@git submodule update --init --recursive themes/docsy
-	@git submodule update --init themes/redis
+	@git submodule update --init --recursive 
 
 stack build: export LOGLEVEL=$(PY_LOGLEVEL)
 stack build:
-	@cp themes/redis/data/groups.json data
-	@python3 build/get_stack.py $(SKIP_CLONE)
-	@python3 themes/redis/build/process_commands.py "$(DEST)/commands.json" "$(DEST)/commands"
+	@python3 build/make_stack.py $(SKIP_CLONE)
 
 serve up:
 	hugo server --disableFastRender $(HUGO_DEBUG) -b http://$(IP) --bind $(IP)
 
 clean:
-	@rm data/groups.json
+	@rm -f data/groups.json data/commands.json
 	@rm -rf $(DEST)/*
+	@rm -rf public
 
 docker:
 	@docker build -t $(DOCKER_IMAGE) .

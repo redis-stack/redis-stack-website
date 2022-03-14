@@ -1,0 +1,145 @@
+.docs {
+	.td-main {
+		main {
+			.td-content {
+				&>h2,
+				&>ul,
+				&>p {
+					max-width: 95%;
+				}
+			}
+		}
+	}
+
+	form.td-sidebar__search {
+		@media (max-width: $tablet-norm) {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+
+	.td-sidebar {
+		background-color: #FAFAFF;
+		padding-left: 50px;
+		min-width: 300px;
+
+		@media (max-width: $tablet-norm) {
+			padding: 0;
+
+			.align-left.pl-0.td-sidebar-link.td-sidebar-link__section.tree-root {
+				margin-top: 0;
+			}
+		}
+
+		&__search {
+			button {
+				@media (max-width: $tablet-norm) {
+					background: white;
+					border: 1px solid black;
+					border-radius: 2px;
+					box-shadow: none;
+					color: var(--c-midnight-700);
+					margin-top: 20px;
+					padding: 9px !important;
+					position: relative;
+					width: 100%;
+
+					&:after {
+						background: url("/images/caret-black.svg") no-repeat;
+						background-size: contain;
+						content: '';
+						height: 7px;
+						position: absolute;
+						right: 1rem;
+						top: 50%;
+						transform: translateY(-50%);
+						width: 12px;
+					}
+
+					&.collapsed {
+						&:after {
+							transform: translateY(-50%) scale(-1);
+						}
+					}
+				}
+			}
+		}
+
+		&-nav {
+			@media (max-width: $tablet-norm) {
+				padding: 0 30px;
+			}
+		}
+	}
+
+	.td-sidebar-toc {
+		top: 11rem;
+	}
+
+	.sidebar-title {
+		color: var(--c-neutral-800);
+		font-size: 18px;
+		font-weight: 600;
+		line-height: 26px;
+	}
+
+	.td-sidebar-toc {
+		border-left: none;
+	}
+
+	.td-toc {
+		border-left: 1px solid var(--c-neutral-700);
+		padding-left: 1rem;
+	}
+
+	#TableOfContents a {
+		color: var(--c-neutral-800);
+		font-weight: 400;
+		margin-bottom: .5rem;
+	}
+
+	.td-sidebar-nav {
+		@media (min-width: 768px) {
+			max-height: calc(100vh - 5rem);
+			overflow-y: auto;
+		}
+
+		.td-sidebar-link.tree-root {
+			border: none;
+			color: var(--c-midnight-700);
+			font-size: 1rem;
+			font-weight: 400;
+			line-height: 26px;
+			margin-top: 3rem;
+			text-transform: uppercase;
+		}
+
+		&__section-title {
+			margin-bottom: .5rem;
+
+			a {
+				color: var(--c-neutral-800);
+				font-size: 18px;
+				font-weight: 500;
+				line-height: 26px;
+
+				.td-sidebar-nav-active-item {
+					font-weight: 600;
+				}
+			}
+
+			.ul-2 {
+				.td-sidebar-nav__section-title {
+					a {
+						font-weight: 400;
+
+						.td-sidebar-nav-active-item {
+							color: var(--c-indigo-600);
+							font-weight: 400;
+						}
+					}
+				}
+			}
+		}
+	}
+}

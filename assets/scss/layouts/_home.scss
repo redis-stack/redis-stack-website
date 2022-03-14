@@ -1,0 +1,163 @@
+.td-home {
+	h2 {
+		@media (max-width: $tablet-norm) {
+			margin-top: 0!important;
+		}
+	}
+
+	.triangle-back {
+		padding-right: 1.5rem;
+		padding-top: 1.5rem!important;
+
+		@media (max-width: $tablet-norm) {
+			margin-top: 1rem;
+			padding-top: 1rem!important;
+		}
+
+		span {
+			margin-top: 1rem;
+
+			svg {
+				margin-bottom: -1px;
+			}
+
+			@media (max-width: $tablet-norm) {
+				display: block;
+				margin: auto auto -3px;
+				width: 80%;
+
+				svg {
+					display: block;
+					height: 100%;
+				}
+			}
+
+			svg {
+				width: 100%;
+			}
+		}
+		img {
+			position: relative;
+			width: 100%;
+			z-index: 1;
+
+			@media (max-width: $tablet-norm) {
+				display: block;
+				margin: auto;
+				width: 80%;
+			}
+		}
+	}
+
+	.compare-section {
+		color: var(--c-neutral-800);
+		justify-content: center;
+		margin: auto;
+		max-width: 660px;
+		width: 100%;
+
+		.col {
+			display: flex;
+			flex-direction: column;
+			max-width: 212px;
+			text-align: center;
+
+			span {
+				color: var(--c-teal-500);
+				font-size: 42px;
+				line-height: 48px;
+			}
+
+			@media (max-width: $tablet-norm) {
+				flex-basis: 30%!important;
+			}
+		}
+	}
+
+	.container-fluid {
+		padding: 0;
+		width: 100%;
+
+		&>.row {
+			margin-left: auto;
+			margin-right: auto;
+			max-width: 1200px;
+		}
+	}
+
+	.use-cases {
+		@media (max-width: $tablet) {
+			padding: 0 1rem!important;
+		}
+
+		.col {
+			border-top: 2px solid var(--c-indigo-600);
+			padding: 20px 0;
+			margin: 0 1rem;
+
+			@media (max-width: $tablet-norm) {
+				flex-basis: 100%;
+				margin: 0 0 1rem!important;
+			}
+
+			&:first-of-type {
+				margin-left: 0;
+
+				@media (max-width: $tablet-norm) {
+					margin-left: 1rem;
+				}
+			}
+
+			&:last-of-type {
+				margin-right: 0;
+
+				@media (max-width: $tablet-norm) {
+					margin-right: 1rem;
+				}
+			}
+		}
+
+		&.three-col {
+			.col {
+				flex-basis: 30%;
+				margin-bottom: 1.5rem;
+
+				@media (max-width: $tablet-norm) {
+					flex-basis: 100%;
+					margin-bottom: 1rem!important;
+				}
+
+				&:nth-of-type(3) {
+					margin-right: 0;
+
+					@media (max-width: $tablet-norm) {
+						margin-right: 1rem;
+					}
+				}
+
+				&:nth-of-type(4) {
+					margin-left: 0;
+
+					@media (max-width: $tablet-norm) {
+						margin-left: 1rem;
+					}
+				}
+			}
+		}
+	}
+
+	.redis-stack {
+		position: relative;
+		&:before {
+			background: url("/images/redis-stack-triangle-gradient.svg") no-repeat;
+			background-size: contain;
+			content: '';
+			height: 100%;
+			left: 0;
+			position: absolute;
+			bottom: -11rem;
+			width: 100%;
+			z-index: -1;
+		}
+	}
+}

@@ -1,4 +1,5 @@
 import argparse
+from calendar import c
 from contextlib import contextmanager
 import errno
 import json
@@ -10,10 +11,11 @@ import subprocess
 import sys
 import tempfile
 from textwrap import TextWrapper
-from typing import OrderedDict
-from urllib.parse import urlparse
+from typing import AnyStr, OrderedDict, Tuple
+from urllib.parse import urlparse, ParseResult
 from urllib.request import urlopen
 
+# ------------------------------------------------------------------------------
 # Utilites
 
 
@@ -39,7 +41,6 @@ def mkdir_p(dir):
     except OSError as e:
         if e.errno != errno.EEXIST or os.path.isfile(dir):
             raise
-
 
 def relpath(dir, rel):
     return os.path.abspath(os.path.join(dir, rel))
@@ -77,60 +78,39 @@ def wget(url, dest="", tempdir=False):
     return os.path.abspath(dest)
 
 
-class Runner:
-    def __init__(self, nop=False):
-        self.nop = nop
-
-    # sudo: True/False/"file"
-    def run(self, cmd, at=None, output=None, nop=None, _try=False):
-        cmd_file = None
-        if cmd.find('\n') > -1:
-            cmds1 = str.lstrip(TextWrapper.dedent(cmd))
-            cmds = filter(lambda s: str.lstrip(s) != '', cmds1.split("\n"))
-            cmd = "; ".join(cmds)
-            cmd_for_log = cmd
-        else:
-            cmd_for_log = cmd
-        print(cmd)
-        if cmd_file is not None:
-            print("# {}".format(cmd_for_log))
-        sys.stdout.flush()
-        if nop is None:
-            nop = self.nop
-        if nop:
-            return
-        if output != True:
-            fd, temppath = tempfile.mkstemp()
-            os.close(fd)
-            cmd = "{{ {CMD}; }} >{LOG} 2>&1".format(CMD=cmd, LOG=temppath)
-        if at is None:
-            rc = subprocess.call(["bash", "-e", "-c", cmd])
-        else:
-            with cwd(at):
-                rc = os.system(cmd)
-        if rc > 0:
-            logging.error("command failed: " + cmd_for_log)
-            sys.stderr.flush()
-        if output != True:
-            os.remove(temppath)
-        if cmd_file is not None:
-            os.remove(cmd_file)
-        if rc > 0 and not _try:
-            sys.exit(1)
-        return rc
-
-    def has_command(self, cmd):
-        return Runner.has_command(cmd)
-
-    @staticmethod
-    def has_command(cmd):
-        return os.system("command -v " + cmd + " > /dev/null") == 0
+def run(cmd, cwd=None, nop=None, _try=False):
+    if cmd.find('\n') > -1:
+        cmds1 = str.lstrip(TextWrapper.dedent(cmd))
+        cmds = filter(lambda s: str.lstrip(s) != '', cmds1.split("\n"))
+        cmd = "; ".join(cmds)
+        cmd_for_log = cmd
+    else:
+        cmd_for_log = cmd
+    logging.debug(f'run: {cmd}')
+    sys.stdout.flush()
+    if nop:
+        return
+    sp = subprocess.Popen(["bash", "-e", "-c", cmd],
+                          cwd=cwd,
+                          stdout=subprocess.PIPE,
+                          stderr=subprocess.PIPE)
+    out, err = sp.communicate()
+    if sp.returncode != 0:
+        logging.error(f'command failed: {cmd_for_log}')
+        logging.error(err.decode('utf-8'))
+        if not _try:
+            die()
+    return out.decode('utf-8')
 
 
-def die(msg: str) -> None:
+def die(msg: str = 'aborting - have a nice day!') -> None:
     logging.error(msg)
     exit(1)
 
+def rsync(src: str, dst: str, exclude: list =['.*']):
+    ex = [f'"{x}"' for x in exclude]
+    return run(f'rsync -av --no-owner --no-group --exclude={{{",".join(ex)}}} {src} {dst}')
+    
 
 def log_func(args: list) -> None:
     caller = sys._getframe(1).f_code.co_name
@@ -142,74 +122,40 @@ def log_dict(msg, obj, *props):
     logging.info(f'{msg} {d}')
 
 
-def load_dict(path: str, log=True) -> dict:
-    _, name = os.path.split(path)
-    _, ext = os.path.splitext(path)
-    with open(path, 'r') as f:
+def load_dict(filepath: str) -> dict:
+    _, name = os.path.split(filepath)
+    _, ext = os.path.splitext(filepath)
+    with open(filepath, 'r') as f:
         if ext == '.json':
             o = json.load(f)
         elif ext in ['.yml', '.yaml']:
             import yaml
             o = yaml.load(f, Loader=yaml.FullLoader)
         else:
-            logging.error(f'Unknown extension {ext} for {path} - aborting.')
-            exit(1)
-    if log:
-        log_dict(f'Loaded {name}', o, 'id', 'type', 'name')
+            die(f'Unknown extension {ext} for {filepath} - aborting.')
     return o
 
 
-def dump_dict(path: str, map: dict, log=True) -> None:
-    _, name = os.path.split(path)
-    _, ext = os.path.splitext(path)
-    with open(path, 'w') as f:
+def dump_dict(filepath: str, map: dict) -> None:
+    _, ext = os.path.splitext(filepath)
+    with open(filepath, 'w') as f:
         if ext == '.json':
             json.dump(map, f, indent=4)
         elif ext in ['.yml', '.yaml']:
             import yaml
             yaml.dump(map, f)
         else:
-            logging.error(f'Unknown extension {ext} for {path} - aborting.')
+            logging.error(
+                f'Unknown extension {ext} for {filepath} - aborting.')
             exit(1)
-    if log:
-        log_dict(f'Dumped {name}', map, 'id', 'type', 'name')
 
 
-def command_filename(name):
-    """ Return the filename for a command """
-    return name.lower().replace(' ', '-')
-
-
-def do_or_die(args: list, cwd='./') -> bytes:
-    log_func(locals())
-    sp = subprocess.Popen(
-        args, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    out, err = sp.communicate()
-    if sp.returncode != 0:
-        logging.error(err.decode('utf-8'))
-        exit(sp.returncode)
-    return out.decode('utf-8')
-
-
-def git_get(uri: str, dest: str, skip_clone: bool = True) -> str:
-    log_func(locals())
+def parseUri(uri: str) -> Tuple[ParseResult, str, str]:
     _uri = urlparse(uri)
+    dirname = os.path.dirname(ARGS.stack)
     _, name = os.path.split(_uri.path)
-    name, ext = os.path.splitext(name)
-    if _uri.scheme == 'https' and ext in ['', '.git']:
-        if not skip_clone:
-            do_or_die(['rm', '-rf', dest])
-            do_or_die(['mkdir', '-p', dest])
-            do_or_die(['git', 'clone', uri, dest])
-            do_or_die(['git', 'fetch', '--all', '--tags'], dest)
-        return dest
-    elif (_uri.scheme == 'file' or _uri.scheme == '') and ext == '':
-        return _uri.path
-    else:
-        logging.error('Cannot determine git repo - aborting.')
-        exit(1)
-
-
+    _, ext = os.path.splitext(name)
+    return _uri, dirname, name, ext
 
 
 def filter_by_res(elems: list, include: str, exclude: list) -> list:
@@ -313,45 +259,133 @@ def get_dev_docs(website: dict, piece: dict, piece_path: str, commands: dict) ->
 
 
 class Component(dict):
-    def __init__(self, path=None):
+    def __init__(self, filepath: AnyStr=None, skip_clone: bool=False, tempdir: AnyStr=''):
         super().__init__()
-        if path:
-            self.update(load_dict(path))
-        self._exec = []
-        self._id = self.get('id')
-        self._type = self.get('type')
-        self._name = self.get('name', '')
-        self._description = self.get('description', '')
+        if filepath:
+            self._uri, self._dirname, self._filename, self._ext = parseUri(
+                filepath)
+            self.update(load_dict(filepath))
+        self._skip_clone = skip_clone
+        self._tempdir = f'{tempdir}/{self.get("id")}'
 
-    def _get_commands(self):
+    @staticmethod
+    def command_filename(name: str) -> str:
+        return name.lower().replace(' ', '-')
+
+    def _git_clone(self, repo) -> str:
+        git_uri = repo.get('git_uri')
+        uri, _, name, ext = parseUri(git_uri)
+        to = f'{self._tempdir}/{name}'
+        if uri.scheme == 'https' and ext in ['', '.git']:
+            if not self._skip_clone:
+                rm_rf(to)
+                mkdir_p(to)
+                run(f'git clone {git_uri} {to}')
+                run(f'git fetch --all --tags', cwd=to)
+            return to
+        elif (uri.scheme == 'file' or uri.scheme == '') and ext == '':
+            return uri.path
+        else:
+            die('Cannot determine git repo - aborting.')
+
+    def _get_docs(self, content: dict) -> None:
         docs = self.get('docs')
-        git_uri = docs.get('git_uri')
-        
-        
-        cmds = load_dict()
+        self._docs_repo = self._git_clone(docs)
+
+    def _get_commands(self, content: str, commands: dict, core: bool = False) -> dict:
+        docs = self.get('docs')
+        dev_branch = docs.get('dev_branch')
+        filename = self.get("docs").get("commands")
+        filepath = f'{self._docs_repo}/{filename}'
+        logging.info(f'Reading {self.get("type")} commands.json from {dev_branch}/{filename}')
+
+        run(f'git checkout {dev_branch}', cwd=self._docs_repo)
+        cmds = load_dict(filepath)
+
         sinter = set(cmds).intersection(set(commands))
         if len(sinter) != 0:
-            logging.error(f'Duplicate commands found - aborting.')
+            logging.error(f'Duplicate commands found in {self._id}:')
             logging.error(sinter)
-            exit(1)
-
-        return cmds
-
-
-    def _apply_core(self):
-        self._get_commands()
-
-    def apply(self):
-        logging.info(f'Applying {self._type} {self._id}')
-        if self._type == 'core':
-            self._apply_core()
-        elif self._type == 'docs':
-            self._apply_docs()
-        elif self._type == 'module':
-            self._apply_module()
+            die()
         else:
-            logging.error(f'Unknown component type: {self._type} - aborting.')
-            exit(1)
+            commands.update(cmds)
+
+        dst = f'{content}/commands/'
+        for cmd in cmds.keys():
+            filename = self.command_filename(cmd)
+            rsync(f'{self._docs_repo}/commands/{filename}.md', dst)
+        if core:
+            rsync(f'{self._docs_repo}/commands/_index.md', dst)
+
+    def _persist_commands(self) -> None:
+        filepath = f'{self._website.get("path")}/{self._website.get("commands")}'
+        logging.info(f'Persisting commands: {filepath}')
+        dump_dict(filepath, self._commands)
+
+    def _persist_groups(self) -> None:
+        filepath = f'{self._website.get("path")}/{self._website.get("groups")}'
+        logging.info(f'Persisting groups: {filepath}')
+        dump_dict(filepath, self._groups)
+
+    def _apply_stack(self) -> None:
+        self._groups = OrderedDict()
+        self._commands = OrderedDict()
+        self._website = self.get('website')
+
+        content_path = f'{self._website.get("path")}/{self._website.get("content")}'
+        rm_rf(content_path)
+        mkdir_p(content_path)
+
+        components = self.get('components')
+        for component in components:
+            if type(component) == str:
+                _, ext = os.path.splitext(component)
+                if ext == '':
+                    component += self._ext
+                c = Component(filepath=f'{self._dirname}/{component}',
+                              skip_clone=self._skip_clone, tempdir=self._tempdir)
+            elif type(component) == dict:
+                c = Component(component)
+            else:
+                die(f'Unknown component definition for {component}')
+            c.apply(content=content_path, groups=self._groups, commands=self._commands)
+
+        self._persist_commands()
+        self._persist_groups()
+
+    def _apply_core(self, content: str, groups: dict, commands: dict) -> None:
+        self._get_docs(content)
+        self._get_commands(content, commands, core=True)
+
+        
+        # Get commands.json and md
+        #
+        pass
+
+    def _apply_docs(self, content: str) -> None:
+        pass
+
+    def _apply_module(self, content: str, groups: dict, commands: dict) -> None:
+        pass
+
+    def apply(self, **kwargs):
+        _type = self.get('type')
+        name = self.get('name')
+        content = kwargs.pop('content', dict)
+        groups = kwargs.pop('groups', dict)
+        commands = kwargs.pop('commands', dict)
+        logging.info(f'Applying {_type} {name}')
+        if _type == 'core':
+            self._apply_core(content, groups, commands, **kwargs)
+        elif _type == 'module':
+            self._apply_module(content, groups, commands, **kwargs)
+        elif _type == 'docs':
+            self._apply_docs(content, **kwargs)
+        elif _type == 'stack':
+            self._apply_stack()
+        else:
+            die(f'Unknown component type: {_type} - aborting.')
+
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
@@ -367,6 +401,7 @@ def parse_args() -> argparse.Namespace:
                         help='temporary path', default=f'{tempfile.gettempdir()}')
     return parser.parse_args()
 
+
 if __name__ == '__main__':
     # Init
     ARGS = parse_args()
@@ -376,17 +411,11 @@ if __name__ == '__main__':
     mkdir_p(ARGS.tempdir)
 
     # Load settings
-    DIRNAME = os.path.dirname(ARGS.stack)
-    _, EXT = os.path.splitext(ARGS.stack)
-    STACK = load_dict(ARGS.stack)
+    STACK = Component(
+        filepath=ARGS.stack, skip_clone=ARGS.skip_clone, tempdir=ARGS.tempdir)
 
-    # Compose the stack
-    groups = OrderedDict()
-    commands = OrderedDict()
-    for component_file in STACK.get('components'):
-        c = Component(path=f'{DIRNAME}/{component_file}{EXT}')
-        c.apply()
-        break
+    # Make the stack
+    STACK.apply()
 
     # ---
     # website_content = f'{website_path}/{website.get("content")}'

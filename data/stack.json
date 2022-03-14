@@ -4,16 +4,18 @@
     "description": "Redis Stack",
     "type": "stack",
     "components": [
-            "components/redis",
-            "components/stack_docs",
-            "components/redisearch",
-            "components/redisjson",
-            "components/redisgraph",
-            "components/redistimeseries",
-            "components/redisbloom"
+            "redis",
+            "stack_docs",
+            "redisearch",
+            "redisjson",
+            "redisgraph",
+            "redistimeseries",
+            "redisbloom"
     ],
     "website": {
-        "path": "./",
-        "content": "content/en"
+        "path": ".",
+        "content": "content/en",
+        "commands": "data/commands.json",
+        "groups": "data/groups.json"
     }
 }

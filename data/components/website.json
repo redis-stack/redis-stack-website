@@ -1,8 +1,0 @@
-{
-    "id": "website",
-    "type": "website",
-    "name": "website",
-    "description": "A website",
-    "path": "./",
-    "content": "content/en"
-}
