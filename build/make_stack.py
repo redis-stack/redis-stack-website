@@ -42,6 +42,7 @@ def mkdir_p(dir):
         if e.errno != errno.EEXIST or os.path.isfile(dir):
             raise
 
+
 def relpath(dir, rel):
     return os.path.abspath(os.path.join(dir, rel))
 
@@ -107,10 +108,11 @@ def die(msg: str = 'aborting - have a nice day!') -> None:
     logging.error(msg)
     exit(1)
 
-def rsync(src: str, dst: str, exclude: list =['.*']):
+
+def rsync(src: str, dst: str, exclude: list = ['.*']):
     ex = [f'"{x}"' for x in exclude]
     return run(f'rsync -av --no-owner --no-group --exclude={{{",".join(ex)}}} {src} {dst}')
-    
+
 
 def log_func(args: list) -> None:
     caller = sys._getframe(1).f_code.co_name
@@ -256,10 +258,95 @@ def get_dev_docs(website: dict, piece: dict, piece_path: str, commands: dict) ->
 
 
 # ------------------------------------------------------------------------------
+def command_filename(name: str) -> str:
+    return name.lower().replace(' ', '-')
+
+
+class Markdown:
+    def __init__(self, filepath: str):
+        self.filepath = filepath
+        with open(self.filepath, 'r') as f:
+            self.payload = f.read()
+
+    def persist(self):
+        with open(self.filepath, 'w') as f:
+            f.write(self.payload)
+
+    @staticmethod
+    def get_command_tokens(arguments: dict) -> set:
+        """ Extract tokens from command arguments """
+        rep = set()
+        if type(arguments) is list:
+            for arg in arguments:
+                rep = rep.union(Markdown.get_command_tokens(arg))
+        else:
+            if 'token' in arguments:
+                rep.add(arguments['token'])
+            if 'arguments' in arguments:
+                for arg in arguments['arguments']:
+                    rep = rep.union(Markdown.get_command_tokens(arg))
+        return rep
+
+    @staticmethod
+    def make_command_linkifier(commands: dict, name: str, data: dict):
+        """
+        Returns a function (for re.sub) that converts valid ticked command names to
+        markdown links. This excludes the command in the context, as well as any of
+        its arguments' tokens.
+        """
+        exclude = set(name)
+        exclude.union(Markdown.get_command_tokens(data))
+
+        def linkifier(m):
+            command = m.group(1)
+            if command in commands and command not in exclude:
+                return f'[`{command}`](/commands/{command_filename(command)})'
+            elif command.startswith('!'):
+                return f'`{command[1:]}`'
+            else:
+                return m.group(0)
+        return linkifier
+
+    def generate_commands_links(self, name: str, commands: dict, payload: str) -> str:
+        """ Generate markdown links for back-ticked commands """
+        data = commands.get(name)
+        linkifier = Markdown.make_command_linkifier(commands, name, data)
+        rep = re.sub(r'`([A-Z][A-Z-_ \.]*)`', linkifier, payload)
+        return rep
+
+    @staticmethod
+    def get_cli_shortcode(m):
+        snippet = m[1]
+        start = f'{{{{% redis-cli %}}}}\n'
+        end = f'\n{{{{% /redis-cli %}}}}\n'
+        return f'{start}{snippet}{end}'
+
+    @staticmethod
+    def convert_cli_snippets(payload):
+        """ Convert the ```cli notation to Hugo shortcode syntax """
+        rep = re.sub(r'```cli\n(.*)\n```\n', Markdown.get_cli_shortcode, payload, flags=re.S)
+        return rep
+
+    def add_command_frontmatter(self, name, commands):
+        data = commands.get(name)
+        data.update({
+            'title': name,
+            'description': data.get('summary')
+        })
+        if 'replaced_by' in data:
+            data['replaced_by'] = self.generate_commands_links(
+                name, commands, data.get('replaced_by'))
+        self.payload = f'{json.dumps(data, indent=4)}\n\n{self.payload}'
+
+    def process_command(self, name, commands):
+        self.payload = self.generate_commands_links(name, commands, self.payload)
+        self.convert_cli_snippets(name)
+        self.add_command_frontmatter(name, commands)
+        self.persist()
 
 
 class Component(dict):
-    def __init__(self, filepath: AnyStr=None, skip_clone: bool=False, tempdir: AnyStr=''):
+    def __init__(self, filepath: str = None, skip_clone: bool = False, tempdir: AnyStr = ''):
         super().__init__()
         if filepath:
             self._uri, self._dirname, self._filename, self._ext = parseUri(
@@ -267,10 +354,6 @@ class Component(dict):
             self.update(load_dict(filepath))
         self._skip_clone = skip_clone
         self._tempdir = f'{tempdir}/{self.get("id")}'
-
-    @staticmethod
-    def command_filename(name: str) -> str:
-        return name.lower().replace(' ', '-')
 
     def _git_clone(self, repo) -> str:
         git_uri = repo.get('git_uri')
@@ -288,18 +371,23 @@ class Component(dict):
         else:
             die('Cannot determine git repo - aborting.')
 
-    def _get_docs(self, content: dict) -> None:
+    def _get_docs(self, branch: str, content: dict) -> None:
         docs = self.get('docs')
         self._docs_repo = self._git_clone(docs)
+        logging.info(f'Copying {self.get("type")} {branch}/docs')
+        run(f'git checkout {branch}', cwd=self._docs_repo)
+        rsync(f'{self._docs_repo}/docs/', f'{content}/docs')
 
     def _get_commands(self, content: str, commands: dict, core: bool = False) -> dict:
         docs = self.get('docs')
         dev_branch = docs.get('dev_branch')
+        run(f'git checkout {dev_branch}', cwd=self._docs_repo)
+
         filename = self.get("docs").get("commands")
         filepath = f'{self._docs_repo}/{filename}'
-        logging.info(f'Reading {self.get("type")} commands.json from {dev_branch}/{filename}')
+        logging.info(
+            f'Reading {self.get("type")} commands.json from {dev_branch}/{filename}')
 
-        run(f'git checkout {dev_branch}', cwd=self._docs_repo)
         cmds = load_dict(filepath)
 
         sinter = set(cmds).intersection(set(commands))
@@ -312,7 +400,7 @@ class Component(dict):
 
         dst = f'{content}/commands/'
         for cmd in cmds.keys():
-            filename = self.command_filename(cmd)
+            filename = command_filename(cmd)
             rsync(f'{self._docs_repo}/commands/{filename}.md', dst)
         if core:
             rsync(f'{self._docs_repo}/commands/_index.md', dst)
@@ -326,6 +414,12 @@ class Component(dict):
         filepath = f'{self._website.get("path")}/{self._website.get("groups")}'
         logging.info(f'Persisting groups: {filepath}')
         dump_dict(filepath, self._groups)
+
+    def _process_commands(self, content) -> None:
+        for name in self._commands:
+            md_path = f'{content}/commands/{command_filename(name)}.md'
+            md = Markdown(md_path)
+            md.process_command(name, self._commands)
 
     def _apply_stack(self) -> None:
         self._groups = OrderedDict()
@@ -348,19 +442,18 @@ class Component(dict):
                 c = Component(component)
             else:
                 die(f'Unknown component definition for {component}')
-            c.apply(content=content_path, groups=self._groups, commands=self._commands)
+            c.apply(content=content_path, groups=self._groups,
+                    commands=self._commands)
 
         self._persist_commands()
         self._persist_groups()
+        self._process_commands(content_path)
 
     def _apply_core(self, content: str, groups: dict, commands: dict) -> None:
-        self._get_docs(content)
+        docs = self.get('docs')
+        dev_branch = docs.get('dev_branch')
+        self._get_docs(dev_branch, content)
         self._get_commands(content, commands, core=True)
-
-        
-        # Get commands.json and md
-        #
-        pass
 
     def _apply_docs(self, content: str) -> None:
         pass
