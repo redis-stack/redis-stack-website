@@ -479,7 +479,7 @@ class Component(dict):
         run(f'git checkout {dev_branch}', cwd=repo)
         payload = self.get('payload')
         for src, dst in payload:
-            logging.info(src + ' : ' + dst)
+            rsync(f'{repo}/{src}', dst)
 
     def apply(self, **kwargs):
         _type = self.get('type')

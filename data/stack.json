@@ -10,14 +10,6 @@
         "stack_docs",
         "redisearch",
         "redisjson",
-        "redistimeseries",
-        "redisbloom"
-    ],
-    "_components": [
-        "redis",
-        "stack_docs",
-        "redisearch",
-        "redisjson",
         "redisgraph",
         "redistimeseries",
         "redisbloom"
