@@ -13,6 +13,8 @@ node_modules/
 
 data/groups.json
 data/commands.json
+static/css/cli.css
+static/js/cli.js
 content/**
 public/**
 resources/**
