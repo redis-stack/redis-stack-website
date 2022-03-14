@@ -319,7 +319,7 @@ class Component(dict):
         self._skip_clone = skip_clone
         self._tempdir = f'{tempdir}/{self.get("id")}'
 
-    def _git_clone(self, repo) -> str:
+    def _git_clone(self, repo, private=False) -> str:
         git_uri = repo.get('git_uri')
         uri, _, name, ext = parseUri(git_uri)
         to = f'{self._tempdir}/{name}'
@@ -327,6 +327,11 @@ class Component(dict):
             if not self._skip_clone:
                 rm_rf(to)
                 mkdir_p(to)
+                if private:
+                    pat = os.environ.get('PRIVATE_REPOS_PAT')
+                    if pat is None:
+                        die('Private repos without a PAT - aborting.')
+                    git_uri = f'{uri.scheme}://{pat}@{uri.netloc}{uri.path}'
                 run(f'git clone {git_uri} {to}')
                 run(f'git fetch --all --tags', cwd=to)
             return to
@@ -340,7 +345,8 @@ class Component(dict):
 
     def _get_docs(self, branch: str, content: dict, stack: str = '') -> None:
         docs = self.get('docs')
-        self._docs_repo = self._git_clone(docs)
+        private = self.get('private', False)
+        self._docs_repo = self._git_clone(docs, private)
         run(f'git checkout {branch}', cwd=self._docs_repo)
         path = docs.get('path', '')
         stack_path = f'{stack}/{self.get("stack_path", "")}'
