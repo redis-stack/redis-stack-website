@@ -15,7 +15,9 @@ jobs:
           submodules: true
       - name: Get Hugo
         run: wget https://github.com/gohugoio/hugo/releases/download/v0.88.1/hugo_extended_0.88.1_Linux-64bit.deb; sudo dpkg -i hugo_extended_0.88.1_Linux-64bit.deb
-      - name: Install stuff
+      - name: Install apt packages
+        run: apt update; apt install -y rsync
+      - name: Install npm packages
         run: npm install
       - name: Prepare website
         run: make init all
