@@ -10,14 +10,9 @@
     "docs": {
         "git_uri": "https://github.com/redis/redis-doc",
         "dev_branch": "new-structure",
-        "path": "/",
-        "commands": "commands/commands.json",
-        "copy": [
-            "_index.html",
-            "clients",
-            "community",
-            "modules",
-            "tools"
+        "exclude": [
+            "COPYRIGHT",
+            "LICENSE"
         ]
     }
 }

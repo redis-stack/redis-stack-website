@@ -111,7 +111,8 @@ def die(msg: str = 'aborting - have a nice day!') -> None:
 
 def rsync(src: str, dst: str, exclude: list = ['.*']):
     ex = [f'"{x}"' for x in exclude]
-    return run(f'rsync -av --no-owner --no-group --exclude={{{",".join(ex)}}} {src} {dst}')
+    cmd = f'rsync -av --no-owner --no-group --exclude={{{",".join(ex)}}} {src} {dst}'
+    return run(cmd)
 
 
 def log_func(args: list) -> None:
@@ -186,52 +187,6 @@ def get_branches(repo_path: str, res: dict) -> list:
 
 
 def get_dev_docs(website: dict, piece: dict, piece_path: str, commands: dict) -> dict:
-    ''' Gets dev commands and docs '''
-    typo = piece.get('type')
-    docs = piece.get('docs', None)
-    docs_repo = f'{piece_path}/docs_repo'
-    if typo == 'docs':
-        docs_repo = piece_path
-    docs_git_uri = docs.get('git_uri')
-    docs_repo = git_get(docs_git_uri, docs_repo, args.skip_clone)
-    docs_dev_branch = None
-    docs_branches_postfix = docs.get('branches_postfix', '')
-    docs_repo_path = docs.get('path', '/')
-    docs_commands = f'{docs_repo}/{docs.get("commands")}'
-    docs_dev_branch = docs.get('dev_branch')
-    website_path = website.get('path')
-    website_content = f'{website_path}/{website.get("content")}'
-    website_commands = f'{website_content}/commands/'
-    website_docs = f'{website_content}'
-
-    if typo == 'module':
-        website_docs = f'{website_docs}/docs/{website.get("stack_docs")}/{piece.get("stack_path")}'
-    for d in [
-        website_content,
-        website_commands,
-        website_docs
-    ]:
-        do_or_die(['mkdir', '-p', d])
-
-    do_or_die(
-        ['git', 'checkout', f'origin/{docs_dev_branch}{docs_branches_postfix}'], cwd=docs_repo)
-
-    payload = []
-    if typo in ['core', 'module']:
-        payload.append((f'{docs_repo}/{docs_repo_path}/docs', website_docs))
-        cmds = get_commands(docs_commands, commands)
-        for cmd in cmds.keys():
-            payload.append(
-                (f'{docs_repo}/{docs_repo_path}/commands/{command_filename(cmd)}.md', website_commands))
-        commands.update(cmds)
-    if typo == 'core':
-        payload.append(
-            (f'{docs_repo}/{docs_repo_path}/commands/_index.md', website_commands))
-    elif typo == 'docs':
-        payload.append((f'{docs_repo}/{docs_repo_path}/', website_content))
-    payload += [(f'{docs_repo}/{p}', website_docs)
-                for p in docs.get('copy', [])]
-
     rels = piece.get('releases', None)
     rels_repo = f'{piece_path}/rels_repo'
     if type(rels) is dict:
@@ -288,14 +243,18 @@ class Markdown:
         return rep
 
     @staticmethod
-    def make_command_linkifier(commands: dict, name: str, data: dict):
+    def make_command_linkifier(commands: dict, name: str):
         """
         Returns a function (for re.sub) that converts valid ticked command names to
         markdown links. This excludes the command in the context, as well as any of
         its arguments' tokens.
         """
-        exclude = set(name)
-        exclude.union(Markdown.get_command_tokens(data))
+        if name:
+            exclude = set(name)
+            tokens = Markdown.get_command_tokens(commands.get(name))
+            exclude.union(tokens)
+        else:
+            exclude = set()
 
         def linkifier(m):
             command = m.group(1)
@@ -309,8 +268,7 @@ class Markdown:
 
     def generate_commands_links(self, name: str, commands: dict, payload: str) -> str:
         """ Generate markdown links for back-ticked commands """
-        data = commands.get(name)
-        linkifier = Markdown.make_command_linkifier(commands, name, data)
+        linkifier = Markdown.make_command_linkifier(commands, name)
         rep = re.sub(r'`([A-Z][A-Z-_ \.]*)`', linkifier, payload)
         return rep
 
@@ -339,11 +297,17 @@ class Markdown:
         self.payload = f'{json.dumps(data, indent=4)}\n\n{self.payload}'
 
     def process_command(self, name, commands):
+        logging.debug(f'Processing command {self.filepath}')
         self.payload = self.generate_commands_links(name, commands, self.payload)
         self.convert_cli_snippets(name)
         self.add_command_frontmatter(name, commands)
         self.persist()
 
+    def process_doc(self, commands):
+        # TODO: verify that every .md has front matter
+        logging.debug(f'Processing document {self.filepath}')
+        self.payload = self.generate_commands_links(None, commands, self.payload)
+        self.persist()
 
 class Component(dict):
     def __init__(self, filepath: str = None, skip_clone: bool = False, tempdir: AnyStr = ''):
@@ -371,22 +335,35 @@ class Component(dict):
         else:
             die('Cannot determine git repo - aborting.')
 
-    def _get_docs(self, branch: str, content: dict) -> None:
+    def _docs_dev_branch(self) -> str:
+        return f'{self.get("docs").get("dev_branch")}{self.get("docs").get("branches_postfix","")}'
+
+    def _get_docs(self, branch: str, content: dict, stack: str = '') -> None:
         docs = self.get('docs')
         self._docs_repo = self._git_clone(docs)
-        logging.info(f'Copying {self.get("type")} {branch}/docs')
         run(f'git checkout {branch}', cwd=self._docs_repo)
-        rsync(f'{self._docs_repo}/docs/', f'{content}/docs')
+        path = docs.get('path', '')
+        stack_path = f'{stack}/{self.get("stack_path", "")}'
+        logging.info(f'Copying docs')
 
-    def _get_commands(self, content: str, commands: dict, core: bool = False) -> dict:
+        if self.get('type') in ['core', 'docs']:
+            ex = docs.get('exclude', [])
+            ex += ['.*', 'README.md', 'commands.json', '/commands', '/docs']
+            src = f'{self._docs_repo}/{path}/'
+            rsync(src, content, exclude=ex)
+
+        src = f'{self._docs_repo}/{path}/docs/'
+        dst = f'{content}/docs/{stack_path}'
+        mkdir_p(dst)
+        rsync(src, dst)
+
+    def _get_commands(self, content: str, commands: dict) -> dict:
+        run(f'git checkout {self._docs_dev_branch()}', cwd=self._docs_repo)
         docs = self.get('docs')
-        dev_branch = docs.get('dev_branch')
-        run(f'git checkout {dev_branch}', cwd=self._docs_repo)
-
-        filename = self.get("docs").get("commands")
+        filename = self.get('docs').get('commands', 'commands.json')
         filepath = f'{self._docs_repo}/{filename}'
         logging.info(
-            f'Reading {self.get("type")} commands.json from {dev_branch}/{filename}')
+            f'Reading {self.get("type")} commands.json from {self._docs_dev_branch()}/{filename}')
 
         cmds = load_dict(filepath)
 
@@ -398,12 +375,13 @@ class Component(dict):
         else:
             commands.update(cmds)
 
+        path = docs.get('path', '')
+        base = f'{self._docs_repo}/{path}/commands/'
         dst = f'{content}/commands/'
-        for cmd in cmds.keys():
-            filename = command_filename(cmd)
-            rsync(f'{self._docs_repo}/commands/{filename}.md', dst)
-        if core:
-            rsync(f'{self._docs_repo}/commands/_index.md', dst)
+        srcs = [f'{base}{command_filename(cmd)}.md' for cmd in cmds.keys()]
+        if self.get('type') == 'core':
+            srcs.append(f'{base}/_index.md')
+        rsync(' '.join(srcs), dst)
 
     def _persist_commands(self) -> None:
         filepath = f'{self._website.get("path")}/{self._website.get("commands")}'
@@ -416,15 +394,24 @@ class Component(dict):
         dump_dict(filepath, self._groups)
 
     def _process_commands(self, content) -> None:
+        logging.info(f'Processing commands')
         for name in self._commands:
             md_path = f'{content}/commands/{command_filename(name)}.md'
             md = Markdown(md_path)
             md.process_command(name, self._commands)
 
+    def _process_docs(self, content) -> None:
+        logging.info(f'Processing docs')
+        out = run(f'find {content}/docs -regex ".*\.md"').strip().split('\n')
+        for md_path in out:
+            md = Markdown(md_path)
+            md.process_doc(self._commands)
+
     def _apply_stack(self) -> None:
         self._groups = OrderedDict()
         self._commands = OrderedDict()
         self._website = self.get('website')
+        self._stack_path = self.get('stack_path')
 
         content_path = f'{self._website.get("path")}/{self._website.get("content")}'
         rm_rf(content_path)
@@ -442,36 +429,37 @@ class Component(dict):
                 c = Component(component)
             else:
                 die(f'Unknown component definition for {component}')
-            c.apply(content=content_path, groups=self._groups,
+            c.apply(content=content_path, stack=self._stack_path, groups=self._groups,
                     commands=self._commands)
 
         self._persist_commands()
         self._persist_groups()
         self._process_commands(content_path)
+        self._process_docs(content_path)
 
     def _apply_core(self, content: str, groups: dict, commands: dict) -> None:
-        docs = self.get('docs')
-        dev_branch = docs.get('dev_branch')
-        self._get_docs(dev_branch, content)
-        self._get_commands(content, commands, core=True)
+        self._get_docs(self._docs_dev_branch(), content)
+        self._get_commands(content, commands)
 
     def _apply_docs(self, content: str) -> None:
-        pass
+        self._get_docs(self._docs_dev_branch(), content)
 
-    def _apply_module(self, content: str, groups: dict, commands: dict) -> None:
-        pass
+    def _apply_module(self, content: str, stack: str, groups: dict, commands: dict) -> None:
+        self._get_docs(self._docs_dev_branch(), content, stack)
+        self._get_commands(content, commands)
 
     def apply(self, **kwargs):
         _type = self.get('type')
         name = self.get('name')
         content = kwargs.pop('content', dict)
+        stack = kwargs.pop('stack', dict)
         groups = kwargs.pop('groups', dict)
         commands = kwargs.pop('commands', dict)
         logging.info(f'Applying {_type} {name}')
         if _type == 'core':
             self._apply_core(content, groups, commands, **kwargs)
         elif _type == 'module':
-            self._apply_module(content, groups, commands, **kwargs)
+            self._apply_module(content, stack, groups, commands, **kwargs)
         elif _type == 'docs':
             self._apply_docs(content, **kwargs)
         elif _type == 'stack':

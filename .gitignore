@@ -12,6 +12,7 @@ node_modules/
 .vscode
 
 data/groups.json
+data/commands.json
 content/**
 public/**
 resources/**

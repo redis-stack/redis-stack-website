@@ -12,8 +12,7 @@
         "git_uri": "https://github.com/redisearch/redisearch",
         "dev_branch": "master",
         "branches_postfix": "-newdocs",
-        "path": "/docs",
-        "commands": "/commands.json"
+        "path": "docs"
     },
     "releases": {
         "source": "docs",

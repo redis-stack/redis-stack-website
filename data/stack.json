@@ -3,14 +3,14 @@
     "name": "Redis Stack",
     "description": "Redis Stack",
     "type": "stack",
+    "stack_path": "stack",
     "components": [
-            "redis",
-            "stack_docs",
-            "redisearch",
-            "redisjson",
-            "redisgraph",
-            "redistimeseries",
-            "redisbloom"
+        "redis",
+        "stack_docs",
+        "redisearch",
+        "redisjson",
+        "redistimeseries",
+        "redisbloom"
     ],
     "website": {
         "path": ".",
