@@ -482,11 +482,13 @@ class Component(dict):
         for dump in payload:
             src = dump.get('src')
             dst = dump.get('dst')
+            mkdir_p(dst)
             rsync(f'{repo}/{src}', dst)
             search = dump.get('search', None)
             if search:
                 replace = dump.get('replace')
-                for line in fileinput.input(dst, inplace=True):
+                _, filename = os.path.split(src)
+                for line in fileinput.input(f'{dst}/{filename}', inplace=True):
                     if line.strip() == search:
                         print(f'{replace}\n')
                     else:

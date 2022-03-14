@@ -10,11 +10,11 @@
     "payload": [
         {
             "src": "interwebz/static/css/cli.css",
-            "dst": "static/css/cli.css"
+            "dst": "static/css"
         },
         {
             "src": "interwebz/static/js/cli.js",
-            "dst": "static/js/cli.js",
+            "dst": "static/js",
             "search": "const API_URL = '/',",
             "replace": "const API_URL = 'http://13.59.16.114',"
         }
