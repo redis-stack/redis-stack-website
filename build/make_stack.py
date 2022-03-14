@@ -2,6 +2,7 @@ import argparse
 from calendar import c
 from contextlib import contextmanager
 import errno
+import fileinput
 import json
 import logging
 import os
@@ -301,7 +302,7 @@ class Markdown:
         logging.debug(f'Processing command {self.filepath}')
         self.payload = self.generate_commands_links(
             name, commands, self.payload)
-        self.convert_cli_snippets(name)
+        self.payload = self.convert_cli_snippets(self.payload)
         self.add_command_frontmatter(name, commands)
         self.persist()
 
@@ -478,8 +479,18 @@ class Component(dict):
         dev_branch = repository.get('dev_branch')
         run(f'git checkout {dev_branch}', cwd=repo)
         payload = self.get('payload')
-        for src, dst in payload:
+        for dump in payload:
+            src = dump.get('src')
+            dst = dump.get('dst')
             rsync(f'{repo}/{src}', dst)
+            search = dump.get('search', None)
+            if search:
+                replace = dump.get('replace')
+                for line in fileinput.input(dst, inplace=True):
+                    if line.strip() == search:
+                        print(f'{replace}\n')
+                    else:
+                        print(line)
 
     def apply(self, **kwargs):
         _type = self.get('type')

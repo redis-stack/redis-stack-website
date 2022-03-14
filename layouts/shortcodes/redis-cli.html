@@ -8,7 +8,6 @@
   {{ end }}
 {{ end }}
 
-{{/* TBD: actually run against backend */}}
-{{ $output = delimit $output "\nTBD\nredis> " }}
-{{ $output = printf "redis> %s" $output }}
-{{ printf "```\n%s\n```" $output | markdownify }}
+<form class="redis-cli">
+{{ $output }}
+</form>

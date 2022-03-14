@@ -4,6 +4,11 @@
     "description": "Redis Stack",
     "type": "stack",
     "stack_path": "stack",
+    "_components": [
+        "redis",
+        "redis_cli",
+        "stack_docs"
+    ],
     "components": [
         "redis",
         "redis_cli",
