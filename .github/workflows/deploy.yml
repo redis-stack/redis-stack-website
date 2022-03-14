@@ -16,7 +16,7 @@ jobs:
       - name: Get Hugo
         run: wget https://github.com/gohugoio/hugo/releases/download/v0.88.1/hugo_extended_0.88.1_Linux-64bit.deb; sudo dpkg -i hugo_extended_0.88.1_Linux-64bit.deb
       - name: Install apt packages
-        run: apt update; apt install -y rsync
+        run: sudo apt update; sudo apt install -y rsync
       - name: Install npm packages
         run: npm install
       - name: Prepare website
