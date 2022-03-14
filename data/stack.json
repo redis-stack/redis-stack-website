@@ -6,6 +6,7 @@
     "stack_path": "stack",
     "components": [
         "redis",
+        "redis_cli",
         "stack_docs",
         "redisearch",
         "redisjson",

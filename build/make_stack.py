@@ -282,7 +282,8 @@ class Markdown:
     @staticmethod
     def convert_cli_snippets(payload):
         """ Convert the ```cli notation to Hugo shortcode syntax """
-        rep = re.sub(r'```cli\n(.*)\n```\n', Markdown.get_cli_shortcode, payload, flags=re.S)
+        rep = re.sub(r'```cli\n(.*)\n```\n',
+                     Markdown.get_cli_shortcode, payload, flags=re.S)
         return rep
 
     def add_command_frontmatter(self, name, commands):
@@ -298,7 +299,8 @@ class Markdown:
 
     def process_command(self, name, commands):
         logging.debug(f'Processing command {self.filepath}')
-        self.payload = self.generate_commands_links(name, commands, self.payload)
+        self.payload = self.generate_commands_links(
+            name, commands, self.payload)
         self.convert_cli_snippets(name)
         self.add_command_frontmatter(name, commands)
         self.persist()
@@ -306,8 +308,10 @@ class Markdown:
     def process_doc(self, commands):
         # TODO: verify that every .md has front matter
         logging.debug(f'Processing document {self.filepath}')
-        self.payload = self.generate_commands_links(None, commands, self.payload)
+        self.payload = self.generate_commands_links(
+            None, commands, self.payload)
         self.persist()
+
 
 class Component(dict):
     def __init__(self, filepath: str = None, skip_clone: bool = False, tempdir: AnyStr = ''):
@@ -354,7 +358,8 @@ class Component(dict):
 
         if self.get('type') in ['core', 'docs']:
             ex = docs.get('exclude', [])
-            ex += ['.*', 'README.md', 'commands.json', '/commands', '/docs']
+            ex += ['.*', 'README.md', 'groups.json',
+                   'commands.json', '/commands', '/docs']
             src = f'{self._docs_repo}/{path}/'
             rsync(src, content, exclude=ex)
 
@@ -388,6 +393,11 @@ class Component(dict):
         if self.get('type') == 'core':
             srcs.append(f'{base}/_index.md')
         rsync(' '.join(srcs), dst)
+
+    def _get_groups(self, groups: dict) -> None:
+        run(f'git checkout {self._docs_dev_branch()}', cwd=self._docs_repo)
+        g = load_dict(f'{self._docs_repo}/groups.json')
+        groups.update(g)
 
     def _persist_commands(self) -> None:
         filepath = f'{self._website.get("path")}/{self._website.get("commands")}'
@@ -446,6 +456,7 @@ class Component(dict):
     def _apply_core(self, content: str, groups: dict, commands: dict) -> None:
         self._get_docs(self._docs_dev_branch(), content)
         self._get_commands(content, commands)
+        self._get_groups(groups)
 
     def _apply_docs(self, content: str) -> None:
         self._get_docs(self._docs_dev_branch(), content)
@@ -453,6 +464,22 @@ class Component(dict):
     def _apply_module(self, content: str, stack: str, groups: dict, commands: dict) -> None:
         self._get_docs(self._docs_dev_branch(), content, stack)
         self._get_commands(content, commands)
+        groups.update({
+            self.get('id'): {
+                'type': 'module',
+                'display': self.get('name'),
+                'description': self.get('description'),
+            }
+        })
+
+    def _apply_asset(self) -> None:
+        repository = self.get('repository')
+        repo = self._git_clone(repository)
+        dev_branch = repository.get('dev_branch')
+        run(f'git checkout {dev_branch}', cwd=repo)
+        payload = self.get('payload')
+        for src, dst in payload:
+            logging.info(src + ' : ' + dst)
 
     def apply(self, **kwargs):
         _type = self.get('type')
@@ -468,6 +495,8 @@ class Component(dict):
             self._apply_module(content, stack, groups, commands, **kwargs)
         elif _type == 'docs':
             self._apply_docs(content, **kwargs)
+        elif _type == 'asset':
+            self._apply_asset(**kwargs)
         elif _type == 'stack':
             self._apply_stack()
         else:
