@@ -14,7 +14,7 @@ jobs:
         with:
           submodules: true
       - name: Build website
-        run: make docker-all
+        run: PRIVATE_REPOS_PAT=${{ secrets.PRIVATE_REPOS_PAT } make docker-all
         env:
           PRIVATE_REPOS_PAT: ${{ secrets.PRIVATE_REPOS_PAT }}
       - uses: jakejarvis/s3-sync-action@master
