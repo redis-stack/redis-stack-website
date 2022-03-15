@@ -1,1 +1,22 @@
-website/content/
+node_modules
+venv
+
+# vim temporary files
+*~
+*.sw?
+
+# system files
+.DS_Store
+
+# IDE files
+.idea
+.vscode
+
+# Files copied pr generated during build
+data/groups.json
+data/commands.json
+static/css/cli.css
+static/js/cli.js
+content/**
+public/**
+resources/**

@@ -217,6 +217,13 @@ def get_dev_docs(website: dict, piece: dict, piece_path: str, commands: dict) ->
 def command_filename(name: str) -> str:
     return name.lower().replace(' ', '-')
 
+def regex_in_file(path:str, search:str, replace:str):
+    with open(path, 'r') as f:
+        p = f.read()
+    r = re.compile(search)
+    p = r.sub(replace, p)
+    with open(path, 'w') as f:
+        f.write(p)
 
 class Markdown:
     def __init__(self, filepath: str):
@@ -488,12 +495,8 @@ class Component(dict):
             if search:
                 sre = re.compile(search)
                 _, filename = os.path.split(src)
-                filename = f'{dst}/{filename}'
-                with open(filename, 'r') as f:
-                    p = f.read()
-                p = sre.sub(replace, p)
-                with open(filename, 'w') as f:
-                    f.write(p)
+                path = f'{dst}/{filename}'
+                regex_in_file(path, search, replace)
 
     def apply(self, **kwargs):
         _type = self.get('type')
