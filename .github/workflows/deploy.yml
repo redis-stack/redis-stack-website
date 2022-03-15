@@ -14,11 +14,9 @@ jobs:
         with:
           submodules: true
       - name: Build website
-        run: make init all
+        run: make docker-all
         env:
           PRIVATE_REPOS_PAT: ${{ secrets.PRIVATE_REPOS_PAT }}
-      - name: Generate website
-        run: hugo --gc --minify
       - uses: jakejarvis/s3-sync-action@master
         with:
           args: --acl public-read --follow-symlinks
