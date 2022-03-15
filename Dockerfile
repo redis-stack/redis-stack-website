@@ -12,7 +12,8 @@ RUN dpkg -i /tmp/hugo.deb
 
 WORKDIR /build
 ADD Makefile .
-ADD package*.json .
+ADD package.json .
+ADD package-lock.json .
 ADD ./build ./build
 ADD ./data ./data
 RUN npm install
