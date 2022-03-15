@@ -488,12 +488,11 @@ class Component(dict):
         payload = self.get('payload')
         for dump in payload:
             src = dump.get('src')
-            dst = dump.get('dst')
+            dst = dump.get('dst', src)
             mkdir_p(dst)
             rsync(f'{repo}/{src}', dst)
             search, replace = dump.get('search', None),dump.get('replace', None)
             if search:
-                sre = re.compile(search)
                 _, filename = os.path.split(src)
                 path = f'{dst}/{filename}'
                 regex_in_file(path, search, replace)

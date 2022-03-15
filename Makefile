@@ -1,4 +1,3 @@
-DEST ?= ./content/en
 IP ?= 0.0.0.0
 PY_LOGLEVEL ?= INFO
 
@@ -32,9 +31,7 @@ up:
 
 clean:
 	@rm -f data/groups.json data/commands.json
-	@rm -f static/js/cli.js static/css/cli.css
-	@rm -rf $(DEST)/*
-	@rm -rf public
+	@rm -rf assets content layouts static public
 
 ifneq ($(VOL),)
 DOCKER_VOL=-v $(VOL):$(VOL)

@@ -1,0 +1,20 @@
+{
+    "id": "stack_theme",
+    "type": "asset",
+    "name": "Redis Stack theme",
+    "repository": {
+        "git_uri": "https://github.com/redis-stack/redis-website-new-design",
+        "dev_branch": "master"
+    },
+    "payload": [
+        {
+            "src": "assets/"
+        },
+        {
+            "src": "layouts/"
+        },
+        {
+            "src": "static/"
+        }
+    ]
+}

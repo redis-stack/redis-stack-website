@@ -15,8 +15,9 @@ venv/**
 # Files copied pr generated during build
 data/groups.json
 data/commands.json
-static/css/cli.css
-static/js/cli.js
+assets/**
 content/**
+layouts/**
 public/**
+static/**
 resources/**
