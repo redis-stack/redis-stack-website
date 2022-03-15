@@ -484,15 +484,16 @@ class Component(dict):
             dst = dump.get('dst')
             mkdir_p(dst)
             rsync(f'{repo}/{src}', dst)
-            search = dump.get('search', None)
+            search, replace = dump.get('search', None),dump.get('replace', None)
             if search:
-                replace = dump.get('replace')
+                sre = re.compile(search)
                 _, filename = os.path.split(src)
-                for line in fileinput.input(f'{dst}/{filename}', inplace=True):
-                    if line.strip() == search:
-                        print(f'{replace}\n')
-                    else:
-                        print(line)
+                filename = f'{dst}/{filename}'
+                with open(filename, 'r') as f:
+                    p = f.read()
+                p = sre.sub(replace, p)
+                with open(filename, 'w') as f:
+                    f.write(p)
 
     def apply(self, **kwargs):
         _type = self.get('type')

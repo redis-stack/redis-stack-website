@@ -24,12 +24,14 @@ init:
 stack build: export LOGLEVEL=$(PY_LOGLEVEL)
 stack build:
 	@python3 build/make_stack.py $(SKIP_CLONE)
+	@hugo $(HUGO_DEBUG) --print-mem --gc --minify
 
 serve up:
 	hugo server --disableFastRender $(HUGO_DEBUG) -b http://$(IP) --bind $(IP)
 
 clean:
 	@rm -f data/groups.json data/commands.json
+	@rm -f static/js/cli.js static/css/cli.css
 	@rm -rf $(DEST)/*
 	@rm -rf public
 
