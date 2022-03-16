@@ -13,8 +13,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Build website
-        run: PRIVATE_REPOS_PAT=${{ secrets.PRIVATE_REPOS_PAT } make docker-all
+      - uses: ./
         env:
           PRIVATE_REPOS_PAT: ${{ secrets.PRIVATE_REPOS_PAT }}
       - uses: jakejarvis/s3-sync-action@master
