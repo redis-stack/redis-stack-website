@@ -5,6 +5,7 @@ from contextlib import contextmanager
 import errno
 import io
 import json
+from operator import mod
 from pydoc import stripid
 from statistics import fmean
 import yaml
@@ -304,7 +305,7 @@ class Markdown:
                 i += 1
             else:
                 break
-        if payload[i].startswith('\ufeff'): # BOM workaround
+        if payload[i].startswith('\ufeff'):  # BOM workaround
             payload[i] = payload[i][1:]
 
         self.fm_type = self.FM_TYPES.get(payload[i])
@@ -338,7 +339,8 @@ class Markdown:
                 fm += '\n'
             payload = fm + payload
         else:
-            logging.warning(f'{self.filepath} has no FrontMatter attached - please make a corrective move ASAP!')
+            logging.warning(
+                f'{self.filepath} has no FrontMatter attached - please make a corrective move ASAP!')
 
         with open(self.filepath, 'w') as f:
             f.write(payload)
@@ -430,6 +432,14 @@ class Markdown:
             None, commands, self.payload)
         self.persist()
 
+    def patch_module_paths(self, module: dict, stack_path) -> None:
+        _id = module.get('id')
+        self.payload = re.sub(f'(\[.+\])(\(.+\))',
+                              lambda x: (
+                                  x.group(2).startswith(f'(/{_id}')
+                                  and f'{x.group(1)}({stack_path}{x.group(2)[len(_id)+2:-1]})'
+                              ) or x.group(0), self.payload)
+
 
 class Component(dict):
     def __init__(self, filepath: str = None, skip_clone: bool = False, tempdir: AnyStr = ''):
@@ -496,22 +506,26 @@ class Component(dict):
                 if os.path.isfile(f):
                     files.append(f)
             if len(files) == 0:
-                logging.warning(f'no index.md nor _index.md found in {dst} - please rectify the situation stat!!')
+                logging.warning(
+                    f'no index.md nor _index.md found in {dst} - please rectify the situation stat!!')
             if len(files) > 1:
-                logging.warning(f'both index.md and _index.md exist in {dst} - please address this immediately!!!')
+                logging.warning(
+                    f'both index.md and _index.md exist in {dst} - please address this immediately!!!')
 
             stack_weight = self.get('stack_weight')
             for f in files:
                 md = Markdown(f)
                 md.fm_data['weight'] = stack_weight
                 md.persist()
-            
+
             files = run(f'find {dst} -regex ".*\.md"').strip().split('\n')
             for f in files:
                 md = Markdown(f)
                 t = md.fm_data.pop('type', None)
                 if t:
-                    logging.warning(f'the file {f} has a type set to `{t}` - please prevent future harm by acting now, thank you.')
+                    logging.warning(
+                        f'the file {f} has a type set to `{t}` - please prevent future harm by acting now, thank you.')
+                md.patch_module_paths(self, f'/docs/{stack_path}')
                 md.persist()
 
     def _get_commands(self, content: str, commands: dict) -> dict:

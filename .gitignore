@@ -12,12 +12,15 @@ venv/**
 .idea
 .vscode
 
-# Files copied pr generated during build
+# Files copied or generated during build
 data/groups.json
 data/commands.json
+public/**
+resources/**
+
+# local "theme"
+/config.toml
 assets/**
 content/**
 layouts/**
-public/**
 static/**
-resources/**
