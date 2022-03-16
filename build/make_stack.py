@@ -368,7 +368,7 @@ class Markdown:
         its arguments' tokens.
         """
         if name:
-            exclude = set(name)
+            exclude = set([name])
             tokens = Markdown.get_command_tokens(commands.get(name))
             exclude.union(tokens)
         else:
@@ -404,6 +404,35 @@ class Markdown:
                      Markdown.get_cli_shortcode, payload, flags=re.S)
         return rep
 
+    @staticmethod
+    def convert_reply_shortcuts(payload):
+        def reply(x):
+            resp2 = {
+                'nil': ('resp-bulk-strings', 'Null reply'),
+                'simple-string': ('resp-simple-string', 'Simple string reply'),
+                'integer': ('resp-integers', 'Integer reply'),
+                'bulk-string': ('resp-bulk-strings', 'Bulk string reply'),
+                'array': ('resp-arrays', 'Array reply'),
+                'error': ('resp-errors', 'Error reply'),
+
+            }
+            rep = resp2.get(x.group(1), None)
+            if rep:
+                return f'[{rep[1]}](/docs/reference/protocol-spec/#{rep[0]})'
+            return f'[]'
+
+        rep = re.sub(r'@(.+)-reply',
+                     reply, payload)
+        return rep
+
+    @staticmethod
+    def convert_command_sections(payload):
+        rep = re.sub(r'@examples\n',
+                     '### Examples\n', payload)
+        rep = re.sub(r'@return\n',
+                     '### Return\n', rep)
+        return rep
+
     def add_command_frontmatter(self, name, commands):
         data = commands.get(name)
         data.update({
@@ -422,6 +451,8 @@ class Markdown:
         logging.debug(f'Processing command {self.filepath}')
         self.payload = self.generate_commands_links(
             name, commands, self.payload)
+        self.payload = self.convert_command_sections(self.payload)
+        self.payload = self.convert_reply_shortcuts(self.payload)
         self.payload = self.convert_cli_snippets(self.payload)
         self.add_command_frontmatter(name, commands)
         self.persist()
@@ -578,7 +609,7 @@ class Component(dict):
 
     def _process_docs(self, content) -> None:
         logging.info(f'Processing docs')
-        out = run(f'find {content} -regex ".*\.md"').strip().split('\n')
+        out = run(f'find {content} -type f -name "*.md" | grep -ive "{content}/commands"').strip().split('\n')
         for md_path in out:
             md = Markdown(md_path)
             md.process_doc(self._commands)
