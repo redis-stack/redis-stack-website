@@ -31,7 +31,7 @@ up:
 
 clean:
 	@rm -f data/groups.json data/commands.json
-	@rm -rf assets content layouts static public
+	@rm -rf assets content layouts public static resources
 
 ifneq ($(VOL),)
 DOCKER_VOL=-v $(VOL):$(VOL)
