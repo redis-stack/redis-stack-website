@@ -12,11 +12,14 @@ venv/**
 .idea
 .vscode
 
+/bin/htmltest
+
 # Files copied or generated during build
 data/groups.json
 data/commands.json
 public/**
 resources/**
+tmp/**
 
 # local "theme"
 /config.toml

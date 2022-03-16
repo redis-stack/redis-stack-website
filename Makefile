@@ -31,7 +31,7 @@ up:
 
 clean:
 	@rm -f config.toml data/groups.json data/commands.json
-	@rm -rf assets content layouts public static resources
+	@rm -rf assets content layouts public static resources tmp
 
 ifneq ($(VOL),)
 DOCKER_VOL=-v $(VOL):$(VOL)

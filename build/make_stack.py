@@ -699,7 +699,7 @@ class Component(dict):
         stack = kwargs.pop('stack', dict)
         groups = kwargs.pop('groups', dict)
         commands = kwargs.pop('commands', dict)
-        logging.info(f'Applying {_type} {name}')
+        logging.info(f'Applying {_type}: {name}')
         if _type == 'core':
             self._apply_core(content, groups, commands, **kwargs)
         elif _type == 'module':
