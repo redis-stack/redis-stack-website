@@ -406,6 +406,7 @@ class Markdown:
 
     @staticmethod
     def convert_reply_shortcuts(payload):
+        """ Convert RESP2 reply type shortcuts to links """
         def reply(x):
             resp2 = {
                 'nil': ('resp-bulk-strings', 'Null reply'),
@@ -427,6 +428,7 @@ class Markdown:
 
     @staticmethod
     def convert_command_sections(payload):
+        """ Converts redis-doc section headers to MD """
         rep = re.sub(r'@examples\n',
                      '### Examples\n', payload)
         rep = re.sub(r'@return\n',
@@ -434,6 +436,7 @@ class Markdown:
         return rep
 
     def add_command_frontmatter(self, name, commands):
+        """ Sets a JSON FrontMatter payload for a command page """
         data = commands.get(name)
         data.update({
             'title': name,
@@ -448,6 +451,7 @@ class Markdown:
         self.fm_data.update(data)
 
     def process_command(self, name, commands):
+        """ New command processing logic """
         logging.debug(f'Processing command {self.filepath}')
         self.payload = self.generate_commands_links(
             name, commands, self.payload)
@@ -458,18 +462,23 @@ class Markdown:
         self.persist()
 
     def process_doc(self, commands):
+        """ New doc processing logic """
         logging.debug(f'Processing document {self.filepath}')
         self.payload = self.generate_commands_links(
             None, commands, self.payload)
         self.persist()
 
-    def patch_module_paths(self, module: dict, stack_path) -> None:
+    def patch_module_paths(self, module: dict) -> None:
+        """ Replaces absolute module documentation links """
+        def rep(x):
+            if x.group(2).startswith(f'(/{_id}'):
+                r = f'{x.group(1)}({x.group(2)[len(_id)+3:-1]})'
+                return r
+            else:
+                return x.group(0)
+
         _id = module.get('id')
-        self.payload = re.sub(f'(\[.+\])(\(.+\))',
-                              lambda x: (
-                                  x.group(2).startswith(f'(/{_id}')
-                                  and f'{x.group(1)}({stack_path}{x.group(2)[len(_id)+2:-1]})'
-                              ) or x.group(0), self.payload)
+        self.payload = re.sub(f'(\[.+\])(\(.+\))', rep, self.payload)
 
 
 class Component(dict):
@@ -556,7 +565,7 @@ class Component(dict):
                 if t:
                     logging.warning(
                         f'the file {f} has a type set to `{t}` - please prevent future harm by acting now, thank you.')
-                md.patch_module_paths(self, f'/docs/{stack_path}')
+                md.patch_module_paths(self)
                 md.persist()
 
     def _get_commands(self, content: str, commands: dict) -> dict:
@@ -609,7 +618,8 @@ class Component(dict):
 
     def _process_docs(self, content) -> None:
         logging.info(f'Processing docs')
-        out = run(f'find {content} -type f -name "*.md" | grep -ive "{content}/commands"').strip().split('\n')
+        out = run(
+            f'find {content} -type f -name "*.md" | grep -ive "{content}/commands"').strip().split('\n')
         for md_path in out:
             md = Markdown(md_path)
             md.process_doc(self._commands)
