@@ -331,8 +331,9 @@ class Component(dict):
         self._skip_clone = skip_clone
         self._tempdir = f'{tempdir}/{self.get("id")}'
 
-    def _git_clone(self, repo, private=False) -> str:
+    def _git_clone(self, repo) -> str:
         git_uri = repo.get('git_uri')
+        private = repo.get('private', False)
         uri, _, name, ext = parseUri(git_uri)
         to = f'{self._tempdir}/{name}'
         if uri.scheme == 'https' and ext in ['', '.git']:
@@ -357,8 +358,7 @@ class Component(dict):
 
     def _get_docs(self, branch: str, content: dict, stack: str = '') -> None:
         docs = self.get('docs')
-        private = self.get('private', False)
-        self._docs_repo = self._git_clone(docs, private)
+        self._docs_repo = self._git_clone(docs)
         run(f'git checkout {branch}', cwd=self._docs_repo)
         path = docs.get('path', '')
         stack_path = f'{stack}/{self.get("stack_path", "")}'
