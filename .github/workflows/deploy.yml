@@ -13,7 +13,12 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - uses: ./
+      - run: apt-get update -qq
+      - run: apt-get install -y ca-certificates wget curl git rsync python3 python3-pip
+      - run: wget -q -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VER}/hugo_extended_${HUGO_VER}_Linux-64bit.deb
+      - run: dpkg -i /tmp/hugo.deb
+      - run: npm install
+      - run: make all
         env:
           PRIVATE_REPOS_PAT: ${{ secrets.PRIVATE_REPOS_PAT }}
       - uses: jakejarvis/s3-sync-action@master

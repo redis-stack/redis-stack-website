@@ -1,5 +1,0 @@
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - make all
