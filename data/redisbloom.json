@@ -5,6 +5,7 @@
     "name": "Bloom",
     "description": "Probabilistic Data Structures",
     "stack_path": "bloom",
+    "stack_weight": 15,
     "repository": {
         "git_uri": "https://github.com/redisbloom/redisbloom"
     },

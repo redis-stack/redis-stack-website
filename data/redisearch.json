@@ -5,6 +5,7 @@
     "name": "Search",
     "description": "Secondary index operations",
     "stack_path": "search",
+    "stack_weight": 10,
     "repository": {
         "git_uri": "https://github.com/redisearch/redisearch"
     },

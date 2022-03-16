@@ -5,6 +5,7 @@
     "name": "JSON",
     "description": "JSON data structure",
     "stack_path": "json",
+    "stack_weight": 11,
     "repository": {
         "git_uri": "https://github.com/redisjson/redisjson"
     },

@@ -9,6 +9,10 @@
     },
     "payload": [
         {
+            "src": "config.toml",
+            "dst": "./"
+        },
+        {
             "src": "assets/"
         },
         {

@@ -30,7 +30,7 @@ up:
 	hugo server --disableFastRender $(HUGO_DEBUG) -b http://$(IP) --bind $(IP)
 
 clean:
-	@rm -f data/groups.json data/commands.json
+	@rm -f config.toml data/groups.json data/commands.json
 	@rm -rf assets content layouts public static resources
 
 ifneq ($(VOL),)

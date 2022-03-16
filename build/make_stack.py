@@ -1,9 +1,14 @@
 import argparse
+from ast import Str
 from calendar import c
 from contextlib import contextmanager
 import errno
-import fileinput
+import io
 import json
+from pydoc import stripid
+from statistics import fmean
+import yaml
+import pytoml
 import logging
 import os
 import re
@@ -12,7 +17,7 @@ import subprocess
 import sys
 import tempfile
 from textwrap import TextWrapper
-from typing import AnyStr, OrderedDict, Tuple
+from typing import Any, AnyStr, OrderedDict, Tuple
 from urllib.parse import urlparse, ParseResult
 from urllib.request import urlopen
 
@@ -126,34 +131,6 @@ def log_dict(msg, obj, *props):
     logging.info(f'{msg} {d}')
 
 
-def load_dict(filepath: str) -> dict:
-    _, name = os.path.split(filepath)
-    _, ext = os.path.splitext(filepath)
-    with open(filepath, 'r') as f:
-        if ext == '.json':
-            o = json.load(f)
-        elif ext in ['.yml', '.yaml']:
-            import yaml
-            o = yaml.load(f, Loader=yaml.FullLoader)
-        else:
-            die(f'Unknown extension {ext} for {filepath} - aborting.')
-    return o
-
-
-def dump_dict(filepath: str, map: dict) -> None:
-    _, ext = os.path.splitext(filepath)
-    with open(filepath, 'w') as f:
-        if ext == '.json':
-            json.dump(map, f, indent=4)
-        elif ext in ['.yml', '.yaml']:
-            import yaml
-            yaml.dump(map, f)
-        else:
-            logging.error(
-                f'Unknown extension {ext} for {filepath} - aborting.')
-            exit(1)
-
-
 def parseUri(uri: str) -> Tuple[ParseResult, str, str]:
     _uri = urlparse(uri)
     dirname = os.path.dirname(ARGS.stack)
@@ -162,62 +139,63 @@ def parseUri(uri: str) -> Tuple[ParseResult, str, str]:
     return _uri, dirname, name, ext
 
 
-def filter_by_res(elems: list, include: str, exclude: list) -> list:
-    log_func(locals())
-    e = [re.match(include, elem) for elem in elems]
-    e = [elem[1] for elem in e if elem]
-    for ex in exclude:
-        e = [x for x in e if not re.match(ex, x)]
-    e.sort(reverse=True)
-    return e
+# def filter_by_res(elems: list, include: str, exclude: list) -> list:
+#     log_func(locals())
+#     e = [re.match(include, elem) for elem in elems]
+#     e = [elem[1] for elem in e if elem]
+#     for ex in exclude:
+#         e = [x for x in e if not re.match(ex, x)]
+#     e.sort(reverse=True)
+#     return e
 
 
-def get_tags(repo_path: str, res: dict) -> list:
-    tags = do_or_die(['git', 'tag'], cwd=repo_path).split('\n')
-    tags = filter_by_res(tags, res.get('include_tag_regex'),
-                         res.get('exclude_tag_regexes'))
-    return tags
+# def get_tags(repo_path: str, res: dict) -> list:
+#     tags = do_or_die(['git', 'tag'], cwd=repo_path).split('\n')
+#     tags = filter_by_res(tags, res.get('include_tag_regex'),
+#                          res.get('exclude_tag_regexes'))
+#     return tags
 
 
-def get_branches(repo_path: str, res: dict) -> list:
-    branches = do_or_die(['git', 'branch', '-r'], cwd=repo_path).split('\n')
-    branches = [branch.strip() for branch in branches]
-    branches = filter_by_res(branches, f'origin/({res.get("include_branch_regex")})',
-                             [f'origin/({bre})' for bre in res.get('exclude_branch_regexes')])
-    return branches
+# def get_branches(repo_path: str, res: dict) -> list:
+#     branches = do_or_die(['git', 'branch', '-r'], cwd=repo_path).split('\n')
+#     branches = [branch.strip() for branch in branches]
+#     branches = filter_by_res(branches, f'origin/({res.get("include_branch_regex")})',
+#                              [f'origin/({bre})' for bre in res.get('exclude_branch_regexes')])
+#     return branches
 
 
-def get_dev_docs(website: dict, piece: dict, piece_path: str, commands: dict) -> dict:
-    rels = piece.get('releases', None)
-    rels_repo = f'{piece_path}/rels_repo'
-    if type(rels) is dict:
-        source = rels.get('source', None)
-        if source not in piece:
-            logging.error(
-                f'Invalid releases source key for {id} - aborting.')
-        if source == 'docs':
-            rels_repo = docs_repo
-        elif source == 'repository':
-            git_get(piece.get(source).get(
-                'git_uri'), rels_repo, args.skip_clone)
+# def get_dev_docs(website: dict, piece: dict, piece_path: str, commands: dict) -> dict:
+#     rels = piece.get('releases', None)
+#     rels_repo = f'{piece_path}/rels_repo'
+#     if type(rels) is dict:
+#         source = rels.get('source', None)
+#         if source not in piece:
+#             logging.error(
+#                 f'Invalid releases source key for {id} - aborting.')
+#         if source == 'docs':
+#             rels_repo = docs_repo
+#         elif source == 'repository':
+#             git_get(piece.get(source).get(
+#                 'git_uri'), rels_repo, args.skip_clone)
 
-    if rels:
-        tags = []
-        if rels.get('tags', False):
-            tags = get_tags(rels_repo, rels)
-        branches = get_branches(rels_repo, rels)
+#     if rels:
+#         tags = []
+#         if rels.get('tags', False):
+#             tags = get_tags(rels_repo, rels)
+#         branches = get_branches(rels_repo, rels)
 
-    for (s, d) in payload:
-        do_or_die(['rsync', '-av', '--no-owner', '--no-group', s, d])
+#     for (s, d) in payload:
+#         do_or_die(['rsync', '-av', '--no-owner', '--no-group', s, d])
 
-    return commands
+#     return commands
 
 
 # ------------------------------------------------------------------------------
 def command_filename(name: str) -> str:
     return name.lower().replace(' ', '-')
 
-def regex_in_file(path:str, search:str, replace:str):
+
+def regex_in_file(path: str, search: str, replace: str):
     with open(path, 'r') as f:
         p = f.read()
     r = re.compile(search)
@@ -225,15 +203,145 @@ def regex_in_file(path:str, search:str, replace:str):
     with open(path, 'w') as f:
         f.write(p)
 
+
+class StructuredData:
+    PARSERS = {
+        '.json': {
+            'dump': lambda x, y: json.dump(x, y, indent=4),
+            'dumps': lambda x: json.dumps(x, indent=4),
+            'load': lambda x: json.load(x),
+            'loads': lambda x: json.loads(x),
+        },
+        '.yaml': {
+            'dump': lambda x, y: yaml.dump(x, y),
+            'dumps': lambda x: yaml.dump(x),
+            'load': lambda x: yaml.load(x, Loader=yaml.FullLoader),
+            'loads': lambda x: yaml.load(io.StringIO(x), Loader=yaml.FullLoader),
+        },
+        '.toml': {
+            'dump': lambda x, y: pytoml.dump(x, y),
+            'dumps': lambda x: pytoml.dumps(x),
+            'load': lambda x: pytoml.load(x),
+            'loads': lambda x: pytoml.loads(x),
+        },
+    }
+
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def dump(ext: str, d: dict, f: Any) -> None:
+        if ext in StructuredData.PARSERS:
+            return StructuredData.PARSERS.get(ext).get('dump')(d, f)
+        else:
+            raise RuntimeError(f'unknown extension {ext}')
+
+    @staticmethod
+    def dumps(ext: str, d: dict) -> None:
+        if ext in StructuredData.PARSERS:
+            return StructuredData.PARSERS.get(ext).get('dumps')(d)
+        else:
+            raise RuntimeError(f'unknown extension {ext}')
+
+    @staticmethod
+    def load(ext: str, f: Any) -> dict:
+        if ext in StructuredData.PARSERS:
+            return StructuredData.PARSERS.get(ext).get('load')(f)
+        else:
+            raise RuntimeError(f'unknown extension {ext}')
+
+    @staticmethod
+    def loads(ext: str, s: str) -> dict:
+        if ext in StructuredData.PARSERS:
+            return StructuredData.PARSERS.get(ext).get('loads')(s)
+        else:
+            raise RuntimeError(f'unknown extension {ext}')
+
+
+def load_dict(filepath: str) -> dict:
+    # _, name = os.path.split(filepath)
+    _, ext = os.path.splitext(filepath)
+    with open(filepath, 'r') as f:
+        o = StructuredData.load(ext, f)
+    return o
+
+
+def dump_dict(filepath: str, d: dict) -> None:
+    _, ext = os.path.splitext(filepath)
+    with open(filepath, 'w') as f:
+        StructuredData.dump(ext, d, f)
+
+
 class Markdown:
+    FM_TYPES = {
+        '{\n': {
+            'eof': '}\n',
+            'ext': '.json'
+        },
+        '---\n': {
+            'eof': '---\n',
+            'ext': '.yaml'
+        },
+        '+++\n': {
+            'eof': '+++\n',
+            'ext': '.toml'
+        }
+    }
+
     def __init__(self, filepath: str):
         self.filepath = filepath
+        self.fm_type = None
+        self.fm_ext = None
+        self.fm_data = dict()
         with open(self.filepath, 'r') as f:
-            self.payload = f.read()
+            payload = f.readlines()
+        if not len(payload):
+            self.payload = ''
+            return
+        i = 0
+        while i < len(payload):             # Munch newlines
+            if payload[i].strip() == '':
+                i += 1
+            else:
+                break
+        if payload[i].startswith('\ufeff'): # BOM workaround
+            payload[i] = payload[i][1:]
+
+        self.fm_type = self.FM_TYPES.get(payload[i])
+        if not self.fm_type:
+            self.payload = ''.join(payload)
+            return
+        eof, self.fm_ext = self.fm_type.get('eof'), self.fm_type.get('ext')
+        found = False
+        for j in range(i+1, len(payload)):
+            if payload[j] == eof:
+                found = True
+                break
+        if not found and payload[j].strip() != eof.strip():
+            die(f'No eof for frontmatter: {payload}')
+        if self.fm_ext == '.json':
+            self.fm_data.update(StructuredData.loads(
+                self.fm_ext, ''.join(payload[i:j+1])))
+            self.payload = ''.join(payload[j+1:])
+        else:
+            self.fm_data.update(StructuredData.loads(
+                self.fm_ext, ''.join(payload[i+1:j])))
+            self.payload = ''.join(payload[j+1:])
 
     def persist(self):
+        payload = self.payload
+        if self.fm_type:
+            fm = StructuredData.dumps(self.fm_ext, self.fm_data)
+            if self.fm_ext != '.json':
+                fm = f'{self.fm_type.get("eof")}{fm}{self.fm_type.get("eof")}'
+            else:
+                fm += '\n'
+            payload = fm + payload
+        else:
+            logging.warning(f'{self.filepath} has no FrontMatter attached - please make a corrective move ASAP!')
+
         with open(self.filepath, 'w') as f:
-            f.write(self.payload)
+            f.write(payload)
 
     @staticmethod
     def get_command_tokens(arguments: dict) -> set:
@@ -298,12 +406,15 @@ class Markdown:
         data = commands.get(name)
         data.update({
             'title': name,
+            'linkTitle': name,
             'description': data.get('summary')
         })
         if 'replaced_by' in data:
             data['replaced_by'] = self.generate_commands_links(
                 name, commands, data.get('replaced_by'))
-        self.payload = f'{json.dumps(data, indent=4)}\n\n{self.payload}'
+        self.fm_type = self.FM_TYPES.get('{\n')
+        self.fm_ext = self.fm_type.get('ext')
+        self.fm_data.update(data)
 
     def process_command(self, name, commands):
         logging.debug(f'Processing command {self.filepath}')
@@ -314,7 +425,6 @@ class Markdown:
         self.persist()
 
     def process_doc(self, commands):
-        # TODO: verify that every .md has front matter
         logging.debug(f'Processing document {self.filepath}')
         self.payload = self.generate_commands_links(
             None, commands, self.payload)
@@ -364,9 +474,10 @@ class Component(dict):
         stack_path = f'{stack}/{self.get("stack_path", "")}'
         logging.info(f'Copying docs')
 
+        ex = ['.*']
         if self.get('type') in ['core', 'docs']:
-            ex = docs.get('exclude', [])
-            ex += ['.*', 'README.md', 'groups.json',
+            ex += docs.get('exclude', [])
+            ex += ['README.md', 'groups.json',
                    'commands.json', '/commands', '/docs']
             src = f'{self._docs_repo}/{path}/'
             rsync(src, content, exclude=ex)
@@ -375,6 +486,33 @@ class Component(dict):
         dst = f'{content}/docs/{stack_path}'
         mkdir_p(dst)
         rsync(src, dst)
+
+        if self.get('type') == 'module':
+            files = [f'{dst}/{f}' for f in ['index.md', '_index.md']]
+            l = len(files)
+            while l > 0:
+                f = files.pop(0)
+                l -= 1
+                if os.path.isfile(f):
+                    files.append(f)
+            if len(files) == 0:
+                logging.warning(f'no index.md nor _index.md found in {dst} - please rectify the situation stat!!')
+            if len(files) > 1:
+                logging.warning(f'both index.md and _index.md exist in {dst} - please address this immediately!!!')
+
+            stack_weight = self.get('stack_weight')
+            for f in files:
+                md = Markdown(f)
+                md.fm_data['weight'] = stack_weight
+                md.persist()
+            
+            files = run(f'find {dst} -regex ".*\.md"').strip().split('\n')
+            for f in files:
+                md = Markdown(f)
+                t = md.fm_data.pop('type', None)
+                if t:
+                    logging.warning(f'the file {f} has a type set to `{t}` - please prevent future harm by acting now, thank you.')
+                md.persist()
 
     def _get_commands(self, content: str, commands: dict) -> dict:
         run(f'git checkout {self._docs_dev_branch()}', cwd=self._docs_repo)
@@ -426,7 +564,7 @@ class Component(dict):
 
     def _process_docs(self, content) -> None:
         logging.info(f'Processing docs')
-        out = run(f'find {content}/docs -regex ".*\.md"').strip().split('\n')
+        out = run(f'find {content} -regex ".*\.md"').strip().split('\n')
         for md_path in out:
             md = Markdown(md_path)
             md.process_doc(self._commands)
@@ -486,12 +624,14 @@ class Component(dict):
         dev_branch = repository.get('dev_branch')
         run(f'git checkout {dev_branch}', cwd=repo)
         payload = self.get('payload')
+        logging.info(f'Dumping payload')
         for dump in payload:
             src = dump.get('src')
             dst = dump.get('dst', src)
             mkdir_p(dst)
             rsync(f'{repo}/{src}', dst)
-            search, replace = dump.get('search', None),dump.get('replace', None)
+            search, replace = dump.get(
+                'search', None), dump.get('replace', None)
             if search:
                 _, filename = os.path.split(src)
                 path = f'{dst}/{filename}'

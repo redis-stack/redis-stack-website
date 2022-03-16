@@ -5,6 +5,7 @@
     "name": "Time series",
     "description": "Time Series data structure",
     "stack_path": "timeseries",
+    "stack_weight": 14,
     "repository": {
         "git_uri": "https://github.com/redistimeseries/redistimeseries"
     },
