@@ -1,33 +1,34 @@
 IP ?= 0.0.0.0
-PY_LOGLEVEL ?= INFO
+LOGLEVEL ?= INFO
+ENV ?= development
+HUGO_BUILD ?= --print-mem --gc --minify
+HUGO_SERVER ?= --quiet --disableFastRender -b http://$(IP) --bind $(IP)
+DOCKER_IMAGE=image-redis-stack-website
+DOCKER_CONTAINER=container-$(DOCKER_IMAGE)
+DOCKER_PORT=-p 1313:1313
 
 .PHONY: all init build up clean docker-build docker docker-up docker-sh
 
 ifeq ($(DEBUG),1)
 HUGO_DEBUG=--debug
-PY_LOGLEVEL=DEBUG
+LOGLEVEL ?= DEBUG
 endif
 
 ifeq ($(SKIP_CLONE),1)
 SKIP_CLONE=--skip-clone
 endif
 
-DOCKER_IMAGE=image-redis-stack-website
-DOCKER_CONTAINER=container-$(DOCKER_IMAGE)
-DOCKER_PORT=-p 1313:1313
-
 all: init build
 
 init:
 	@git submodule update --init --recursive 
 
-build: export LOGLEVEL=$(PY_LOGLEVEL)
 build:
-	@python3 build/make_stack.py $(SKIP_CLONE)
-	@hugo $(HUGO_DEBUG) --print-mem --gc --minify
+	@python3 build/make_stack.py $(SKIP_CLONE) --loglevel=$(LOGLEVEL)
+	@hugo $(HUGO_DEBUG) $(HUGO_BUILD)
 
 up:
-	hugo server --disableFastRender $(HUGO_DEBUG) -b http://$(IP) --bind $(IP)
+	hugo server $(HUGO_DEBUG) $(HUGO_SERVER)
 
 clean:
 	@rm -f config.toml data/groups.json data/commands.json

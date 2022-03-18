@@ -6,7 +6,23 @@
     "docs": {
         "git_uri": "https://github.com/redis-stack/redis-stack-docs",
         "dev_branch": "main",
-        "path": "/",
-        "private": true
+        "private": true,
+        "path": "docs"
+    },
+    "misc": {
+        "git_uri": "https://github.com/redis-stack/redis-stack-docs",
+        "dev_branch": "main",
+        "private": true,
+        "payload": [
+            {
+                "src": "community/"
+            },
+            {
+                "src": "download/"
+            },
+            {
+                "src": "support/"
+            }
+        ]
     }
 }

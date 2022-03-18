@@ -9,11 +9,18 @@
     "repository": {
         "git_uri": "https://github.com/redisjson/redisjson"
     },
+    "commands": {
+        "git_uri": "https://github.com/redisjson/redisjson",
+        "dev_branch": "master",
+        "branches_postfix": "-newdocs",
+        "defs": "commands.json",
+        "path": "docs/commands"
+    },
     "docs": {
         "git_uri": "https://github.com/redisjson/redisjson",
         "dev_branch": "master",
         "branches_postfix": "-newdocs",
-        "path": "docs"
+        "path": "docs/docs"
     },
     "releases": {
         "source": "docs",

@@ -9,12 +9,18 @@
     "repository": {
         "git_uri": "https://github.com/redisbloom/redisbloom"
     },
+    "commands": {
+        "git_uri": "https://github.com/redisbloom/redisbloom",
+        "dev_branch": "master",
+        "branches_postfix": "-newdocs",
+        "defs": "commands.json",
+        "path": "docs/commands"
+    },
     "docs": {
         "git_uri": "https://github.com/redisbloom/redisbloom",
         "dev_branch": "master",
         "branches_postfix": "-newdocs",
-        "path": "/docs",
-        "commands": "/commands.json"
+        "path": "docs/docs"
     },
     "releases": {
         "source": "docs",

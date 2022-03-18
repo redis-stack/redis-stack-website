@@ -7,12 +7,39 @@
         "git_uri": "https://github.com/redis/redis",
         "dev_branch": "unstable"
     },
+    "commands": {
+        "git_uri": "https://github.com/redis/redis-doc",
+        "dev_branch": "new-structure",
+        "defs": "commands.json",
+        "groups": "groups.json",
+        "path": "commands",
+        "payload": [
+            {
+                "src": "_index.md"
+            }
+        ]
+    },
     "docs": {
         "git_uri": "https://github.com/redis/redis-doc",
         "dev_branch": "new-structure",
-        "exclude": [
-            "COPYRIGHT",
-            "LICENSE"
+        "path": "docs"
+    },
+    "misc": {
+        "git_uri": "https://github.com/redis/redis-doc",
+        "dev_branch": "new-structure",
+        "payload": [
+            {
+                "src": "_index.html"
+            },
+            {
+                "src": "community/"
+            },
+            {
+                "src": "modules/"
+            },
+            {
+                "src": "tools/"
+            }
         ]
     }
 }

@@ -1,13 +1,14 @@
 import argparse
-from ast import Str
 from calendar import c
 from contextlib import contextmanager
+from curses.ascii import isdigit
+from datetime import datetime
 import errno
+from genericpath import isfile
+from importlib.resources import path
 import io
 import json
-from operator import mod
-from pydoc import stripid
-from statistics import fmean
+from xml.dom.expatbuilder import theDOMImplementation
 import yaml
 import pytoml
 import logging
@@ -329,7 +330,20 @@ class Markdown:
                 self.fm_ext, ''.join(payload[i+1:j])))
             self.payload = ''.join(payload[j+1:])
 
+    def report_links(self):
+        links = re.findall(r'(\[.+\])(\(.+\))', self.payload)
+        exc = ['./', '#', '/commands', '/community', '/docs', '/topics']
+        for link in links:
+            ex = False
+            for e in exc:
+                if link[1].startswith(f'({e}'):
+                    ex = True
+                    break
+            if not ex:
+                print(f'"{link[1]}","{link[0]}","{self.filepath}"')
+
     def persist(self):
+        # self.report_links()
         payload = self.payload
         if self.fm_type:
             fm = StructuredData.dumps(self.fm_ext, self.fm_data)
@@ -482,14 +496,55 @@ class Markdown:
 
 
 class Component(dict):
-    def __init__(self, filepath: str = None, skip_clone: bool = False, tempdir: AnyStr = ''):
+    def __init__(self, filepath: str, clones: list, skip_clone: bool = False, tempdir: AnyStr = ''):
         super().__init__()
         if filepath:
             self._uri, self._dirname, self._filename, self._ext = parseUri(
                 filepath)
             self.update(load_dict(filepath))
+        self._clones = clones
+        self._id = self.get('id')
+        self._type = self.get('type')
+        self._name = self.get('name', self._id)
+        self._desc = self.get('description', '')
+        self._stack_path = self.get('stack_path', '')
+        self._repository = self.get('repository', None)
+        self._docs = self.get('docs', None)
+        self._commands = self.get('commands', None)
+        self._misc = self.get('misc', None)
         self._skip_clone = skip_clone
         self._tempdir = f'{tempdir}/{self.get("id")}'
+
+    @staticmethod
+    def _dump_payload(spath: str, dpath: str, payload: list) -> None:
+        if not payload:
+            return
+        logging.info(f'Dumping payload')
+        for dump in payload:
+            src = dump.get('src')
+            dst = dump.get('dst', src)
+            s = f'{spath}/{src}'
+            d = f'{dpath}/{dst}'
+            if os.path.isfile(s):
+                mkdir_p(os.path.dirname(d))
+            else:
+                mkdir_p(d)
+            rsync(s, d)
+            search = dump.get('search', None)
+            replace = dump.get('replace', None)
+            if search:
+                if os.path.isdir(s):
+                    files = next(os.walk(d), (None, None, []))[2]
+                else:
+                    files = [d]
+                for file in files:
+                    regex_in_file(file, search, replace)
+
+    @staticmethod
+    def _get_dev_branch(repository: dict) -> str:
+        branch = repository.get("dev_branch")
+        post = repository .get("branches_postfix", "")
+        return f'{branch}{post}'
 
     def _git_clone(self, repo) -> str:
         git_uri = repo.get('git_uri')
@@ -497,7 +552,7 @@ class Component(dict):
         uri, _, name, ext = parseUri(git_uri)
         to = f'{self._tempdir}/{name}'
         if uri.scheme == 'https' and ext in ['', '.git']:
-            if not self._skip_clone:
+            if not self._skip_clone and git_uri not in self._clones:
                 rm_rf(to)
                 mkdir_p(to)
                 if private:
@@ -507,97 +562,113 @@ class Component(dict):
                     git_uri = f'{uri.scheme}://{pat}@{uri.netloc}{uri.path}'
                 run(f'git clone {git_uri} {to}')
                 run(f'git fetch --all --tags', cwd=to)
+                self._clones.append(to)
             return to
         elif (uri.scheme == 'file' or uri.scheme == '') and ext == '':
             return uri.path
         else:
             die('Cannot determine git repo - aborting.')
 
-    def _docs_dev_branch(self) -> str:
-        return f'{self.get("docs").get("dev_branch")}{self.get("docs").get("branches_postfix","")}'
-
-    def _get_docs(self, branch: str, content: dict, stack: str = '') -> None:
-        docs = self.get('docs')
-        self._docs_repo = self._git_clone(docs)
-        run(f'git checkout {branch}', cwd=self._docs_repo)
+    def _get_docs(self, content: dict, stack: str = '') -> None:
+        docs = self._docs
+        repo = self._git_clone(docs)
+        branch = Component._get_dev_branch(docs)
+        run(f'git checkout {branch}', cwd=repo)
         path = docs.get('path', '')
         stack_path = f'{stack}/{self.get("stack_path", "")}'
         logging.info(f'Copying docs')
-
-        ex = ['.*']
-        if self.get('type') in ['core', 'docs']:
-            ex += docs.get('exclude', [])
-            ex += ['README.md', 'groups.json',
-                   'commands.json', '/commands', '/docs']
-            src = f'{self._docs_repo}/{path}/'
-            rsync(src, content, exclude=ex)
-
-        src = f'{self._docs_repo}/{path}/docs/'
+        src = f'{repo}/{path}/'
         dst = f'{content}/docs/{stack_path}'
         mkdir_p(dst)
         rsync(src, dst)
+        Component._dump_payload(src, dst, docs.get('payload', None))
 
-        if self.get('type') == 'module':
-            files = [f'{dst}/{f}' for f in ['index.md', '_index.md']]
-            l = len(files)
-            while l > 0:
-                f = files.pop(0)
-                l -= 1
-                if os.path.isfile(f):
-                    files.append(f)
-            if len(files) == 0:
-                logging.warning(
-                    f'no index.md nor _index.md found in {dst} - please rectify the situation stat!!')
-            if len(files) > 1:
-                logging.warning(
-                    f'both index.md and _index.md exist in {dst} - please address this immediately!!!')
+        # if self.get('type') == 'module':
+        #     files = [f'{dst}/{f}' for f in ['index.md', '_index.md']]
+        #     l = len(files)
+        #     while l > 0:
+        #         f = files.pop(0)
+        #         l -= 1
+        #         if os.path.isfile(f):
+        #             files.append(f)
+        #     if len(files) == 0:
+        #         logging.warning(
+        #             f'no index.md nor _index.md found in {dst} - please rectify the situation stat!!')
+        #     if len(files) > 1:
+        #         logging.warning(
+        #             f'both index.md and _index.md exist in {dst} - please address this immediately!!!')
 
-            stack_weight = self.get('stack_weight')
-            for f in files:
-                md = Markdown(f)
-                md.fm_data['weight'] = stack_weight
-                md.persist()
+        #     stack_weight = self.get('stack_weight')
+        #     for f in files:
+        #         md = Markdown(f)
+        #         md.fm_data['weight'] = stack_weight
+        #         md.persist()
 
-            files = run(f'find {dst} -regex ".*\.md"').strip().split('\n')
-            for f in files:
-                md = Markdown(f)
-                t = md.fm_data.pop('type', None)
-                if t:
-                    logging.warning(
-                        f'the file {f} has a type set to `{t}` - please prevent future harm by acting now, thank you.')
-                md.patch_module_paths(self)
-                md.persist()
+        #     files = run(f'find {dst} -regex ".*\.md"').strip().split('\n')
+        #     for f in files:
+        #         md = Markdown(f)
+        #         t = md.fm_data.pop('type', None)
+        #         if t:
+        #             logging.warning(
+        #                 f'the file {f} has a type set to `{t}` - please prevent future harm by acting now, thank you.')
+        #         md.patch_module_paths(self)
+        #         md.persist()
 
     def _get_commands(self, content: str, commands: dict) -> dict:
-        run(f'git checkout {self._docs_dev_branch()}', cwd=self._docs_repo)
-        docs = self.get('docs')
-        filename = self.get('docs').get('commands', 'commands.json')
-        filepath = f'{self._docs_repo}/{filename}'
-        logging.info(
-            f'Reading {self.get("type")} commands.json from {self._docs_dev_branch()}/{filename}')
+        repo = self._git_clone(self._commands)
+        branch = Component._get_dev_branch(self._commands)
+        run(f'git checkout {branch}', cwd=repo)
+        path = self._commands.get('path', '')
 
+        logging.info(f'Copying commands')
+        filename = self._commands.get('defs', 'commands.json')
+        filepath = f'{repo}/{filename}'
+        logging.info(
+            f'Reading {self._type} commands.json from {branch}/{filename}')
         cmds = load_dict(filepath)
 
         sinter = set(cmds).intersection(set(commands))
         if len(sinter) != 0:
-            logging.error(f'Duplicate commands found in {self._id}:')
+            logging.error(f'Duplicate command(s) found in {self._id}:')
             logging.error(sinter)
             die()
         else:
             commands.update(cmds)
 
-        path = docs.get('path', '')
-        base = f'{self._docs_repo}/{path}/commands/'
+        base = f'{repo}/{path}/'
         dst = f'{content}/commands/'
         srcs = [f'{base}{command_filename(cmd)}.md' for cmd in cmds.keys()]
-        if self.get('type') == 'core':
-            srcs.append(f'{base}/_index.md')
         rsync(' '.join(srcs), dst)
+        Component._dump_payload(base, dst, self._commands.get('payload', None))
+
+    def _make_group(self, data: dict = {}) -> None:
+        d = {
+            'type': self.get('type'),
+            'display': data.get('display', self.get('id')),
+            'description': data.get('description', self._desc),
+            'weight': self.get('stack_weight', 0)
+        }
+        return d
 
     def _get_groups(self, groups: dict) -> None:
-        run(f'git checkout {self._docs_dev_branch()}', cwd=self._docs_repo)
-        g = load_dict(f'{self._docs_repo}/groups.json')
+        repo = self._git_clone(self._commands)
+        branch = Component._get_dev_branch(self._commands)
+        run(f'git checkout {branch}', cwd=repo)
+
+        logging.info(f'Getting groups')
+        filename = self._commands.get('groups', 'groups.json')
+        filepath = f'{repo}/{filename}'
+        logging.info(
+            f'Reading {self._type} commands.json from {branch}/{filename}')
+        g = load_dict(filepath)
+        g = {group: self._make_group(data) for (group, data) in g.items()}
         groups.update(g)
+
+    def _get_misc(self, content) -> None:
+        repo = self._git_clone(self._misc)
+        branch = Component._get_dev_branch(self._misc)
+        run(f'git checkout {branch}', cwd=repo)
+        Component._dump_payload(repo, f'{content}/{self._stack_path}', self._misc.get('payload'))
 
     def _persist_commands(self) -> None:
         filepath = f'{self._website.get("path")}/{self._website.get("commands")}'
@@ -640,7 +711,7 @@ class Component(dict):
                 _, ext = os.path.splitext(component)
                 if ext == '':
                     component += self._ext
-                c = Component(filepath=f'{self._dirname}/{component}',
+                c = Component(f'{self._dirname}/{component}', self._clones,
                               skip_clone=self._skip_clone, tempdir=self._tempdir)
             elif type(component) == dict:
                 c = Component(component)
@@ -655,67 +726,50 @@ class Component(dict):
         self._process_docs(content_path)
 
     def _apply_core(self, content: str, groups: dict, commands: dict) -> None:
-        self._get_docs(self._docs_dev_branch(), content)
+        self._get_docs(content)
         self._get_commands(content, commands)
+        self._get_misc(content)
         self._get_groups(groups)
 
     def _apply_docs(self, content: str) -> None:
-        self._get_docs(self._docs_dev_branch(), content)
+        self._get_docs(content)
+        self._get_misc(content)
 
     def _apply_module(self, content: str, stack: str, groups: dict, commands: dict) -> None:
-        self._get_docs(self._docs_dev_branch(), content, stack)
+        self._get_docs(content, stack)
         self._get_commands(content, commands)
-        groups.update({
-            self.get('id'): {
-                'type': 'module',
-                'display': self.get('name'),
-                'description': self.get('description'),
-            }
-        })
+        groups.update({self._id: self._make_group()})
 
     def _apply_asset(self) -> None:
-        repository = self.get('repository')
-        repo = self._git_clone(repository)
-        dev_branch = repository.get('dev_branch')
+        if not self._repository:
+            return
+        repo = self._git_clone(self._repository)
+        dev_branch = self._repository.get('dev_branch')
         run(f'git checkout {dev_branch}', cwd=repo)
-        payload = self.get('payload')
-        logging.info(f'Dumping payload')
-        for dump in payload:
-            src = dump.get('src')
-            dst = dump.get('dst', src)
-            mkdir_p(dst)
-            rsync(f'{repo}/{src}', dst)
-            search, replace = dump.get(
-                'search', None), dump.get('replace', None)
-            if search:
-                _, filename = os.path.split(src)
-                path = f'{dst}/{filename}'
-                regex_in_file(path, search, replace)
+        Component._dump_payload(repo, './', self._repository.get('payload'))
 
     def apply(self, **kwargs):
-        _type = self.get('type')
-        name = self.get('name')
         content = kwargs.pop('content', dict)
         stack = kwargs.pop('stack', dict)
         groups = kwargs.pop('groups', dict)
         commands = kwargs.pop('commands', dict)
-        logging.info(f'Applying {_type}: {name}')
-        if _type == 'core':
+        logging.info(f'Applying {self._type}: {self._name}')
+        if self._type == 'core':
             self._apply_core(content, groups, commands, **kwargs)
-        elif _type == 'module':
+        elif self._type == 'module':
             self._apply_module(content, stack, groups, commands, **kwargs)
-        elif _type == 'docs':
+        elif self._type == 'docs':
             self._apply_docs(content, **kwargs)
-        elif _type == 'asset':
+        elif self._type == 'asset':
             self._apply_asset(**kwargs)
-        elif _type == 'stack':
+        elif self._type == 'stack':
             self._apply_stack()
         else:
-            die(f'Unknown component type: {_type} - aborting.')
+            die(f'Unknown component type: {self._type} - aborting.')
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description='Builds a stack website')
     parser.add_argument('--stack', type=str,
                         default='./data/stack.json',
                         help='path to stack definition')
@@ -732,45 +786,17 @@ def parse_args() -> argparse.Namespace:
 if __name__ == '__main__':
     # Init
     ARGS = parse_args()
-    LOGLEVEL = os.environ.get('LOGLEVEL', ARGS.loglevel)
-    logging.basicConfig(
-        level=LOGLEVEL, format='%(levelname)s %(asctime)s %(message)s')
     mkdir_p(ARGS.tempdir)
 
     # Load settings
     STACK = Component(
-        filepath=ARGS.stack, skip_clone=ARGS.skip_clone, tempdir=ARGS.tempdir)
+        ARGS.stack, [], skip_clone=ARGS.skip_clone, tempdir=ARGS.tempdir)
 
     # Make the stack
+    logging.basicConfig(
+        level=ARGS.loglevel, format='%(filename)s: %(levelname)s %(asctime)s %(message)s')
+    print(f'APPLY STACK "{STACK._name}"')
+    start = datetime.now()
     STACK.apply()
-
-    # ---
-    # website_content = f'{website_path}/{website.get("content")}'
-
-    # groups = OrderedDict(load_dict(f'{args.data}/groups.json'))
-    # commands = OrderedDict()
-    # for piece_file in stack['pieces']:
-    #     piece = load_dict(f'{args.data}/components/{piece_file}')
-    #     id = piece.get('id')
-    #     typo = piece.get('type')
-    #     logging.info(f'Processing {typo} {id}...')
-
-    #     name = piece.get('name', id)
-    #     piece_path = f'{temp_dir}/{id}'
-
-    #     if typo == 'core':
-    #         commands = get_dev_docs(website, piece, piece_path, commands)
-    #     elif typo == 'module':
-    #         commands = get_dev_docs(website, piece, piece_path, commands)
-    #         groups.update({
-    #             piece.get('id'): {
-    #                 'type': 'module',
-    #                 'display': piece.get('name'),
-    #                 'description': piece.get('description'),
-    #             }
-    #         })
-    #     elif typo == 'docs':
-    #         get_dev_docs(website, piece, piece_path, {})
-
-    # dump_dict(f'{website_content}/commands.json', commands)
-    # dump_dict(f'{args.data}/groups.json', groups)
+    total = datetime.now() - start
+    print(f'+OK ({total.microseconds / 1000} ms)')
