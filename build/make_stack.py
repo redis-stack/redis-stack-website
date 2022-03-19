@@ -1,6 +1,7 @@
 import argparse
 from calendar import c
 from contextlib import contextmanager
+from ctypes import resize
 from curses.ascii import isdigit
 from datetime import datetime
 import errno
@@ -519,7 +520,6 @@ class Component(dict):
     def _dump_payload(spath: str, dpath: str, payload: list) -> None:
         if not payload:
             return
-        logging.info(f'Dumping payload')
         for dump in payload:
             src = dump.get('src')
             dst = dump.get('dst', src)
@@ -555,6 +555,8 @@ class Component(dict):
             if not self._skip_clone and git_uri not in self._clones:
                 rm_rf(to)
                 mkdir_p(to)
+                logging.debug(
+                    f'Cloning {private and "private" or "public"} {git_uri} to {to}')
                 if private:
                     pat = os.environ.get('PRIVATE_REPOS_PAT')
                     if pat is None:
@@ -563,6 +565,8 @@ class Component(dict):
                 run(f'git clone {git_uri} {to}')
                 run(f'git fetch --all --tags', cwd=to)
                 self._clones.append(to)
+            else:
+                logging.debug(f'Skipping clone {git_uri}')
             return to
         elif (uri.scheme == 'file' or uri.scheme == '') and ext == '':
             return uri.path
@@ -654,21 +658,61 @@ class Component(dict):
         repo = self._git_clone(self._commands)
         branch = Component._get_dev_branch(self._commands)
         run(f'git checkout {branch}', cwd=repo)
-
         logging.info(f'Getting groups')
         filename = self._commands.get('groups', 'groups.json')
         filepath = f'{repo}/{filename}'
         logging.info(
-            f'Reading {self._type} commands.json from {branch}/{filename}')
+            f'Reading {self._type} groups.json from {branch}/{filename}')
         g = load_dict(filepath)
         g = {group: self._make_group(data) for (group, data) in g.items()}
         groups.update(g)
+
+    @staticmethod
+    def _make_data(path: str) -> dict:
+        data = {}
+        for root, _, files in os.walk(path, topdown=False):
+            for filename in files:
+                fullpath = os.path.join(root, filename)
+                name, _ = os.path.splitext(filename)
+                s = root[len(path)+1:].split('/')
+                key, domain = s[0], s[1]
+                if len(s) > 2:
+                    org = f'{s[2]}/'
+                else:
+                    org = ''
+                d = load_dict(fullpath)
+                field = d.pop('name')
+                d.update({
+                    'repository': f'{domain}/{org}{name}',
+                })
+                if key not in data:
+                    data.update({
+                        key: {}
+                    })
+                data.get(key).update({
+                    field: d
+                })
+        return data
+
+    def _get_data(self) -> None:
+        data = self.get('data')
+        repo = self._git_clone(data)
+        branch = Component._get_dev_branch(data)
+        run(f'git checkout {branch}', cwd=repo)
+        logging.info(f'Getting data')
+        filename = self._commands.get('languages', 'languages.json')
+        filepath = f'{repo}/{filename}'
+        rsync(filepath, 'data/')
+        for src in ['clients', 'libraries', 'modules', 'tools']:
+            data = Component._make_data(f'{repo}/{src}')
+            dump_dict(f'data/{src}.json', data)
 
     def _get_misc(self, content) -> None:
         repo = self._git_clone(self._misc)
         branch = Component._get_dev_branch(self._misc)
         run(f'git checkout {branch}', cwd=repo)
-        Component._dump_payload(repo, f'{content}/{self._stack_path}', self._misc.get('payload'))
+        Component._dump_payload(
+            repo, f'{content}/{self._stack_path}', self._misc.get('payload'))
 
     def _persist_commands(self) -> None:
         filepath = f'{self._website.get("path")}/{self._website.get("commands")}'
@@ -728,8 +772,9 @@ class Component(dict):
     def _apply_core(self, content: str, groups: dict, commands: dict) -> None:
         self._get_docs(content)
         self._get_commands(content, commands)
-        self._get_misc(content)
         self._get_groups(groups)
+        self._get_misc(content)
+        self._get_data()
 
     def _apply_docs(self, content: str) -> None:
         self._get_docs(content)

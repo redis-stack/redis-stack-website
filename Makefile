@@ -31,7 +31,8 @@ up:
 	hugo server $(HUGO_DEBUG) $(HUGO_SERVER)
 
 clean:
-	@rm -f config.toml data/groups.json data/commands.json
+	@rm -f config.toml
+	@cd data; rm -f groups.json commands.json languages.json clients.json libraries.json modules.json tools.json
 	@rm -rf assets content layouts public static resources tmp
 
 ifneq ($(VOL),)

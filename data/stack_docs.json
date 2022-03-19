@@ -15,9 +15,6 @@
         "private": true,
         "payload": [
             {
-                "src": "community/"
-            },
-            {
                 "src": "download/"
             },
             {

@@ -12,14 +12,4 @@ venv
 .idea
 .vscode
 
-bin/htmltest
-
-# Files copied or generated during build
-data/groups.json
-data/commands.json
-static/css/cli.css
-static/js/cli.js
-content/**
-public/**
-resources/**
-tmp/**
+bin/**

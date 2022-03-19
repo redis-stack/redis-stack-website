@@ -17,6 +17,11 @@ venv/**
 # Files copied or generated during build
 data/groups.json
 data/commands.json
+data/languages.json
+data/clients.json
+data/libraries.json
+data/modules.json
+data/tools.json
 public/**
 resources/**
 tmp/**

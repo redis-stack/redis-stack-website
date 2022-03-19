@@ -24,21 +24,24 @@
         "dev_branch": "new-structure",
         "path": "docs"
     },
+    "data": {
+        "git_uri": "../redis-doc",
+        "dev_branch": "new-structure",
+        "languages": "languages.json",
+        "clients": "clients/",
+        "libraries": "libraries/",
+        "modules": "modules/",
+        "tools": "tools/"
+    },
     "misc": {
         "git_uri": "https://github.com/redis/redis-doc",
         "dev_branch": "new-structure",
         "payload": [
             {
-                "src": "_index.html"
+                "src": "index.md"
             },
             {
                 "src": "community/"
-            },
-            {
-                "src": "modules/"
-            },
-            {
-                "src": "tools/"
             }
         ]
     }
