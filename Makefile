@@ -32,7 +32,7 @@ up:
 
 clean:
 	@rm -f config.toml
-	@cd data; rm -f groups.json commands.json languages.json clients.json libraries.json modules.json tools.json
+	@cd data; rm -f clients.json commands.json groups.json languages.json libraries.json modules.json tool_types.json tools.json
 	@rm -rf assets content layouts public static resources tmp
 
 ifneq ($(VOL),)

@@ -291,11 +291,13 @@ class Markdown:
         }
     }
 
-    def __init__(self, filepath: str):
+    def __init__(self, filepath: str = None):
         self.filepath = filepath
         self.fm_type = None
         self.fm_ext = None
         self.fm_data = dict()
+        if not self.filepath:
+            return
         with open(self.filepath, 'r') as f:
             payload = f.readlines()
         if not len(payload):
@@ -694,15 +696,16 @@ class Component(dict):
                 })
         return data
 
-    def _get_data(self) -> None:
+    def _get_data(self, content: str) -> None:
         data = self.get('data')
         repo = self._git_clone(data)
         branch = Component._get_dev_branch(data)
         run(f'git checkout {branch}', cwd=repo)
         logging.info(f'Getting data')
-        filename = self._commands.get('languages', 'languages.json')
-        filepath = f'{repo}/{filename}'
-        rsync(filepath, 'data/')
+        for src in ['languages', 'tool_types']:
+            filename = data.get(src)
+            filepath = f'{repo}/{filename}'
+            rsync(filepath, 'data/')
         for src in ['clients', 'libraries', 'modules', 'tools']:
             data = Component._make_data(f'{repo}/{src}')
             dump_dict(f'data/{src}.json', data)
@@ -774,7 +777,7 @@ class Component(dict):
         self._get_commands(content, commands)
         self._get_groups(groups)
         self._get_misc(content)
-        self._get_data()
+        self._get_data(content)
 
     def _apply_docs(self, content: str) -> None:
         self._get_docs(content)

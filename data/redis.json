@@ -25,9 +25,10 @@
         "path": "docs"
     },
     "data": {
-        "git_uri": "../redis-doc",
+        "git_uri": "https://github.com/redis/redis-doc",
         "dev_branch": "new-structure",
         "languages": "languages.json",
+        "tool_types": "tool_types.json",
         "clients": "clients/",
         "libraries": "libraries/",
         "modules": "modules/",
@@ -38,7 +39,7 @@
         "dev_branch": "new-structure",
         "payload": [
             {
-                "src": "index.md"
+                "src": "_index.md"
             },
             {
                 "src": "community/"
