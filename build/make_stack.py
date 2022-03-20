@@ -9,6 +9,7 @@ from genericpath import isfile
 from importlib.resources import path
 import io
 import json
+import requests
 from xml.dom.expatbuilder import theDOMImplementation
 import yaml
 import pytoml
@@ -275,6 +276,23 @@ def dump_dict(filepath: str, d: dict) -> None:
         StructuredData.dump(ext, d, f)
 
 
+class Repository(dict):
+    def __init__(self, uri):
+        super().__init__()
+        self.uri = urlparse(f'https://{uri}')
+        self.owner, self.name = os.path.split(self.uri.path)
+        self.owner = self.owner[1:]
+        self._get_gh_stats()
+    def _get_gh_stats(self) -> None:
+        if self.uri.netloc != 'github.com':
+            return
+        r = requests.get(
+            f'https://api.github.com/repos/{self.owner}/{self.name}')
+        j = r.json()
+        for prop in ['archived', 'license', 'created_at', 'pushed_at', 'description', 'homepage', 'forks_count', 'stargazers_count', 'open_issues_count', ]:
+            self[prop] = j.get(prop, None)
+
+
 class Markdown:
     FM_TYPES = {
         '{\n': {
@@ -499,7 +517,7 @@ class Markdown:
 
 
 class Component(dict):
-    def __init__(self, filepath: str, clones: list, skip_clone: bool = False, tempdir: AnyStr = ''):
+    def __init__(self, filepath: str, clones: list, **kwargs):
         super().__init__()
         if filepath:
             self._uri, self._dirname, self._filename, self._ext = parseUri(
@@ -515,8 +533,9 @@ class Component(dict):
         self._docs = self.get('docs', None)
         self._commands = self.get('commands', None)
         self._misc = self.get('misc', None)
-        self._skip_clone = skip_clone
-        self._tempdir = f'{tempdir}/{self.get("id")}'
+        self._skip_clone = kwargs.get('skip_clone')
+        self._get_stats = kwargs.get('get_stats')
+        self._tempdir = f'{kwargs.get("tempdir")}/{self.get("id")}'
 
     @staticmethod
     def _dump_payload(spath: str, dpath: str, payload: list) -> None:
@@ -696,7 +715,7 @@ class Component(dict):
                 })
         return data
 
-    def _get_data(self, content: str) -> None:
+    def _get_data(self) -> None:
         data = self.get('data')
         repo = self._git_clone(data)
         branch = Component._get_dev_branch(data)
@@ -706,9 +725,21 @@ class Component(dict):
             filename = data.get(src)
             filepath = f'{repo}/{filename}'
             rsync(filepath, 'data/')
+        repos = {}
         for src in ['clients', 'libraries', 'modules', 'tools']:
             data = Component._make_data(f'{repo}/{src}')
-            dump_dict(f'data/{src}.json', data)
+            repos[src] = data
+        if self._get_stats:
+            for cat, subs in repos.items():
+                for sub, rs in subs.items():
+                    for n, d in rs.items():
+                        logging.info(f'Getting stats for {n}')
+                        r = Repository(d.get('repository'))
+                        repos[cat][sub][n].update(dict(r))
+                        break
+                    break
+                break
+        dump_dict(f'data/repos.json', repos)
 
     def _get_misc(self, content) -> None:
         repo = self._git_clone(self._misc)
@@ -759,7 +790,8 @@ class Component(dict):
                 if ext == '':
                     component += self._ext
                 c = Component(f'{self._dirname}/{component}', self._clones,
-                              skip_clone=self._skip_clone, tempdir=self._tempdir)
+                              skip_clone=self._skip_clone, get_stats=self._get_stats,
+                              tempdir=self._tempdir)
             elif type(component) == dict:
                 c = Component(component)
             else:
@@ -777,7 +809,7 @@ class Component(dict):
         self._get_commands(content, commands)
         self._get_groups(groups)
         self._get_misc(content)
-        self._get_data(content)
+        self._get_data()
 
     def _apply_docs(self, content: str) -> None:
         self._get_docs(content)
@@ -823,6 +855,8 @@ def parse_args() -> argparse.Namespace:
                         help='path to stack definition')
     parser.add_argument('--skip-clone', action='store_true',
                         help='skips `git clone`')
+    parser.add_argument('--get-stats', action='store_true',
+                        help='Attempts scraping the internet for statistics')
     parser.add_argument('--loglevel', type=str,
                         default='INFO',
                         help='Python logging level (overwrites LOGLEVEL env var)')
@@ -837,8 +871,7 @@ if __name__ == '__main__':
     mkdir_p(ARGS.tempdir)
 
     # Load settings
-    STACK = Component(
-        ARGS.stack, [], skip_clone=ARGS.skip_clone, tempdir=ARGS.tempdir)
+    STACK = Component(ARGS.stack, [], **ARGS.__dict__)
 
     # Make the stack
     logging.basicConfig(

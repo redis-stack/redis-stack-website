@@ -9,6 +9,10 @@ DOCKER_PORT=-p 1313:1313
 
 .PHONY: all init build up clean docker-build docker docker-up docker-sh
 
+ifneq ($(ENV),development)
+GET_STATS=--get-stats
+endif
+
 ifeq ($(DEBUG),1)
 HUGO_DEBUG=--debug
 LOGLEVEL ?= DEBUG
@@ -24,15 +28,15 @@ init:
 	@git submodule update --init --recursive 
 
 build:
-	@python3 build/make_stack.py $(SKIP_CLONE) --loglevel=$(LOGLEVEL)
+	@python3 build/make_stack.py $(SKIP_CLONE) $(GET_STATS) --loglevel=$(LOGLEVEL)
 	@hugo $(HUGO_DEBUG) $(HUGO_BUILD)
 
 up:
-	hugo server $(HUGO_DEBUG) $(HUGO_SERVER)
+	hugo server $(HUGO_DEBUG) $(HUGO_SERVER) --environment $(ENV)
 
 clean:
 	@rm -f config.toml
-	@cd data; rm -f clients.json commands.json groups.json languages.json libraries.json modules.json tool_types.json tools.json
+	@cd data; rm -f languages.json tool_types.json commands.json groups.json repos.json
 	@rm -rf assets content layouts public static resources tmp
 
 ifneq ($(VOL),)
