@@ -736,9 +736,6 @@ class Component(dict):
                         logging.info(f'Getting stats for {n}')
                         r = Repository(d.get('repository'))
                         repos[cat][sub][n].update(dict(r))
-                        break
-                    break
-                break
         dump_dict(f'data/repos.json', repos)
 
     def _get_misc(self, content) -> None:
