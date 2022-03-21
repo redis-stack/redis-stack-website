@@ -16,6 +16,12 @@
         "defs": "commands.json",
         "path": "docs/commands"
     },
+    "groups": {
+        "timeseries": {
+            "display": "Time Series",
+            "description": "Operations on the Time Series data type"
+        }
+    },
     "docs": {
         "git_uri": "https://github.com/redistimeseries/redistimeseries",
         "dev_branch": "master",

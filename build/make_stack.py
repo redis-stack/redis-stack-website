@@ -3,13 +3,15 @@ from calendar import c
 from contextlib import contextmanager
 from ctypes import resize
 from curses.ascii import isdigit
-from datetime import datetime
+from dataclasses import dataclass
+from datetime import datetime, timedelta
 import errno
 from genericpath import isfile
 from importlib.resources import path
 import io
 import json
 import requests
+import semver
 from xml.dom.expatbuilder import theDOMImplementation
 import yaml
 import pytoml
@@ -277,20 +279,42 @@ def dump_dict(filepath: str, d: dict) -> None:
 
 
 class Repository(dict):
-    def __init__(self, uri):
+    def __init__(self, uri, gh_token=None):
         super().__init__()
         self.uri = urlparse(f'https://{uri}')
+        self.gh_token = gh_token
         self.owner, self.name = os.path.split(self.uri.path)
         self.owner = self.owner[1:]
         self._get_gh_stats()
+
     def _get_gh_stats(self) -> None:
         if self.uri.netloc != 'github.com':
+            logging.warning(
+                f'Unknown repository provider {self.uri.netloc} - skipping stats.')
+            return
+        if not self.gh_token:
+            logging.warning(
+                f'No GITHUB_TOKEN for {self.uri.netloc} - skipping stats.')
             return
         r = requests.get(
-            f'https://api.github.com/repos/{self.owner}/{self.name}')
+            f'https://api.github.com/repos/{self.owner}/{self.name}',
+            headers={
+                'Authorization': f'token {self.gh_token}'
+            })
         j = r.json()
-        for prop in ['archived', 'license', 'created_at', 'pushed_at', 'description', 'homepage', 'forks_count', 'stargazers_count', 'open_issues_count', ]:
-            self[prop] = j.get(prop, None)
+        for prop in ['archived', 'description', 'homepage', 'forks_count', 'stargazers_count', 'open_issues_count', ]:
+            p = j.get(prop)
+            if p and (type(p) != str or len(p) > 0):
+                self[prop] = p
+        license = j.get('license')
+        if license and license.get('key') != 'other':
+            self['license'] = license.get('spdx_id')
+        p = j.get('pushed_at')
+        if p:
+            fmt = '%Y-%m-%dT%H:%M:%SZ'
+            d = datetime.strptime(p, fmt)
+            self['pushed_at'] = d.timestamp()
+            self['active'] = d > (datetime.now() - timedelta(days=30*6))
 
 
 class Markdown:
@@ -608,36 +632,36 @@ class Component(dict):
         rsync(src, dst)
         Component._dump_payload(src, dst, docs.get('payload', None))
 
-        # if self.get('type') == 'module':
-        #     files = [f'{dst}/{f}' for f in ['index.md', '_index.md']]
-        #     l = len(files)
-        #     while l > 0:
-        #         f = files.pop(0)
-        #         l -= 1
-        #         if os.path.isfile(f):
-        #             files.append(f)
-        #     if len(files) == 0:
-        #         logging.warning(
-        #             f'no index.md nor _index.md found in {dst} - please rectify the situation stat!!')
-        #     if len(files) > 1:
-        #         logging.warning(
-        #             f'both index.md and _index.md exist in {dst} - please address this immediately!!!')
+        if self.get('type') == 'module':
+            files = [f'{dst}/{f}' for f in ['index.md', '_index.md']]
+            l = len(files)
+            while l > 0:
+                f = files.pop(0)
+                l -= 1
+                if os.path.isfile(f):
+                    files.append(f)
+            if len(files) == 0:
+                logging.warning(
+                    f'no index.md nor _index.md found in {dst} - please rectify the situation stat!!')
+            if len(files) > 1:
+                logging.warning(
+                    f'both index.md and _index.md exist in {dst} - please address this immediately!!!')
 
-        #     stack_weight = self.get('stack_weight')
-        #     for f in files:
-        #         md = Markdown(f)
-        #         md.fm_data['weight'] = stack_weight
-        #         md.persist()
+            stack_weight = self.get('stack_weight')
+            for f in files:
+                md = Markdown(f)
+                md.fm_data['weight'] = stack_weight
+                md.persist()
 
-        #     files = run(f'find {dst} -regex ".*\.md"').strip().split('\n')
-        #     for f in files:
-        #         md = Markdown(f)
-        #         t = md.fm_data.pop('type', None)
-        #         if t:
-        #             logging.warning(
-        #                 f'the file {f} has a type set to `{t}` - please prevent future harm by acting now, thank you.')
-        #         md.patch_module_paths(self)
-        #         md.persist()
+            files = run(f'find {dst} -regex ".*\.md"').strip().split('\n')
+            for f in files:
+                md = Markdown(f)
+                t = md.fm_data.pop('type', None)
+                if t:
+                    logging.warning(
+                        f'the file {f} has a type set to `{t}` - please prevent future harm by acting now, thank you.')
+                md.patch_module_paths(self)
+                md.persist()
 
     def _get_commands(self, content: str, commands: dict) -> dict:
         repo = self._git_clone(self._commands)
@@ -657,8 +681,10 @@ class Component(dict):
             logging.error(f'Duplicate command(s) found in {self._id}:')
             logging.error(sinter)
             die()
-        else:
-            commands.update(cmds)
+
+        for key in cmds:
+            cmds[key]['module'] = self._type == 'module'
+        commands.update(cmds)
 
         base = f'{repo}/{path}/'
         dst = f'{content}/commands/'
@@ -666,27 +692,25 @@ class Component(dict):
         rsync(' '.join(srcs), dst)
         Component._dump_payload(base, dst, self._commands.get('payload', None))
 
-    def _make_group(self, data: dict = {}) -> None:
-        d = {
-            'type': self.get('type'),
-            'display': data.get('display', self.get('id')),
-            'description': data.get('description', self._desc),
-            'weight': self.get('stack_weight', 0)
-        }
-        return d
-
-    def _get_groups(self, groups: dict) -> None:
-        repo = self._git_clone(self._commands)
-        branch = Component._get_dev_branch(self._commands)
-        run(f'git checkout {branch}', cwd=repo)
-        logging.info(f'Getting groups')
-        filename = self._commands.get('groups', 'groups.json')
-        filepath = f'{repo}/{filename}'
-        logging.info(
-            f'Reading {self._type} groups.json from {branch}/{filename}')
-        g = load_dict(filepath)
-        g = {group: self._make_group(data) for (group, data) in g.items()}
-        groups.update(g)
+    def _get_groups(self, groups: dict, versions: dict) -> None:
+        for key, val in self.get('groups').items():
+            d = {
+                'display': val.get('display', self._name),
+                'description': val.get('description', self._desc),
+                'weight': self.get('stack_weight', 0)
+            }
+            if self._type == 'module':
+                top = 'stack'
+                vdt = {}
+            else:
+                top = 'core'
+                vdt = []
+            if not groups.get(top):
+                groups[top] = {}
+                versions[top] = vdt
+            if self._type == 'module':
+                versions[top][key] = []
+            groups[top][key] = d
 
     @staticmethod
     def _make_data(path: str) -> dict:
@@ -730,12 +754,15 @@ class Component(dict):
             data = Component._make_data(f'{repo}/{src}')
             repos[src] = data
         if self._get_stats:
+            gh_token = os.environ.get('GITHUB_TOKEN', None)
             for cat, subs in repos.items():
                 for sub, rs in subs.items():
                     for n, d in rs.items():
                         logging.info(f'Getting stats for {n}')
-                        r = Repository(d.get('repository'))
-                        repos[cat][sub][n].update(dict(r))
+                        r = Repository(d.get('repository'), gh_token)
+                        r.update(repos[cat][sub][n])
+                        repos[cat][sub][n] = r
+                        pass
         dump_dict(f'data/repos.json', repos)
 
     def _get_misc(self, content) -> None:
@@ -755,6 +782,21 @@ class Component(dict):
         logging.info(f'Persisting groups: {filepath}')
         dump_dict(filepath, self._groups)
 
+    def _persist_versions(self) -> None:
+        filepath = f'{self._website.get("path")}/{self._website.get("versions")}'
+        logging.info(f'Persisting versions: {filepath}')
+        for cmd in self._commands.values():
+            since = semver.parse_version_info(cmd.get('since'))
+            since = f'{since.major}.{since.minor}'
+            if not cmd.get('module'):
+                vers = self._versions['core']
+            else:
+                vers = self._versions['stack'][cmd.get('group')]
+            if since not in vers:
+                vers.append(since)
+                vers.sort(reverse=True)
+        dump_dict(filepath, self._versions)
+
     def _process_commands(self, content) -> None:
         logging.info(f'Processing commands')
         for name in self._commands:
@@ -771,8 +813,9 @@ class Component(dict):
             md.process_doc(self._commands)
 
     def _apply_stack(self) -> None:
-        self._groups = OrderedDict()
-        self._commands = OrderedDict()
+        self._groups = {}
+        self._commands = {}
+        self._versions = {}
         self._website = self.get('website')
         self._stack_path = self.get('stack_path')
 
@@ -794,17 +837,18 @@ class Component(dict):
             else:
                 die(f'Unknown component definition for {component}')
             c.apply(content=content_path, stack=self._stack_path, groups=self._groups,
-                    commands=self._commands)
+                    versions=self._versions, commands=self._commands)
 
         self._persist_commands()
         self._persist_groups()
+        self._persist_versions()
         self._process_commands(content_path)
         self._process_docs(content_path)
 
-    def _apply_core(self, content: str, groups: dict, commands: dict) -> None:
+    def _apply_core(self, content: str, groups: dict, versions: dict, commands: dict) -> None:
         self._get_docs(content)
         self._get_commands(content, commands)
-        self._get_groups(groups)
+        self._get_groups(groups, versions)
         self._get_misc(content)
         self._get_data()
 
@@ -812,10 +856,10 @@ class Component(dict):
         self._get_docs(content)
         self._get_misc(content)
 
-    def _apply_module(self, content: str, stack: str, groups: dict, commands: dict) -> None:
+    def _apply_module(self, content: str, stack: str, groups: dict, versions: dict, commands: dict) -> None:
         self._get_docs(content, stack)
         self._get_commands(content, commands)
-        groups.update({self._id: self._make_group()})
+        self._get_groups(groups, versions)
 
     def _apply_asset(self) -> None:
         if not self._repository:
@@ -829,12 +873,14 @@ class Component(dict):
         content = kwargs.pop('content', dict)
         stack = kwargs.pop('stack', dict)
         groups = kwargs.pop('groups', dict)
+        versions = kwargs.pop('versions', dict)
         commands = kwargs.pop('commands', dict)
         logging.info(f'Applying {self._type}: {self._name}')
         if self._type == 'core':
-            self._apply_core(content, groups, commands, **kwargs)
+            self._apply_core(content, groups, versions, commands, **kwargs)
         elif self._type == 'module':
-            self._apply_module(content, stack, groups, commands, **kwargs)
+            self._apply_module(content, stack, groups,
+                               versions, commands, **kwargs)
         elif self._type == 'docs':
             self._apply_docs(content, **kwargs)
         elif self._type == 'asset':
@@ -848,7 +894,7 @@ class Component(dict):
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description='Builds a stack website')
     parser.add_argument('--stack', type=str,
-                        default='./data/stack.json',
+                        default='./data/stack/index.json',
                         help='path to stack definition')
     parser.add_argument('--skip-clone', action='store_true',
                         help='skips `git clone`')

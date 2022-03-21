@@ -1,23 +1,29 @@
 {
-    "id": "redisearch",
-    "module_id": "search",
+    "id": "redisgraph",
+    "module_id": "graph",
     "type": "module",
-    "name": "Search",
-    "description": "Secondary index operations",
-    "stack_path": "search",
-    "stack_weight": 10,
+    "name": "Graph",
+    "description": "Queryable property graph database operations",
+    "stack_path": "graph",
+    "stack_weight": 13,
     "repository": {
-        "git_uri": "https://github.com/redisearch/redisearch"
+        "git_uri": "https://github.com/redisgraph/redisgraph"
     },
     "commands": {
-        "git_uri": "https://github.com/redisearch/redisearch",
+        "git_uri": "https://github.com/redisgraph/redisgraph",
         "dev_branch": "master",
         "branches_postfix": "-newdocs",
         "defs": "commands.json",
         "path": "docs/commands"
     },
+    "groups": {
+        "graph": {
+            "display": "Graph",
+            "description": "Graph database operations"
+        }
+    },
     "docs": {
-        "git_uri": "https://github.com/redisearch/redisearch",
+        "git_uri": "https://github.com/redisgraph/redisgraph",
         "dev_branch": "master",
         "branches_postfix": "-newdocs",
         "path": "docs/docs"

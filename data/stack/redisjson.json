@@ -1,23 +1,29 @@
 {
-    "id": "redisgraph",
-    "module_id": "graph",
+    "id": "redisjson",
+    "module_id": "ReJSON",
     "type": "module",
-    "name": "Graph",
-    "description": "Queryable property graph database operations",
-    "stack_path": "graph",
-    "stack_weight": 13,
+    "name": "JSON",
+    "description": "JSON data structure",
+    "stack_path": "json",
+    "stack_weight": 11,
     "repository": {
-        "git_uri": "https://github.com/redisgraph/redisgraph"
+        "git_uri": "https://github.com/redisjson/redisjson"
     },
     "commands": {
-        "git_uri": "https://github.com/redisgraph/redisgraph",
+        "git_uri": "https://github.com/redisjson/redisjson",
         "dev_branch": "master",
         "branches_postfix": "-newdocs",
         "defs": "commands.json",
         "path": "docs/commands"
     },
+    "groups": {
+        "json": {
+            "display": "JSON",
+            "description": "Operations on the JSON data type"
+        }
+    },
     "docs": {
-        "git_uri": "https://github.com/redisgraph/redisgraph",
+        "git_uri": "https://github.com/redisjson/redisjson",
         "dev_branch": "master",
         "branches_postfix": "-newdocs",
         "path": "docs/docs"

@@ -36,7 +36,7 @@ up:
 
 clean:
 	@rm -f config.toml
-	@cd data; rm -f languages.json tool_types.json commands.json groups.json repos.json
+	@rm -f data/*.json
 	@rm -rf assets content layouts public static resources tmp
 
 ifneq ($(VOL),)

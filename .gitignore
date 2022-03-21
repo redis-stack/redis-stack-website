@@ -15,11 +15,7 @@ venv/**
 /bin/htmltest
 
 # Files copied or generated during build
-data/commands.json
-data/groups.json
-data/repos.json
-data/languages.json
-data/tool_types.json
+data/*.json
 public/**
 resources/**
 tmp/**

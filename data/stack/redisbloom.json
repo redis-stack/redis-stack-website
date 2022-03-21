@@ -16,6 +16,28 @@
         "defs": "commands.json",
         "path": "docs/commands"
     },
+    "groups": {
+        "bf": {
+            "display": "Bloom Filter",
+            "description": "Operations on the Bloom Filter data type"
+        },
+        "cf": {
+            "display": "Cuckoo Filter",
+            "description": "Operations on the Cuckoo Filter data type"
+        },
+        "cms": {
+            "display": "Count-min Sketch",
+            "description": "Operations on the Count-min Sketch data type"
+        },
+        "tdigest": {
+            "display": "T-Digest",
+            "description": "Operations on the T-Digest data type"
+        },
+        "topk": {
+            "display": "Top-K",
+            "description": "Operations on the Top-K data type"
+        }
+    },
     "docs": {
         "git_uri": "https://github.com/redisbloom/redisbloom",
         "dev_branch": "master",
@@ -24,7 +46,7 @@
     },
     "releases": {
         "source": "docs",
-            "tags": true,
+        "tags": true,
         "include_tag_regex": "v([0-9]+\\.[0-9]+\\.[0-9]+)",
         "exclude_tag_regexes": [],
         "include_branch_regex": "([0-9]+\\.[0-9])",

@@ -24,6 +24,7 @@
         "path": ".",
         "content": "content/en",
         "commands": "data/commands.json",
-        "groups": "data/groups.json"
+        "groups": "data/groups.json",
+        "versions": "data/versions.json"
     }
 }
