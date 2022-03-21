@@ -22,6 +22,7 @@ jobs:
       - run: make all
         env:
           PRIVATE_REPOS_PAT: ${{ secrets.PRIVATE_REPOS_PAT }}
+          GITHUB_TOKEN: ${{ secrets.PRIVATE_REPOS_PAT }}
       - name: Run htmltest
         continue-on-error: true
         run: curl https://htmltest.wjdp.uk | bash; ./bin/htmltest -s public
