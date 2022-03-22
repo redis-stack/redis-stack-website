@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {{ hugo.Generator }}
     {{ range .AlternativeOutputFormats -}}
-    <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
+      <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
     {{ end -}}
 
     {{ if and hugo.IsProduction -}}
@@ -34,10 +34,19 @@
     {{ block "head" . }}{{ end }}
 
     {{ if hugo.IsProduction -}}
-      {{ template "_internal/google_analytics_async.html" . -}}
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','{{ .Site.Params.tagManagerId }}');</script>
     {{ end -}}
   </head>
   <body>
+    {{ if hugo.IsProduction -}}
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ .Site.Params.tagManagerId }}"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    {{ end -}}
+
     <header class="primary-background-color">
       {{ partial "navbar.html" . }}
     </header>

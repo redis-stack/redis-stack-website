@@ -43,15 +43,20 @@
     </nav>
 
     <main>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.description }}<div>{{ . | markdownify }}</div>{{ end }}
+
       {{ .Content }}
 
       <nav>
-        {{ range .CurrentSection.Pages }}
-          <div class="entry">
-            <a href="{{ .RelPermalink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a>
-            <p>{{ .Description | markdownify }}</p>
-          </div>
-        {{ end }}
+        <ul>
+          {{ range .CurrentSection.Pages }}
+            <li>
+              <a href="{{ .RelPermalink }}"{{ with .Params.manualLinkTitle }} title="{{ . }}"{{ end }}{{ with .Params.manualLinkTarget }} target="{{ . }}"{{ if eq . "_blank" }} rel="noopener"{{ end }}{{ end }}>{{- .Title -}}</a>
+              <p>{{ .Description | markdownify }}</p>
+            </li>
+          {{ end }}
+        </ul>
       </nav>
     </main>
   </section>

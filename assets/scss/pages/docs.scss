@@ -11,7 +11,7 @@ body > section {
             font-weight: 400;
 
             > li {
-                margin: 1em 0;
+                margin: 0.5em 0;
 
                 > a {
                     color: var(--neutral-text-color);
@@ -31,5 +31,27 @@ body > section {
 
     > main {
         flex: 1 1 auto;
+        min-width: 0; // prevent flex overflow
+
+        > nav {
+            border-top: 1px solid var(--neutral-text-color);
+
+            > ul {
+                list-style: none;
+                padding: 0;
+
+                > li {
+                    margin-block: 1em;
+
+                    > a {
+                        font-weight: 500;
+                    }
+
+                    > p {
+                        margin: 0;
+                    }
+                }
+            }
+        }
     }
 }

@@ -8,12 +8,7 @@ body > main > section {
 
             position: relative;
             padding: $triangleMargin $triangleMargin 0 0;
-
-            > img.triangle {
-                position: absolute;
-                top: 0;
-                right: 0;
-            }
+            background: url('/images/triangle-lines.svg') no-repeat top right;
 
             > header {
                 background-color: var(--primary-color);
