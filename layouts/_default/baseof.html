@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="{{ .Site.Language.Lang }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {{ hugo.Generator }}
+    {{ range .AlternativeOutputFormats -}}
+    <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}">
+    {{ end -}}
+
+    {{ if and hugo.IsProduction -}}
+      <meta name="robots" content="index, follow">
+    {{ else -}}
+      <meta name="robots" content="noindex, nofollow">
+    {{ end -}}
+
+    {{/* {{ partialCached "favicons.html" . }} */}}
+    <title>
+      {{- if .IsHome -}}
+        {{ .Site.Title -}}
+      {{ else -}}
+        {{ with .Title }}{{ . }} | {{ end -}}
+        {{ .Site.Title -}}
+      {{ end -}}
+    </title>
+    {{ $desc := .Page.Description | default (.Page.Content | safeHTML | truncate 150) -}}
+    <meta name="description" content="{{ $desc }}">
+    {{ template "_internal/opengraph.html" . -}}
+    {{ template "_internal/schema.html" . -}}
+    {{ template "_internal/twitter_cards.html" . -}}
+
+    {{ partial "partials/scss.html" (dict "path" "scss/style.scss") }}
+
+    {{ block "head" . }}{{ end }}
+
+    {{ if hugo.IsProduction -}}
+      {{ template "_internal/google_analytics_async.html" . -}}
+    {{ end -}}
+  </head>
+  <body>
+    <header class="primary-background-color">
+      {{ partial "navbar.html" . }}
+    </header>
+
+    {{ block "main" . }}{{ end }}
+
+    <footer class="primary-background-color">
+      {{ partial "footer.html" . }}
+    </footer>
+  </body>
+</html>

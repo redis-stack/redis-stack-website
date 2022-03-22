@@ -19,10 +19,4 @@ data/*.json
 public/**
 resources/**
 tmp/**
-
-# local "theme"
-/config.toml
-assets/**
 content/**
-layouts/**
-static/**

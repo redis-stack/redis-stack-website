@@ -1,0 +1,70 @@
+{{ define "head" }}
+  {{ partial "partials/scss.html" (dict "path" "scss/pages/command.scss") }}
+
+  <script src="/js/cli.js" defer></script>
+  <link rel="stylesheet" href="/css/cli.css">
+{{ end }}
+
+{{ define "main" }}
+  <section class="full-width">
+    <main>
+      {{ $syntax := "" }}
+      {{ if isset .Params "arguments" }}
+        {{ $args := .Params.arguments }}
+        {{ if gt (len $args) 0 }}
+          {{ $syntax = partial "command-syntax.html" $args }}
+        {{ end }}
+      {{ end }}
+      <h1>{{ .Title }} {{ $syntax }}</h1>
+
+      <div>
+        <span class="title">Available since:</span>
+        {{ .Params.since }}
+      </div>
+
+      <div>
+        <span class="title">Time complexity:</span>
+        {{ .Params.complexity | markdownify }}
+      </div>
+
+      <div>
+        <span class="title">ACL categories:</span>
+        {{ range .Params.acl_categories }}
+          {{ printf "`%s`" . | markdownify }}
+        {{ end}}
+      </div>
+
+      {{ if (isset .Params "deprecated_since") }}
+        <p class="deprecated">
+            As of Redis version {{ .Params.deprecated_since }}, this command is regarded as deprecated.
+            {{ if (isset .Params "replaced_by") }}
+              <br /><br />It can be replaced by {{ .Params.replaced_by | markdownify }} when migrating or writing new code.
+            {{ end }}
+        </p>
+      {{ end }}
+
+      {{ .Content }}
+
+      {{ if isset .Params "history" }}
+        <h2>History</h2>
+        <ul>
+          {{ range .Params.history }}
+          <li>Starting with Redis version {{ index . 0 }}: {{ index . 1 | markdownify }}</li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    </main>
+
+    <aside>
+      {{ $related := .Site.Pages.RelatedIndices . "group" }}
+      {{ with $related }}
+        <h3>See also</h3>
+        <ul>
+          {{ range . }}
+            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    </aside>
+  </section>
+{{ end }}

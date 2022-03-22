@@ -1,0 +1,217 @@
+{{ define "head" }}
+    {{ partial "partials/scss.html" (dict "path" "scss/pages/home.scss") }}
+{{ end }}
+
+{{ define "main" }}
+    <main>
+        <section class="hero full-width-container">
+            <div class="row align-items-center">
+                <div>
+                    <h1>Redis</h1>
+                    <p class="neutral-text-color">The open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message broker.</p>
+
+                    <div>
+                        <a href="" class="button">Get Started</a>
+                        <a href="" class="button-outline">Read the docs</a>
+                    </div>
+                </div>
+                <div class="cli-window">
+                    <img class="triangle" src="/images/triangle-lines.svg"/>
+                    <header></header>
+                    <img class="cli" alt="terminal gif" src="/images/redis.io.terminal.gif" />
+                </div>
+            </div>
+
+            <div class="text-center">
+                <h2>A vibrant, open source database</h2>
+                <p class="neutral-text-color">Voted the most-loved database for 5 years running, Redis is at the center of an engaged community of developers, architects, and open source contributors.</p>
+
+                <div class="row neutral-text-color">
+                    <div>
+                        <div class="stat">4B+</div>
+                        Docker pulls
+                    </div>
+                    <div>
+                        <div class="stat">50K+</div>
+                        Github stars
+                    </div>
+                    <div>
+                        <div class="stat">50+</div>
+                        Supported programing languages
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="full-width-container">
+            <div class="grid">
+                <h2 class="text-center">Core capabilities</h2>
+                <div>
+                    <span>{{ with resources.Get "icons/in-memory-data-structures-icon.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}</span>
+                    <h3>In-memory data structures</h3>
+                    <p>Well-known as a "data structure server", with support for strings, hashes, lists, sets, sorted sets, streams, and more.</p>
+                    <a>Learn more</a>
+                </div>
+                <div>
+                    <span>{{ with resources.Get "icons/programmability.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}</span>
+                    <h3>Programmability</h3>
+                    <p>
+                        Server-side scripting with Lua and server-side stored procedures with Redis Functions.
+                    </p>
+                    <a class="cta">Learn more</a>
+                </div>
+                <div>
+                    <span>{{ with resources.Get "icons/extensibility-icon.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}</span>
+                    <h3 class="mt-3">
+                        Extensibility
+                    </h3>
+                    <p>
+                        A module API for building custom extensions to Redis in C, C++, and Rust.
+                    </p>
+                    <a class="cta">Learn more</a>
+                </div>
+                <div>
+                    <span>{{ with resources.Get "icons/persistence-icon.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}</span>
+                    <h3 class="mt-3">
+                        Persistence
+                    </h3>
+                    <p>
+                        Keeps the dataset in memory for fast access, but can also persist all writes to permanent storage to survive reboots and system failures.
+                    </p>
+                    <a class="cta">Learn more</a>
+                </div>
+                <div>
+                    <span>{{ with resources.Get "icons/cluster.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}</span>
+                    <h3 class="mt-3">
+                        Clustering
+                    </h3>
+                    <p>
+                        Horizontal scalability with hash-based sharding, scaling to millions of nodes with automatic re-partitioning when growing the cluster.
+                    </p>
+                    <a class="cta">Learn more</a>
+                </div>
+                <div>
+                    <span>{{ with resources.Get "icons/availability.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}</span>
+                    <h3 class="mt-3">
+                        High availability
+                    </h3>
+                    <p>
+                        Replication with automatic failover for both standalone and clustered deployments.
+                    </p>
+                    <a class="cta">Learn more</a>
+                </div>
+            </div>
+
+            <div class="grid with-border">
+                <h2 class="text-center">Use cases</h2>
+                <div class="use-case">
+                    <h3>Real-time data store</h3>
+                    <p>
+                        Redis' versatile in-memory data structures enable building data infrastructure for real-time applications that require low latency and high-throughput.
+                    </p>
+                </div>
+                <div>
+                    <h3>Caching & session storage</h3>
+                    <p>
+                        Redis' speed makes it ideal for caching database queries, complex computations, API calls, and session state.
+                    </p>
+                </div>
+                <div>
+                    <h3>Streaming & messaging</h3>
+                    <p>
+                        The stream data type enables high-rate data ingestion, messaging, event sourcing, and notifications.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- <section>
+            <div class="row redis-stack">
+                <h2 class="text-center w-100 mb-5">Redis Stack</h2>
+                <p class="max-eight text-center">
+                    Redis Stack extends Redis with modern data models and processing engines to provide a complete developer experience. Download the source, install using your favorite package manager, or spin it up for free in the cloud.
+                </p>
+                <div class="row mt-5 align-items-center max-eight">
+                    <div class="col">
+                        <div class="shadow-card">
+                            <span class="text-center d-block p-3">{{ with resources.Get "icons/modules-icons.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}</span>
+                            <p>
+                                Redis Stack Server lets you build applications with searchable JSON, time series and graph data models, and extended probabilistic data structures.
+                            </p>
+                        </div>
+                        <div class="shadow-card mt-3">
+                            <span class="pt-3 px-4 pb-5 float-left">{{ with resources.Get "icons/redis-insight-red-icon.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}</span>
+                            <p class="pr-5">
+                                Visualize and optimize your Redis data with RedisInsight.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="shadow-card mt-3">
+                            <span class="text-center d-block p-3">{{ with resources.Get "icons/object-mapping-and-client-libraries-icons.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}</span>
+                            <p>
+                                Get productive quickly with the Redis Stack object mapping and client libraries.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <span class="redis-cube w-100 text-center">{{ with resources.Get "icons/redis-cube.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}</span>
+                <div class="d-flex justify-content-center mx-auto mt-5">
+                    <a href="" class="bttn-primary">Download Stack</a>
+                    <a href="" class="bttn-secondary bttn-secondary__black ml-3">Learn more</a>
+                </div>
+            </div>
+        </section> -->
+
+        <section class="full-width-container">
+            <h2 class="text-center">Redis Stack use cases</h2>
+            <div class="grid with-border">
+                <div>
+                    <h3>Searchable Redis</h3>
+                    <p>Index and query Redis data structures and data models; run complex aggregations and full-text search on your Redis data.</p>
+                </div>
+                <div>
+                    <h3>Document database</h3>
+                    <p>Model domain entirely in Redis, and query your JSON data efficiently without ever having to use a cache.</p>
+                </div>
+                <div>
+                    <h3>Telemetry</h3>
+                    <p>Ingest continuous readings from devices in the field, storing as time series data or analyzing and deduplicating with probabilistic data structures.</p>
+                </div>
+                <div>
+                    <h3>Identity and resource management</h3>
+                    <p>Define digital resources and ACLs as a graph, and compute permissions in real-time with a single Cypher query.</p>
+                </div>
+                <div>
+                    <h3>Vector similarity search</h3>
+                    <p>Query vector embeddings to power images search, recommendation engines, and natural language text processing.</p>
+                </div>
+                <div>
+                    <h3>Fraud detection</h3>
+                    <p>All the tools to detect fraud in real time, with graph analysis, probabilistic queries, vector search, and even processing using streams.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="full-width-container">
+            <h2 class="text-center">Get started</h2>
+            <div class="grid with-border">
+                <div>
+                    <h3>Preparation</h3>
+                    <a>Install & launch Redis</a>
+                    <a>Learn the Redis CLI</a>
+                </div>
+                <div>
+                    <h3>Countdown</h3>
+                    <a>Experiment with Redis data structures</a>
+                    <a>Explore Redis clients</a>
+                </div>
+                <div>
+                    <h3>Liftoff</h3>
+                    <a>See Redis programming patterns</a>
+                    <a href="/community">Join to the community</a>
+                </div>
+            </div>
+        </section>
+    </main>
+{{ end }}

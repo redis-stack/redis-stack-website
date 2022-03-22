@@ -1,0 +1,51 @@
+{{ define "head" }}
+  <script src="/js/commands-filters.js" defer></script>
+
+  {{ partial "partials/scss.html" (dict "path" "scss/pages/commands.scss") }}
+{{ end }}
+
+{{ define "main" }}
+  <div class="full-width">
+    <h1 class="text-center">Commands</h1>
+
+    <form class="command-filter text-center">
+      <select id="group-filter">
+        <option value="" disabled selected >Filter by group...</option>
+        <option value="">All</option>
+        {{- range $id, $group := .Site.Data.groups -}}
+            <option value="{{ $id }}">{{ $group.display }}</option>
+        {{ end }}
+      </select>
+      <input id="name-filter" type="search" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus="" placeholder="Search" spellcheck="false">
+    </form>
+
+    <div class="section-index">
+      {{ $parent := .Page }}
+      {{ $pages := (where .Site.Pages "Section" .Section).ByWeight }}
+      {{ $pages = (where $pages "Type" "!=" "search") }}
+      {{ $pages = (where $pages ".Params.hide_summary" "!=" true) }}
+      {{ $pages = (where $pages ".Parent" "!=" nil) }}
+      {{ $pages = (where $pages "Parent.File.UniqueID" "==" $parent.File.UniqueID) }}
+      <div id="commands-grid">
+          {{ range $index, $page := $pages }}
+            {{ $syntax := "" }}
+            {{ if isset .Params "arguments"  }}
+              {{ $args := .Params.arguments }}
+              {{ if gt (len $args) 0 }}
+                {{ $syntax = partial "command-syntax.html" $args }}
+              {{ end }}
+            {{ end }}
+            <a href="{{ .RelPermalink }}" title="{{ printf "%s %s" .Title $syntax }}" data-name="{{ .Title }}" data-group="{{ .Params.group }}">
+              <div class="name primary-text-color">
+                {{ .Title }}
+                <span class="neutral-text-color">{{ $syntax }}</span>
+              </div>
+              <p class="neutral-text-color">
+                {{ .Params.summary }}
+              </p>
+            </a>
+          {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end }}
