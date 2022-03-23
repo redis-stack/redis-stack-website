@@ -14,7 +14,7 @@ jobs:
         with:
           submodules: true
       - name: Make the stack
-        run: make docker-build
+        run: make all
         env:
           PRIVATE_ACCESS_TOKEN: ${{ secrets.PRIVATE_ACCESS_TOKEN }}
           ENV: production
