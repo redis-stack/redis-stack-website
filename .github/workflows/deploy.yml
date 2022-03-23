@@ -14,13 +14,10 @@ jobs:
         with:
           submodules: true
       - name: Install deps
-        run: \
-          sudo apt-get update -qq; \
-          sudo apt-get install -y ca-certificates wget curl git rsync python3 python3-pip; \
-          wget -q -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VER}/hugo_extended_${HUGO_VER}_Linux-64bit.deb; \
-          dpkg -i /tmp/hugo.deb; \
-          npm install; \
-          pip install -r build/requirements.txt
+      - run: sudo apt-get update -qq; sudo apt-get install -y ca-certificates wget curl git rsync python3 python3-pip
+      - run: wget -q -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/v0.88.1/hugo_extended_0.88.1_Linux-64bit.deb; sudo dpkg -i /tmp/hugo.deb
+      - run: pip install -r build/requirements.txt
+      - run: npm install
       - name: Make the stack
         run: make all
         env:
