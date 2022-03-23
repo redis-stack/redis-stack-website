@@ -1,7 +1,8 @@
 
 FROM node as base
 
-ARG PRIVATE_REPOS_PAT
+ARG PRIVATE_ACCESS_TOKEN
+ARG SKIP_STATS
 ENV HUGO_VER=0.88.1
 
 RUN apt-get update -qq
@@ -11,17 +12,14 @@ RUN wget -q -O /tmp/hugo.deb https://github.com/gohugoio/hugo/releases/download/
 RUN dpkg -i /tmp/hugo.deb
 
 WORKDIR /build
-ADD Makefile .
 ADD package.json .
 ADD package-lock.json .
 ADD ./build ./build
-ADD ./data ./data
 RUN npm install
 RUN pip install -r build/requirements.txt
 
 FROM base
 ADD . .
-RUN make all
 
 EXPOSE 1313
 CMD ["echo", "Docker image build done."]

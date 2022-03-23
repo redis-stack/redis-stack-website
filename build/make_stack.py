@@ -1,18 +1,11 @@
 import argparse
-from calendar import c
 from contextlib import contextmanager
-from ctypes import resize
-from curses.ascii import isdigit
-from dataclasses import dataclass
 from datetime import datetime, timedelta
 import errno
-from genericpath import isfile
-from importlib.resources import path
 import io
 import json
 import requests
 import semver
-from xml.dom.expatbuilder import theDOMImplementation
 import yaml
 import pytoml
 import logging
@@ -23,7 +16,7 @@ import subprocess
 import sys
 import tempfile
 from textwrap import TextWrapper
-from typing import Any, AnyStr, OrderedDict, Tuple
+from typing import Any, Tuple
 from urllib.parse import urlparse, ParseResult
 from urllib.request import urlopen
 
@@ -124,7 +117,8 @@ def die(msg: str = 'aborting - have a nice day!') -> None:
 def rsync(src: str, dst: str, exclude: list = ['.*']):
     ex = [f'"{x}"' for x in exclude]
     cmd = f'rsync -av --no-owner --no-group --exclude={{{",".join(ex)}}} {src} {dst}'
-    return run(cmd)
+    ret = run(cmd)
+    return ret.split('\n')
 
 
 def log_func(args: list) -> None:
@@ -294,7 +288,7 @@ class Repository(dict):
             return
         if not self.gh_token:
             logging.warning(
-                f'No GITHUB_TOKEN for {self.uri.netloc} - skipping stats.')
+                f'No PRIVATE_ACCESS_TOKEN for {self.uri.netloc} - skipping stats.')
             return
         r = requests.get(
             f'https://api.github.com/repos/{self.owner}/{self.name}',
@@ -375,7 +369,17 @@ class Markdown:
                 self.fm_ext, ''.join(payload[i+1:j])))
             self.payload = ''.join(payload[j+1:])
 
-    def report_links(self):
+    def add_github_metadata(self, github_repo: str, github_branch: str, github_path: str) -> None:
+        if self.fm_data.get('github_repo'):
+            return
+        self.fm_data['github_repo'] = github_repo
+        self.fm_data['github_branch'] = github_branch
+        self.fm_data['github_path'] = github_path
+        if not self.fm_type:
+            self.fm_type = self.FM_TYPES['---\n']
+            self.fm_ext = self.fm_type.get('ext')
+
+    def report_links(self) -> None:
         links = re.findall(r'(\[.+\])(\(.+\))', self.payload)
         exc = ['./', '#', '/commands', '/community', '/docs', '/topics']
         for link in links:
@@ -387,7 +391,7 @@ class Markdown:
             if not ex:
                 print(f'"{link[1]}","{link[0]}","{self.filepath}"')
 
-    def persist(self):
+    def persist(self) -> None:
         # self.report_links()
         payload = self.payload
         if self.fm_type:
@@ -505,7 +509,7 @@ class Markdown:
         if 'replaced_by' in data:
             data['replaced_by'] = self.generate_commands_links(
                 name, commands, data.get('replaced_by'))
-        self.fm_type = self.FM_TYPES.get('{\n')
+        self.fm_type = self.FM_TYPES.get('---\n')
         self.fm_ext = self.fm_type.get('ext')
         self.fm_data.update(data)
 
@@ -564,7 +568,8 @@ class Component(dict):
     @staticmethod
     def _dump_payload(spath: str, dpath: str, payload: list) -> None:
         if not payload:
-            return
+            return []
+        files = []
         for dump in payload:
             src = dump.get('src')
             dst = dump.get('dst', src)
@@ -574,7 +579,7 @@ class Component(dict):
                 mkdir_p(os.path.dirname(d))
             else:
                 mkdir_p(d)
-            rsync(s, d)
+            files += rsync(s, d)
             search = dump.get('search', None)
             replace = dump.get('replace', None)
             if search:
@@ -591,6 +596,18 @@ class Component(dict):
         post = repository .get("branches_postfix", "")
         return f'{branch}{post}'
 
+    @staticmethod
+    def _add_meta_fm(repo: str, branch: str, base: str, path: str) -> None:
+        _, dirs, files = next(os.walk(base))
+        for d in dirs:
+            Component._add_meta_fm(repo, branch, f'{base}/{d}', f'{path}/{d}')
+        for f in files:
+            if not f.endswith('.md'):
+                continue
+            md = Markdown(f'{base}/{f}')
+            md.add_github_metadata(repo, branch, f'{path}/{f}')
+            md.persist()
+
     def _git_clone(self, repo) -> str:
         git_uri = repo.get('git_uri')
         private = repo.get('private', False)
@@ -603,9 +620,9 @@ class Component(dict):
                 logging.debug(
                     f'Cloning {private and "private" or "public"} {git_uri} to {to}')
                 if private:
-                    pat = os.environ.get('PRIVATE_REPOS_PAT')
+                    pat = os.environ.get('PRIVATE_ACCESS_TOKEN')
                     if pat is None:
-                        die('Private repos without a PAT - aborting.')
+                        die('Private repos without a PRIVATE_ACCESS_TOKEN - aborting.')
                     git_uri = f'{uri.scheme}://{pat}@{uri.netloc}{uri.path}'
                 run(f'git clone {git_uri} {to}')
                 run(f'git fetch --all --tags', cwd=to)
@@ -618,42 +635,31 @@ class Component(dict):
         else:
             die('Cannot determine git repo - aborting.')
 
-    def _get_docs(self, content: dict, stack: str = '') -> None:
-        docs = self._docs
-        repo = self._git_clone(docs)
-        branch = Component._get_dev_branch(docs)
-        run(f'git checkout {branch}', cwd=repo)
-        path = docs.get('path', '')
+    def _process_module_docs(self, files: list, content: str, stack: str = '') -> None:
         stack_path = f'{stack}/{self.get("stack_path", "")}'
-        logging.info(f'Copying docs')
-        src = f'{repo}/{path}/'
-        dst = f'{content}/docs/{stack_path}'
-        mkdir_p(dst)
-        rsync(src, dst)
-        Component._dump_payload(src, dst, docs.get('payload', None))
-
+        path = f'{content}/docs/{stack_path}'
         if self.get('type') == 'module':
-            files = [f'{dst}/{f}' for f in ['index.md', '_index.md']]
-            l = len(files)
+            foes = [f'{path}/{f}' for f in ['index.md', '_index.md']]
+            l = len(foes)
             while l > 0:
-                f = files.pop(0)
+                f = foes.pop(0)
                 l -= 1
                 if os.path.isfile(f):
-                    files.append(f)
-            if len(files) == 0:
+                    foes.append(f)
+            if len(foes) == 0:
                 logging.warning(
-                    f'no index.md nor _index.md found in {dst} - please rectify the situation stat!!')
-            if len(files) > 1:
+                    f'no index.md nor _index.md found in {path} - please rectify the situation stat!!')
+            if len(foes) > 1:
                 logging.warning(
-                    f'both index.md and _index.md exist in {dst} - please address this immediately!!!')
+                    f'both index.md and _index.md exist in {path} - please address this immediately!!!')
 
             stack_weight = self.get('stack_weight')
-            for f in files:
+            for f in foes:
                 md = Markdown(f)
                 md.fm_data['weight'] = stack_weight
                 md.persist()
 
-            files = run(f'find {dst} -regex ".*\.md"').strip().split('\n')
+            files = run(f'find {path} -regex ".*\.md"').strip().split('\n')
             for f in files:
                 md = Markdown(f)
                 t = md.fm_data.pop('type', None)
@@ -663,7 +669,25 @@ class Component(dict):
                 md.patch_module_paths(self)
                 md.persist()
 
-    def _get_commands(self, content: str, commands: dict) -> dict:
+    def _get_docs(self, content: str, stack: str = '') -> list:
+        docs = self._docs
+        repo = self._git_clone(docs)
+        branch = Component._get_dev_branch(docs)
+        run(f'git checkout {branch}', cwd=repo)
+        path = docs.get('path', '')
+        stack_path = f'{stack}/{self.get("stack_path", "")}'
+        if stack_path == '/':
+            stack_path = ''
+        logging.info(f'Copying docs')
+        src = f'{repo}/{path}/'
+        dst = f'{content}/docs/{stack_path}'
+        mkdir_p(dst)
+        files = rsync(src, dst)
+        Component._dump_payload(src, dst, docs.get('payload', None))
+        Component._add_meta_fm(docs.get('git_uri'), branch, dst, path)
+        return files
+
+    def _get_commands(self, content: str, commands: dict) -> list:
         repo = self._git_clone(self._commands)
         branch = Component._get_dev_branch(self._commands)
         run(f'git checkout {branch}', cwd=repo)
@@ -688,9 +712,13 @@ class Component(dict):
 
         base = f'{repo}/{path}/'
         dst = f'{content}/commands/'
-        srcs = [f'{base}{command_filename(cmd)}.md' for cmd in cmds.keys()]
-        rsync(' '.join(srcs), dst)
-        Component._dump_payload(base, dst, self._commands.get('payload', None))
+        srcs = [f'{base}{command_filename(cmd)}.md' for cmd in cmds]
+        files = rsync(' '.join(srcs), dst)
+        Component._dump_payload(base, dst,
+                                self._commands.get('payload', None))
+        Component._add_meta_fm(self._commands.get(
+            'git_uri'), branch, dst, path)
+        return files
 
     def _get_groups(self, groups: dict, versions: dict) -> None:
         for key, val in self.get('groups').items():
@@ -754,7 +782,7 @@ class Component(dict):
             data = Component._make_data(f'{repo}/{src}')
             repos[src] = data
         if self._get_stats:
-            gh_token = os.environ.get('GITHUB_TOKEN', None)
+            gh_token = os.environ.get('PRIVATE_ACCESS_TOKEN', None)
             for cat, subs in repos.items():
                 for sub, rs in subs.items():
                     for n, d in rs.items():
@@ -769,8 +797,9 @@ class Component(dict):
         repo = self._git_clone(self._misc)
         branch = Component._get_dev_branch(self._misc)
         run(f'git checkout {branch}', cwd=repo)
-        Component._dump_payload(
-            repo, f'{content}/{self._stack_path}', self._misc.get('payload'))
+        dst = f'{content}/{self._stack_path}'
+        Component._dump_payload(repo, dst, self._misc.get('payload'))
+        return
 
     def _persist_commands(self) -> None:
         filepath = f'{self._website.get("path")}/{self._website.get("commands")}'
@@ -845,31 +874,35 @@ class Component(dict):
         self._process_commands(content_path)
         self._process_docs(content_path)
 
-    def _apply_core(self, content: str, groups: dict, versions: dict, commands: dict) -> None:
-        self._get_docs(content)
-        self._get_commands(content, commands)
-        self._get_groups(groups, versions)
+    def _apply_core(self, content: str, groups: dict, versions: dict, commands: dict) -> list:
+        files = self._get_docs(content)
+        files += self._get_commands(content, commands)
         self._get_misc(content)
+        self._get_groups(groups, versions)
         self._get_data()
+        return files
 
-    def _apply_docs(self, content: str) -> None:
-        self._get_docs(content)
+    def _apply_docs(self, content: str) -> list:
+        files = self._get_docs(content)
         self._get_misc(content)
+        return files
 
-    def _apply_module(self, content: str, stack: str, groups: dict, versions: dict, commands: dict) -> None:
-        self._get_docs(content, stack)
-        self._get_commands(content, commands)
+    def _apply_module(self, content: str, stack: str, groups: dict, versions: dict, commands: dict) -> list:
+        files = self._get_docs(content, stack)
+        self._process_module_docs(files, content, stack)
+        files += self._get_commands(content, commands)
         self._get_groups(groups, versions)
+        return files
 
-    def _apply_asset(self) -> None:
+    def _apply_asset(self) -> list:
         if not self._repository:
             return
         repo = self._git_clone(self._repository)
         dev_branch = self._repository.get('dev_branch')
         run(f'git checkout {dev_branch}', cwd=repo)
-        Component._dump_payload(repo, './', self._repository.get('payload'))
+        return Component._dump_payload(repo, './', self._repository.get('payload'))
 
-    def apply(self, **kwargs):
+    def apply(self, **kwargs) -> None:
         content = kwargs.pop('content', dict)
         stack = kwargs.pop('stack', dict)
         groups = kwargs.pop('groups', dict)
