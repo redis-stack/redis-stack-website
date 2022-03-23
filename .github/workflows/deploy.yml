@@ -37,7 +37,7 @@ jobs:
           SOURCE_DIR: 'public'
       - name: Invalidate AWS CloudFront
         uses: chetan/invalidate-cloudfront-action@v2
-        with:
+        env:
             DISTRIBUTION: ${{ secrets.AWS_CF_DISTRIBUTION }}
             PATHS: "/*"
             AWS_REGION: "us-east-1"
