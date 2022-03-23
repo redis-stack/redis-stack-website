@@ -32,7 +32,7 @@ jobs:
           DEST_DIR: ${{ secrets.AWS_S3_DIR }}
           SOURCE_DIR: 'public'
       - name: Invalidate AWS CloudFront
-        uses: chetan/invalidate-cloudfront-action@v2\
+        uses: chetan/invalidate-cloudfront-action@v2
         with:
             DISTRIBUTION: ${{ secrets.AWS_CF_DISTRIBUTION }}
             PATHS: "/*"
