@@ -6,12 +6,10 @@
     "stack_path": "stack",
     "_components": [
         "redis",
-        "redis_cli",
         "stack_docs"
     ],
     "components": [
         "redis",
-        "redis_cli",
         "stack_theme",
         "stack_docs",
         "redisearch",
