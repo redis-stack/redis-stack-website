@@ -1,13 +1,12 @@
 [context.production]
-  command = "make all"
+  command = "make netlify"
   publish = "public"
   [context.production.environment]
-    ENV = "production"
     PYTHON_VERSION = "3.8"
     RUBY_VERSION = "2.7.2"
 
 [context.development]
-  command = "make all"
+  command = "make netlify"
   publish = "public"
   [context.development.environment]
     PYTHON_VERSION = "3.8"

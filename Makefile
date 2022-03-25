@@ -1,13 +1,14 @@
 IP ?= 0.0.0.0
 LOGLEVEL ?= INFO
 ENV ?= development
+HUGO_CONTENT ?= ./content/en
 HUGO_BUILD ?= --gc --minify
 HUGO_SERVER ?= --quiet --disableFastRender -b http://$(IP) --bind $(IP)
 DOCKER_IMAGE=image-redis-stack-website
 DOCKER_CONTAINER=container-$(DOCKER_IMAGE)
 DOCKER_PORT=-p 1313:1313
 
-.PHONY: all init build up clean docker-build docker-make docker docker-up docker-sh
+.PHONY: all init build up clean docker-build docker-make docker docker-up docker-sh netlify
 
 ifneq ($(ENV),development)
 GET_STATS=--get-stats
@@ -29,6 +30,7 @@ init:
 
 build:
 	@python3 build/make_stack.py $(SKIP_CLONE) $(GET_STATS) --loglevel=$(LOGLEVEL)
+	@cp -R data/*.json $(HUGO_CONTENT)
 	@hugo $(HUGO_DEBUG) $(HUGO_BUILD)
 
 up:
@@ -37,7 +39,7 @@ up:
 clean:
 	@rm -f config.toml
 	@rm -f data/*.json
-	@rm -rf assets content layouts public static resources tmp
+	@rm -rf $(HUGO_CONTENT) assets layouts public static resources tmp
 
 ifneq ($(VOL),)
 DOCKER_VOL=-v $(VOL):$(VOL)
@@ -67,3 +69,7 @@ docker-all: docker-build docker-make
 	@rm -rf public/
 	@tar xvf public.tar
 	@rm public.tar
+
+netlify:
+	@echo "INCOMING_HOOK_BODY: $(INCOMING_HOOK_BODY)"
+	@make all

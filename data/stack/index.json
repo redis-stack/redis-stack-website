@@ -4,18 +4,22 @@
     "description": "Redis Stack",
     "type": "stack",
     "stack_path": "stack",
-    "_components": [
-        "redis_cli"
+    "docs": [
+        "redis_docs",
+        "stack_docs"
     ],
-    "components": [
-        "redis",
-        "stack_theme",
-        "stack_docs",
+    "modules": [
         "redisearch",
         "redisjson",
         "redisgraph",
         "redistimeseries",
         "redisbloom"
+    ],
+    "themes": [
+        "stack_theme"
+    ],
+    "_assets": [
+        "redis_cli"
     ],
     "website": {
         "path": ".",
