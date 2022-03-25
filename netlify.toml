@@ -2,5 +2,4 @@
   command = "make all"
   publish = "public"
   [context.production.environment]
-    ENV = "development"
-    
+    ENV = "production"
