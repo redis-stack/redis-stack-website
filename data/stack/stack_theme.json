@@ -3,8 +3,7 @@
     "type": "asset",
     "name": "Redis Stack theme",
     "repository": {
-        "git_uri": "../redis-website-new-design",
-        "_git_uri": "https://github.com/redis-stack/redis-website-new-design",
+        "git_uri": "https://github.com/redis-stack/redis-website-new-design",
         "dev_branch": "master",
         "private": true,
         "payload": [

@@ -5,8 +5,7 @@
     "type": "stack",
     "stack_path": "stack",
     "_components": [
-        "redis",
-        "stack_docs"
+        "redis_cli"
     ],
     "components": [
         "redis",

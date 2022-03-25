@@ -3,8 +3,7 @@
     "type": "asset",
     "name": "Redis clinterwebz",
     "repository": {
-        "git_uri": "../redis-interactive",
-        "_git_uri": "https://github.com/redis/redis-clinterwebz",
+        "git_uri": "https://github.com/redis/redis-clinterwebz",
         "dev_branch": "master",
         "payload": [
             {
