@@ -3,3 +3,12 @@
   publish = "public"
   [context.production.environment]
     ENV = "production"
+    PYTHON_VERSION = 3.8
+    RUBY_VERSION = 2.7.2
+
+[context.development]
+  command = "make all"
+  publish = "public"
+  [context.production.development]
+    PYTHON_VERSION = 3.8
+    RUBY_VERSION = 2.7.2
