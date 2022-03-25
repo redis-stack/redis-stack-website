@@ -9,6 +9,6 @@
 [context.development]
   command = "make all"
   publish = "public"
-  [context.production.development]
+  [context.development.environment]
     PYTHON_VERSION = 3.8
     RUBY_VERSION = 2.7.2
