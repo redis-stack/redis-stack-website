@@ -28,7 +28,7 @@ def get_repositories(args: argparse.Namespace) -> None:
                 if not meta.get(repo):
                     meta[repo] = {}
     for repo, data in meta.items():
-        fetched_at = meta.get('fetched_at')
+        fetched_at = meta[repo].get('fetched_at')
         now = datetime.now().timestamp()
         if not fetched_at or fetched_at + 3600 * args.expire < now:
             if production:
