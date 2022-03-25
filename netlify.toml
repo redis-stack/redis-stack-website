@@ -2,6 +2,7 @@
   command = "make netlify"
   publish = "public"
   [context.production.environment]
+    ENV = "production"
     PYTHON_VERSION = "3.8"
     RUBY_VERSION = "2.7.2"
 
@@ -9,5 +10,6 @@
   command = "make netlify"
   publish = "public"
   [context.development.environment]
+    ENV = "development"
     PYTHON_VERSION = "3.8"
     RUBY_VERSION = "2.7.2"

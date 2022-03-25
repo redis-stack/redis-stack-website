@@ -1,7 +1,7 @@
 import logging
 import re
-from structured_data import StructuredData
-from util import die, command_filename
+from .structured_data import StructuredData
+from .util import die, command_filename
 
 
 class Markdown:

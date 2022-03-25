@@ -1,9 +1,10 @@
 import argparse
-from component import Component
 from datetime import datetime
 import logging
 import tempfile
-from util import mkdir_p
+
+from stack.component import Component
+from stack.util import mkdir_p
 
 
 def parse_args() -> argparse.Namespace:
@@ -13,8 +14,6 @@ def parse_args() -> argparse.Namespace:
                         help='path to stack definition')
     parser.add_argument('--skip-clone', action='store_true',
                         help='skips `git clone`')
-    parser.add_argument('--get-stats', action='store_true',
-                        help='Attempts scraping the internet for statistics')
     parser.add_argument('--loglevel', type=str,
                         default='INFO',
                         help='Python logging level (overwrites LOGLEVEL env var)')

@@ -10,8 +10,8 @@ DOCKER_PORT=-p 1313:1313
 
 .PHONY: all init build up clean docker-build docker-make docker docker-up docker-sh netlify
 
-ifneq ($(ENV),development)
-GET_STATS=--get-stats
+ifeq ($(ENV),production)
+GET_META=--production
 endif
 
 ifeq ($(DEBUG),1)
@@ -29,7 +29,8 @@ init:
 	@git submodule update --init --recursive 
 
 build:
-	@python3 build/make_stack.py $(SKIP_CLONE) $(GET_STATS) --loglevel=$(LOGLEVEL)
+	@python3 build/make_stack.py $(SKIP_CLONE) --loglevel=$(LOGLEVEL)
+	@python3 build/get_meta.p $(GET_META) --loglevel=$(LOGLEVEL)
 	@cp -R data/*.json $(HUGO_CONTENT)
 	@hugo $(HUGO_DEBUG) $(HUGO_BUILD)
 

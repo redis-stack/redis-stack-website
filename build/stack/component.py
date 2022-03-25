@@ -3,10 +3,11 @@ import os
 import semver
 from typing import Tuple
 from urllib.parse import urlparse, ParseResult
-from github import Repository
-from markdown import Markdown
-from structured_data import load_dict, dump_dict
-from util import die, mkdir_p, rsync, regex_in_file, run, rm_rf, command_filename
+
+from .github import Repository
+from .markdown import Markdown
+from .structured_data import load_dict, dump_dict
+from .util import die, mkdir_p, rsync, regex_in_file, run, rm_rf, command_filename
 
 
 def parseUri(uri: str) -> Tuple[ParseResult, str, str]:
@@ -254,16 +255,6 @@ class Component(dict):
         for src in ['clients', 'libraries', 'modules', 'tools']:
             data = Component._make_data(f'{repo}/{src}')
             repos[src] = data
-        if self._get_stats:
-            gh_token = os.environ.get('PRIVATE_ACCESS_TOKEN', None)
-            for cat, subs in repos.items():
-                for sub, rs in subs.items():
-                    for n, d in rs.items():
-                        logging.info(f'Getting stats for {n}')
-                        r = Repository(d.get('repository'), gh_token)
-                        r.update(repos[cat][sub][n])
-                        repos[cat][sub][n] = r
-                        pass
         dump_dict(f'data/repos.json', repos)
 
     def _get_misc(self, content) -> None:
