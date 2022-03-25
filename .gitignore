@@ -26,3 +26,6 @@ assets/**
 content/**
 layouts/**
 static/**
+
+# Local Netlify folder
+.netlify

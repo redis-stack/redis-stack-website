@@ -1,0 +1,6 @@
+[context.production]
+  command = "make all"
+  publish = "public"
+  [context.production.environment]
+    ENV = "development"
+    

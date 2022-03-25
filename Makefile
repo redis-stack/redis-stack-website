@@ -32,7 +32,7 @@ build:
 	@hugo $(HUGO_DEBUG) $(HUGO_BUILD)
 
 up:
-	hugo server $(HUGO_DEBUG) $(HUGO_SERVER) --environment $(ENV)
+	hugo server $(HUGO_DEBUG) $(HUGO_SERVER) -w --environment $(ENV)
 
 clean:
 	@rm -f config.toml
