@@ -30,7 +30,7 @@ init:
 
 build:
 	@python3 build/make_stack.py $(SKIP_CLONE) --loglevel=$(LOGLEVEL)
-	@python3 build/get_meta.p $(GET_META) --loglevel=$(LOGLEVEL)
+	@python3 build/get_meta.py $(GET_META) --loglevel=$(LOGLEVEL)
 	@cp -R data/*.json $(HUGO_CONTENT)
 	@hugo $(HUGO_DEBUG) $(HUGO_BUILD)
 
