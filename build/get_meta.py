@@ -36,7 +36,7 @@ def get_repositories(args: argparse.Namespace) -> None:
                 data.update(Repository(repo, token))
                 data.update({ 'fetched_at': datetime.now().timestamp() })
             else:
-                logging.info(f'Skipping meta for {repo} - not in production.')
+                logging.debug(f'Skipping meta for {repo} - not in production.')
         else:
             logging.info(f'Skipping meta for {repo} - last fetch at {fetched_at}.')
     dump_dict(args.output, meta)
@@ -51,7 +51,7 @@ def parse_args() -> argparse.Namespace:
                         default='./data/meta.json',
                         help='path to meta dict')
     parser.add_argument('--merge', type=str,
-                        default='https://redis-stack/meta.json',
+                        default='https://redis-stack.io/meta.json',
                         help='uri to merge meta dict')
     parser.add_argument('--expire', type=int,
                         default=24,
