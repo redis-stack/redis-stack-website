@@ -1,4 +1,5 @@
 import logging
+import os
 import re
 from .structured_data import StructuredData
 from .util import die, command_filename
@@ -20,20 +21,21 @@ class Markdown:
         }
     }
 
-    def __init__(self, filepath: str = None):
+    def __init__(self, filepath: str, warnings: bool = False):
         self.filepath = filepath
-        self.fm_type = None
-        self.fm_ext = None
+        self.warnings = warnings
+        self.fm_type = self.FM_TYPES.get('---\n')
+        self.fm_ext = self.fm_type.get('ext')
         self.fm_data = dict()
-        if not self.filepath:
+        self.payload = ''
+        if not self.filepath or not os.path.exists(self.filepath):
             return
         with open(self.filepath, 'r') as f:
             payload = f.readlines()
         if not len(payload):
             self.payload = ''
-            return
         i = 0
-        while i < len(payload):             # Munch newlines
+        while i < len(payload):              # Munch newlines
             if payload[i].strip() == '':
                 i += 1
             else:
@@ -68,9 +70,6 @@ class Markdown:
         self.fm_data['github_repo'] = github_repo
         self.fm_data['github_branch'] = github_branch
         self.fm_data['github_path'] = github_path
-        if not self.fm_type:
-            self.fm_type = self.FM_TYPES['---\n']
-            self.fm_ext = self.fm_type.get('ext')
 
     def report_links(self) -> None:
         links = re.findall(r'(\[.+\])(\(.+\))', self.payload)
@@ -95,8 +94,9 @@ class Markdown:
                 fm += '\n'
             payload = fm + payload
         else:
-            logging.warning(
-                f'{self.filepath} has no FrontMatter attached - please make a corrective move ASAP!')
+            if self.warnings:
+                logging.warning(
+                    f'{self.filepath} has no FrontMatter attached - please make a corrective move ASAP!')
 
         with open(self.filepath, 'w') as f:
             f.write(payload)
@@ -186,9 +186,9 @@ class Markdown:
     def convert_command_sections(payload):
         """ Converts redis-doc section headers to MD """
         rep = re.sub(r'@examples\n',
-                     '### Examples\n', payload)
+                     '## Examples\n', payload)
         rep = re.sub(r'@return\n',
-                     '### Return\n', rep)
+                     '## Return\n', rep)
         return rep
 
     def add_command_frontmatter(self, name, commands):

@@ -1,32 +1,53 @@
 import argparse
 import logging
 import os
+import sys
 import urllib.error
 from datetime import datetime
 from stack.github import Repository
 from stack.structured_data import load_dict, dump_dict
-from stack.util import wget
+from stack.util import die, wget
 
 def get_repositories(args: argparse.Namespace) -> None:
     production = args.production
     token = os.environ.get('PRIVATE_ACCESS_TOKEN')
-    if not token:
-        logging.info('PRIVATE_ACCESS_TOKEN not provided - skipping.')
-        return
+    if not token and production:
+        die('PRIVATE_ACCESS_TOKEN not provided for production mode - aborting.')
+
     try:
-        wget(args.merge, args.output)
-        meta = load_dict(args.output)
-        logging.info(f'Merge metadata loaded from {args.merge}')
-    except urllib.error.URLError as e:
+        meta_in = f'{args.input}{args.meta}'
+        meta_out = f'{args.output}{args.meta}'
+        wget(meta_in, meta_out)
+        meta = load_dict(meta_out)
+        logging.info(f'Merge metadata loaded from {meta_in}.')
+    except urllib.error.URLError:
         meta = {}
-        logging.warning(f'Merge metadata not found at {args.merge} - starting from scratch.')
-    input = load_dict(args.input)
-    for group in input.values():
+        logging.warning(f'Merge metadata not found at {meta_in} - starting from scratch.')
+    repos_in = f'{args.input}{args.repos}'
+    repos_out = f'{args.output}{args.repos}'
+    if os.path.exists(repos_out):
+        logging.info(f'Repos data loaded locally from {repos_out}.')
+    else:
+        try:
+            wget(repos_in, repos_out)
+            logging.info(f'Repos metadata loaded from {repos_in}.')
+        except urllib.error.URLError:
+            die('Could not find repositories - aborting.')
+
+    repos = load_dict(repos_out)
+    for group in repos.values():
         for sub in group.values():
             for project in sub.values():
                 repo = project.get('repository')
                 if not meta.get(repo):
-                    meta[repo] = {}
+                    meta[repo] = {
+                        'active': None,
+                        'forks_count': None,
+                        'license': None,
+                        'pushed_at': None,
+                        'open_issues_count': None,
+                        'stargazers_count': None
+                    }
     for repo, data in meta.items():
         fetched_at = meta[repo].get('fetched_at')
         now = datetime.now().timestamp()
@@ -38,21 +59,24 @@ def get_repositories(args: argparse.Namespace) -> None:
             else:
                 logging.debug(f'Skipping meta for {repo} - not in production.')
         else:
-            logging.info(f'Skipping meta for {repo} - last fetch at {fetched_at}.')
-    dump_dict(args.output, meta)
+            logging.info(f'Skipping meta for {repo} - last fetched {round((now - fetched_at) / 60)} minutes ago.')
+    dump_dict(meta_out, meta)
     logging.info(f'Processed {len(meta)} repositories.')
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description='Gets repositories metadata')
+    parser.add_argument('--repos', type=str,
+                        default='repos.json',
+                        help='repositories dict')
+    parser.add_argument('--meta', type=str,
+                        default='meta.json',
+                        help='meta dict')
     parser.add_argument('--input', type=str,
-                        default='./data/repos.json',
-                        help='path to repos dict')
+                        default='https://redis-stack.io/',
+                        help='path to input dicts')
     parser.add_argument('--output', type=str,
-                        default='./data/meta.json',
-                        help='path to meta dict')
-    parser.add_argument('--merge', type=str,
-                        default='https://redis-stack.io/meta.json',
-                        help='uri to merge meta dict')
+                        default='./data/',
+                        help='path to output dicts')
     parser.add_argument('--expire', type=int,
                         default=24,
                         help='expire time in hours after last fetched_at')
@@ -70,7 +94,7 @@ if __name__ == '__main__':
 
     # Do starry run
     logging.basicConfig(
-        level=ARGS.loglevel, format='%(filename)s: %(levelname)s %(asctime)s %(message)s')
+        level=ARGS.loglevel, format=f'{sys.argv[0]}: %(levelname)s %(asctime)s %(message)s')
     print(f'GET REPOS')
     start = datetime.now()
     get_repositories(ARGS)

@@ -1,9 +1,10 @@
 import argparse
 from datetime import datetime
 import logging
+import sys
 import tempfile
 
-from stack.component import Component
+from stack.component import Stack
 from stack.util import mkdir_p
 
 
@@ -28,11 +29,11 @@ if __name__ == '__main__':
     mkdir_p(ARGS.tempdir)
 
     # Load settings
-    STACK = Component(ARGS.stack, [], **ARGS.__dict__)
+    STACK = Stack(ARGS.stack, None, ARGS.__dict__)
 
     # Make the stack
     logging.basicConfig(
-        level=ARGS.loglevel, format='%(filename)s: %(levelname)s %(asctime)s %(message)s')
+        level=ARGS.loglevel, format=f'{sys.argv[0]}: %(levelname)s %(asctime)s %(message)s')
     print(f'APPLY STACK "{STACK._name}"')
     start = datetime.now()
     STACK.apply()

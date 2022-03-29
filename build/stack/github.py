@@ -6,12 +6,17 @@ from urllib.parse import urlparse
 
 
 class Repository(dict):
+    _props = ['archived', 'description', 'homepage',
+              'forks_count', 'stargazers_count', 'open_issues_count', ]
+
     def __init__(self, uri, gh_token=None):
         super().__init__()
         self.uri = urlparse(f'https://{uri}')
         self.gh_token = gh_token
         self.owner, self.name = os.path.split(self.uri.path)
         self.owner = self.owner[1:]
+        for prop in self._props:
+            self[prop] = None
         self._get_gh_stats()
 
     def _get_gh_stats(self) -> None:
@@ -29,7 +34,7 @@ class Repository(dict):
                 'Authorization': f'token {self.gh_token}'
             })
         j = r.json()
-        for prop in ['archived', 'description', 'homepage', 'forks_count', 'stargazers_count', 'open_issues_count', ]:
+        for prop in self:
             p = j.get(prop)
             if p and (type(p) != str or len(p) > 0):
                 self[prop] = p
