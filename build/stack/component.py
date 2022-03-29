@@ -106,14 +106,14 @@ class Component(dict):
             die('Cannot determine git repo - aborting.')
 
     def _get_commands(self) -> list:
-        cmds = self.get('commands')
-        repo = self._git_clone(cmds)
-        branch = Component._get_dev_branch(cmds)
+        commands = self.get('commands')
+        repo = self._git_clone(commands)
+        branch = Component._get_dev_branch(commands)
         run(f'git checkout {branch}', cwd=repo)
-        path = cmds.get('path', '')
+        path = commands.get('path', '')
 
         logging.info(f'Copying {self._id} commands')
-        filename = cmds.get('defs', 'commands.json')
+        filename = commands.get('defs', 'commands.json')
         filepath = f'{repo}/{filename}'
         logging.info(
             f'Reading {self._id} {self._type} commands.json from {branch}/{filename}')
@@ -134,7 +134,7 @@ class Component(dict):
         srcs = [f'{base}{command_filename(cmd)}.md' for cmd in cmds]
         files = rsync(' '.join(srcs), dst)
         self._dump_payload(base, dst, cmds.get('payload', None))
-        self._add_meta_fm(cmds.get('git_uri'), branch, dst, path)
+        self._add_meta_fm(commands.get('git_uri'), branch, dst, path)
         return files
 
     def _get_groups(self) -> None:
@@ -229,19 +229,6 @@ class Stack(Component):
             for gname, group in kind.items():
                 path = f'{self._content}/docs/{kname}'
                 mkdir_p(path)
-                # md = Markdown(f'{path}/_index.md')
-                # if kname in ['clients', 'libraries']:
-                #     md.fm_data['title'] = f'{languages.get(gname)} Redis {kname[0].upper()}{kname[1:]}'
-                #     md.fm_data['linkTitle'] = languages.get(gname)
-                # elif kname == 'tools':
-                #     md.fm_data['title'] = f'{tool_types.get(gname)} Tools for Redis'
-                #     md.fm_data['linkTitle'] = tool_types.get(gname)
-                # elif kname == 'modules':
-                #     md.fm_data['title'] = 'Redis Modules'
-                #     md.fm_data['linkTitle'] = 'Redis Modules'
-                # md.fm_data['layout'] = 'bazzar'
-                # md.fm_data['bazzar'] = kname
-                # md.persist()
                 for pname, project in group.items():
                     filename = f'{path}/{slugify(gname)}_{slugify(pname)}.md'
                     md = Markdown(filename)
@@ -398,7 +385,7 @@ class Module(Component):
                 if t:
                     logging.warning(
                         f'the file {f} has a type set to `{t}` - please prevent future harm by acting now, thank you.')
-                md.patch_module_paths(self)
+                md.patch_module_paths(self._id, self._stack_path)
                 md.persist()
 
     def apply(self) -> None:

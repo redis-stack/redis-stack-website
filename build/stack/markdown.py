@@ -24,28 +24,29 @@ class Markdown:
     def __init__(self, filepath: str, warnings: bool = False):
         self.filepath = filepath
         self.warnings = warnings
-        self.fm_type = self.FM_TYPES.get('---\n')
-        self.fm_ext = self.fm_type.get('ext')
         self.fm_data = dict()
+        self.fm_type = None
+        self.fm_ext = None
         self.payload = ''
         if not self.filepath or not os.path.exists(self.filepath):
             return
         with open(self.filepath, 'r') as f:
             payload = f.readlines()
-        if not len(payload):
-            self.payload = ''
+
         i = 0
-        while i < len(payload):              # Munch newlines
-            if payload[i].strip() == '':
+        while i < len(payload):
+            if payload[i].startswith('\ufeff'):  # BOM workaround
+                payload[i] = payload[i][1:]
+            if payload[i].strip() == '':         # Munch newlines and whitespaces
                 i += 1
             else:
+                self.fm_type = self.FM_TYPES.get(payload[i])
                 break
-        if payload[i].startswith('\ufeff'):  # BOM workaround
-            payload[i] = payload[i][1:]
 
-        self.fm_type = self.FM_TYPES.get(payload[i])
         if not self.fm_type:
             self.payload = ''.join(payload)
+            self.fm_type = self.FM_TYPES.get('---\n')
+            self.fm_ext = self.fm_type.get('ext')
             return
         eof, self.fm_ext = self.fm_type.get('eof'), self.fm_type.get('ext')
         found = False
@@ -54,7 +55,7 @@ class Markdown:
                 found = True
                 break
         if not found and payload[j].strip() != eof.strip():
-            die(f'No eof for frontmatter: {payload}')
+            die(f'No EOF for frontmatter: {payload}')
         if self.fm_ext == '.json':
             self.fm_data.update(StructuredData.loads(
                 self.fm_ext, ''.join(payload[i:j+1])))
@@ -166,7 +167,7 @@ class Markdown:
         def reply(x):
             resp2 = {
                 'nil': ('resp-bulk-strings', 'Null reply'),
-                'simple-string': ('resp-simple-string', 'Simple string reply'),
+                'simple-string': ('resp-simple-strings', 'Simple string reply'),
                 'integer': ('resp-integers', 'Integer reply'),
                 'bulk-string': ('resp-bulk-strings', 'Bulk string reply'),
                 'array': ('resp-arrays', 'Array reply'),
@@ -175,7 +176,7 @@ class Markdown:
             }
             rep = resp2.get(x.group(1), None)
             if rep:
-                return f'[{rep[1]}](/docs/reference/protocol-spec/#{rep[0]})'
+                return f'[{rep[1]}](/docs/reference/protocol-spec#{rep[0]})'
             return f'[]'
 
         rep = re.sub(r'@(.+)-reply',
@@ -224,14 +225,12 @@ class Markdown:
             None, commands, self.payload)
         self.persist()
 
-    def patch_module_paths(self, module: dict) -> None:
+    def patch_module_paths(self, module_id: str, module_path) -> None:
         """ Replaces absolute module documentation links """
         def rep(x):
-            if x.group(2).startswith(f'(/{_id}'):
-                r = f'{x.group(1)}({x.group(2)[len(_id)+3:-1]})'
+            if x.group(2).startswith(f'(/{module_id}/'):
+                r = f'{x.group(1)}(/{module_path}/{x.group(2)[len(module_id)+3:-1]})'
                 return r
             else:
                 return x.group(0)
-
-        _id = module.get('id')
         self.payload = re.sub(f'(\[.+\])(\(.+\))', rep, self.payload)
