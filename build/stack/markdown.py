@@ -150,14 +150,14 @@ class Markdown:
     @staticmethod
     def get_cli_shortcode(m):
         snippet = m[1]
-        start = f'{{{{% redis-cli %}}}}\n'
-        end = f'\n{{{{% /redis-cli %}}}}\n'
-        return f'{start}{snippet}{end}'
+        start = f'{{{{% redis-cli %}}}}'
+        end = f'{{{{% /redis-cli %}}}}'
+        return f'{start}\n{snippet.strip()}\n{end}\n'
 
     @staticmethod
     def convert_cli_snippets(payload):
         """ Convert the ```cli notation to Hugo shortcode syntax """
-        rep = re.sub(r'```cli\n(.*)\n```\n',
+        rep = re.sub(r'```cli(.*?)```',
                      Markdown.get_cli_shortcode, payload, flags=re.S)
         return rep
 
