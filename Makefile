@@ -78,4 +78,5 @@ docker-all: docker-build docker-make
 netlify:
 	@echo "INCOMING_HOOK_BODY: $(INCOMING_HOOK_BODY)"
 	@make all
+	@cp _redirects public
 	# @make test
