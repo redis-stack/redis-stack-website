@@ -4,7 +4,7 @@ python3
 make
 hugo
 npm
-
+?
 
 After cloning `redis-stack-website`, run `make docker` to build and run a container that serves hugo on `localhost:1313` with the components defined in `redis_stack_components.yml`.
 
