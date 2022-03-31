@@ -223,15 +223,13 @@ class Stack(Component):
     def _make_repos(self) -> None:
         logging.info(f'Making {self._id} repositories')
         meta = load_dict(self.get('website').get('meta'))
-        languages = {v: k for k, v in load_dict(self._website.get('languages')).items()}
-        tool_types = {v: k for k, v in load_dict(self._website.get('tool_types')).items()}
         for kname, kind in self._repos.items():
             for gname, group in kind.items():
                 path = f'{self._content}/docs/{kname}'
                 mkdir_p(path)
                 for pname, project in group.items():
                     filename = f'{path}/{slugify(gname)}_{slugify(pname)}.md'
-                    md = Markdown(filename)
+                    md = Markdown(filename, True)
                     md.payload = ''
                     md.fm_data['recommended'] = False
                     md.fm_data.update(project)

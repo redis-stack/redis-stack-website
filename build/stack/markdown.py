@@ -25,8 +25,8 @@ class Markdown:
         self.filepath = filepath
         self.warnings = warnings
         self.fm_data = dict()
-        self.fm_type = None
-        self.fm_ext = None
+        self.fm_type = self.FM_TYPES.get('---\n')
+        self.fm_ext = self.fm_type.get('ext')
         self.payload = ''
         if not self.filepath or not os.path.exists(self.filepath):
             return
