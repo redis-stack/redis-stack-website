@@ -20,6 +20,9 @@
             },
             {
                 "src": "support/"
+            },
+            {
+                "src": "terms/"
             }
         ]
     }
