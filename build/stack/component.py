@@ -5,9 +5,9 @@ import semver
 from typing import Tuple
 from urllib.parse import urlparse, ParseResult
 
-from .github import Repository
 from .markdown import Markdown
 from .structured_data import load_dict, dump_dict
+from .syntax import Command
 from .util import die, mkdir_p, rsync, regex_in_file, run, rm_rf, command_filename, slugify
 
 
@@ -243,9 +243,13 @@ class Stack(Component):
     def _process_commands(self) -> None:
         logging.info(f'Processing {self._id} commands')
         for name in self._commands:
-            md_path = f'{self._content}/commands/{command_filename(name)}.md'
-            md = Markdown(md_path)
+            path = f'{self._content}/commands/{command_filename(name)}'
+            md = Markdown(f'{path}.md')
             md.process_command(name, self._commands)
+            c = Command(name, self._commands.get(name))
+            d = c.diagram()
+            with open(f'{path}.svg', 'w') as f:
+                f.write(d)
 
     def _process_docs(self) -> None:
         logging.info(f'Processing {self._id} docs')

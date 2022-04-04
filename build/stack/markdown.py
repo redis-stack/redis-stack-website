@@ -2,6 +2,7 @@ import logging
 import os
 import re
 from .structured_data import StructuredData
+from .syntax import Command
 from .util import die, command_filename
 
 
@@ -198,7 +199,8 @@ class Markdown:
         data.update({
             'title': name,
             'linkTitle': name,
-            'description': data.get('summary')
+            'description': data.get('summary'),
+            'syntax': Command(name, data).syntax()
         })
         if 'replaced_by' in data:
             data['replaced_by'] = self.generate_commands_links(
