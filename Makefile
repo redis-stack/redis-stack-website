@@ -8,7 +8,7 @@ DOCKER_IMAGE=image-redis-stack-website
 DOCKER_CONTAINER=container-$(DOCKER_IMAGE)
 DOCKER_PORT=-p 1313:1313
 
-.PHONY: all init build test up clean docker-build docker-make docker docker-up docker-sh netlify
+.PHONY: all init build up clean docker-build docker-make docker docker-up docker-sh netlify
 
 ifeq ($(ENV),production)
 GET_META=--production
@@ -27,16 +27,12 @@ all: init build
 
 init:
 	@git submodule update --init --recursive
-	@if [ ! -f bin/htmltest ]; then curl https://htmltest.wjdp.uk | bash; fi;
 
 build:
 	@python3 build/get_meta.py $(GET_META) --loglevel=$(LOGLEVEL)
 	@python3 build/make_stack.py $(SKIP_CLONE) --loglevel=$(LOGLEVEL)
 	@cp -R data/*.json $(HUGO_CONTENT)
 	@hugo $(HUGO_DEBUG) $(HUGO_BUILD)
-
-test:
-	@bin/htmltest -c build/htmltest.conf
 
 up:
 	hugo server $(HUGO_DEBUG) $(HUGO_SERVER) -w --environment $(ENV)
@@ -79,4 +75,3 @@ netlify:
 	@echo "INCOMING_HOOK_BODY: $(INCOMING_HOOK_BODY)"
 	@make all
 	@cp _redirects public
-	# @make test

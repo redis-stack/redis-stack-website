@@ -42,7 +42,7 @@
 /topics/releases            /docs/about/releases/
 /topics/replication         /docs/manual/replication/
 /topics/security            /docs/manual/security/
-/topics/sentinel            /docs/manual/high-availability/
+/topics/sentinel            /docs/manual/sentinel/
 /topics/signals             /docs/reference/signals/
 /topics/sponsors            /docs/about/sponsors/
 /topics/streams-intro       /docs/manual/data-types/streams/
