@@ -21,7 +21,7 @@
 /topics/indexes             /docs/reference/patterns/indexes/
 /topics/internals           /docs/reference/internals/
 /topics/introduction        /docs/about/
-/topics/latency             /docs/manual/troubleshooting/
+/topics/latency             /docs/reference/optimization/latency/
 /topics/latency-monitor     /docs/manual/optimization/latency-monitor/
 /topics/ldb                 /docs/manual/programmability/lua-debugging/
 /topics/license             /docs/about/license/
