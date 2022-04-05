@@ -76,7 +76,7 @@ class Argument:
 
         return f'{syntax}'
 
-    def diagram(self) -> DiagramItem | None:
+    def diagram(self) -> DiagramItem:
         if self._type == ArgumentType.COMMAND:
             s = []
             i = 0
