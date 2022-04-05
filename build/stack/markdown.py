@@ -136,8 +136,6 @@ class Markdown:
             command = m.group(1)
             if command in commands and command not in exclude:
                 return f'[`{command}`](/commands/{command_filename(command)})'
-            elif command.startswith('!'):
-                return f'`{command[1:]}`'
             else:
                 return m.group(0)
         return linkifier
@@ -146,6 +144,7 @@ class Markdown:
         """ Generate markdown links for back-ticked commands """
         linkifier = Markdown.make_command_linkifier(commands, name)
         rep = re.sub(r'`([A-Z][A-Z-_ \.]*)`', linkifier, payload)
+        rep = re.sub(r'`!([A-Z][A-Z-_ \.]*)`', lambda x: f'`{x[1]}`', rep)
         return rep
 
     @staticmethod

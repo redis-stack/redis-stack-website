@@ -244,11 +244,13 @@ class Stack(Component):
         logging.info(f'Processing {self._id} commands')
         for name in self._commands:
             path = f'{self._content}/commands/{command_filename(name)}'
-            md = Markdown(f'{path}.md')
+            mkdir_p(path)
+            run(f'mv {path}.md {path}/index.md')
+            md = Markdown(f'{path}/index.md')
             md.process_command(name, self._commands)
             c = Command(name, self._commands.get(name))
             d = c.diagram()
-            with open(f'{path}.svg', 'w') as f:
+            with open(f'{path}/syntax.svg', 'w+') as f:
                 f.write(d)
 
     def _process_docs(self) -> None:

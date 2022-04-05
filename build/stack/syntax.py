@@ -189,11 +189,14 @@ if __name__ == '__main__':
     with open('data/commands.json', 'r') as f:
         j = json.load(f)
 
-    # for k in j:
-    for k in ['BITFIELD']:
+    board = []
+    for k in j:
         v = j.get(k)
         c = Command(k, v)
         d = c.diagram()
-        with open(f'assets/syntax/{k.lower().replace(" ", "-")}.svg', 'w') as f:
+        with open(f'content/en/commands/{k.lower().replace(" ", "-")}/syntax.svg', 'w+') as f:
             f.write(d)
-        print(c.syntax())
+        board.append(c.syntax())
+    board.sort(key=lambda x: len(x))
+    for c in board:
+        print(c)
