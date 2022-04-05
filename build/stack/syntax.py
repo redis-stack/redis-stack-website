@@ -1,6 +1,6 @@
 from enum import Enum
 from io import StringIO
-from textwrap import fill
+from textwrap import fill, wrap
 from typing import List
 from railroad import *
 
@@ -83,7 +83,7 @@ class Argument:
             optionals = []
             while i < len(self._arguments):
                 arg = self._arguments[i].diagram()
-                if type(arg) is Sequence:
+                if type(arg) is Optional:
                     optionals.append(arg)
                 else:
                     if len(optionals) != 0:
@@ -105,7 +105,7 @@ class Argument:
                 for a in items:
                     width = self._stack[-1].width
                     w = a.width
-                    if width + w >= 600:
+                    if width + w >= self._max_width:
                         self._stack.append(Sequence(a))
                     else:
                         self._stack[-1] = Sequence(*self._stack[-1].items, a)
@@ -113,9 +113,9 @@ class Argument:
             if self._type in [ArgumentType.BLOCK, ArgumentType.ONEOF] and len(self._arguments) > 0:
                 args = [arg.diagram() for arg in self._arguments]
                 if self._type == ArgumentType.BLOCK:
-                    el = Group(Sequence(*args), self._name)
+                    el = Sequence(*args)
                 elif self._type == ArgumentType.ONEOF:
-                    el = Group(Choice(round(len(args)/2), *args), self._name)
+                    el = Choice(round(len(args)/2), *args)
             elif self._type != ArgumentType.PURE_TOKEN:
                 el = NonTerminal(self._name, title=self._type.value)
 
@@ -123,8 +123,7 @@ class Argument:
                 if self._multiple_token:
                     el = Sequence(Terminal(self._token), el)
                 el = OneOrMore(el)
-
-            if self._token and self._level:
+            elif self._token:
                 if self._type == ArgumentType.PURE_TOKEN:
                     el = Terminal(self._token)
                 else:
@@ -136,7 +135,7 @@ class Argument:
 
 
 class Command(Argument):
-    def __init__(self, cname: str, data: dict, max_width: int = 800) -> None:
+    def __init__(self, cname: str, data: dict, max_width: int = 860) -> None:
         self._cname = cname
         self._cdata = data
         carg = {
@@ -153,7 +152,7 @@ class Command(Argument):
     def syntax(self, **kwargs):
         indent = len(self._name) + 1
         opts = {
-            'width': kwargs.get('width', 50),
+            'width': kwargs.get('width', 58),
             'subsequent_indent': ' ' * indent,
             'break_long_words': False,
             'break_on_hyphens': False
@@ -163,7 +162,7 @@ class Command(Argument):
         optionals = []
         while i < len(self._arguments):
             arg = self._arguments[i].syntax(**kwargs)
-            if arg.startswith('['):
+            if arg.startswith('[') and not (arg.endswith('...]') or arg.endswith('...]]')):
                 optionals.append(arg)
             else:
                 if len(optionals) != 0:
@@ -183,3 +182,18 @@ class Command(Argument):
         s = StringIO()
         d.writeSvg(s.write)
         return s.getvalue()
+
+
+if __name__ == '__main__':
+    import json
+    with open('data/commands.json', 'r') as f:
+        j = json.load(f)
+
+    # for k in j:
+    for k in ['BITFIELD']:
+        v = j.get(k)
+        c = Command(k, v)
+        d = c.diagram()
+        with open(f'assets/syntax/{k.lower().replace(" ", "-")}.svg', 'w') as f:
+            f.write(d)
+        print(c.syntax())

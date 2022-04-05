@@ -200,7 +200,8 @@ class Markdown:
             'title': name,
             'linkTitle': name,
             'description': data.get('summary'),
-            'syntax': Command(name, data).syntax()
+            'syntax_str': str(Command(name, data)),
+            'syntax_fmt': Command(name, data).syntax()
         })
         if 'replaced_by' in data:
             data['replaced_by'] = self.generate_commands_links(

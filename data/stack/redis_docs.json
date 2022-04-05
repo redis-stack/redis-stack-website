@@ -10,7 +10,7 @@
     },
     "commands": {
         "git_uri": "https://github.com/redis/redis-doc",
-        "dev_branch": "new-structure",
+        "dev_branch": "master",
         "defs": "commands.json",
         "path": "commands",
         "payload": [
@@ -103,12 +103,12 @@
     },
     "docs": {
         "git_uri": "https://github.com/redis/redis-doc",
-        "dev_branch": "new-structure",
+        "dev_branch": "master",
         "path": "docs"
     },
     "data": {
         "git_uri": "https://github.com/redis/redis-doc",
-        "dev_branch": "new-structure",
+        "dev_branch": "master",
         "languages": "languages.json",
         "tool_types": "tool_types.json",
         "clients": "clients/",
@@ -118,7 +118,7 @@
     },
     "misc": {
         "git_uri": "https://github.com/redis/redis-doc",
-        "dev_branch": "new-structure",
+        "dev_branch": "master",
         "payload": [
             {
                 "src": "_index.md"
