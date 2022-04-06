@@ -1,12 +1,15 @@
 from enum import Enum
 from io import StringIO
-from textwrap import fill, wrap
+from re import M
+from textwrap import fill
 from typing import List
 from railroad import *
 
 # Non-breaking space
 NBSP = '\xa0'
 
+# HTML Word Break Opportunity
+WBR = '<wbr>'
 
 class ArgumentType(Enum):
     INTEGER = 'integer'
@@ -43,7 +46,7 @@ class Argument:
         if self._type == ArgumentType.BLOCK:
             args += ' '.join([arg.syntax() for arg in self._arguments])
         elif self._type == ArgumentType.ONEOF:
-            args += f' |{NBSP}'.join([arg.syntax() for arg in self._arguments])
+            args += f' | '.join([arg.syntax() for arg in self._arguments])
         elif self._type != ArgumentType.PURE_TOKEN:
             args += self._name
             if show_types:
@@ -135,7 +138,7 @@ class Argument:
 
 
 class Command(Argument):
-    def __init__(self, cname: str, data: dict, max_width: int = 860) -> None:
+    def __init__(self, cname: str, data: dict, max_width: int = 640) -> None:
         self._cname = cname
         self._cdata = data
         carg = {
@@ -146,7 +149,7 @@ class Command(Argument):
         super().__init__(carg, 0, max_width)
 
     def __str__(self):
-        s = ' '.join([self._cname] + [arg.syntax() for arg in self._arguments])
+        s = ' '.join([arg.syntax() for arg in self._arguments[1:]])
         return s
 
     def syntax(self, **kwargs):
@@ -181,22 +184,11 @@ class Command(Argument):
         d = Diagram(Stack(*self._stack),css=None)
         s = StringIO()
         d.writeSvg(s.write)
-        return s.getvalue()
-
-
-if __name__ == '__main__':
-    import json
-    with open('data/commands.json', 'r') as f:
-        j = json.load(f)
-
-    board = []
-    for k in j:
-        v = j.get(k)
-        c = Command(k, v)
-        d = c.diagram()
-        with open(f'content/en/commands/{k.lower().replace(" ", "-")}/syntax.svg', 'w+') as f:
-            f.write(d)
-        board.append(c.syntax())
-    board.sort(key=lambda x: len(x))
-    for c in board:
-        print(c)
+        # Hack: strip out the 'width' and 'height' attrs from the svg
+        s = s.getvalue()
+        for attr in ['width', 'height']:
+            a = f'{attr}="'
+            x = s.find(a)
+            y = s.find('"', x + len(a))
+            s = s[:x-1] + s[y+1:]
+        return s
