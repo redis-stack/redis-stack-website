@@ -235,4 +235,4 @@ class Markdown:
                 return r
             else:
                 return x.group(0)
-        self.payload = re.sub(f'(\[.+\])(\(.+\))', rep, self.payload)
+        self.payload = re.sub(f'(\[.+?\])(\(.+?\))', rep, self.payload)
