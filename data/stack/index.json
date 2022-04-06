@@ -16,9 +16,6 @@
         "redistimeseries",
         "redisbloom"
     ],
-    "assets": [
-        "stack_theme"
-    ],
     "_assets": [
         "stack_theme",
         "redis_cli"
