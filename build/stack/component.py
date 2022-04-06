@@ -132,9 +132,15 @@ class Component(dict):
         base = f'{repo}/{path}/'
         dst = f'{self._root._website.get("content")}/commands/'
         srcs = [f'{base}{command_filename(cmd)}.md' for cmd in cmds]
-        files = rsync(' '.join(srcs), dst)
+        files = rsync(' '.join(srcs), dst)[1:-5]
         self._dump_payload(base, dst, cmds.get('payload', None))
         self._add_meta_fm(commands.get('git_uri'), branch, dst, path)
+        if self._type == 'module':
+            for file in files:
+                path = f'{dst}/{file}'
+                md = Markdown(path)
+                md.patch_module_paths(self._id, self._stack_path)
+                md.persist()
         return files
 
     def _get_groups(self) -> None:
@@ -167,7 +173,7 @@ class Component(dict):
         src = f'{repo}/{path}/'
         dst = f'{self._content}'
         mkdir_p(dst)
-        files = rsync(src, dst)
+        files = rsync(src, dst)[1:-5]
         Component._dump_payload(src, dst, docs.get('payload', None))
         Component._add_meta_fm(docs.get('git_uri'), branch, dst, path)
         return files
