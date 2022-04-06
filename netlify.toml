@@ -13,3 +13,11 @@
     ENV = "development"
     PYTHON_VERSION = "3.8"
     RUBY_VERSION = "2.7.2"
+
+[context.branch-deploy]
+  command = "make netlify"
+  publish = "public"
+  [context.branch-deploy.environment]
+    ENV = "development"
+    PYTHON_VERSION = "3.8"
+    RUBY_VERSION = "2.7.2"
