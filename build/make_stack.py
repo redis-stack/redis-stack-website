@@ -20,6 +20,9 @@ def parse_args() -> argparse.Namespace:
                         help='Python logging level (overwrites LOGLEVEL env var)')
     parser.add_argument('--tempdir', type=str,
                         help='temporary path', default=f'{tempfile.gettempdir()}')
+    parser.add_argument('--module', type=str,
+                        default='*',
+                        help='builds a single module (implies core docs and assets)')
     return parser.parse_args()
 
 

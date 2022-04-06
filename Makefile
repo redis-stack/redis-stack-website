@@ -1,3 +1,4 @@
+STACK_MODULE ?= "*"
 IP ?= 0.0.0.0
 LOGLEVEL ?= INFO
 ENV ?= development
@@ -30,7 +31,7 @@ init:
 
 build:
 	@python3 build/get_meta.py $(GET_META) --loglevel=$(LOGLEVEL)
-	@python3 build/make_stack.py $(SKIP_CLONE) --loglevel=$(LOGLEVEL)
+	@python3 build/make_stack.py $(SKIP_CLONE) --module=$(STACK_MODULE) --loglevel=$(LOGLEVEL)
 	@cp -R data/*.json $(HUGO_CONTENT)
 	@hugo $(HUGO_DEBUG) $(HUGO_BUILD)
 
@@ -55,6 +56,7 @@ docker-make: docker-build
 		--env SKIP_CLONE=$(SKIP_CLONE) \
 		--env GET_STATS=$(GET_STATS) \
 		--env LOGLEVEL=$(LOGLEVEL) \
+		--env STACK_MODULE=$(STACK_MODULE) \
 		$(DOCKER_IMAGE) make clean build
 
 docker docker-up: docker-make
