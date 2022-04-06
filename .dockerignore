@@ -12,5 +12,6 @@ venv
 .idea
 .vscode
 
+**/__pycache__
 bin/**
 data/*.json

@@ -12,6 +12,8 @@ venv/**
 .idea
 .vscode
 
+**/__pycache__
+
 /bin/htmltest
 
 # Files copied or generated during build
@@ -20,3 +22,6 @@ public/**
 resources/**
 tmp/**
 content/**
+
+# Local Netlify folder
+.netlify

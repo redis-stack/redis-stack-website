@@ -3,6 +3,7 @@
     "type": "docs",
     "name": "Redis Stack",
     "description": "Redis Stack docs",
+    "stack_path": "docs",
     "docs": {
         "git_uri": "https://github.com/redis-stack/redis-stack-docs",
         "dev_branch": "main",
@@ -19,6 +20,9 @@
             },
             {
                 "src": "support/"
+            },
+            {
+                "src": "terms/"
             }
         ]
     }
