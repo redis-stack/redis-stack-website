@@ -178,7 +178,7 @@ class Command(Argument):
 
     def diagram(self) -> str:
         super().diagram()
-        d = Diagram(Stack(*self._stack))
+        d = Diagram(Stack(*self._stack),css=None)
         s = StringIO()
         d.writeSvg(s.write)
         return s.getvalue()
