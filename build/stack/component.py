@@ -1,4 +1,5 @@
 from ast import dump
+from email.mime import base
 import logging
 import os
 import semver
@@ -271,7 +272,7 @@ class Stack(Component):
         for kind in ['core', 'docs', 'modules', 'assets']:
             for component in self.get(kind):
                 if type(component) == str:
-                    _, ext = os.path.splitext(component)
+                    basename, ext = os.path.splitext(component)
                     if ext == '':
                         component += self._ext
                     filename = f'{self._dirname}/{component}'
@@ -280,7 +281,10 @@ class Stack(Component):
                     elif kind == 'docs':
                         c = Docs(filename, self)
                     elif kind == 'modules':
-                        c = Module(filename, self)
+                        if self._args.get('module') in ['*', basename]:
+                            c = Module(filename, self)
+                        else:
+                            continue
                     elif kind == 'assets':
                         c = Asset(filename, self)
                 else:
