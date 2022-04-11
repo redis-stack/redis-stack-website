@@ -70,32 +70,6 @@ form {
     }
 }
 
-.td-sidebar-toc {
-    border: none;
-
-    ul {
-        border-left: 1px solid var(--c-neutral-700);
-        padding-left: 1rem;
-    }
-}
-
-.alert-primary {
-    border: none;
-    color: var(--c-neutral-800);
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 26px;
-    padding-left: 0;
-
-    strong {
-        font-weight: 600;
-    }
-
-    &>div {
-        margin-bottom: 1rem;
-    }
-}
-
 #commands-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(18em, 1fr));
@@ -107,8 +81,9 @@ form {
         box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.05);
         padding: 1em;
 
-        &:hover, &:focus-within {
+        &:hover, &:focus {
             border-top-color: var(--secondary-color);
+            text-decoration: none;
         }
 
         > .name {
