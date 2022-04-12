@@ -1,0 +1,37 @@
+{{ define "li" -}}
+  {{ $s := .section -}}
+  {{ $p := .page -}}
+  {{ $treeRoot := cond (eq .ulNr 0) true false -}}
+  {{ $ulNr := .ulNr -}}
+  {{ $ulShow := .ulShow -}}
+  {{ $active := eq $s $p -}}
+  {{ $activePath := $p.IsDescendant $s -}}
+  {{ $show := cond (or (lt $ulNr $ulShow) $activePath (eq $s.Parent $p.Parent) (eq $s.Parent $p) ($p.IsDescendant $s.Parent)) true false -}}
+  {{ $pages := (union $s.Pages $s.Sections).ByWeight -}}
+  {{ $withChild := gt (len $pages) 0 -}}
+
+  {{ if $show }}
+    <li {{- if $active }} class="active" {{- end }}>
+      <a href="{{ $s.RelPermalink }}">{{ $s.LinkTitle }}</a>
+      {{- if $withChild }}
+        {{- $ulNr := add $ulNr 1 }}
+        <ul>
+          {{ range $pages -}}
+            {{ if (not (eq $s $p.Site.Home)) -}}
+              {{ template "li" (dict "page" $p "section" . "ulNr" $ulNr "ulShow" $ulShow) }}
+            {{- end }}
+          {{- end }}
+        </ul>
+      {{- end }}
+    </li>
+  {{- end }}
+{{- end }}
+
+<nav>
+  {{ $navRoot := cond (eq .Site.Home.Type "docs") .Site.Home .FirstSection -}}
+  {{ $ulNr := 0 -}}
+  {{ $ulShow := 1 -}}
+  <ul>
+    {{ template "li" (dict "page" . "section" $navRoot "ulNr" $ulNr "ulShow" (add $ulShow 1)) }}
+  </ul>
+</nav>

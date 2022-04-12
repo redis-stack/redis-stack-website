@@ -1,0 +1,16 @@
+{{ define "head" }}
+  {{ partial "scss.html" (dict "path" "scss/pages/docs.scss") }}
+{{ end }}
+
+{{ define "main" }}
+  <section class="full-width">
+    {{ partial "docs-nav.html" . }}
+
+    <main>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.description }}<p>{{ . | markdownify }}</p>{{ end }}
+      {{ partial "docs-toc.html" . }}
+      {{ .Content }}
+    </main>
+  </section>
+{{ end }}

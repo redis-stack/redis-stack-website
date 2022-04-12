@@ -9,19 +9,19 @@
 }
 
 .bazzar-list {
-    display: grid;
-    grid-template-columns: 15ch 1fr auto auto auto auto;
-    gap: 1rem;
+  display: grid;
+  grid-template-columns: 15ch 1fr auto auto auto auto;
+  gap: 1rem;
 }
 
 i.bazzar-star {
-    color: #ffe00d;
+  color: #ffe00d;
 }
 
 .bazzar-active {
-    color: green;
+  color: green;
 }
 
 .bazzar-recommended {
-    color: red;
+  color: red;
 }

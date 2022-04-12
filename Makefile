@@ -24,10 +24,7 @@ ifeq ($(SKIP_CLONE),1)
 SKIP_CLONE=--skip-clone
 endif
 
-all: init build
-
-init:
-	@git submodule update --init --recursive
+all: build
 
 build:
 	@python3 build/get_meta.py $(GET_META) --loglevel=$(LOGLEVEL)
@@ -65,7 +62,7 @@ docker-sh:
 	@docker run -it $(DOCKER_PORT) $(DOCKER_VOL) $(DOCKER_IMAGE) bash
 
 docker-all: docker-build docker-make
-	@docker create --name $(DOCKER_CONTAINER) $(DOCKER_IMAGE) 
+	@docker create --name $(DOCKER_CONTAINER) $(DOCKER_IMAGE)
 	@docker cp $(DOCKER_CONTAINER):/build/public - > public.tar
 	@docker rm -v $(DOCKER_CONTAINER)
 	@rm -rf public/
