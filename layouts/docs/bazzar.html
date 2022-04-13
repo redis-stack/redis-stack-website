@@ -1,6 +1,5 @@
 {{ define "head" }}
-  {{/*  {{ partial "scss.html" (dict "path" "scss/pages/bazzar.scss") }}  */}}
-  {{ partial "scss.html" (dict "path" "scss/pages/docs.scss") }}
+  {{ partial "scss.html" (dict "path" "scss/pages/bazzar.scss") }}
 {{ end }}
 
 {{ define "main" }}
@@ -32,77 +31,72 @@
         {{ $has_groups = false }}
       {{ end }}
 
-      <div class="td-content">
-        <p>
-          The recommended repositories are marked with a <span class="bazzar-recommended"><i class="fa fa-heart"></i></span>.<br />
-          Repositories with some activity within the latest six months are marked with a <span class="bazzar-active"><i class="fa fa-circle"></i></span>.<br />
-          Want your repository listed here? Just submit a PR to the {{ "[redis-doc repository](https://github.com/redis/redis-doc/pull/new)" | markdownify }}
-        </p>
-        {{ if $has_groups }}
-          <h3>Browse by {{ $group_name }}</h3>
-          <div class="bazzar-group">
-            {{ range $id, $name := $groups }}
-              <a href="#{{ $id }}">{{ $name }}</a>
-            {{ end }}
-          </div>
-        {{ end }}
+      <p>
+        The recommended repositories are marked with a <i class="todo"></i></span>.<br />
+        Repositories with some activity within the latest six months are marked with a <i class="todo"></i>.<br />
+        Want your repository listed here? Just submit a PR to the <a href="https://github.com/redis/redis-doc/pull/new">redis-doc repository</a>
+      </p>
 
-        <div class="bazzar-list">
+      {{ if $has_groups }}
+        <h3>Browse by {{ $group_name }}</h3>
+        <div class="bazzar-group">
           {{ range $id, $name := $groups }}
-            {{ if $has_groups }}
-              <div id="{{ $id }}" class="bazzar-section">
-                <h3>{{ $name }}</h3>
-              </div>
-            {{ end }}
-            {{ $repos := (index (index $.Site.Data.repos $bazzar) $id) }}
-            {{ $sorted := slice }}
-            {{ range $name, $data := $repos }}
-              {{ $data = merge $data (dict "name" $name) }}
-              {{ $sorted = $sorted | append $data }}
-            {{- end }}
-            {{ $sorted = sort (sort $sorted "stargazers_count" "desc") "active" "desc" }}
-            {{ range $sorted }}
-              <div>
-                {{ .name }}
-              </div>
-              <div>{{ .description }}</div>
-              <div>
-                {{ $recommended := and (isSet . "recommended") (.recommended) }}
-                {{ $active := and (isSet . "active") (.active) }}
-                {{ if $recommended }}
-                  <span class="bazzar-recommended">
-                    <i class="fa fa-heart"></i>
-                  </span>
-                {{ else if $active }}
-                  <span class="bazzar-active">
-                    <i class="fa fa-circle"></i>
-                  </span>
-                {{- end }}
-              </div>
-              <div>
-                <a href="https://{{ .repository }}">
-                  <i class="fa fa-code-branch"></i>
-                  {{ .license | default "Other" }}
-                </a>
-              </div>
-              <div>
-                {{ $stars := isSet . "stargazers_count" }}
-                {{ if $stars }}
-                  <i class="fa fa-star bazzar-star"></i>
-                  {{ .stargazers_count }}
-                {{ end }}
-              </div>
-              <div>
-                {{ $home := isSet . "homepage" }}
-                {{ if $home }}
-                  <a href="{{ .home }}">
-                    <i class="fa fa-home"></i>
-                  </a>
-                {{ end }}
-              </div>
-            {{ end }}
+            <a href="#{{ $id }}">{{ $name }}</a>
           {{ end }}
         </div>
+      {{ end }}
+
+      <div class="bazzar-list">
+        {{ range $id, $name := $groups }}
+          {{ if $has_groups }}
+            <div id="{{ $id }}" class="bazzar-section">
+              <h3>{{ $name }}</h3>
+            </div>
+          {{ end }}
+          {{ $repos := (index (index $.Site.Data.repos $bazzar) $id) }}
+          {{ $sorted := slice }}
+          {{ range $name, $data := $repos }}
+            {{ $data = merge $data (dict "name" $name) }}
+            {{ $sorted = $sorted | append $data }}
+          {{- end }}
+          {{ $sorted = sort (sort $sorted "stargazers_count" "desc") "active" "desc" }}
+          {{ range $sorted }}
+            <div>
+              {{ .name }}
+            </div>
+            <div>{{ .description }}</div>
+            <div>
+              {{ $recommended := and (isSet . "recommended") (.recommended) }}
+              {{ $active := and (isSet . "active") (.active) }}
+              {{ if $recommended }}
+                <i class="todo"></i>
+              {{ else if $active }}
+                <i class="todo"></i>
+              {{- end }}
+            </div>
+            <div>
+              <a href="https://{{ .repository }}">
+                <i class="todo"></i>
+                {{ .license | default "Other" }}
+              </a>
+            </div>
+            <div>
+              {{ $stars := isSet . "stargazers_count" }}
+              {{ if $stars }}
+                <i class="todo"></i>
+                {{ .stargazers_count }}
+              {{ end }}
+            </div>
+            <div>
+              {{ $home := isSet . "homepage" }}
+              {{ if $home }}
+                <a href="{{ .home }}">
+                  <i class="fa fa-home"></i>
+                </a>
+              {{ end }}
+            </div>
+          {{ end }}
+        {{ end }}
       </div>
     </main>
   </section>

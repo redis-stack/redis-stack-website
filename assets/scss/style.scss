@@ -68,6 +68,18 @@ a {
   color: var(--neutral-text-color);
 }
 
+.success-text-color {
+  color: var(--success-color);
+}
+
+.warning-text-color {
+  color: var(--warning-color);
+}
+
+.error-text-color {
+  color: var(--error-color);
+}
+
 > nav > ul {
   list-style: none;
   padding: 0;
