@@ -345,6 +345,7 @@ class Core(Component):
             self._root._repos[src] = data
 
     def apply(self) -> None:
+        logging.info(f'Applying core {self._id}')
         files = self._get_docs()
         files += self._get_commands()
         self._get_misc()
@@ -359,6 +360,7 @@ class Docs(Component):
         self._content = f'{self._root._content}/{self._stack_path}'
 
     def apply(self) -> None:
+        logging.info(f'Applying docs {self._id}')
         files = self._get_docs()
         self._get_misc()
         return files
@@ -403,6 +405,7 @@ class Module(Component):
                 md.persist()
 
     def apply(self) -> None:
+        logging.info(f'Applying module {self._id}')
         files = self._get_docs()
         self._process_module_docs(files)
         files += self._get_commands()
@@ -415,6 +418,7 @@ class Asset(Component):
         super().__init__(filepath, root)
 
     def apply(self) -> None:
+        logging.info(f'Applying asset {self._id}')
         if not self._repository:
             return
         repo = self._git_clone(self._repository)

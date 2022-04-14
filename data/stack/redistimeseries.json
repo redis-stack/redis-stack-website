@@ -12,7 +12,6 @@
     "commands": {
         "git_uri": "https://github.com/redistimeseries/redistimeseries",
         "dev_branch": "master",
-        "branches_postfix": "-newdocs",
         "defs": "commands.json",
         "path": "docs/commands"
     },
@@ -25,7 +24,6 @@
     "docs": {
         "git_uri": "https://github.com/redistimeseries/redistimeseries",
         "dev_branch": "master",
-        "branches_postfix": "-newdocs",
         "path": "docs/docs"
     },
     "releases": {
