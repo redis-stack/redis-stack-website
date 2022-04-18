@@ -159,7 +159,7 @@ a {
 }
 
 html {
-  scroll-padding-top: 5em;
+  scroll-padding-top: var(--header-height);
 }
 
 body {
@@ -174,15 +174,21 @@ body {
     font-size: 0.875em;
     box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
 
-    > div {
+    > div.full-width {
       display: flex;
       align-items: center;
-      gap: 2em;
+      gap: 1rem;
       font-weight: 500;
+      height: var(--header-height);
 
-      > a > svg {
-        display: block;
-        height: 2.5em;
+      > div.logo {
+        height: 100%;
+        padding: 0.5em;
+        width: var(--nav-width);
+
+        > a, > a > svg {
+          height: 100%;
+        }
       }
 
       > button {
@@ -199,33 +205,50 @@ body {
           a {
             display: block;
             color: inherit;
-            text-decoration: none;
-            padding: 0.51em;
           }
 
           &.links > li {
             position: relative;
 
+            > a {
+              margin-inline-end: 1em;
+            }
+
             > ul {
-              $topMargin: 0.5em;
+              $padding: 1em;
+              $topMargin: 1em;
 
               display: none;
               width: 10em;
               position: absolute;
               top: calc(100% + #{$topMargin});
-              left: 0;
+              left: -$padding;
               z-index: 1;
               list-style: none;
               padding: 0;
               margin: 0;
               background: var(--secondary-color);
+              border-radius: 3px;
 
               > li {
-                  padding: 1em;
+                padding: $padding;
+              }
+
+              // triangle
+              &:before {
+                content: '';
+                $size: 0.5em;
+                position: absolute;
+                top: -$size;
+                left: $padding;
+                border-left: $size solid transparent;
+                border-right: $size solid transparent;
+                border-bottom: $size solid var(--secondary-color);
+                margin-left: -$size / 2;
               }
 
               // extend the "hoverable" area
-              &:before {
+              &:after {
                 content: '';
                 height: $topMargin;
                 position: absolute;
@@ -239,14 +262,12 @@ body {
                 display: block;
               }
             }
-
-            &:first-child {
-              margin-inline-start: 4em;
-            }
           }
 
-          &.buttons > li:first-child {
-            margin-inline-start: auto;
+          &.buttons > li {
+            &:first-child {
+              margin-inline-start: auto;
+            }
           }
         }
       }

@@ -1,9 +1,11 @@
 <div class="full-width">
-	<a href="{{ .Site.Home.RelPermalink }}">
-		{{ with resources.Get "icons/logo.svg" }}
-			{{ ( . | minify).Content | safeHTML }}
-		{{ end }}
-	</a>
+  <div class="logo">
+    <a href="{{ .Site.Home.RelPermalink }}">
+      {{ with resources.Get "icons/logo.svg" }}
+        {{ ( . | minify).Content | safeHTML }}
+      {{ end }}
+    </a>
+  </div>
 
 	<button type="button" onclick="event.target.nextElementSibling.classList.toggle('open')">
 		HAMBURGER
