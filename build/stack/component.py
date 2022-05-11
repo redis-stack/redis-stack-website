@@ -243,7 +243,7 @@ class Stack(Component):
                     md.fm_data.update({'title': pname})
                     md.fm_data.update({'group': gname})
                     md.fm_data.update({'kind': kname})
-                    md.fm_data.update(meta.get(project.get('repository')))
+                    md.fm_data.update(meta.get(project.get('repository'), {}))
                     md.persist()
         dump_dict(f'data/repos.json', self._repos)
 
