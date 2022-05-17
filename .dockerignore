@@ -14,4 +14,3 @@ venv
 
 **/__pycache__
 bin/**
-data/*.json

@@ -2620,6 +2620,14 @@
                 "recommended": true,
                 "repository": "github.com/RedisInsight/RedisInsight"
             },
+            "Medis": {
+                "description": "Medis is a beautiful, easy-to-use Mac database management application for Redis.",
+                "homepage": "https://github.com/luin/medis",
+                "twitter": [
+                    "medisclient"
+                ],
+                "repository": "github.com/luin/medis"
+            },
             "redis-browser": {
                 "description": "Cross platform GUI tool for redis that includes support for ReJSON",
                 "twitter": [
