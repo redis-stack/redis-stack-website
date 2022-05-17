@@ -1,12 +1,15 @@
 # Prereqs
 git
 python3
+python3-pip
 make
 hugo
 npm
 
-
-After cloning `redis-stack-website`, run `make docker` to build and run a container that serves hugo on `localhost:1313` with the components defined in `redis_stack_components.yml`.
+## Run in Docker
+1. Clone `redis-stack-website`
+1. Create a Personal Access Token for your GitHub account with repo access, add it as an environment variable name `PRIVATE_ACCESS_TOKEN`
+1. Run `make docker` to build and run a container that serves hugo on `localhost:1313` with the components defined in `redis_stack_components.yml`.
 
 The site is generated inside the container.
 
