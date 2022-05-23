@@ -191,9 +191,40 @@
             }
         },
         "smalltalk": {
+            "SimpleRedisClient": {
+                "language": "Smalltalk",
+                "repository": "github.com/SimpleRedisClient/SimpleRedisClient",
+                "description": "A minimal Redis client for Pharo.",
+                "homepage": "https://medium.com/concerning-pharo/quick-write-me-a-redis-client-5fbe4ddfb13d",
+                "authors": [
+                    "SvenVC"
+                ]
+            },
+            "Pharo-Redis": {
+                "language": "Smalltalk",
+                "repository": "github.com/Pharo-Redis/Pharo-Redis",
+                "description": "A full featured Redis client for Pharo. This was forked from svenvc/SimpleRedisClient and that simple client is still at the center of this.",
+                "authors": [
+                    "ToddBlanchard10"
+                ]
+            },
+            "RediStick": {
+                "language": "Smalltalk",
+                "repository": "github.com/RediStick/RediStick",
+                "description": "A Redis client for Pharo using Stick auto-reconnection layer.",
+                "authors": [
+                    "umejava"
+                ]
+            },
             "Redis": {
-                "description": "Smalltalk Redis client.",
-                "repository": "squeaksource.com/Redis"
+                "language": "Smalltalk",
+                "repository": "squeaksource.com/Redis/Redis",
+                "description": "Smalltalk Redis client."
+            },
+            "RedisBinaryClient": {
+                "language": "Smalltalk",
+                "repository": "squeaksource.com/RedisBinaryClient/RedisBinaryClient",
+                "description": "A fork of the RedisConnection from Redis Client."
             }
         },
         "bash": {
@@ -1013,7 +1044,7 @@
             },
             "mini_redis": {
                 "description": "A light-weight low-level Redis client for Crystal",
-                "homepage": "http://github.vladfaust.com/mini_redis/",
+                "homepage": "https://github.com/vladfaust/mini_redis/",
                 "twitter": [
                     "vladfaust"
                 ],
@@ -1172,6 +1203,10 @@
                     "aallamaa"
                 ],
                 "repository": "github.com/aallamaa/desir"
+            },
+            "coredis": {
+                "description": "Async redis client with support for redis server, cluster & sentinel",
+                "repository": "github.com/alisaifee/coredis"
             },
             "redis-streams": {
                 "description": "Redis-Streams Python library provides an easy to use interface for batch collection and processing. Simplifies the consumer group and consumers management. Designed for a highly available, scalable and distributed environment, it thus offers, in addition to the main functionality, monitoring and scaling capabilities.",

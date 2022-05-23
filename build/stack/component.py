@@ -112,7 +112,7 @@ class Component(dict):
         commands = self.get('commands')
         repo = self._git_clone(commands)
         branch = Component._get_dev_branch(commands)
-        run(f'git checkout {branch}', cwd=repo)
+        #run(f'git checkout {branch}', cwd=repo)
         path = commands.get('path', '')
 
         logging.info(f'Copying {self._id} commands')
@@ -175,7 +175,6 @@ class Component(dict):
         if ref == "":
             ref = Component._get_dev_branch(docs)
         remote = self._remote()
-
         if remote != "":
             run(f'git remote add repo {remote}', cwd=repo)
             run(f'git fetch repo', cwd=repo)
