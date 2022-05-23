@@ -22,10 +22,10 @@
     PYTHON_VERSION = "3.8"
     RUBY_VERSION = "2.7.2"
 
-[context.preview]
+[context.deploy-preview]
   command = "make netlify"
   publish = "public"
-  [context.preview.environment]
-    ENV = "preview"
+  [context.deploy-preview.environment]
+    ENV = "deploy-preview"
     PYTHON_VERSION = "3.8"
     RUBY_VERSION = "2.7.2"
