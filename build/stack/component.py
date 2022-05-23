@@ -112,7 +112,7 @@ class Component(dict):
         commands = self.get('commands')
         repo = self._git_clone(commands)
         branch = Component._get_dev_branch(commands)
-        #run(f'git checkout {branch}', cwd=repo)
+        self._checkout(branch,repo)
         path = commands.get('path', '')
 
         logging.info(f'Copying {self._id} commands')
@@ -169,18 +169,8 @@ class Component(dict):
     def _get_docs(self) -> list:
         docs = self.get('docs')
         repo = self._git_clone(docs)
-
-        ref = self._ref()
-
-        if ref == "":
-            ref = Component._get_dev_branch(docs)
-        remote = self._remote()
-        if remote != "":
-            run(f'git remote add repo {remote}', cwd=repo)
-            run(f'git fetch repo', cwd=repo)
-            run(f'git checkout {ref}', cwd=repo)
-        else:
-            run(f'git checkout {ref}', cwd=repo)
+        ref = Component._get_dev_branch(docs)
+        self._checkout(ref, repo)
 
         path = docs.get('path', '')
         logging.info(f'Copying {self._id} docs')
@@ -196,9 +186,22 @@ class Component(dict):
         misc = self.get('misc')
         repo = self._git_clone(misc)
         branch = Component._get_dev_branch(misc)
-        run(f'git checkout {branch}', cwd=repo)
+        self._checkout(branch, repo)
         Component._dump_payload(repo, self._root._content, misc.get('payload'))
         return
+
+    def _checkout(self, default, repo):
+        ref = self._ref()
+        remote = self._remote()
+        if ref == '':
+            ref = default
+
+        if(remote != ''):
+            run(f'git remote add repo {remote}', cwd=repo)
+            run('git fetch repo', cwd=repo)
+        
+        run(f'git checkout {ref}', cwd=repo)
+
 
     def _ref(self) -> str:
         if os.getenv(f"{self.env_var_prefix}_SHA"):
@@ -358,7 +361,7 @@ class Core(Component):
         data = self.get('data')
         repo = self._git_clone(data)
         branch = Component._get_dev_branch(data)
-        run(f'git checkout {branch}', cwd=repo)
+        self._checkout(branch,repo)        
         logging.info(f'Getting {self._id} data')
         for src in ['languages', 'tool_types']:
             filename = data.get(src)
@@ -445,5 +448,5 @@ class Asset(Component):
             return
         repo = self._git_clone(self._repository)
         dev_branch = self._repository.get('dev_branch')
-        run(f'git checkout {dev_branch}', cwd=repo)
+        self._checkout(dev_branch, repo)
         return Component._dump_payload(repo, './', self._repository.get('payload'))
