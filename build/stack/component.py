@@ -197,8 +197,8 @@ class Component(dict):
             ref = default
 
         if(remote != ''):
-            run(f'git remote add repo {remote}', cwd=repo)
-            run('git fetch repo', cwd=repo)
+            run(f'git remote set-url origin {remote}', cwd=repo)
+            run('git fetch origin', cwd=repo)
         
         run(f'git checkout {ref}', cwd=repo)
 
