@@ -35,6 +35,7 @@ class Component(dict):
         self._desc = self.get('description', '')
         self._stack_path = self.get('stack_path', '')
         self._repository = self.get('repository', None)
+        self._env_prefix = self.get('env_prefix','')
 
     @staticmethod
     def _dump_payload(spath: str, dpath: str, payload: list) -> None:
@@ -84,7 +85,7 @@ class Component(dict):
         private = repo.get('private', False)
         uri, _, name, ext = parseUri(git_uri)
         to = f'{self._root._tempdir}/{name}'
-        if uri.scheme == 'https' and ext in ['', '.git']:
+        if uri.scheme == 'https' and ext in ['', '.git'] and self._repo_env_dir() == '':
             if not self._root._skip_clone and git_uri not in self._root._clones:
                 rm_rf(to)
                 mkdir_p(to)
@@ -101,6 +102,8 @@ class Component(dict):
             else:
                 logging.debug(f'Skipping clone {git_uri}')
             return to
+        elif self._repo_env_dir() != '':
+            return self._repo_env_dir()
         elif (uri.scheme == 'file' or uri.scheme == '') and ext == '':
             return uri.path
         else:
@@ -186,6 +189,11 @@ class Component(dict):
         run(f'git checkout {branch}', cwd=repo)
         Component._dump_payload(repo, self._root._content, misc.get('payload'))
         return
+    
+    def _repo_env_dir(self) -> str:
+        if os.getenv(f'{self._env_prefix}_DIR'):
+            return os.getenv(f'{self._env_prefix}_DIR')
+        return ''
 
 
 class Stack(Component):
