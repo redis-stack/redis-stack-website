@@ -113,7 +113,7 @@ class Component(dict):
         commands = self.get('commands')
         repo = self._git_clone(commands)
         branch = Component._get_dev_branch(commands)
-        run(f'git checkout {branch}', cwd=repo)
+        self._checkout(branch, repo)        
         path = commands.get('path', '')
 
         logging.info(f'Copying {self._id} commands')
@@ -171,7 +171,7 @@ class Component(dict):
         docs = self.get('docs')
         repo = self._git_clone(docs)
         branch = Component._get_dev_branch(docs)
-        run(f'git checkout {branch}', cwd=repo)
+        self._checkout(branch, repo)
         path = docs.get('path', '')
         logging.info(f'Copying {self._id} docs')
         src = f'{repo}/{path}/'
@@ -186,7 +186,7 @@ class Component(dict):
         misc = self.get('misc')
         repo = self._git_clone(misc)
         branch = Component._get_dev_branch(misc)
-        run(f'git checkout {branch}', cwd=repo)
+        self._checkout(branch,repo)
         Component._dump_payload(repo, self._root._content, misc.get('payload'))
         return
     
@@ -195,6 +195,14 @@ class Component(dict):
             return os.getenv(f'{self._env_prefix}_DIR')
         return ''
 
+    def _skip_checkout(self) -> bool:
+        if self._repo_env_dir() == '':
+            return False
+        return True
+    
+    def _checkout(self, ref, dest):
+        if not self._skip_checkout:
+            run(f'git checkout {ref}', cwd=dest)
 
 class Stack(Component):
     def __init__(self, filepath: str, root: dict = None, args: dict = None):
@@ -342,7 +350,7 @@ class Core(Component):
         data = self.get('data')
         repo = self._git_clone(data)
         branch = Component._get_dev_branch(data)
-        run(f'git checkout {branch}', cwd=repo)
+        self._checkout(branch, repo)
         logging.info(f'Getting {self._id} data')
         for src in ['languages', 'tool_types']:
             filename = data.get(src)
@@ -431,5 +439,5 @@ class Asset(Component):
             return
         repo = self._git_clone(self._repository)
         dev_branch = self._repository.get('dev_branch')
-        run(f'git checkout {dev_branch}', cwd=repo)
+        self._checkout(dev_branch, repo)
         return Component._dump_payload(repo, './', self._repository.get('payload'))
