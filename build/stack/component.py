@@ -35,7 +35,6 @@ class Component(dict):
         self._desc = self.get('description', '')
         self._stack_path = self.get('stack_path', '')
         self._repository = self.get('repository', None)
-        self.env_var_prefix = self.get('env_prefix', '')
 
     @staticmethod
     def _dump_payload(spath: str, dpath: str, payload: list) -> None:
@@ -111,7 +110,7 @@ class Component(dict):
         commands = self.get('commands')
         repo = self._git_clone(commands)
         branch = Component._get_dev_branch(commands)
-        self._checkout(branch,repo)
+        run(f'git checkout {branch}', cwd=repo)
         path = commands.get('path', '')
 
         logging.info(f'Copying {self._id} commands')
@@ -168,9 +167,8 @@ class Component(dict):
     def _get_docs(self) -> list:
         docs = self.get('docs')
         repo = self._git_clone(docs)
-        ref = Component._get_dev_branch(docs)
-        self._checkout(ref, repo)
-
+        branch = Component._get_dev_branch(docs)
+        run(f'git checkout {branch}', cwd=repo)
         path = docs.get('path', '')
         logging.info(f'Copying {self._id} docs')
         src = f'{repo}/{path}/'
@@ -178,40 +176,16 @@ class Component(dict):
         mkdir_p(dst)
         files = rsync(src, dst)[1:-5]
         Component._dump_payload(src, dst, docs.get('payload', None))
-        Component._add_meta_fm(docs.get('git_uri'), ref, dst, path)
+        Component._add_meta_fm(docs.get('git_uri'), branch, dst, path)
         return files
 
     def _get_misc(self) -> None:
         misc = self.get('misc')
         repo = self._git_clone(misc)
         branch = Component._get_dev_branch(misc)
-        self._checkout(branch, repo)
+        run(f'git checkout {branch}', cwd=repo)
         Component._dump_payload(repo, self._root._content, misc.get('payload'))
         return
-
-    def _checkout(self, default, repo):
-        ref = self._ref()
-        remote = self._remote()
-        if ref == '':
-            ref = default
-
-        if(remote != ''):
-            run(f'git remote set-url origin {remote}', cwd=repo)
-            run('git fetch origin', cwd=repo)
-        
-        run(f'git checkout {ref}', cwd=repo)
-
-
-    def _ref(self) -> str:
-        if os.getenv(f"{self.env_var_prefix}_SHA"):
-            return os.getenv(f"{self.env_var_prefix}_SHA")
-        
-        return ""
-    
-    def _remote(self) -> str:
-        if os.getenv(f"{self.env_var_prefix}_REMOTE"):
-            return os.getenv(f"{self.env_var_prefix}_REMOTE")
-        return ""
 
 
 class Stack(Component):
@@ -360,7 +334,7 @@ class Core(Component):
         data = self.get('data')
         repo = self._git_clone(data)
         branch = Component._get_dev_branch(data)
-        self._checkout(branch,repo)
+        run(f'git checkout {branch}', cwd=repo)
         logging.info(f'Getting {self._id} data')
         for src in ['languages', 'tool_types']:
             filename = data.get(src)
@@ -379,7 +353,8 @@ class Core(Component):
         self._get_data()
         return files
 
-class Docs(Component):    
+
+class Docs(Component):
     def __init__(self, filepath: str, root: dict = None):
         super().__init__(filepath, root)
         self._content = f'{self._root._content}/{self._stack_path}'
@@ -389,6 +364,7 @@ class Docs(Component):
         files = self._get_docs()
         self._get_misc()
         return files
+
 
 class Module(Component):
     def __init__(self, filepath: str, root: dict = None):
@@ -447,5 +423,5 @@ class Asset(Component):
             return
         repo = self._git_clone(self._repository)
         dev_branch = self._repository.get('dev_branch')
-        self._checkout(dev_branch, repo)
+        run(f'git checkout {dev_branch}', cwd=repo)
         return Component._dump_payload(repo, './', self._repository.get('payload'))

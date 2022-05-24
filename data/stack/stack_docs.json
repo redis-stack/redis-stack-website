@@ -4,7 +4,6 @@
     "name": "Redis Stack",
     "description": "Redis Stack docs",
     "stack_path": "docs",
-    "env_prefix":"REDIS_STACK_DOCS",
     "docs": {
         "git_uri": "https://github.com/redis-stack/redis-stack-docs",
         "dev_branch": "main",
