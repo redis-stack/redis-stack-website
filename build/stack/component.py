@@ -2,7 +2,6 @@ from ast import dump
 from email.mime import base
 import logging
 import os
-import string
 import semver
 from typing import Tuple
 from urllib.parse import urlparse, ParseResult
@@ -361,7 +360,7 @@ class Core(Component):
         data = self.get('data')
         repo = self._git_clone(data)
         branch = Component._get_dev_branch(data)
-        self._checkout(branch,repo)        
+        self._checkout(branch,repo)
         logging.info(f'Getting {self._id} data')
         for src in ['languages', 'tool_types']:
             filename = data.get(src)
