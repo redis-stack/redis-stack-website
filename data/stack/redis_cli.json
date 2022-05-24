@@ -2,6 +2,7 @@
     "id": "redis_cli",
     "type": "asset",
     "name": "Redis clinterwebz",
+    "env_prefix":"REDIS_CLI",
     "repository": {
         "git_uri": "https://github.com/redis/redis-clinterwebz",
         "dev_branch": "master",

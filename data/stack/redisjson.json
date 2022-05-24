@@ -6,6 +6,7 @@
     "description": "JSON data structure",
     "stack_path": "docs/stack/json",
     "stack_weight": 11,
+    "env_prefix":"REDIS_JSON",
     "repository": {
         "git_uri": "https://github.com/redisjson/redisjson"
     },
