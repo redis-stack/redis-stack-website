@@ -35,7 +35,6 @@ class Component(dict):
         self._desc = self.get('description', '')
         self._stack_path = self.get('stack_path', '')
         self._repository = self.get('repository', None)
-        self._env_prefix = self.get('env_prefix','')
 
     @staticmethod
     def _dump_payload(spath: str, dpath: str, payload: list) -> None:
@@ -85,7 +84,7 @@ class Component(dict):
         private = repo.get('private', False)
         uri, _, name, ext = parseUri(git_uri)
         to = f'{self._root._tempdir}/{name}'
-        if uri.scheme == 'https' and ext in ['', '.git'] and self._repo_env_dir() == '':
+        if uri.scheme == 'https' and ext in ['', '.git'] and self._repo_uri() != git_uri:
             if not self._root._skip_clone and git_uri not in self._root._clones:
                 rm_rf(to)
                 mkdir_p(to)
@@ -102,7 +101,7 @@ class Component(dict):
             else:
                 logging.debug(f'Skipping clone {git_uri}')
             return to
-        elif self._repo_env_dir() != '':
+        elif self._repo_uri() == git_uri:
             return self._repo_env_dir()
         elif (uri.scheme == 'file' or uri.scheme == '') and ext == '':
             return uri.path
@@ -113,7 +112,7 @@ class Component(dict):
         commands = self.get('commands')
         repo = self._git_clone(commands)
         branch = Component._get_dev_branch(commands)
-        run(f'git checkout {branch}', cwd=repo)
+        self._checkout(branch, repo, commands)
         path = commands.get('path', '')
 
         logging.info(f'Copying {self._id} commands')
@@ -171,7 +170,7 @@ class Component(dict):
         docs = self.get('docs')
         repo = self._git_clone(docs)
         branch = Component._get_dev_branch(docs)
-        run(f'git checkout {branch}', cwd=repo)
+        self._checkout(branch, repo, docs)
         path = docs.get('path', '')
         logging.info(f'Copying {self._id} docs')
         src = f'{repo}/{path}/'
@@ -186,15 +185,33 @@ class Component(dict):
         misc = self.get('misc')
         repo = self._git_clone(misc)
         branch = Component._get_dev_branch(misc)
-        run(f'git checkout {branch}', cwd=repo)
+        self._checkout(branch, repo, misc)
         Component._dump_payload(repo, self._root._content, misc.get('payload'))
         return
     
     def _repo_env_dir(self) -> str:
-        if os.getenv(f'{self._env_prefix}_DIR'):
-            return os.getenv(f'{self._env_prefix}_DIR')
+        if os.getenv(f'REPO_DIR'):
+            return os.getenv(f'REPO_DIR')
+        return ''
+    
+    def _repo_uri(self) -> str:
+        if(os.getenv('REPOSITORY_URL')):
+            return os.getenv('REPOSITORY_URL')
         return ''
 
+    def _preview_mode(self) -> bool:
+        if(os.getenv("PREVIEW_MODE") == 1):
+            return True
+        return False
+
+    def _skip_checkout(self, obj) -> bool:
+        if obj.get('git_uri') == self._repo_uri() and self._preview_mode():
+            return False
+        return True
+    
+    def _checkout(self, ref, dest, obj):
+        if not self._skip_checkout(obj):
+            run(f'git checkout {ref}', cwd=dest)
 
 class Stack(Component):
     def __init__(self, filepath: str, root: dict = None, args: dict = None):
@@ -342,7 +359,7 @@ class Core(Component):
         data = self.get('data')
         repo = self._git_clone(data)
         branch = Component._get_dev_branch(data)
-        run(f'git checkout {branch}', cwd=repo)
+        self._checkout(branch, repo, data)
         logging.info(f'Getting {self._id} data')
         for src in ['languages', 'tool_types']:
             filename = data.get(src)
@@ -431,5 +448,5 @@ class Asset(Component):
             return
         repo = self._git_clone(self._repository)
         dev_branch = self._repository.get('dev_branch')
-        run(f'git checkout {dev_branch}', cwd=repo)
+        self._checkout(dev_branch, repo, self._repository)
         return Component._dump_payload(repo, './', self._repository.get('payload'))
