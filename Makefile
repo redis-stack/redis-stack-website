@@ -9,7 +9,7 @@ DOCKER_IMAGE=image-redis-stack-website
 DOCKER_CONTAINER=container-$(DOCKER_IMAGE)
 DOCKER_PORT=-p 1313:1313
 
-.PHONY: all init build up clean docker-build docker-make docker docker-up docker-sh netlify
+.PHONY: all deps init build up clean docker-build docker-make docker docker-up docker-sh netlify
 
 ifeq ($(ENV),production)
 GET_META=--production
@@ -28,6 +28,10 @@ all: init build
 
 init:
 	@git submodule update --init --recursive
+
+deps:
+	@pip install -r requirements.txt
+	@npm install
 
 build:
 	# @python3 build/get_meta.py $(GET_META) --loglevel=$(LOGLEVEL)
