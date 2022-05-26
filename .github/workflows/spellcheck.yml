@@ -1,0 +1,16 @@
+name: Spell Check
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  spellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: execute
+        run: make deps collate spell
+        env:
+          PRIVATE_ACCESS_TOKEN: ${{ secrets.PRIVATE_ACCESS_TOKEN }}

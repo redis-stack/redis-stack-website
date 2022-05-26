@@ -9,7 +9,7 @@ DOCKER_IMAGE=image-redis-stack-website
 DOCKER_CONTAINER=container-$(DOCKER_IMAGE)
 DOCKER_PORT=-p 1313:1313
 
-.PHONY: all deps init build up clean docker-build docker-make docker docker-up docker-sh netlify
+.PHONY: all deps init build up clean docker-build docker-make docker docker-up docker-sh netlify spell collate
 
 ifeq ($(ENV),production)
 GET_META=--production
@@ -31,7 +31,15 @@ init:
 
 deps:
 	@pip install -r requirements.txt
+	@npm install -g spellchecker-cli
 	@npm install
+
+spell:
+	@cp dictionary.txt $(HUGO_CONTENT)
+	@cd $(HUGO_CONTENT); spellchecker --no-suggestions  -f '**/*.md' -l en-US -d dictionary.txt -q	--plugins spell syntax-mentions syntax-urls
+
+collate:
+	@python3 build/make_stack.py $(SKIP_CLONE) --module=$(STACK_MODULE) --loglevel=$(LOGLEVEL)
 
 build:
 	# @python3 build/get_meta.py $(GET_META) --loglevel=$(LOGLEVEL)
