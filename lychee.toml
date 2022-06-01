@@ -17,7 +17,9 @@ exclude_path = [
     "public/docs/manual/data-types/_print/index.html",
     "public/docs/stack/search/_print/index.html",
     "public/docs/stack/graph/_print/index.html",
-    "public/docs/getting-started/installation/_print/index.html"
+    "public/docs/getting-started/installation/_print/index.html",
+    "public/docs/reference/_print/index.html",
+    ""
 ]
 
 timeout = 10
