@@ -128,8 +128,9 @@ class Component(dict):
             logging.error(sinter)
             die()
 
-        for key in cmds:
-            cmds[key]['module'] = self._type == 'module'
+        if self._type == 'module':
+            for key in cmds:
+                cmds[key]['module'] = self._name
         self._root._commands.update(cmds)
 
         base = f'{repo}/{path}/'
