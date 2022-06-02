@@ -1,0 +1,25 @@
+name: Link checker
+on:
+  schedule:
+    - cron: "22 17 * * WED"
+  workflow_dispatch:
+jobs:
+  linkChecker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          extended: true
+          hugo-version: '0.91.2'
+      - name: build site
+        run: make deps netlify
+        env:
+          PRIVATE_ACCESS_TOKEN: ${{secrets.PRIVATE_ACCESS_TOKEN}}
+      - name: Link Checker
+        id: lychee
+        uses: lycheeverse/lychee-action@v1.5.0
+        with:
+          fail: true
+          args: './public -c lychee.toml'
