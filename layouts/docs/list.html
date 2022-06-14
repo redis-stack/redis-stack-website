@@ -3,10 +3,10 @@
 {{ end }}
 
 {{ define "main" }}
-  <section class="full-width">
+  <section class="container max-w-[90rem] mx-auto px-4 sm:px-8 grid grid-cols-[auto,1fr]">
     {{ partial "docs-nav.html" . }}
 
-    <main>
+    <main class="prose">
       <h1>{{ .Title }}</h1>
       {{ with .Params.description }}<p>{{ . | markdownify }}</p>{{ end }}
       {{ partial "docs-toc.html" . }}

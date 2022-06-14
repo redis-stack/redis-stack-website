@@ -1,0 +1,17 @@
+/* the contents of index.css */
+/* @import '/themes/twcss/assets/css/codeblocks.css'; */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+[class*=button-] {
+  @apply transition-colors shrink-0 border border-solid focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.button-indigo {
+  @apply text-white border-transparent bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-600 focus:ring-indigo-600;
+}
+
+.button-outline {
+  @apply border-current hover:bg-transparent hover:text-indigo-600 focus:text-indigo-600 focus:ring-indigo-600;
+}

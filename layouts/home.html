@@ -1,161 +1,206 @@
 {{ define "head" }}
   {{ partial "scss.html" (dict "path" "scss/pages/home.scss") }}
+  {{ partial "fonts.html" }}
 {{ end }}
 
 {{ define "main" }}
   <main>
-    <section class="hero full-width-container">
-      <div class="row align-items-center">
+    <header class="bg-gradient-to-t from-indigo-50 via-white to-white">
+      <div class="flex flex-col lg:grid grid-cols-2 gap-x-10 items-center container max-w-7xl mx-auto px-4 sm:px-8 pt-16 pb-24">
         <div>
-          <h1>Redis</h1>
-          <p class="neutral-text-color">
-            The open source, in-memory data store used by millions of developers
-            as a database, cache, streaming engine, and message broker.
+          <h1 class="font-display text-6xl leading-none text-slate-900 font-semibold mb-4">Redis</h1>
+          <p class="text-slate-500 text-xl mb-7 max-w-xl">
+            The open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message&nbsp;broker.
           </p>
-
-          <div>
-            <a href="" class="button">Get Started</a>
-            <a href="" class="button-outline">Read the docs</a>
+          <a href="/docs/getting-started/" class="button-xl button-indigo">Get Started</a>
+          <a href="/docs/" class="button-xl button-outline ml-2">Read the docs</a>
+        </div>
+        <div class="relative pt-7 pr-7 -mr-7 bg-no-repeat bg-right-top" style="background-image: url('/images/triangle-lines.svg')">
+          <div class="bg-slate-800 rounded-xl shadow-lg shadow-slate-900/10">
+            <div class="bg-slate-900 border-b border-slate-700 rounded-t-xl p-4 w-full flex space-x-2">
+              <div class="w-3 h-3 border border-slate-700 rounded-full"></div>
+              <div class="w-3 h-3 border border-slate-700 rounded-full"></div>
+              <div class="w-3 h-3 border border-slate-700 rounded-full"></div>
+            </div>
+            <img
+              class="cli mix-blend-screen p-5"
+              alt="terminal gif"
+              src="/images/redis.io.terminal.gif"
+            />
           </div>
         </div>
-        <div class="cli-window">
-          <header></header>
-          <img
-            class="cli"
-            alt="terminal gif"
-            src="/images/redis.io.terminal.gif"
-          />
-        </div>
       </div>
-
-      <div class="text-center">
-        <h2>A vibrant, open source database</h2>
-        <p class="neutral-text-color">
+    </header>
+    <article class="container max-w-7xl mx-auto px-4 sm:px-8">
+      <div class="text-center py-20">
+        <h2 class="font-display text-4xl leading-tight text-slate-900 font-semibold mb-4">
+          A vibrant, open source database
+        </h2>
+        <p class="text-slate-500 text-lg max-w-2xl mx-auto mb-12">
           Voted the most-loved database for 5 years running, Redis is at the
           center of an engaged community of developers, architects, and open
           source contributors.
         </p>
-
-        <div class="row neutral-text-color">
-          <div>
-            <div class="stat">4B+</div>
+        <ul class="grid grid-cols-3 gap-6 text-slate-500 max-w-2xl mx-auto">
+          <li class="w-full text-sm font-semibold text-slate-900 p-6 border shadow-md shadow-slate-900/5 rounded-2xl flex flex-col justify-center">
+            <span class="mb-1 text-cyan-500 font-display text-5xl">4B+</span>
             Docker pulls
-          </div>
-          <div>
-            <div class="stat">50K+</div>
+          </li>
+          <li class="w-full text-sm font-semibold text-slate-900 p-6 border shadow-md shadow-slate-900/5 rounded-2xl flex flex-col justify-center">
+            <span class="mb-1 text-cyan-500 font-display text-5xl">50K+</span>
             Github stars
-          </div>
-          <div>
-            <div class="stat">50+</div>
+          </li>
+          <li class="w-full text-sm font-semibold text-slate-900 p-6 border shadow-md shadow-slate-900/5 rounded-2xl flex flex-col justify-center">
+            <span class="mb-1 text-cyan-500 font-display text-5xl">50+</span>
             Supported programing languages
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="full-width-container">
-      <div class="grid">
-        <h2 class="text-center">Core capabilities</h2>
-        <div>
-          <span
-            >{{ with resources.Get "icons/in-memory-data-structures-icon.svg" }}{{
-            ( . | minify).Content | safeHTML }}{{ end }}</span
-          >
-          <h3>In-memory data structures</h3>
-          <p>
-            Well-known as a "data structure server", with support for strings,
-            hashes, lists, sets, sorted sets, streams, and more.
-          </p>
-          <a>Learn more</a>
-        </div>
-        <div>
-          <span
-            >{{ with resources.Get "icons/programmability.svg" }}{{ ( . |
-            minify).Content | safeHTML }}{{ end }}</span
-          >
-          <h3>Programmability</h3>
-          <p>
-            Server-side scripting with Lua and server-side stored procedures with
-            Redis Functions.
-          </p>
-          <a class="cta">Learn more</a>
-        </div>
-        <div>
-          <span
-            >{{ with resources.Get "icons/extensibility-icon.svg" }}{{ ( . |
-            minify).Content | safeHTML }}{{ end }}</span
-          >
-          <h3 class="mt-3">Extensibility</h3>
-          <p>
-            A module API for building custom extensions to Redis in C, C++, and
-            Rust.
-          </p>
-          <a class="cta">Learn more</a>
-        </div>
-        <div>
-          <span
-            >{{ with resources.Get "icons/persistence-icon.svg" }}{{ ( . |
-            minify).Content | safeHTML }}{{ end }}</span
-          >
-          <h3 class="mt-3">Persistence</h3>
-          <p>
-            Keeps the dataset in memory for fast access, but can also persist all
-            writes to permanent storage to survive reboots and system failures.
-          </p>
-          <a class="cta">Learn more</a>
-        </div>
-        <div>
-          <span
-            >{{ with resources.Get "icons/cluster.svg" }}{{ ( . | minify).Content
-            | safeHTML }}{{ end }}</span
-          >
-          <h3 class="mt-3">Clustering</h3>
-          <p>
-            Horizontal scalability with hash-based sharding, scaling to millions
-            of nodes with automatic re-partitioning when growing the cluster.
-          </p>
-          <a class="cta">Learn more</a>
-        </div>
-        <div>
-          <span
-            >{{ with resources.Get "icons/availability.svg" }}{{ ( . |
-            minify).Content | safeHTML }}{{ end }}</span
-          >
-          <h3 class="mt-3">High availability</h3>
-          <p>
-            Replication with automatic failover for both standalone and clustered
-            deployments.
-          </p>
-          <a class="cta">Learn more</a>
-        </div>
+          </li>
+        </ul>
       </div>
 
-      <div class="grid with-border">
-        <h2 class="text-center">Use cases</h2>
-        <div class="use-case">
-          <h3>Real-time data store</h3>
-          <p>
-            Redis' versatile in-memory data structures enable building data
-            infrastructure for real-time applications that require low latency and
-            high-throughput.
-          </p>
-        </div>
-        <div>
-          <h3>Caching & session storage</h3>
-          <p>
-            Redis' speed makes it ideal for caching database queries, complex
-            computations, API calls, and session state.
-          </p>
-        </div>
-        <div>
-          <h3>Streaming & messaging</h3>
-          <p>
-            The stream data type enables high-rate data ingestion, messaging,
-            event sourcing, and notifications.
-          </p>
-        </div>
-      </div>
-    </section>
+      <section class="pt-24">
+        <h2 class="text-center font-display text-4xl leading-tight text-slate-900 font-semibold mb-10">
+          Core capabilities
+        </h2>
+        <ul class="flex flex-col sm:grid md:grid-cols-2 xl:grid-cols-3 gap-14">
+          <li class="flex flex-col h-full">
+            <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-xl mb-6"
+              >{{ with resources.Get "icons/in-memory-data-structures-icon.svg" }}{{
+              ( . | minify).Content | safeHTML }}{{ end }}</span
+            >
+            <h3 class="font-semibold text-xl mb-2">
+              In-memory data structures
+            </h3>
+            <p class="text-slate-500 mb-5">
+              Well-known as a "data structure server", with support for strings,
+              hashes, lists, sets, sorted sets, streams, and more.
+            </p>
+            <a class="group inline-flex items-center text-indigo-500 hover:text-indigo-600 font-medium mt-auto self-start" href="#?">
+              Learn more
+              <span class="ml-1.5 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+          </li>
+          <li class="flex flex-col h-full">
+            <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-xl mb-6"
+              >{{ with resources.Get "icons/programmability.svg" }}{{ ( . |
+              minify).Content | safeHTML }}{{ end }}</span
+            >
+            <h3 class="font-semibold text-xl mb-2">
+              Programmability
+            </h3>
+            <p class="text-slate-500 mb-5">
+              Server-side scripting with Lua and server-side stored procedures with
+              Redis Functions.
+            </p>
+            <a class="group inline-flex items-center text-indigo-500 hover:text-indigo-600 font-medium mt-auto self-start" href="#?">
+              Learn more
+              <span class="ml-1.5 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+          </li>
+          <li class="flex flex-col h-full">
+            <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-xl mb-6"
+              >{{ with resources.Get "icons/extensibility-icon.svg" }}{{ ( . |
+              minify).Content | safeHTML }}{{ end }}</span
+            >
+            <h3 class="font-semibold text-xl mb-2">
+              Extensibility
+            </h3>
+            <p class="text-slate-500 mb-5">
+              A module API for building custom extensions to Redis in C, C++, and
+              Rust.
+            </p>
+            <a class="group inline-flex items-center text-indigo-500 hover:text-indigo-600 font-medium mt-auto self-start" href="#?">
+              Learn more
+              <span class="ml-1.5 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+          </li>
+          <li class="flex flex-col h-full">
+            <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-xl mb-6"
+              >{{ with resources.Get "icons/persistence-icon.svg" }}{{ ( . |
+              minify).Content | safeHTML }}{{ end }}</span
+            >
+            <h3 class="font-semibold text-xl mb-2">
+              Persistence
+            </h3>
+            <p class="text-slate-500 mb-5">
+              Keeps the dataset in memory for fast access, but can also persist all
+              writes to permanent storage to survive reboots and system failures.
+            </p>
+            <a class="group inline-flex items-center text-indigo-500 hover:text-indigo-600 font-medium mt-auto self-start" href="#?">
+              Learn more
+              <span class="ml-1.5 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+          </li>
+          <li class="flex flex-col h-full">
+            <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-xl mb-6"
+              >{{ with resources.Get "icons/cluster.svg" }}{{ ( . | minify).Content
+              | safeHTML }}{{ end }}</span
+            >
+            <h3 class="font-semibold text-xl mb-2">
+              Clustering
+            </h3>
+            <p class="text-slate-500 mb-5">
+              Horizontal scalability with hash-based sharding, scaling to millions
+              of nodes with automatic re-partitioning when growing the cluster.
+            </p>
+            <a class="group inline-flex items-center text-indigo-500 hover:text-indigo-600 font-medium mt-auto self-start" href="#?">
+              Learn more
+              <span class="ml-1.5 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+          </li>
+          <li class="flex flex-col h-full">
+            <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-xl mb-6"
+              >{{ with resources.Get "icons/availability.svg" }}{{ ( . |
+              minify).Content | safeHTML }}{{ end }}</span
+            >
+            <h3 class="font-semibold text-xl mb-2">
+              High availability
+            </h3>
+            <p class="text-slate-500 mb-5">
+              Replication with automatic failover for both standalone and clustered
+              deployments.
+            </p>
+            <a class="group inline-flex items-center text-indigo-500 hover:text-indigo-600 font-medium mt-auto self-start" href="#?">
+              Learn more
+              <span class="ml-1.5 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="pt-24">
+        <h2 class="text-center font-display text-4xl leading-tight text-slate-900 font-semibold mb-10">
+          Use cases
+        </h2>
+        <ul class="flex flex-col sm:grid md:grid-cols-2 xl:grid-cols-3 gap-14">
+          <li class="flex flex-col h-full">
+            <h3 class="font-semibold text-xl mb-2 pt-5 border-t-2 border-indigo-500">
+              Real-time data store
+            </h3>
+            <p class="text-slate-500 mb-5">
+              Redis' versatile in-memory data structures enable building data
+              infrastructure for real-time applications that require low latency and
+              high-throughput.
+            </p>
+          </li>
+          <li>
+            <h3 class="font-semibold text-xl mb-2 pt-5 border-t-2 border-indigo-500">
+              Caching & session storage
+            </h3>
+            <p class="text-slate-500 mb-5">
+              Redis' speed makes it ideal for caching database queries, complex
+              computations, API calls, and session state.
+            </p>
+          </li>
+          <li>
+            <h3 class="font-semibold text-xl mb-2 pt-5 border-t-2 border-indigo-500">
+              Streaming & messaging
+            </h3>
+            <p class="text-slate-500 mb-5">
+              The stream data type enables high-rate data ingestion, messaging,
+              event sourcing, and notifications.
+            </p>
+          </li>
+        </ul>
+      </section>
 
     <!-- <section>
               <div class="row redis-stack">
@@ -195,75 +240,116 @@
               </div>
           </section> -->
 
-    <section class="full-width-container">
-      <h2 class="text-center">Redis Stack use cases</h2>
-      <div class="grid with-border">
-        <div>
-          <h3>Searchable Redis</h3>
-          <p>
-            Index and query Redis data structures and data models; run complex
-            aggregations and full-text search on your Redis data.
-          </p>
-        </div>
-        <div>
-          <h3>Document database</h3>
-          <p>
-            Model domain entirely in Redis, and query your JSON data efficiently
-            without ever having to use a cache.
-          </p>
-        </div>
-        <div>
-          <h3>Telemetry</h3>
-          <p>
-            Ingest continuous readings from devices in the field, storing as time
-            series data or analyzing and deduplicating with probabilistic data
-            structures.
-          </p>
-        </div>
-        <div>
-          <h3>Identity and resource management</h3>
-          <p>
-            Define digital resources and ACLs as a graph, and compute permissions
-            in real-time with a single Cypher query.
-          </p>
-        </div>
-        <div>
-          <h3>Vector similarity search</h3>
-          <p>
-            Query vector embeddings to power images search, recommendation
-            engines, and natural language text processing.
-          </p>
-        </div>
-        <div>
-          <h3>Fraud detection</h3>
-          <p>
-            All the tools to detect fraud in real time, with graph analysis,
-            probabilistic queries, vector search, and even processing using
-            streams.
-          </p>
-        </div>
-      </div>
-    </section>
+      <section class="pt-24">
+        <h2 class="text-center font-display text-4xl leading-tight text-slate-900 font-semibold mb-10">
+          Redis Stack use cases
+        </h2>
+        <ul class="flex flex-col sm:grid md:grid-cols-2 xl:grid-cols-3 gap-14">
+          <li class="flex flex-col h-full">
+            <h3 class="font-semibold text-xl mb-2 pt-5 border-t-2 border-indigo-500">
+              Searchable Redis
+            </h3>
+            <p class="text-slate-500 mb-5">
+              Index and query Redis data structures and data models; run complex
+              aggregations and full-text search on your Redis data.
+            </p>
+          </li>
+          <li class="flex flex-col h-full">
+            <h3 class="font-semibold text-xl mb-2 pt-5 border-t-2 border-indigo-500">
+              Document database
+            </h3>
+            <p class="text-slate-500 mb-5">
+              Model domain entirely in Redis, and query your JSON data efficiently
+              without ever having to use a cache.
+            </p>
+          </li>
+          <li class="flex flex-col h-full">
+            <h3 class="font-semibold text-xl mb-2 pt-5 border-t-2 border-indigo-500">
+              Telemetry
+            </h3>
+            <p class="text-slate-500 mb-5">
+              Ingest continuous readings from devices in the field, storing as time
+              series data or analyzing and deduplicating with probabilistic data
+              structures.
+            </p>
+          </li>
+          <li class="flex flex-col h-full">
+            <h3 class="font-semibold text-xl mb-2 pt-5 border-t-2 border-indigo-500">
+              Identity and resource management
+            </h3>
+            <p class="text-slate-500 mb-5">
+              Define digital resources and ACLs as a graph, and compute permissions
+              in real-time with a single Cypher query.
+            </p>
+          </li>
+          <li class="flex flex-col h-full">
+            <h3 class="font-semibold text-xl mb-2 pt-5 border-t-2 border-indigo-500">
+              Vector similarity search
+            </h3>
+            <p class="text-slate-500 mb-5">
+              Query vector embeddings to power images search, recommendation
+              engines, and natural language text processing.
+            </p>
+          </li>
+          <li class="flex flex-col h-full">
+            <h3 class="font-semibold text-xl mb-2 pt-5 border-t-2 border-indigo-500">
+              Fraud detection
+            </h3>
+            <p class="text-slate-500 mb-5">
+              All the tools to detect fraud in real time, with graph analysis,
+              probabilistic queries, vector search, and even processing using
+              streams.
+            </p>
+          </li>
+        </ul>
+      </section>
 
-    <section class="full-width-container">
-      <h2 class="text-center">Get started</h2>
-      <div class="grid with-border">
-        <div>
-          <h3>Preparation</h3>
-          <a>Install & launch Redis</a>
-          <a>Learn the Redis CLI</a>
-        </div>
-        <div>
-          <h3>Countdown</h3>
-          <a>Experiment with Redis data structures</a>
-          <a>Explore Redis clients</a>
-        </div>
-        <div>
-          <h3>Liftoff</h3>
-          <a>See Redis programming patterns</a>
-          <a href="/community">Join to the community</a>
-        </div>
-      </div>
-    </section>
+      <section class="py-24">
+        <h2 class="text-center font-display text-4xl leading-tight text-slate-900 font-semibold mb-10">
+          Get started
+        </h2>
+        <ul class="flex flex-col sm:grid md:grid-cols-2 xl:grid-cols-3 gap-14">
+          <li class="flex flex-col h-full">
+            <h3 class="font-semibold text-xl mb-2 pt-5 border-t-2 border-indigo-500">
+              Preparation
+            </h3>
+            <a class="group inline-flex items-center text-indigo-500 hover:text-indigo-600 font-medium mt-auto self-start" href="#?">
+              Install & launch Redis
+              <span class="ml-1.5 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+            <a class="group inline-flex items-center text-indigo-500 hover:text-indigo-600 font-medium mt-auto self-start" href="#?">
+              Learn the Redis CLI
+              <span class="ml-1.5 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+          </li>
+          <li class="flex flex-col h-full">
+            <h3 class="font-semibold text-xl mb-2 pt-5 border-t-2 border-indigo-500">
+              Countdown
+            </h3>
+            <a class="group inline-flex items-center text-indigo-500 hover:text-indigo-600 font-medium mt-auto self-start" href="#?">
+              Experiment with Redis data structures
+              <span class="ml-1.5 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+            <a class="group inline-flex items-center text-indigo-500 hover:text-indigo-600 font-medium mt-auto self-start" href="#?">
+              Explore Redis clients
+              <span class="ml-1.5 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+          </li>
+          <li class="flex flex-col h-full">
+            <h3 class="font-semibold text-xl mb-2 pt-5 border-t-2 border-indigo-500">
+              Liftoff
+            </h3>
+            <a class="group inline-flex items-center text-indigo-500 hover:text-indigo-600 font-medium mt-auto self-start" href="#?">
+              See Redis programming patterns
+              <span class="ml-1.5 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+            <a href="/community" class="group inline-flex items-center text-indigo-500 hover:text-indigo-600 font-medium mt-auto self-start" href="#?">
+              Join to the community
+              <span class="ml-1.5 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+    </article>
   </main>
 {{ end }}

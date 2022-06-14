@@ -30,6 +30,7 @@
     {{ template "_internal/twitter_cards.html" . -}}
 
     {{ partial "scss.html" (dict "path" "scss/style.scss") }}
+    {{ partialCached "css.html" . }}
 
     {{ block "head" . }}{{ end }}
 
@@ -41,19 +42,19 @@
         })(window,document,'script','dataLayer','{{ .Site.Params.tagManagerId }}');</script>
     {{ end -}}
   </head>
-  <body>
+  <body class="antialiased tracking-[-0.01em]">
     {{ if hugo.IsProduction -}}
       <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ .Site.Params.tagManagerId }}"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {{ end -}}
 
-    <header class="primary-background-color">
+    <header class="flex items-center w-full text-xs lg:text-sm font-semibold lg:font-medium text-white shadow bg-slate-900">
       {{ partial "navbar.html" . }}
     </header>
 
     {{ block "main" . }}{{ end }}
 
-    <footer class="primary-background-color">
+    <footer class="bg-slate-900">
       {{ partial "footer.html" . }}
     </footer>
   </body>

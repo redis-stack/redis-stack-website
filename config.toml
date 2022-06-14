@@ -100,66 +100,68 @@ section = ["HTML", "RSS"] # print
 [menu]
   [[menu.main]]
     identifier = "get-started"
-    name = "GET STARTED"
+    name = "Get Started"
     weight = 1
   [[menu.main]]
     identifier = "redis"
-    name = "REDIS"
+    name = "Redis"
     url = "/docs/getting-started/"
     parent = "get-started"
     weight = 1
   [[menu.main]]
     identifier = "redis-stack"
-    name = "REDIS STACK"
+    name = "Redis Stack"
     url = "/docs/stack/get-started/"
     parent = "get-started"
     weight = 2
   [[menu.main]]
     identifier = "docs"
-    name = "DOCS"
+    name = "Docs"
     url = "/docs/"
     weight = 2
   [[menu.main]]
     identifier = "commands"
-    name = "COMMANDS"
+    name = "Commands"
     url = "/commands/"
     weight = 3
   [[menu.main]]
     identifier = "resources"
-    name = "RESOURCES"
+    name = "Resources"
     weight = 4
   [[menu.main]]
     identifier = "resource-download"
-    name = "DOWNLOAD"
+    name = "Download"
     url = "/download/"
     parent = "resources"
     weight = 1
   [[menu.main]]
     identifier = "support"
-    name = "SUPPORT"
+    name = "Support"
     url = "/support/"
     parent = "resources"
     weight = 2
   [[menu.main]]
     identifier = "clients"
-    name = "CLIENTS"
+    name = "Clients"
     url = "/docs/clients/"
     parent = "resources"
     weight = 3
   [[menu.main]]
     identifier = "community"
-    name = "COMMUNITY"
+    name = "Community"
     url = "/community/"
     weight = 5
   [[menu.buttons]]
     identifier = "download"
-    name = "DOWNLOAD"
+    name = "Download"
     url = "/download/"
     weight = 1
+    [menu.buttons.params]
+      style = "solid"
   [[menu.buttons]]
     identifier = "try-free"
-    name = "TRY REDIS CLOUD"
+    name = "Try Redis Cloud"
     url = "http://redis.com/try-free/"
     weight = 2
     [menu.buttons.params]
-      style = "outline-white"
+      style = "outline"
