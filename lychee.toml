@@ -1,25 +1,12 @@
+scheme = [ "http", "https" ]
 
-exclude = ["github.com","googletagmanager.com", "localhost","127.0.0.1"]
-
-exclude_path = [
-    "exclude-path public/docs/reference/patterns/_print/index.html", 
-    "public/docs/stack/timeseries/reference/out-of-order_performance_considerations/_print/index.html", 
-    "public/docs/stack/json/_print/index.html",
-    "public/docs/stack/get-started/_print/index.html",
-    "public/docs/stack/timeseries/reference/_print/index.html",
-    "public/docs/_print/index.html",        
-    "public/docs/stack/json/performance/_print/index.html",
-    "public/docs/stack/_print/index.html",
-    "public/docs/stack/timeseries/_print/index.html",
-    "public/docs/stack/graph/design/_print/index.html",
-    "public/docs/manual/_print/index.html",
-    "public/docs/stack/get-started/tutorials/_print/index.html",
-    "public/docs/manual/data-types/_print/index.html",
-    "public/docs/stack/search/_print/index.html",
-    "public/docs/stack/graph/_print/index.html",
-    "public/docs/getting-started/installation/_print/index.html",
-    "public/docs/reference/_print/index.html",
-    ""
+exclude = [
+    "github.com",
+    "googletagmanager.com",
+    "packages.redis.io",
+    "techstacks.io",
+    "localhost",
+    "127.0.0.1"
 ]
 
 timeout = 10
