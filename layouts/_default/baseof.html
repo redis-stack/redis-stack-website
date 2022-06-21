@@ -34,6 +34,8 @@
 
     {{ block "head" . }}{{ end }}
 
+    {{ partial "fonts.html" }}
+    
     {{ if hugo.IsProduction -}}
       <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -41,6 +43,11 @@
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','{{ .Site.Params.tagManagerId }}');</script>
     {{ end -}}
+    
+    <script src="/js/index.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" integrity="sha512-yUUc0qWm2rhM7X0EFe82LNnv2moqArj5nro/w1bi05A09hRVeIZbN6jlMoyu0+4I/Bu4Ck/85JQIU82T82M28w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
   </head>
   <body class="antialiased tracking-[-0.01em]">
     {{ if hugo.IsProduction -}}
@@ -48,14 +55,47 @@
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {{ end -}}
 
-    <header class="flex items-center w-full text-xs lg:text-sm font-semibold lg:font-medium text-white shadow bg-slate-900">
+   <!--  <div id="redis-sitesearch" class="redis-sitesearch redis-sitesearch-home">
+      <input class="redis-sitesearch-input" />
+
+      <div class="redis-sitesearch-result-list-wrapper">
+        <ul class="redis-sitesearch-result-list"></ul>
+        <div class="redisearch-logo">
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://docs.redis.com/latest/js/redis-sitesearch.min.js" defer></script>
+    <script src="https://docs.redis.com/latest/js/search.js" defer></script>
+    <link href="https://docs.redis.com/latest/css/redis-sitesearch.css" rel="stylesheet">
+    <link href="https://docs.redis.com/latest/css/redis-sitesearch-overrides.css" rel="stylesheet">
+    <link href="https://docs.redis.com/latest/css/demo.css" rel="stylesheet">
+
+    <div class="search-box" style="display: none">
+        <form role="search" method="get" class="search-form" action="https://redislabs.com/">
+            <input type="search" class="search-field" placeholder="Search..." value="" name="s" title="Search for:">
+            <div class="input-group-button">
+                <input type="submit" class="search-submit button" value="Search"><a data-close="" aria-label="Close modal"
+                    class="close button secondary hollow"><span aria-hidden="true">×</span></a>
+            </div>
+        </form>
+    </div> -->
+
+    <header class="sticky top-0 z-50 flex items-center w-full text-xs lg:text-sm font-semibold lg:font-medium text-white shadow bg-slate-900">
       {{ partial "navbar.html" . }}
     </header>
 
     {{ block "main" . }}{{ end }}
 
-    <footer class="bg-slate-900">
+    <footer class="bg-slate-900 relative z-50">
       {{ partial "footer.html" . }}
+
+      <script>
+        document.querySelectorAll('.prose pre code').forEach(block => {
+          hljs.highlightBlock(block);
+        });
+      </script>
     </footer>
   </body>
 </html>

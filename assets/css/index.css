@@ -3,15 +3,103 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+/* @import 'syntax'; */
+
+.hljs, .hljs-operator, .hljs-punctuation, .hljs-subst {
+  @apply text-slate-300;
+}
+
+.hljs ::selection, .hljs::selection {
+  @apply bg-indigo-600 text-slate-300;
+}
+
+.hljs-comment {
+  @apply text-slate-500;
+}
+
+.hljs-tag, .hljs-attribute, .hljs-function .hljs-title, .hljs-section, .hljs-title.function_, .ruby .hljs-property {
+  @apply text-sky-500;
+}
+
+.hljs-bullet, .hljs-deletion, .hljs-name, .hljs-selector-tag, .hljs-template-variable, .hljs-variable {
+  @apply text-red-500;
+}
+
+.hljs-attr, .hljs-link, .hljs-literal, .hljs-number, .hljs-symbol, .hljs-variable.constant_ {
+  @apply text-orange-400;
+}
+
+.hljs-class .hljs-title, .hljs-title, .hljs-title.class_, .hljs-meta, .hljs-meta .hljs-keyword, .hljs-meta .hljs-string, .hljs-strong {
+  @apply text-yellow-500;
+}
+
+.hljs-addition, .hljs-code, .hljs-string, .hljs-title.class_.inherited__ {
+  @apply text-green-500;
+}
+
+.hljs-built_in, .hljs-doctag, .hljs-keyword.hljs-atrule, .hljs-quote, .hljs-regexp {
+  @apply text-teal-400;
+}
+
+.diff .hljs-meta, .hljs-keyword, .hljs-template-tag, .hljs-type, .hljs-emphasis {
+  @apply text-purple-400;
+}
+
+.hljs-emphasis {
+  font-style: italic
+}
+
+.hljs-strong, .hljs-meta .hljs-keyword, .hljs-meta-keyword {
+  font-weight: 700;
+}
 
 [class*=button-] {
-  @apply transition-colors shrink-0 border border-solid focus:outline-none focus:ring-2 focus:ring-offset-2;
+  @apply transition-colors shrink-0 focus:outline-none focus:ring-2 focus:ring-offset-2;
 }
 
 .button-indigo {
-  @apply text-white border-transparent bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-600 focus:ring-indigo-600;
+  @apply text-white border border-solid border-transparent bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-600 focus:ring-indigo-600;
 }
 
 .button-outline {
-  @apply border-current hover:bg-transparent hover:text-indigo-600 focus:text-indigo-600 focus:ring-indigo-600;
+  @apply relative hover:bg-transparent hover:text-indigo-600 focus:text-indigo-600 focus:ring-indigo-600 hover:after:opacity-100 focus:after:opacity-100;
+}
+
+.button-outline:after {
+  @apply content-[''] absolute inset-0 opacity-50 border border-current rounded-[inherit] transition-opacity;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  @apply font-semibold text-slate-900 tracking-[-0.04em];
+}
+
+.prose pre {
+  @apply bg-slate-900 rounded-xl !important;
+}
+
+.prose pre > code {
+  @apply bg-none;
+}
+
+.prose h1 {
+  @apply text-3xl;
+}
+
+.prose h1[id],
+.prose h2[id],
+.prose h3[id],
+.prose h4[id],
+.prose h5[id],
+.prose h6[id] {
+  @apply mt-11 scroll-mt-6;
+}
+
+.prose p:empty,
+.prose li:empty {
+  @apply hidden;
 }

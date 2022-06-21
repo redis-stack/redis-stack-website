@@ -1,8 +1,13 @@
 {{ with .TableOfContents }}
-    {{ if gt (len .) 32 }}
-        <aside>
-            <p class="bold">On This Page</p>
-            {{ . }}
-        </aside>
-    {{ end }}
+  {{ if gt (len .) 32 }}
+    <aside class="hidden xl:flex">
+      <div class="w-48 h-full shrink-0"></div>
+      <dl class="w-48 z-40 bg-white hidden md:flex flex-col ml-auto fixed top-28 pb-16 h-full max-h-[calc(100vh-7rem)] overflow-y-auto lg:text-sm lg:leading-7">
+        <dt class="font-semibold mb-3">On This Page</dt>
+        <dd>
+          {{ . }}
+        </dd>
+      </dl>
+    </aside>
+  {{ end }}
 {{ end }}

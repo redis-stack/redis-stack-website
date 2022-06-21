@@ -1,16 +1,13 @@
-{{ define "head" }}
-  {{ partial "scss.html" (dict "path" "scss/pages/docs.scss") }}
-{{ end }}
-
 {{ define "main" }}
-  <section class="container max-w-[90rem] mx-auto px-4 sm:px-8 grid grid-cols-[auto,1fr]">
+  <main class="docs w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 md:grid grid-cols-[auto,1fr,auto] gap-16 relative">
     {{ partial "docs-nav.html" . }}
 
-    <main class="prose lg:prose-xl">
+    <section class="prose prose-slate py-12">
       <h1>{{ .Title }}</h1>
       {{ with .Params.description }}<p>{{ . | markdownify }}</p>{{ end }}
-      {{ partial "docs-toc.html" . }}
       {{ .Content }}
-    </main>
-  </section>
+    </section>
+    
+    {{ partial "docs-toc.html" . }}
+  </main>
 {{ end }}
