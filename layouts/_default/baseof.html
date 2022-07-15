@@ -14,7 +14,8 @@
       <meta name="robots" content="noindex, nofollow">
     {{ end -}}
 
-    {{/* {{ partialCached "favicons.html" . }} */}}
+    {{ partialCached "favicons.html" . }}
+
     <title>
       {{- if .IsHome -}}
         {{ .Site.Title -}}
@@ -46,41 +47,12 @@
     
     <script src="/js/index.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" integrity="sha512-yUUc0qWm2rhM7X0EFe82LNnv2moqArj5nro/w1bi05A09hRVeIZbN6jlMoyu0+4I/Bu4Ck/85JQIU82T82M28w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
   </head>
   <body class="antialiased tracking-[-0.01em]">
     {{ if hugo.IsProduction -}}
       <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ .Site.Params.tagManagerId }}"
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {{ end -}}
-
-   <!--  <div id="redis-sitesearch" class="redis-sitesearch redis-sitesearch-home">
-      <input class="redis-sitesearch-input" />
-
-      <div class="redis-sitesearch-result-list-wrapper">
-        <ul class="redis-sitesearch-result-list"></ul>
-        <div class="redisearch-logo">
-        </div>
-      </div>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://docs.redis.com/latest/js/redis-sitesearch.min.js" defer></script>
-    <script src="https://docs.redis.com/latest/js/search.js" defer></script>
-    <link href="https://docs.redis.com/latest/css/redis-sitesearch.css" rel="stylesheet">
-    <link href="https://docs.redis.com/latest/css/redis-sitesearch-overrides.css" rel="stylesheet">
-    <link href="https://docs.redis.com/latest/css/demo.css" rel="stylesheet">
-
-    <div class="search-box" style="display: none">
-        <form role="search" method="get" class="search-form" action="https://redislabs.com/">
-            <input type="search" class="search-field" placeholder="Search..." value="" name="s" title="Search for:">
-            <div class="input-group-button">
-                <input type="submit" class="search-submit button" value="Search"><a data-close="" aria-label="Close modal"
-                    class="close button secondary hollow"><span aria-hidden="true">×</span></a>
-            </div>
-        </form>
-    </div> -->
 
     <header class="sticky top-0 z-50 flex items-center w-full text-xs lg:text-sm font-semibold lg:font-medium text-white shadow bg-slate-900">
       {{ partial "navbar.html" . }}
@@ -93,9 +65,13 @@
 
       <script>
         document.querySelectorAll('.prose pre code').forEach(block => {
-          hljs.highlightBlock(block);
+          hljs.highlightElement(block);
         });
       </script>
+
+      {{ partial "toc-js.html" . }}
     </footer>
+
+    {{ partial "search-modal.html" . }}
   </body>
 </html>

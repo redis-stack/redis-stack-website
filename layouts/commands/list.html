@@ -1,51 +1,64 @@
 {{ define "head" }}
   <script src="/js/commands-filters.js" defer></script>
-
-  {{ partial "scss.html" (dict "path" "scss/pages/commands.scss") }}
 {{ end }}
 
 {{ define "main" }}
-  <div class="full-width">
-    <h1 class="text-center">Commands</h1>
+    <main class="docs w-full max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 md:flex gap-16 relative">
+    {{ partial "docs-nav.html" . }}
 
-    <form class="command-filter text-center">
-      <select id="group-filter">
-        <option value="" disabled selected >Filter by group...</option>
-        <option value="">All</option>
-        {{- range $id, $group := .Site.Data.groups -}}
-            <option value="{{ $id }}">{{ $group.display }}</option>
-        {{ end }}
-      </select>
-      <input id="name-filter" type="search" autocapitalize="off" autocomplete="off" autocorrect="off" autofocus="" placeholder="Search" spellcheck="false">
-    </form>
+    <section class="py-12">
+      <h1 class="text-3xl tracking-tighter font-semibold text-slate-900">Commands</h1>
 
-    <div class="section-index">
+      <form class="command-filter text-center flex flex-col sm:grid grid-cols-2 gap-4 mt-6 mb-8">
+        <label class="relative flex items-center">
+          <span class="sr-only">Search commands&hellip;</span>
+          <svg class="text-slate-400 absolute left-4 w-5 h-5" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <circle cx="10" cy="10" r="7" />
+            <line x1="21" y1="21" x2="15" y2="15" />
+          </svg>
+          <input class="transition appearance-none block w-full pl-12 pr-4 py-3 rounded-lg shadow-sm shadow-slate-900/5 bg-clip-padding bg-slate-50 hover:bg-indigo-50/50 focus:bg-indigo-50/50 border border-slate-900/10 hover:border-indigo-200 focus:border-indigo-300 ring-indigo-200 focus:ring-indigo-200 focus:ring-[3px] focus:outline-none text-slate-900/70 placeholder:text-slate-900/70" id="name-filter" type="search" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Search commands&hellip;" spellcheck="false">
+        </label>
+        <select id="group-filter" class="cursor-pointer transition appearance-none block w-full pl-4 pr-12 py-3 rounded-lg shadow-sm shadow-slate-900/5 bg-clip-padding bg-slate-50 hover:bg-indigo-50/50 focus:bg-indigo-50/50 border border-slate-900/10 hover:border-indigo-200 focus:border-indigo-300 ring-indigo-200 focus:ring-indigo-200 focus:ring-[3px] focus:outline-none text-slate-900/70">
+          <option disabled hidden selected>Filter by group...</option>
+          <option value="">All</option>
+          {{ range $id, $group := .Site.Data.groups }}
+              <option value="{{ $id }}">
+                <!-- {{ $group.display }} -->
+                {{ $id }}
+              </option>
+          {{ end }}
+        </select>
+      </form>
+      
       {{ $parent := .Page }}
       {{ $pages := (where .Site.Pages "Section" .Section).ByWeight }}
       {{ $pages = (where $pages "Type" "!=" "search") }}
       {{ $pages = (where $pages ".Params.hide_summary" "!=" true) }}
       {{ $pages = (where $pages ".Parent" "!=" nil) }}
       {{ $pages = (where $pages "Parent.File.UniqueID" "==" $parent.File.UniqueID) }}
-      <div id="commands-grid">
-          {{ range $index, $page := $pages }}
-            {{ $syntax := "" }}
-            {{ if isset .Params "arguments"  }}
-              {{ $args := .Params.arguments }}
-              {{ if gt (len $args) 0 }}
-                {{ $syntax = partial "command-syntax.html" $args }}
-              {{ end }}
+      <div class="flex flex-col md:grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-4 text-slate-500 mx-auto">
+        {{ range $index, $page := $pages }}
+          {{ $syntax := "" }}
+          {{ if isset .Params "arguments"  }}
+            {{ $args := .Params.arguments }}
+            {{ if gt (len $args) 0 }}
+              {{ $syntax = partial "command-syntax.html" $args }}
             {{ end }}
-            <a href="{{ .RelPermalink }}" title="{{ printf "%s %s" .Title $syntax }}" data-name="{{ .Title }}" data-group="{{ .Params.group }}">
-              <div class="name primary-text-color">
-                {{ .Title }}
-                <span class="neutral-text-color">{{ $syntax }}</span>
-              </div>
-              <p class="neutral-text-color">
-                {{ .Params.summary }}
-              </p>
-            </a>
           {{ end }}
+          <article class="flex flex-col justify-start transition relative h-full p-6 text-sm text-slate-900 hover:text-indigo-900 focus-within:text-indigo-900 bg-white hover:bg-indigo-50/50 focus-within:bg-indigo-50/50 border border-slate-900/10 hover:border-indigo-200 focus-within:border-indigo-300 focus-within:ring-indigo-200 focus-within:ring-[3px] focus-within:outline-none bg-clip-padding shadow shadow-slate-900/5 rounded-xl">
+            <h1 class="font-mono font-medium mb-1.5">
+              {{ .Title }}
+            </h1>
+            <p class="opacity-70">
+              {{ .Params.summary }}
+            </p>
+            <a class="absolute inset-0 outline-0" href="{{ .RelPermalink }}" data-name="{{ .Title }}" data-group="{{ .Params.group }}">
+              <span class="sr-only">Read more</span>
+            </a>
+          </article>
+        {{ end }}
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
 {{ end }}

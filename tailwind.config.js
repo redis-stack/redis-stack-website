@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       fontFamily: {
 				sans: [ 'Inter', ...defaultTheme.fontFamily.sans ],
-				mono: [ 'SF Mono', ...defaultTheme.fontFamily.mono ],
+				mono: [ 'Fira Code', 'SF Mono', ...defaultTheme.fontFamily.mono ],
 				display: [ 'Inter Display', ...defaultTheme.fontFamily.sans ],
       },
       typography: (theme) => (  {
@@ -24,6 +24,12 @@ module.exports = {
               '&:hover': {
                 color: theme('colors.indigo.400'),
               },
+            },
+            code: {
+              fontWeight: '500',
+            },
+            pre: {
+              padding: '1.25rem',
             },
           },
         },

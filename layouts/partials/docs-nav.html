@@ -11,8 +11,8 @@
   {{ $withChild := gt (len $pages) 0 -}}
 
   {{ if $show }}
-    <li class="">
-      <a class="{{- if $active }} text-indigo-500 border-current font-semibold{{- else }} text-slate-700 hover:text-slate-900 border-transparent hover:border-slate-400{{- end }}" href="{{ $s.RelPermalink }}">{{ $s.LinkTitle }}</a>
+    <li class="truncate">
+      <a class="{{- if $active }} text-indigo-500 border-current font-medium{{- else }} text-slate-600 hover:text-indigo-600 border-transparent hover:border-slate-400{{- end }}" href="{{ $s.RelPermalink }}">{{ $s.LinkTitle }}</a>
       {{- if $withChild }}
         {{- $ulNr := add $ulNr 1 }}
         <ul class="">
@@ -27,13 +27,14 @@
   {{- end }}
 {{- end }}
 
-<div class="hidden md:block w-48 h-full shrink-0"></div>
-<nav class="w-48 z-40 bg-white hidden md:block fixed top-28 pb-16 h-full max-h-[calc(100vh-7rem)] lg:text-sm lg:leading-7">
-  <div class="absolute right-0 -top-28 z-[-1] h-screen border-r border-slate-200/50 bg-gradient-to-bl from-slate-50 via-slate-50 to-indigo-100 w-[17rem] xl:w-[calc(50vw-23rem)]"></div>
-  {{ $navRoot := cond (eq .Site.Home.Type "docs") .Site.Home .FirstSection -}}
-  {{ $ulNr := 0 -}}
-  {{ $ulShow := 1 -}}
-  <ul class="h-full max-h-[calc(100vh-7rem)] overflow-y-auto -ml-4">
-    {{ template "li" (dict "page" . "section" $navRoot "ulNr" $ulNr "ulShow" (add $ulShow 1)) }}
-  </ul>
-</nav>
+<div class="hidden md:block w-52 h-full shrink-0">
+  <nav class="w-52 z-40 bg-white hidden md:block fixed top-28 pb-16 h-full max-h-[calc(100vh-7rem)] text-[0.8125rem] leading-7 font">
+    <div class="absolute right-0 -top-28 z-[-1] h-screen border-r border-slate-200/50 bg-gradient-to-bl from-slate-50 via-slate-50 to-indigo-100 w-[17rem] xl:w-[calc(50vw-23rem)]"></div>
+    {{ $navRoot := cond (eq .Site.Home.Type "docs") .Site.Home .FirstSection -}}
+    {{ $ulNr := 0 -}}
+    {{ $ulShow := 1 -}}
+    <ul class="h-full max-h-[calc(100vh-7rem)] overflow-y-auto pr-6">
+      {{ template "li" (dict "page" . "section" $navRoot "ulNr" $ulNr "ulShow" (add $ulShow 1)) }}
+    </ul>
+  </nav>
+</div>

@@ -1,13 +1,8 @@
-{{ define "head" }}
-  {{ partial "scss.html" (dict "path" "scss/pages/command.scss") }}
-
-  <script src="/js/cli.js" defer></script>
-  <link rel="stylesheet" href="/css/cli.css">
-{{ end }}
-
 {{ define "main" }}
-  <section class="full-width">
-    <main>
+  <main class="docs w-full max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 md:flex gap-16 relative">
+    {{ partial "docs-nav.html" . }}
+
+    <section class="prose prose-slate w-full max-w-[47rem] py-12">
       {{ $syntax := "" }}
       {{ if isset .Params "arguments" }}
         {{ $args := .Params.arguments }}
@@ -17,21 +12,31 @@
       {{ end }}
       <h1>{{ .Title }} {{ $syntax }}</h1>
 
+      <dl class="grid grid-cols-[auto,1fr]">
+        <dt>Available since:</dt>
+        <dd>{{ .Params.since }}</dd>
+        <dt>Time complexity:</dt>
+        <dd>{{ .Params.complexity | markdownify }}</dd>
+        <dt>ACL categories:</dt>
+        <dd>
+          {{ range .Params.acl_categories }}
+            {{ printf "`%s`" . | markdownify }}
+          {{ end}}
+        </dd>
+      </dl>
       <div>
-        <span class="title">Available since:</span>
-        {{ .Params.since }}
+        <span class="title"></span>
+        
       </div>
 
       <div>
-        <span class="title">Time complexity:</span>
-        {{ .Params.complexity | markdownify }}
+        <span class="title"></span>
+        
       </div>
 
       <div>
-        <span class="title">ACL categories:</span>
-        {{ range .Params.acl_categories }}
-          {{ printf "`%s`" . | markdownify }}
-        {{ end}}
+        <span class="title"></span>
+        
       </div>
 
       {{ if (isset .Params "deprecated_since") }}
@@ -53,18 +58,23 @@
           {{ end }}
         </ul>
       {{ end }}
-    </main>
-
-    <aside>
+    </section>
+    
+    <aside class="hidden xl:block w-52 h-full shrink-0">
       {{ $related := .Site.Pages.RelatedIndices . "group" }}
       {{ with $related }}
-        <div class="bold">See also</div>
-        <ul>
-          {{ range . }}
-            <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-          {{ end }}
-        </ul>
+      <dl class="w-52 z-40 bg-white hidden md:block overflow-auto fixed top-28 h-full max-h-[calc(100vh-15rem)] text-[0.8125rem]">
+        <dt class="font-semibold mb-3">
+          See also
+        </dt>
+        {{ range . }}
+          <dd>
+            <a class="block font-mono font-medium mb-2" href="{{ .RelPermalink }}">{{ .Title }}</a>
+          </dd>
+        {{ end }}
+      </dl>
       {{ end }}
     </aside>
-  </section>
+
+  </main>
 {{ end }}

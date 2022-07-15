@@ -1,0 +1,325 @@
+{{/* Search Modal */}}
+<div class="sr-only w-screen h-screen fixed z-[200] top-0 left-0 cursor-auto flex flex-col bg-slate-900/75 p-4 sm:p-6 md:p-[10vh] lg:p-[12vh]" id="search-container" role="button" aria-expanded="true" aria-haspopup="listbox" aria-labelledby="search-label" tabindex="0">
+  <div class="search-modal">
+    <header class="search-bar">
+      <form id="search-form" class="search-form">
+        <label class="search-magnifier-label" for="search-input" id="search-label">
+          <svg width="20" height="20" class="search-icon" viewBox="0 0 20 20">
+            <path d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </label>
+        <div class="search-loading-indicator">
+          <svg viewBox="0 0 38 38" stroke="currentColor" stroke-opacity=".5">
+            <g fill="none" fill-rule="evenodd">
+              <g transform="translate(1 1)" stroke-width="2">
+                <circle stroke-opacity=".3" cx="18" cy="18" r="18" />
+                <path d="M36 18c0-9.94-8.06-18-18-18">
+                  <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite" />
+                </path>
+              </g>
+            </g>
+          </svg>
+        </div>
+        <input class="search-input" aria-autocomplete="both" aria-labelledby="search-label" id="search-input" autocomplete="off" autocorrect="off" autocapitalize="off" enterkeyhint="go" spellcheck="false" placeholder="Search&hellip;" maxlength="64" type="search" value="">
+        <button type="reset" title="Clear the query" class="search-reset" aria-label="Clear the query" hidden="">
+          <svg width="20" height="20" viewBox="0 0 20 20">
+            <path d="M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </form>
+      <button class="search-cancel" type="reset" aria-label="Cancel">
+        Cancel
+      </button>
+    </header>
+    <ul id="search-results" class="search-results" role="listbox"></ul>
+    <footer class="search-footer">
+      <a href="/docs/stack/search/" target="_blank" rel="noopener noreferrer">
+        <span class="logo-label">Powered by RediSearch</span>
+        <svg aria-label="RediSearch Logomark" role="img" viewBox="0 0 30 25" fill="currentColor">
+          <path d="M8.289 10.061c1.145.477 2.481.763 3.817.763h.573c1.622-.095 3.053-.572 4.103-1.24.954-.668 1.527-1.527 1.431-2.481-.095-1.05-.954-2.004-2.29-2.577-1.24-.572-2.863-.859-4.485-.763-1.527.095-3.054.572-4.008 1.24-1.145.764-1.622 1.718-1.432 2.672.191.955.955 1.813 2.291 2.386zm-.096-3.817c.859-.573 2.004-.954 3.34-.954h.573c1.145 0 2.29.19 3.245.668.858.381 1.431.954 1.526 1.431 0 .382-.286.763-.763 1.145-.859.573-2.004.954-3.34.954-1.336.096-2.767-.19-3.817-.668-.955-.381-1.432-.954-1.527-1.431-.096-.477.382-.954.763-1.145z" />
+          <path d="M4.758 13.115c2.481 1.145 5.535 1.622 8.589 1.431 2.099-.095 4.008-.572 5.725-1.24l5.631 2.576c.572.287 1.24.382 1.908.382h.287c.763 0 1.526-.286 2.099-.668.764-.477 1.145-1.336.954-2.099-.095-.764-.668-1.337-1.431-1.718l-4.772-2.195c.573-1.05.764-2.1.573-3.245-.382-2.004-2.004-3.721-4.676-4.867C17.164.327 14.205-.15 11.056.041c-3.244.191-6.107 1.05-8.111 2.481C.654 4.049-.3 6.053.082 8.152c.382 2.004 2.004 3.722 4.676 4.963zm-.954-9.448c1.813-1.24 4.389-2.004 7.252-2.195 2.863-.191 5.631.287 7.921 1.336 2.195.955 3.531 2.386 3.817 3.913.191.954-.095 1.909-.763 2.863-.096.191-.191.382-.096.572.096.191.191.382.382.478l5.535 2.576c.382.191.572.382.668.668.095.287-.191.573-.382.668-.382.191-.859.382-1.336.382-.572 0-1.05-.095-1.527-.286l-5.916-2.672c-.096 0-.191-.096-.287-.096-.095 0-.191 0-.286.096a16.791 16.791 0 01-5.535 1.24c-2.863.191-5.63-.286-7.921-1.336-2.194-.954-3.53-2.386-3.817-3.912-.286-1.623.477-3.054 2.291-4.295z" />
+          <path d="M24.798 18.745c-2.767-1.24-5.439-2.386-5.439-2.386-.191-.095-.287-.095-.478 0-2.004.859-3.626 1.336-6.202 1.527C4.376 18.363.75 14.26.654 13.21c-.954 1.05 2.004 6.585 12.025 6.012 2.576-.095 4.198-.668 6.298-1.527 0 0 1.909.859 5.249 2.291 4.294 1.908 6.68-1.05 5.248-2.291.096.668-1.431 2.386-4.676 1.05z" />
+          <path d="M24.798 22.849c-2.767-1.241-5.439-2.386-5.439-2.386-.191-.096-.287-.096-.478 0-2.004.859-3.626 1.336-6.202 1.527C4.376 22.372.75 18.363.654 17.218c-.954 1.05 2.004 6.585 12.025 6.012 2.576-.095 4.198-.668 6.298-1.527 0 0 1.909.859 5.249 2.291 4.294 1.908 6.68-1.05 5.248-2.291.096.764-1.431 2.577-4.676 1.146z" />
+        </svg>
+      </a>
+    </footer>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function(event) {
+    const searchContainer = document.querySelector('#search-container');
+    const searchInput = searchContainer.querySelector('#search-input');
+    const resultsContainer = searchContainer.querySelector('#search-results');
+
+    function debounce(callback, delay) {
+      let timeout;
+      return function() {
+        clearTimeout(timeout);
+        timeout = setTimeout(callback, delay);
+      };
+    }
+  
+    function keyUpHandler(event) {
+      if (document.activeElement.id !== 'search-input') return false;
+      searchSubmit(document.activeElement.closest('form'));
+    }
+  
+    function searchSubmit(form) {
+      // console.log(event)
+      // event.preventDefault();
+      if (form.id !== 'search-form') return false;
+  
+      const searchTerm = searchInput.value;
+      //const resultsContainer = document.querySelector('#search-results');
+  
+      if (searchTerm.length < 1) {
+        // event.preventDefault();
+        resultsContainer.innerHTML = '';
+        return;
+      }
+  
+      const mockData = {
+        total: 16,
+        results: [
+          {
+            title: '<b>Streams</b> in Active-Active databases',
+            section_title: '',
+            hierarchy: [
+              'Redis Enterprise Software',
+              'Manage databases',
+              'Active-Active geo-distributed Redis',
+              'Develop applications with Active-Active databases',
+              'Streams in Active-Active databases'
+            ],
+            body: 'logical <b>stream</b> from more than one region. <b>Streams</b> are... ',
+            url: 'https://docs.redis.com/latest/rs/databases/active-active/develop/streams-active-active'
+          },
+          {
+            title: 'StreamReader',
+            section_title: 'Output records',
+            hierarchy: [
+              'Redis Stack and modules',
+              'RedisGears',
+              'RedisGears JVM plugin',
+              'RedisGears Java classes and functions',
+              'RedisGears readers',
+              'StreamReader'
+            ],
+            body: 'each message in the input <b>stream</b>. Each record is a HashMap... ',
+            url: 'https://docs.redis.com/latest/modules/redisgears/jvm/classes/readers/streamreader'
+          },
+          {
+            title: 'RedisGears readers',
+            section_title: 'Classes',
+            hierarchy: [
+              'Redis Stack and modules',
+              'RedisGears',
+              'RedisGears JVM plugin',
+              'RedisGears Java classes and functions',
+              'RedisGears readers'
+            ],
+            body: 'StreamReader Reads Redis <b>stream</b> data... ',
+            url: 'https://docs.redis.com/latest/modules/redisgears/jvm/classes/readers'
+          },
+          {
+            title: 'Sets in Active-Active databases',
+            section_title: '',
+            hierarchy: [
+              'Redis Enterprise Software',
+              'Manage databases',
+              'Active-Active geo-distributed Redis',
+              'Develop applications with Active-Active databases',
+              'Sets in Active-Active databases'
+            ],
+            body: 'a list of events (click <b>streams</b>), users (in a group... ',
+            url: 'https://docs.redis.com/latest/rs/databases/active-active/develop/sets-active-active'
+          },
+          {
+            title: 'Application failover with Active-Active databases',
+            section_title: 'Detecting Failure',
+            hierarchy: [
+              'Redis Enterprise Software',
+              'Manage databases',
+              'Active-Active geo-distributed Redis',
+              'Develop applications with Active-Active databases',
+              'Application failover with Active-Active databases'
+            ],
+            body: 'of the replication <b>stream</b>, but pub/sub is preferred... ',
+            url: 'https://docs.redis.com/latest/rs/databases/active-active/develop/app-failover-active-active'
+          },
+          {
+            title: 'RedisTimeSeries',
+            section_title: '',
+            hierarchy: [ 'Redis Stack and modules', 'RedisTimeSeries' ],
+            body: 'as Redis <b>Streams</b>. With <b>Streams</b>, you can create a capped <b>stream</b>, effectively... ',
+            url: 'https://docs.redis.com/latest/modules/redistimeseries'
+          },
+          {
+            title: 'FAQs',
+            section_title: 'General',
+            hierarchy: [ 'RedisInsight', 'FAQs' ],
+            body: 'and update data from <b>Streams</b>, RedisGraph, RediSearch and... ',
+            url: 'https://docs.redis.com/latest/ri/faqs'
+          }
+        ]
+      };
+  
+      const endpoint = 'https://search-service.redislabs.com/search?q=' + searchTerm + '&site=https://redis.io';
+  
+      function search(url) {
+        let promise = new Promise((resolve, reject) => {
+          const req = new XMLHttpRequest();
+          req.open('GET', url);
+          req.onload = function() {
+            if (req.status === 200) {
+              resolve(JSON.parse(req.response));
+            } else {
+              reject(Error(req.status));
+            }
+          };
+          req.send();
+        });
+  
+        return promise;
+      }
+  
+      function sortData(data) {
+        // Get a list of unique times
+        const getCategories = (data) =>
+          data.reduce((a, c) => {
+            if (!a.includes(c.hierarchy[0])) {
+              a.push(c.hierarchy[0]);
+            }
+  
+            return a;
+          }, []);
+  
+        // Merge the data into a single list using the categories list as index
+        const mergeData = (data, categories) =>
+          categories.map((category) => {
+            const obj = {};
+            obj.category = category;
+  
+            data.forEach((record) => {
+              if (record.hierarchy[0] === category) {
+                obj[record.title] = record.url;
+              }
+            });
+  
+            return obj;
+          });
+  
+        return mergeData(data.results, getCategories(data.results));
+      }
+  
+      function displayData(data) {
+        resultsContainer.innerHTML = '';
+  
+        sortData(data).forEach((result) => {
+          resultsContainer.insertAdjacentHTML('beforeend', `<h1 class="text-bold">${result.category}</h1>`);
+  
+          delete result.category;
+  
+          Object.keys(result).forEach((key, index) => {
+            resultsContainer.insertAdjacentHTML(
+              'beforeend',
+              `<li class="search-item"><a href="${result[key]}">${key.replace(
+                new RegExp('(^|)(' + searchTerm + ')(|$)', 'ig'),
+                '$1<b>$2</b>$3'
+              )}</a></li>`
+            );
+          });
+        });
+        return;
+      }
+  
+      function displayError(error) {
+        //const cityElem = document.querySelector('.city');
+        //cityElem.textContent = `We are very sorry but we are receiving ${error} when trying to connect to a third party server`;
+        console.log(error);
+      }
+  
+      //  search(endpoint)
+      //    .then(displayData)
+      //    .catch(displayError);
+  
+      displayData(mockData);
+    }
+  
+    function clickHandler(event) {
+      if (event.target.closest('#search-button')) initSearchModal();
+      if (event.target.closest('#close-search')) destroySearchModal();
+      return false;
+    }
+    
+    function keyDownHandler(event) {
+      // Only run when an open search modal exists
+      if (searchContainer.classList.contains('sr-only')) return false;
+  
+      // Scoped variables
+      var tabKey = 9,
+        escKey = 27;
+  
+      switch (event.keyCode) {
+        // Tab
+        case tabKey:
+          if (focusable.length === 1) {
+            event.preventDefault();
+            break;
+          }
+  
+          // Go back if shift is fired, tab backward
+          if (event.shiftKey) {
+            if (document.activeElement === firstFocusable) {
+              event.preventDefault();
+              lastFocusable.focus();
+            }
+  
+            // Otherwise tab forward
+          } else {
+            if (document.activeElement === lastFocusable) {
+              event.preventDefault();
+              firstFocusable.focus();
+            }
+          }
+          break;
+  
+        // Esc
+        case escKey:
+          destroySearchModal();
+          break;
+  
+        // Default
+        default:
+          break;
+      }
+    }
+  
+    // Trap focus to currently open modal
+    function trapFocus() {
+      focusable = searchContainer.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"]');
+      firstFocusable = focusable[0];
+      lastFocusable = focusable[focusable.length - 1];
+    }
+  
+    function initSearchModal() {
+      searchContainer.classList.remove('sr-only');
+      trapFocus();
+      searchInput.focus();
+    }
+  
+    function destroySearchModal() {
+      searchContainer.classList.add('sr-only');
+    }
+  
+    // Attach event listeners
+    searchContainer.addEventListener('click', function(event) {
+      console.log('CLICKED')
+    }, false);
+    document.addEventListener('click', clickHandler, false);
+    document.addEventListener('keydown', keyDownHandler, false);
+    document.addEventListener('keyup', debounce(keyUpHandler, 500), false);
+  
+  });
+</script>

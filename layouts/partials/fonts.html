@@ -1,7 +1,7 @@
 <style>
   @font-face {
     font-family: 'Inter';
-    src: url("/fonts/inter-light.woff2") format('woff2');
+    src: url('/fonts/inter-light.woff2') format('woff2');
     font-weight: 300;
     font-style: normal;
     font-display: swap;
@@ -9,7 +9,7 @@
 
   @font-face {
     font-family: 'Inter';
-    src: url("/fonts/inter-regular.woff2") format('woff2');
+    src: url('/fonts/inter-regular.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
@@ -17,7 +17,7 @@
 
   @font-face {
     font-family: 'Inter';
-    src: url("/fonts/inter-medium.woff2") format('woff2');
+    src: url('/fonts/inter-medium.woff2') format('woff2');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
@@ -25,7 +25,7 @@
 
   @font-face {
     font-family: 'Inter';
-    src: url("/fonts/inter-semibold.woff2") format('woff2');
+    src: url('/fonts/inter-semibold.woff2') format('woff2');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -33,16 +33,24 @@
 
   @font-face {
     font-family: 'Inter';
-    src: url("/fonts/inter-bold.woff2") format('woff2');
+    src: url('/fonts/inter-bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
   }
 
   @font-face {
-    font-family: 'Inter Display';
-    src: url("/fonts/inter-display-semibold.woff2") format('woff2');
-    font-weight: 600;
+    font-family: 'Fira Code';
+    src: url('/fonts/fira-code-regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Fira Code';
+    src: url('/fonts/fira-code-medium.woff2') format('woff2');
+    font-weight: 500;
     font-style: normal;
     font-display: swap;
   }
@@ -97,10 +105,16 @@
       { weight: "700" }
     );
 
-    let sansDisplaySemibold = new FontFace(
-      "Inter Display",
-      "url('/fonts/inter-display-semibold.woff2') format('woff2')",
-      { weight: "600" }
+    let monoRegular = new FontFace(
+      "Fira Code",
+      "url('/fonts/fira-code-regular.woff2') format('woff2')",
+      { weight: "400" }
+    );
+
+    let monoMedium = new FontFace(
+      "Fira Code",
+      "url('/fonts/fira-code-medium.woff2') format('woff2')",
+      { weight: "500" }
     );
     
     let loadedFonts = Promise.all([
@@ -109,7 +123,8 @@
       sansMedium.load(),
       sansSemibold.load(),
       sansBold.load(),
-      sansDisplaySemibold.load()
+      monoRegular.load(),
+      monoMedium.load()
 
     ]).then(result => {
       result.forEach(font => document.fonts.add(font));
@@ -138,4 +153,5 @@
 <link rel="preload" href="/fonts/inter-medium.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/fonts/inter-semibold.woff2" as="font" type="font/woff2" crossorigin />
 <link rel="preload" href="/fonts/inter-bold.woff2" as="font" type="font/woff2" crossorigin />
-<link rel="preload" href="/fonts/inter-display-semibold.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/fira-code-regular.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/fonts/fira-code-medium.woff2" as="font" type="font/woff2" crossorigin />
