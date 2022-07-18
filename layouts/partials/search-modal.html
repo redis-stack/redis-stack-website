@@ -27,11 +27,11 @@
           </svg>
         </button>
       </form>
-      <button class="search-cancel" type="reset" aria-label="Cancel">
+      <button id="search-cancel" type="reset" aria-label="Cancel">
         Cancel
       </button>
     </header>
-    <ul id="search-results" class="search-results" role="listbox"></ul>
+    <dl id="search-results" class="search-results" role="listbox"></dl>
     <footer class="search-footer">
       <a href="/docs/stack/search/" target="_blank" rel="noopener noreferrer">
         <span class="logo-label">Powered by RediSearch</span>
@@ -71,7 +71,6 @@
       if (form.id !== 'search-form') return false;
   
       const searchTerm = searchInput.value;
-      //const resultsContainer = document.querySelector('#search-results');
   
       if (searchTerm.length < 1) {
         // event.preventDefault();
@@ -203,7 +202,10 @@
   
             data.forEach((record) => {
               if (record.hierarchy[0] === category) {
-                obj[record.title] = record.url;
+                obj[record.title] = {
+                  path: record.section_title,
+                  url: record.url,
+                };
               }
             });
   
@@ -217,17 +219,28 @@
         resultsContainer.innerHTML = '';
   
         sortData(data).forEach((result) => {
-          resultsContainer.insertAdjacentHTML('beforeend', `<h1 class="text-bold">${result.category}</h1>`);
+          resultsContainer.insertAdjacentHTML(
+            'beforeend', 
+            `<dt class="search-item-source">
+              ${result.category}
+            </dt>`
+          );
   
           delete result.category;
   
           Object.keys(result).forEach((key, index) => {
             resultsContainer.insertAdjacentHTML(
               'beforeend',
-              `<li class="search-item"><a href="${result[key]}">${key.replace(
-                new RegExp('(^|)(' + searchTerm + ')(|$)', 'ig'),
-                '$1<b>$2</b>$3'
-              )}</a></li>`
+              `<dd class="search-item">
+                <a href="${result[key].url}">
+                  <span class="search-item-icon"></span>
+                  <span class="search-item-content">
+                    ${result[key].path ? `<span class="search-item-path">${result[key].path}</span>` : ''}
+                    <span class="search-item-title">${key.replace(new RegExp('(^|)(' + searchTerm + ')(|$)', 'ig'), '$1<b class="font-semibold text-indigo-500 underline underline-offset-2 decoration-2">$2</b>$3')}</span>
+                  </span>
+                  <span class="search-item-action"></span>
+                </a>
+              </dd>`
             );
           });
         });
@@ -249,7 +262,7 @@
   
     function clickHandler(event) {
       if (event.target.closest('#search-button')) initSearchModal();
-      if (event.target.closest('#close-search')) destroySearchModal();
+      if (event.target.closest('#search-cancel')) destroySearchModal();
       return false;
     }
     
@@ -314,9 +327,6 @@
     }
   
     // Attach event listeners
-    searchContainer.addEventListener('click', function(event) {
-      console.log('CLICKED')
-    }, false);
     document.addEventListener('click', clickHandler, false);
     document.addEventListener('keydown', keyDownHandler, false);
     document.addEventListener('keyup', debounce(keyUpHandler, 500), false);
