@@ -70,33 +70,33 @@ form {
   }
 }
 
-#commands-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(18em, 1fr));
-  gap: 1.875rem;
+// #commands-grid {
+//   display: grid;
+//   grid-template-columns: repeat(auto-fill, minmax(18em, 1fr));
+//   gap: 1.875rem;
 
-  > a {
-    background-color: #ffffff;
-    border-top: 2px solid transparent;
-    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.05);
-    padding: 1em;
+//   > a {
+//     background-color: #ffffff;
+//     border-top: 2px solid transparent;
+//     box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.05);
+//     padding: 1em;
 
-    &:hover, &:focus {
-      border-top-color: var(--secondary-color);
-      text-decoration: none;
-    }
+//     &:hover, &:focus {
+//       border-top-color: var(--secondary-color);
+//       text-decoration: none;
+//     }
 
-    > .name {
-      margin-bottom: .5rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-weight: 500;
+//     > .name {
+//       margin-bottom: .5rem;
+//       overflow: hidden;
+//       text-overflow: ellipsis;
+//       white-space: nowrap;
+//       font-weight: 500;
 
-      > span {
-        font-weight: 400;
-        font-size: 0.8em;
-      }
-    }
-  }
-}
+//       > span {
+//         font-weight: 400;
+//         font-size: 0.8em;
+//       }
+//     }
+//   }
+// }
