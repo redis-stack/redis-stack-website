@@ -51,6 +51,7 @@
     const searchContainer = document.querySelector('#search-container');
     const searchInput = searchContainer.querySelector('#search-input');
     const resultsContainer = searchContainer.querySelector('#search-results');
+    let keys = {};
 
     function debounce(callback, delay) {
       let timeout;
@@ -58,11 +59,6 @@
         clearTimeout(timeout);
         timeout = setTimeout(callback, delay);
       };
-    }
-  
-    function keyUpHandler(event) {
-      if (document.activeElement.id !== 'search-input') return false;
-      searchSubmit(document.activeElement.closest('form'));
     }
   
     function searchSubmit(form) {
@@ -73,98 +69,9 @@
       const searchTerm = searchInput.value;
   
       if (searchTerm.length < 1) {
-        // event.preventDefault();
         resultsContainer.innerHTML = '';
         return;
       }
-  
-      const mockData = {
-        total: 16,
-        results: [
-          {
-            title: '<b>Streams</b> in Active-Active databases',
-            section_title: '',
-            hierarchy: [
-              'Redis Enterprise Software',
-              'Manage databases',
-              'Active-Active geo-distributed Redis',
-              'Develop applications with Active-Active databases',
-              'Streams in Active-Active databases'
-            ],
-            body: 'logical <b>stream</b> from more than one region. <b>Streams</b> are... ',
-            url: 'https://docs.redis.com/latest/rs/databases/active-active/develop/streams-active-active'
-          },
-          {
-            title: 'StreamReader',
-            section_title: 'Output records',
-            hierarchy: [
-              'Redis Stack and modules',
-              'RedisGears',
-              'RedisGears JVM plugin',
-              'RedisGears Java classes and functions',
-              'RedisGears readers',
-              'StreamReader'
-            ],
-            body: 'each message in the input <b>stream</b>. Each record is a HashMap... ',
-            url: 'https://docs.redis.com/latest/modules/redisgears/jvm/classes/readers/streamreader'
-          },
-          {
-            title: 'RedisGears readers',
-            section_title: 'Classes',
-            hierarchy: [
-              'Redis Stack and modules',
-              'RedisGears',
-              'RedisGears JVM plugin',
-              'RedisGears Java classes and functions',
-              'RedisGears readers'
-            ],
-            body: 'StreamReader Reads Redis <b>stream</b> data... ',
-            url: 'https://docs.redis.com/latest/modules/redisgears/jvm/classes/readers'
-          },
-          {
-            title: 'Sets in Active-Active databases',
-            section_title: '',
-            hierarchy: [
-              'Redis Enterprise Software',
-              'Manage databases',
-              'Active-Active geo-distributed Redis',
-              'Develop applications with Active-Active databases',
-              'Sets in Active-Active databases'
-            ],
-            body: 'a list of events (click <b>streams</b>), users (in a group... ',
-            url: 'https://docs.redis.com/latest/rs/databases/active-active/develop/sets-active-active'
-          },
-          {
-            title: 'Application failover with Active-Active databases',
-            section_title: 'Detecting Failure',
-            hierarchy: [
-              'Redis Enterprise Software',
-              'Manage databases',
-              'Active-Active geo-distributed Redis',
-              'Develop applications with Active-Active databases',
-              'Application failover with Active-Active databases'
-            ],
-            body: 'of the replication <b>stream</b>, but pub/sub is preferred... ',
-            url: 'https://docs.redis.com/latest/rs/databases/active-active/develop/app-failover-active-active'
-          },
-          {
-            title: 'RedisTimeSeries',
-            section_title: '',
-            hierarchy: [ 'Redis Stack and modules', 'RedisTimeSeries' ],
-            body: 'as Redis <b>Streams</b>. With <b>Streams</b>, you can create a capped <b>stream</b>, effectively... ',
-            url: 'https://docs.redis.com/latest/modules/redistimeseries'
-          },
-          {
-            title: 'FAQs',
-            section_title: 'General',
-            hierarchy: [ 'RedisInsight', 'FAQs' ],
-            body: 'and update data from <b>Streams</b>, RedisGraph, RediSearch and... ',
-            url: 'https://docs.redis.com/latest/ri/faqs'
-          }
-        ]
-      };
-  
-      const endpoint = 'https://search-service.redislabs.com/search?q=' + searchTerm + '&site=https://redis.io';
   
       function search(url) {
         let promise = new Promise((resolve, reject) => {
@@ -172,6 +79,7 @@
           req.open('GET', url);
           req.onload = function() {
             if (req.status === 200) {
+              console.log(req.response)
               resolve(JSON.parse(req.response));
             } else {
               reject(Error(req.status));
@@ -236,7 +144,7 @@
                   <span class="search-item-icon"></span>
                   <span class="search-item-content">
                     ${result[key].path ? `<span class="search-item-path">${result[key].path}</span>` : ''}
-                    <span class="search-item-title">${key.replace(new RegExp('(^|)(' + searchTerm + ')(|$)', 'ig'), '$1<b class="font-semibold text-indigo-500 underline underline-offset-2 decoration-2">$2</b>$3')}</span>
+                    <span class="search-item-title">${key.replace(new RegExp(`(^|)(${searchTerm})(|$)`, 'ig'), '$1<b class="font-semibold text-indigo-500 underline underline-offset-2 decoration-2 decoration-indigo-200">$2</b>$3')}</span>
                   </span>
                   <span class="search-item-action"></span>
                 </a>
@@ -248,16 +156,12 @@
       }
   
       function displayError(error) {
-        //const cityElem = document.querySelector('.city');
-        //cityElem.textContent = `We are very sorry but we are receiving ${error} when trying to connect to a third party server`;
         console.log(error);
       }
   
-      //  search(endpoint)
-      //    .then(displayData)
-      //    .catch(displayError);
-  
-      displayData(mockData);
+      search(`https://search-service.redislabs.com/search?q=${searchTerm}&site=https://redis.io`)
+        .then(displayData)
+      	.catch(displayError);
     }
   
     function clickHandler(event) {
@@ -267,16 +171,11 @@
     }
     
     function keyDownHandler(event) {
-      // Only run when an open search modal exists
-      if (searchContainer.classList.contains('sr-only')) return false;
-  
-      // Scoped variables
-      var tabKey = 9,
-        escKey = 27;
-  
-      switch (event.keyCode) {
+      switch (event.key) {
         // Tab
-        case tabKey:
+        case 'Tab':
+          if (searchContainer.classList.contains('sr-only')) return false;
+
           if (focusable.length === 1) {
             event.preventDefault();
             break;
@@ -299,17 +198,40 @@
           break;
   
         // Esc
-        case escKey:
+        case 'Escape':
+          if (searchContainer.classList.contains('sr-only')) return false;
+
           destroySearchModal();
           break;
-  
+
+        // Forward slash
+        case '/':
+          event.preventDefault();
+          initSearchModal();
+          break;
+      
         // Default
         default:
           break;
       }
     }
+
+    function keyUpHandler(event) {
+      if (document.activeElement.id !== 'search-input') return false;
+      searchSubmit(document.activeElement.closest('form'));
+    }
+
+    function multiKeyHandler(event) {
+      let { key, type } = event;
+      let isKeyDown = (type == 'keydown');
+      keys[key] = isKeyDown;
+
+      // Both cmd & k pressed
+      if (isKeyDown && keys.Meta && keys.k) {
+        initSearchModal();
+      }
+    }
   
-    // Trap focus to currently open modal
     function trapFocus() {
       focusable = searchContainer.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"]');
       firstFocusable = focusable[0];
@@ -324,12 +246,15 @@
   
     function destroySearchModal() {
       searchContainer.classList.add('sr-only');
+      document.activeElement.blur();
+      keys = {};
     }
   
     // Attach event listeners
-    document.addEventListener('click', clickHandler, false);
-    document.addEventListener('keydown', keyDownHandler, false);
-    document.addEventListener('keyup', debounce(keyUpHandler, 500), false);
-  
+    document.addEventListener('click', clickHandler);
+    document.addEventListener('keydown', keyDownHandler);
+    document.addEventListener('keyup', debounce(keyUpHandler, 500));
+    document.addEventListener('keyup', multiKeyHandler);
+    document.addEventListener('keydown', multiKeyHandler);
   });
 </script>
