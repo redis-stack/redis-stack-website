@@ -328,10 +328,6 @@
                 ],
                 "repository": "pypi.python.org/pypi/txredis"
             },
-            "aredis": {
-                "description": "An efficient and user-friendly async redis client ported from redis-py.",
-                "repository": "github.com/NoneGG/aredis"
-            },
             "Pypredis": {
                 "description": "A client focused on arbitrary sharding and parallel pipelining.",
                 "twitter": [
@@ -370,11 +366,6 @@
                 ],
                 "repository": "github.com/brainix/pottery"
             },
-            "aioredis": {
-                "description": "Asyncio (PEP 3156) Redis client",
-                "homepage": "http://aioredis.readthedocs.org/",
-                "repository": "github.com/aio-libs/aioredis"
-            },
             "pyton-redis-orm": {
                 "description": "Python Redis ORM library that gives redis easy-to-use objects with fields and speeds a developmet up, inspired by Django ORM",
                 "repository": "github.com/gh0st-work/python_redis_orm"
@@ -402,7 +393,7 @@
                 "repository": "github.com/KissPeter/redis-streams"
             },
             "redis-py-cluster": {
-                "description": "Python cluster client for the official redis cluster. Redis 3.0+.",
+                "description": "Adds cluster support to redis-py < 4.1.0. Obsolete for 4.1.0 and above.",
                 "twitter": [
                     "grokzen"
                 ],
@@ -832,14 +823,6 @@
                     "stefanwille"
                 ],
                 "repository": "github.com/stefanwille/crystal-redis"
-            },
-            "mini_redis": {
-                "description": "A light-weight low-level Redis client for Crystal",
-                "homepage": "https://github.com/vladfaust/mini_redis/",
-                "twitter": [
-                    "vladfaust"
-                ],
-                "repository": "github.com/vladfaust/mini_redis"
             }
         },
         "haskell": {
@@ -869,14 +852,6 @@
                     "JoL1hAHN"
                 ],
                 "repository": "github.com/nrk/predis"
-            },
-            "Rediska": {
-                "description": "A Redis client.",
-                "homepage": "http://rediska.geometria-lab.net",
-                "twitter": [
-                    "shumkov"
-                ],
-                "repository": "github.com/Shumkov/Rediska"
             },
             "Redisent": {
                 "description": "A Redis client.",
@@ -1585,6 +1560,11 @@
             "miniredis": {
                 "description": "Pure Go Redis server for Go unittests",
                 "repository": "github.com/alicebob/miniredis"
+            },
+            "godis": {
+                "description": "A Golang implemented Redis Server and Cluster",
+                "homepage": "https://github.com/hdt3213/godis",
+                "repository": "github.com/hdt3213/godis"
             },
             "Rediseen": {
                 "description": "Start a REST-like API service for your Redis database, without writing a single line of code.",
