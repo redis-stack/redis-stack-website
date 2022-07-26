@@ -1,3 +1,7 @@
+{{ define "head" }}
+  <script src="/js/cli.js" defer></script>
+{{ end }}
+
 {{ define "main" }}
   <main>
     <header class="bg-gradient-to-b from-indigo-50/30 via-indigo-50/30 to-white">
@@ -17,12 +21,12 @@
               <div class="w-3 h-3 border border-slate-700 rounded-full"></div>
               <div class="w-3 h-3 border border-slate-700 rounded-full"></div>
             </div>
-            
-            <img
+            <form class="redis-cli"></form>
+            {{/*  <img
               class="cli mix-blend-screen p-5"
               alt="terminal gif"
               src="/images/redis.io.terminal.gif"
-            />
+            />  */}}
           </div>
         </div>
       </div>
@@ -38,15 +42,15 @@
           source contributors.
         </p>
         <ul class="flex flex-col md:grid grid-cols-3 gap-5 text-slate-500 max-w-2xl mx-auto">
-          <li class="w-full text-sm font-semibold text-slate-900 p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-2xl flex flex-col justify-center">
+          <li class="w-full text-sm font-semibold text-slate-900 p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-lg flex flex-col justify-center">
             <span class="mb-1 text-cyan-500 font-display text-5xl">4B+</span>
             Docker pulls
           </li>
-          <li class="w-full text-sm font-semibold text-slate-900 p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-2xl flex flex-col justify-center">
+          <li class="w-full text-sm font-semibold text-slate-900 p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-lg flex flex-col justify-center">
             <span class="mb-1 text-cyan-500 font-display text-5xl">50K+</span>
             Github stars
           </li>
-          <li class="w-full text-sm font-semibold text-slate-900 p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-2xl flex flex-col justify-center">
+          <li class="w-full text-sm font-semibold text-slate-900 p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-lg flex flex-col justify-center">
             <span class="mb-1 text-cyan-500 font-display text-5xl">50+</span>
             Supported programing languages
           </li>
@@ -215,7 +219,7 @@
             Redis Stack extends Redis with modern data models and processing engines to provide a complete developer experience. Download the source, install using your favorite package manager, or spin it up for free in the cloud.
           </p>
           <ul class="flex flex-col md:grid grid-cols-2 gap-5 text-slate-500 max-w-3xl mx-auto mb-12">
-            <li class="w-full text-sm font-medium text-slate-900 p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-2xl flex flex-col justify-center">
+            <li class="w-full text-sm font-medium text-slate-900 p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-lg flex flex-col justify-center">
               <span class="mx-auto h-36 mb-6">
                 {{ with resources.Get "icons/modules-icons.svg" }}
                 {{ ( . | minify).Content | safeHTML }}{{ end }}
@@ -224,7 +228,7 @@
                 Redis Stack Server lets you build applications with searchable JSON, time series and graph data models, and extended probabilistic data structures.
               </p>
             </li>
-            <li class="w-full text-sm font-medium text-slate-900 p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-2xl flex flex-col justify-start">
+            <li class="w-full text-sm font-medium text-slate-900 p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-lg flex flex-col justify-start">
               <span class="mx-auto h-36 mb-6">
                 {{ with resources.Get "icons/object-mapping-and-client-libraries-icons.svg" }}
                 {{ ( . | minify).Content | safeHTML }}{{ end }}
@@ -233,7 +237,7 @@
                 Get productive quickly with the Redis Stack object mapping and client libraries.
               </p>
             </li>
-            <li class="col-span-full w-full text-sm font-medium text-slate-900 p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-2xl flex items-center justify-center">
+            <li class="col-span-full w-full text-sm font-medium text-slate-900 p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-lg flex items-center justify-center">
               <span class="mr-5">
                 {{ with resources.Get "icons/redis-insight-red-icon.svg" }}
                 {{ ( . | minify).Content | safeHTML }}{{ end }}
@@ -367,4 +371,6 @@
       </div>
     </div>
   </main>
+
+  
 {{ end }}

@@ -1,64 +1,67 @@
 {{ define "main" }}
   <main class="docs w-full max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 md:flex gap-16 relative">
     {{ partial "docs-nav.html" . }}
+    <div class="w-full max-w-[47rem] py-12">
+      {{ partial "breadcrumbs" . }}
 
-    <section class="prose prose-slate w-full max-w-[47rem] py-12">
-      {{ $syntax := "" }}
-      {{ if isset .Params "arguments" }}
-        {{ $args := .Params.arguments }}
-        {{ if gt (len $args) 0 }}
-          {{ $syntax = partial "command-syntax.html" $args }}
-        {{ end }}
-      {{ end }}
-      <h1>{{ .Title }} {{ $syntax }}</h1>
-
-      <dl class="grid grid-cols-[auto,1fr]">
-        <dt>Available since:</dt>
-        <dd>{{ .Params.since }}</dd>
-        <dt>Time complexity:</dt>
-        <dd>{{ .Params.complexity | markdownify }}</dd>
-        <dt>ACL categories:</dt>
-        <dd>
-          {{ range .Params.acl_categories }}
-            {{ printf "`%s`" . | markdownify }}
-          {{ end}}
-        </dd>
-      </dl>
-      <div>
-        <span class="title"></span>
-        
-      </div>
-
-      <div>
-        <span class="title"></span>
-        
-      </div>
-
-      <div>
-        <span class="title"></span>
-        
-      </div>
-
-      {{ if (isset .Params "deprecated_since") }}
-        <p class="deprecated">
-            As of Redis version {{ .Params.deprecated_since }}, this command is regarded as deprecated.
-            {{ if (isset .Params "replaced_by") }}
-              <br /><br />It can be replaced by {{ .Params.replaced_by | markdownify }} when migrating or writing new code.
-            {{ end }}
-        </p>
-      {{ end }}
-
-      {{ .Content }}
-
-      {{ if isset .Params "history" }}
-        <h2>History</h2>
-        <ul>
-          {{ range .Params.history }}
-          <li>Starting with Redis version {{ index . 0 }}: {{ index . 1 | markdownify }}</li>
+      <section class="prose prose-slate pt-10">
+        {{ $syntax := "" }}
+        {{ if isset .Params "arguments" }}
+          {{ $args := .Params.arguments }}
+          {{ if gt (len $args) 0 }}
+            {{ $syntax = partial "command-syntax.html" $args }}
           {{ end }}
-        </ul>
-      {{ end }}
-    </section>
+        {{ end }}
+        <h1>{{ .Title }} {{ $syntax }}</h1>
+
+        <dl class="grid grid-cols-[auto,1fr]">
+          <dt>Available since:</dt>
+          <dd>{{ .Params.since }}</dd>
+          <dt>Time complexity:</dt>
+          <dd>{{ .Params.complexity | markdownify }}</dd>
+          <dt>ACL categories:</dt>
+          <dd>
+            {{ range .Params.acl_categories }}
+              {{ printf "`%s`" . | markdownify }}
+            {{ end}}
+          </dd>
+        </dl>
+        <div>
+          <span class="title"></span>
+          
+        </div>
+
+        <div>
+          <span class="title"></span>
+          
+        </div>
+
+        <div>
+          <span class="title"></span>
+          
+        </div>
+
+        {{ if (isset .Params "deprecated_since") }}
+          <p class="deprecated">
+              As of Redis version {{ .Params.deprecated_since }}, this command is regarded as deprecated.
+              {{ if (isset .Params "replaced_by") }}
+                <br /><br />It can be replaced by {{ .Params.replaced_by | markdownify }} when migrating or writing new code.
+              {{ end }}
+          </p>
+        {{ end }}
+
+        {{ .Content }}
+
+        {{ if isset .Params "history" }}
+          <h2>History</h2>
+          <ul>
+            {{ range .Params.history }}
+            <li>Starting with Redis version {{ index . 0 }}: {{ index . 1 | markdownify }}</li>
+            {{ end }}
+          </ul>
+        {{ end }}
+      </section>
+    </div>
     
     <aside class="hidden xl:block w-52 h-full shrink-0">
       {{ $related := .Site.Pages.RelatedIndices . "group" }}
@@ -67,7 +70,7 @@
         <dt class="font-semibold mb-3">
           See also
         </dt>
-        {{ range . }}
+        {{ range first 10 . }}
           <dd>
             <a class="block font-mono font-medium mb-2" href="{{ .RelPermalink }}">{{ .Title }}</a>
           </dd>

@@ -51,7 +51,7 @@ module.exports = {
 					justifyContent: 'center',
 					fontWeight: '600',
 					letterSpacing: theme('letterSpacing.normal'),
-					borderRadius: theme('borderRadius.lg'),
+					borderRadius: theme('borderRadius.md'),
 					whiteSpace: 'nowrap',
 					transition: '.2s all',
 				},

@@ -14,22 +14,38 @@
           </dt>
           <dd class="text-[0.8rem] lg:text-sm text-slate-900 absolute top-full -mt-1 right-[1000rem] group-hover:right-[unset] group-hover:-left-3 group-focus-within:right-[unset] group-focus-within:-left-3 flex flex-col bg-white transition-opacity rounded-lg border border-slate-500/10 bg-clip-padding shadow-md p-2">
             {{ range .Children }}
-              <a href="{{ .URL }}" class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} grid gap-x-2 grid-cols-auto-span items-center whitespace-nowrap rounded-lg min-w-[11rem] px-3 py-2 hover:bg-indigo-100 hover:text-indigo-600 focus:bg-indigo-100 focus:text-indigo-600 transition-colors">
+              <a href="{{ .URL }}" class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} grid gap-x-2 grid-cols-auto-span items-center whitespace-nowrap rounded-md min-w-[11rem] px-3 py-2 hover:bg-indigo-100 hover:text-indigo-600 focus:bg-indigo-100 focus:text-indigo-600 transition-colors">
                 {{ .Name }}
               </a>
             {{ end }}
           </dd>
         </dl>
       {{ else }}
-        <a href="{{ .URL }}" class="group grid gap-x-2 gap-y-1 grid-cols-1 lg:grid-cols-auto-span items-center justify-items-center lg:justify-items-start first:ml-auto ml-1 px-3 py-2 rounded-lg bg-transparent hover:text-white/50 focus:text-white/50 whitespace-nowrap transition-colors">
+        <a href="{{ .URL }}" class="group grid gap-x-2 gap-y-1 grid-cols-1 lg:grid-cols-auto-span items-center justify-items-center lg:justify-items-start first:ml-auto ml-1 px-3 py-2 rounded-md bg-transparent hover:text-white/50 focus:text-white/50 whitespace-nowrap transition-colors">
           {{ .Pre }}
           {{ .Name }}
         </a>
       {{ end }}
     {{ end }}
     <div class="flex ml-auto space-x-2">
+      <button id="search-button" type="button" class="transition-colors shrink-0 flex-1 lg:flex-none mx-8 lg:ml-2 lg:mr-0 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 border-white/50 hover:text-indigo-600 focus:text-indigo-600 hover:bg-white focus:bg-white focus:ring-white">
+        <svg class="w-[0.875rem] h-[0.875rem] mr-0.5" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <circle cx="10" cy="10" r="7" />
+          <line x1="21" y1="21" x2="15" y2="15" />
+        </svg>
+        <span class="lg:sr-only flex-auto ml-1 mr-4">Quick search&hellip;</span>
+        <script>
+          if (navigator.appVersion.indexOf("Win") != -1 || navigator.appVersion.indexOf("Linux") != -1) {
+            document.querySelector('[title="Command"]').textContent = "&#8963;";
+          } 
+        </script>
+        <kbd class="font-sans font-semibold">
+          <abbr title="Command" class="no-underline">&#8984</abbr>&nbsp;K
+        </kbd>
+      </button>
       {{ range .Site.Menus.buttons }}
-        <a class="transition-colors shrink-0 inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900
+        <a class="transition-colors shrink-0 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900
         {{ if (eq .Params.style "solid") }} border-transparent bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-600 focus:ring-indigo-600{{ end }}
         {{ if (eq .Params.style "outline") }} border-white/50 hover:text-indigo-600 focus:text-indigo-600 hover:bg-white focus:bg-white focus:ring-white{{ end }}" href="{{ .URL }}">
           {{ .Name }}
@@ -37,18 +53,7 @@
       {{ end }}
     </div>
 	</nav>
-  <button id="search-button" type="button" class="transition-colors shrink-0 flex-1 lg:flex-none mx-8 lg:ml-2 lg:mr-0 inline-flex items-center px-4 py-2 text-sm font-medium rounded-lg border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 border-white/50 hover:text-indigo-600 focus:text-indigo-600 hover:bg-white focus:bg-white focus:ring-white">
-    <svg class="w-[0.875rem] h-[0.875rem] mr-0.5" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <circle cx="10" cy="10" r="7" />
-      <line x1="21" y1="21" x2="15" y2="15" />
-    </svg>
-    <span class="lg:sr-only flex-auto ml-1 mr-4">Quick search&hellip;</span>
-    <kbd class="font-sans font-semibold">
-      <abbr title="Command" class="no-underline">⌘</abbr>
-      K
-    </kbd>
-  </button>
+
   <button data-menu-toggle aria-expanded="false" class="menu-toggle block ml-auto lg:hidden relative z-50"> 
     <span class="sr-only">Open main menu</span> 
     <svg aria-hidden="true" role="img" viewBox="0 0 24 24" style="pointer-events: none; width: 24px; height: 24px;" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

@@ -20,7 +20,7 @@
             </g>
           </svg>
         </div>
-        <input class="search-input" aria-autocomplete="both" aria-labelledby="search-label" id="search-input" autocomplete="off" autocorrect="off" autocapitalize="off" enterkeyhint="go" spellcheck="false" placeholder="Search&hellip;" maxlength="64" type="search" value="">
+        <input class="search-input" aria-autocomplete="both" aria-labelledby="search-label" id="search-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search&hellip;" maxlength="64" type="search" value="">
         <button type="reset" title="Clear the query" class="search-reset" aria-label="Clear the query" hidden="">
           <svg width="20" height="20" viewBox="0 0 20 20">
             <path d="M10 10l5.09-5.09L10 10l5.09 5.09L10 10zm0 0L4.91 4.91 10 10l-5.09 5.09L10 10z" stroke="currentColor" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round" />
@@ -34,61 +34,61 @@
     <dl id="search-results" class="search-results" role="listbox"></dl>
     <footer class="search-footer">
       <a href="/docs/stack/search/" target="_blank" rel="noopener noreferrer">
-        <span class="logo-label">Powered by RediSearch</span>
-        <svg aria-label="RediSearch Logomark" role="img" viewBox="0 0 30 25" fill="currentColor">
-          <path d="M8.289 10.061c1.145.477 2.481.763 3.817.763h.573c1.622-.095 3.053-.572 4.103-1.24.954-.668 1.527-1.527 1.431-2.481-.095-1.05-.954-2.004-2.29-2.577-1.24-.572-2.863-.859-4.485-.763-1.527.095-3.054.572-4.008 1.24-1.145.764-1.622 1.718-1.432 2.672.191.955.955 1.813 2.291 2.386zm-.096-3.817c.859-.573 2.004-.954 3.34-.954h.573c1.145 0 2.29.19 3.245.668.858.381 1.431.954 1.526 1.431 0 .382-.286.763-.763 1.145-.859.573-2.004.954-3.34.954-1.336.096-2.767-.19-3.817-.668-.955-.381-1.432-.954-1.527-1.431-.096-.477.382-.954.763-1.145z" />
-          <path d="M4.758 13.115c2.481 1.145 5.535 1.622 8.589 1.431 2.099-.095 4.008-.572 5.725-1.24l5.631 2.576c.572.287 1.24.382 1.908.382h.287c.763 0 1.526-.286 2.099-.668.764-.477 1.145-1.336.954-2.099-.095-.764-.668-1.337-1.431-1.718l-4.772-2.195c.573-1.05.764-2.1.573-3.245-.382-2.004-2.004-3.721-4.676-4.867C17.164.327 14.205-.15 11.056.041c-3.244.191-6.107 1.05-8.111 2.481C.654 4.049-.3 6.053.082 8.152c.382 2.004 2.004 3.722 4.676 4.963zm-.954-9.448c1.813-1.24 4.389-2.004 7.252-2.195 2.863-.191 5.631.287 7.921 1.336 2.195.955 3.531 2.386 3.817 3.913.191.954-.095 1.909-.763 2.863-.096.191-.191.382-.096.572.096.191.191.382.382.478l5.535 2.576c.382.191.572.382.668.668.095.287-.191.573-.382.668-.382.191-.859.382-1.336.382-.572 0-1.05-.095-1.527-.286l-5.916-2.672c-.096 0-.191-.096-.287-.096-.095 0-.191 0-.286.096a16.791 16.791 0 01-5.535 1.24c-2.863.191-5.63-.286-7.921-1.336-2.194-.954-3.53-2.386-3.817-3.912-.286-1.623.477-3.054 2.291-4.295z" />
-          <path d="M24.798 18.745c-2.767-1.24-5.439-2.386-5.439-2.386-.191-.095-.287-.095-.478 0-2.004.859-3.626 1.336-6.202 1.527C4.376 18.363.75 14.26.654 13.21c-.954 1.05 2.004 6.585 12.025 6.012 2.576-.095 4.198-.668 6.298-1.527 0 0 1.909.859 5.249 2.291 4.294 1.908 6.68-1.05 5.248-2.291.096.668-1.431 2.386-4.676 1.05z" />
-          <path d="M24.798 22.849c-2.767-1.241-5.439-2.386-5.439-2.386-.191-.096-.287-.096-.478 0-2.004.859-3.626 1.336-6.202 1.527C4.376 22.372.75 18.363.654 17.218c-.954 1.05 2.004 6.585 12.025 6.012 2.576-.095 4.198-.668 6.298-1.527 0 0 1.909.859 5.249 2.291 4.294 1.908 6.68-1.05 5.248-2.291.096.764-1.431 2.577-4.676 1.146z" />
-        </svg>
+        <span class="logo-label">Powered by Redis Stack</span>
+        {{ with resources.Get "icons/stack-icon.svg" }}
+        {{ ( . | minify).Content | safeHTML }}{{ end }}
       </a>
     </footer>
   </div>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function(event) {
-    const searchContainer = document.querySelector('#search-container');
-    const searchInput = searchContainer.querySelector('#search-input');
-    const resultsContainer = searchContainer.querySelector('#search-results');
-    let keys = {};
+  const searchModal = (() => {
+    const searchButton = document.querySelector('#search-button')
+    const searchContainer = document.querySelector('#search-container')
+    const searchInput = searchContainer.querySelector('#search-input')
+    const resultsContainer = searchContainer.querySelector('#search-results')
+    const style = document.createElement('style')
+    
+    let keys = {}
+    let focusable
+    let firstFocusable
+    let lastFocusable
 
     function debounce(callback, delay) {
-      let timeout;
+      let timeout
+      
       return function() {
-        clearTimeout(timeout);
-        timeout = setTimeout(callback, delay);
-      };
+        clearTimeout(timeout)
+        timeout = setTimeout(callback, delay)
+      }
     }
   
     function searchSubmit(form) {
-      // console.log(event)
-      // event.preventDefault();
-      if (form.id !== 'search-form') return false;
+      if (form.id !== 'search-form') return false
   
-      const searchTerm = searchInput.value;
+      const searchTerm = searchInput.value
   
       if (searchTerm.length < 1) {
-        resultsContainer.innerHTML = '';
-        return;
+        resultsContainer.innerHTML = ''
+        return
       }
   
       function search(url) {
         let promise = new Promise((resolve, reject) => {
-          const req = new XMLHttpRequest();
-          req.open('GET', url);
+          const req = new XMLHttpRequest()
+          req.open('GET', url)
           req.onload = function() {
             if (req.status === 200) {
-              console.log(req.response)
-              resolve(JSON.parse(req.response));
+              resolve(JSON.parse(req.response))
             } else {
-              reject(Error(req.status));
+              reject(Error(req.status))
             }
-          };
-          req.send();
-        });
+          }
+          req.send()
+        })
   
-        return promise;
+        return promise
       }
   
       function sortData(data) {
@@ -96,35 +96,35 @@
         const getCategories = (data) =>
           data.reduce((a, c) => {
             if (!a.includes(c.hierarchy[0])) {
-              a.push(c.hierarchy[0]);
+              a.push(c.hierarchy[0])
             }
   
-            return a;
-          }, []);
+            return a
+          }, [])
   
         // Merge the data into a single list using the categories list as index
         const mergeData = (data, categories) =>
           categories.map((category) => {
-            const obj = {};
-            obj.category = category;
+            const obj = {}
+            obj.category = category
   
             data.forEach((record) => {
               if (record.hierarchy[0] === category) {
                 obj[record.title] = {
                   path: record.section_title,
                   url: record.url,
-                };
+                }
               }
-            });
+            })
   
-            return obj;
-          });
+            return obj
+          })
   
-        return mergeData(data.results, getCategories(data.results));
+        return mergeData(data.results, getCategories(data.results))
       }
   
       function displayData(data) {
-        resultsContainer.innerHTML = '';
+        resultsContainer.innerHTML = ''
   
         sortData(data).forEach((result) => {
           resultsContainer.insertAdjacentHTML(
@@ -132,9 +132,9 @@
             `<dt class="search-item-source">
               ${result.category}
             </dt>`
-          );
+          )
   
-          delete result.category;
+          delete result.category
   
           Object.keys(result).forEach((key, index) => {
             resultsContainer.insertAdjacentHTML(
@@ -149,112 +149,159 @@
                   <span class="search-item-action"></span>
                 </a>
               </dd>`
-            );
-          });
-        });
-        return;
+            )
+          })
+        })
+        return
       }
   
       function displayError(error) {
-        console.log(error);
+        console.log(error)
       }
   
       search(`https://search-service.redislabs.com/search?q=${searchTerm}&site=https://redis.io`)
         .then(displayData)
-      	.catch(displayError);
+      	.catch(displayError)
     }
-  
-    function clickHandler(event) {
-      if (event.target.closest('#search-button')) initSearchModal();
-      if (event.target.closest('#search-cancel')) destroySearchModal();
-      return false;
+
+    function loadHandler(event) {
+      style.innerHTML = `
+        [data-scroll-disabled="on"], 
+        [data-scroll-disabled="on"] body {
+          touch-action: none;
+          overscroll-behavior: none;
+          -webkit-overflow-scrolling: auto;
+          overflow: hidden;
+        }
+      `
+
+      document.head.appendChild(style)
+      document.documentElement.dataset.searchState = 'off'
     }
     
     function keyDownHandler(event) {
+      event = event || window.event
+      
       switch (event.key) {
+        
         // Tab
         case 'Tab':
-          if (searchContainer.classList.contains('sr-only')) return false;
+          if (document.documentElement.dataset.searchState === 'off') return false
 
           if (focusable.length === 1) {
-            event.preventDefault();
-            break;
+            event.preventDefault()
+            break
           }
   
           // Go back if shift is fired, tab backward
           if (event.shiftKey) {
             if (document.activeElement === firstFocusable) {
-              event.preventDefault();
-              lastFocusable.focus();
+              event.preventDefault()
+              lastFocusable.focus()
             }
   
             // Otherwise tab forward
           } else {
             if (document.activeElement === lastFocusable) {
-              event.preventDefault();
-              firstFocusable.focus();
+              event.preventDefault()
+              firstFocusable.focus()
             }
           }
-          break;
+          break
   
         // Esc
         case 'Escape':
-          if (searchContainer.classList.contains('sr-only')) return false;
-
-          destroySearchModal();
-          break;
+          if (document.documentElement.dataset.searchState === 'off') return false
+          stopSearch()
+          break
 
         // Forward slash
         case '/':
-          event.preventDefault();
-          initSearchModal();
-          break;
+        if (document.documentElement.dataset.searchState === 'on') return false
+          event.preventDefault()
+          startSearch()
+          break
       
         // Default
         default:
-          break;
+          break
       }
     }
 
     function keyUpHandler(event) {
-      if (document.activeElement.id !== 'search-input') return false;
-      searchSubmit(document.activeElement.closest('form'));
+      if (document.documentElement.dataset.searchState === 'off') return false
+      searchSubmit(document.activeElement.closest('form'))
     }
 
     function multiKeyHandler(event) {
-      let { key, type } = event;
-      let isKeyDown = (type == 'keydown');
-      keys[key] = isKeyDown;
+      if (document.documentElement.dataset.searchState === 'on') return false
 
-      // Both cmd & k pressed
-      if (isKeyDown && keys.Meta && keys.k) {
-        initSearchModal();
+      let { key, type } = event
+      let isKeyDown = (type == 'keydown')
+      keys[key] = isKeyDown
+
+      // Both (cmd || cntrl) & k pressed
+      if (isKeyDown && (keys.Control || keys.Meta) && keys.k) {
+        event.preventDefault()
+        startSearch()
       }
     }
-  
-    function trapFocus() {
-      focusable = searchContainer.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"]');
-      firstFocusable = focusable[0];
-      lastFocusable = focusable[focusable.length - 1];
+
+    // Click handler function
+    function clickHandler(event) {
+      if (event.target.closest('#search-button')) {
+        startSearch()
+      } else if (event.target.closest('#search-cancel')) {
+        stopSearch()
+      }
+    }
+
+    function startSearch() {
+      sessionStorage.setItem('scroll-position', document.documentElement.scrollTop)
+      document.documentElement.dataset.scrollDisabled = 'on'
+      document.documentElement.dataset.searchState = 'on'
+      allowFocus(searchContainer, true)
+      trapFocus(searchContainer)
+      searchInput.focus()
+    }
+
+    function stopSearch() {
+      document.documentElement.dataset.searchState = 'off'
+      document.documentElement.dataset.scrollDisabled = 'off'
+      document.documentElement.scrollTop = sessionStorage.getItem('scroll-position')
+      allowFocus(searchContainer, false)
+      document.activeElement.blur()
+      resultsContainer.innerHTML = ''
+      searchInput.value = ''
+      keys = {}
+    }
+
+    function submitHandler(event) {
+      if (event.target.id === 'search-form') {
+        event.preventDefault()
+        return false
+      }
+    }
+
+    function allowFocus(selector, state) {
+      const focusable = selector.querySelectorAll('button, [href], input, select, textarea')
+      focusable.forEach(el => el.setAttribute('tabindex', state ? '' : '-1'))
+      selector.classList.toggle('sr-only')
     }
   
-    function initSearchModal() {
-      searchContainer.classList.remove('sr-only');
-      trapFocus();
-      searchInput.focus();
-    }
-  
-    function destroySearchModal() {
-      searchContainer.classList.add('sr-only');
-      document.activeElement.blur();
-      keys = {};
+    function trapFocus(selector) {
+      focusable = selector.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"]')
+      firstFocusable = focusable[0]
+      lastFocusable = focusable[focusable.length - 1]
     }
   
     // Attach event listeners
-    document.addEventListener('click', clickHandler);
-    document.addEventListener('keydown', keyDownHandler);
-    document.addEventListener('keyup', debounce(keyUpHandler, 500));
-    document.addEventListener('keyup', multiKeyHandler);
-    document.addEventListener('keydown', multiKeyHandler);
-  });
+    document.addEventListener('DOMContentLoaded', loadHandler)
+    document.addEventListener('click', clickHandler)
+    document.addEventListener('keydown', keyDownHandler)
+    document.addEventListener('keydown', multiKeyHandler)
+    document.addEventListener('keyup', debounce(keyUpHandler, 500))
+    document.addEventListener('keyup', multiKeyHandler)
+    document.addEventListener('submit', submitHandler)
+  })()
 </script>
