@@ -9,13 +9,14 @@
   {{ $show := cond (or (lt $ulNr $ulShow) $activePath (eq $s.Parent $p.Parent) (eq $s.Parent $p) ($p.IsDescendant $s.Parent)) true false -}}
   {{ $pages := (union $s.Pages $s.Sections).ByWeight -}}
   {{ $withChild := gt (len $pages) 0 -}}
+  {{ $rootDir := lt $ulNr 1 -}}
 
   {{ if $show }}
-    <li class="truncate">
-      <a class="{{- if $active }} text-indigo-500 border-current font-medium{{- else }} text-slate-600 hover:text-indigo-600 border-transparent hover:border-slate-400{{- end }}" href="{{ $s.RelPermalink }}">{{ $s.LinkTitle }}</a>
+    <li>
+      <a class="flex truncate{{- if $rootDir}} font-semibold text-slate-900{{- else if and ($active) (not $rootDir) }} active text-indigo-600{{- else }} text-slate-600 hover:text-indigo-600{{- end }}" href="{{ $s.RelPermalink }}">{{ $s.LinkTitle }}</a>
       {{- if $withChild }}
         {{- $ulNr := add $ulNr 1 }}
-        <ul class="">
+        <ul class="{{- if gt $ulNr 1}}child-list{{- end }}">
           {{ range $pages -}}
             {{ if (not (eq $s $p.Site.Home)) -}}
               {{ template "li" (dict "page" $p "section" . "ulNr" $ulNr "ulShow" $ulShow) }}

@@ -222,6 +222,33 @@ select {
   display: none;
 }
 
+.child-list {
+  @apply relative;
+}
+
+.child-list:before {
+  content: '';
+  @apply w-[3px] h-full bg-slate-300/30 absolute left-0 top-0 rounded-xl transition;
+}
+ 
+.child-list .child-list {
+  @apply ml-4;
+}
+
+.child-list a {
+  @apply relative block hover:text-indigo-600 py-0.5 pl-4 transition-colors leading-6;
+}
+
+.child-list a:before {
+  content: '';
+  @apply w-[3px] h-full bg-transparent absolute left-0 top-0 rounded-xl transition;
+}
+
+.child-list a.active {
+  @apply before:bg-indigo-600 pointer-events-none;
+}
+
+
 #search-cancel {
   appearance: none;
   flex: none;
