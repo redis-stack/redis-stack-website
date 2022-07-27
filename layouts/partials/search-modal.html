@@ -300,7 +300,7 @@
     document.addEventListener('click', clickHandler)
     document.addEventListener('keydown', keyDownHandler)
     document.addEventListener('keydown', multiKeyHandler)
-    document.addEventListener('keyup', debounce(keyUpHandler, 500))
+    document.addEventListener('keyup', debounce(keyUpHandler, 50))
     document.addEventListener('keyup', multiKeyHandler)
     document.addEventListener('submit', submitHandler)
   })()
