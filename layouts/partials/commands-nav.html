@@ -1,0 +1,96 @@
+{{/*  {{ $names := slice "Abby" "Alfred" "Benjamin" "Beth" "Xavier" }}
+
+{{ $.Scratch.Set "FirstLetter" (index (split (index $names 0) "") 0) }}
+
+<h2>{{ ($.Scratch.Get "FirstLetter") }}</h2>
+<ul>
+    {{ range $names }}
+
+        {{ $firstLetter := index (split . "") 0 }}
+        <!-- extract the current first letter with the `split` method !-->
+
+        <!-- check if the current $firstLetter is not equal (ne) to the recently stored !-->
+        {{ if ne $firstLetter ($.Scratch.Get "FirstLetter") }}
+            <!-- if its a new one - close last ul and start with a new headline !-->
+            </ul>
+            <h2>{{ $firstLetter }}</h2>
+            <ul>
+            <!-- update current first letter using Scratch !-->
+            {{ $.Scratch.Set "FirstLetter" $firstLetter }}
+        {{ end }}
+
+        <li>{{ . }}</li>
+        <!-- Display the current name within an li tag !-->
+
+    {{ end }}
+</ul>  */}}
+
+{{/*  {{ define "li" -}}
+  {{ $s := .section -}}
+  {{ $p := .page -}}
+  {{ $treeRoot := cond (eq .ulNr 0) true false -}}
+  {{ $ulNr := .ulNr -}}
+  {{ $ulShow := .ulShow -}}
+  {{ $active := eq $s $p -}}
+  {{ $activePath := $p.IsDescendant $s -}}
+  {{ $show := cond (or (lt $ulNr $ulShow) $activePath (eq $s.Parent $p.Parent) (eq $s.Parent $p) ($p.IsDescendant $s.Parent)) true false -}}
+  {{ $pages := (union $s.Pages $s.Sections).ByWeight -}}
+  {{ $withChild := gt (len $pages) 0 -}}
+  {{ $rootDir := lt $ulNr 1 -}}
+
+  {{ if $show }}
+    <li>
+      <a class="flex truncate{{- if $rootDir}} font-semibold text-slate-900{{- else if and ($active) (not $rootDir) }} active text-indigo-600{{- else }} text-slate-600 hover:text-indigo-600{{- end }}" href="{{ $s.RelPermalink }}">{{ $s.LinkTitle }}</a>
+      {{- if $withChild }}
+        {{- $ulNr := add $ulNr 1 }}
+        <ul class="{{- if gt $ulNr 1}}child-list{{- end }}">
+          {{ range $pages -}}
+            {{ if (not (eq $s $p.Site.Home)) -}}
+              {{ template "li" (dict "page" $p "section" . "ulNr" $ulNr "ulShow" $ulShow) }}
+            {{- end }}
+          {{- end }}
+        </ul>
+      {{- end }}
+    </li>
+  {{- end }}
+{{- end }}
+
+<div class="hidden md:block w-52 h-full shrink-0">
+  <nav class="w-52 z-40 bg-white hidden md:block fixed top-28 pb-16 h-full max-h-[calc(100vh-7rem)] text-[0.8125rem] leading-7 font">
+    <div class="absolute right-0 -top-28 z-[-1] h-screen border-r border-slate-200/50 bg-gradient-to-bl from-slate-50 via-slate-50 to-indigo-100 w-[17rem] xl:w-[calc(50vw-23rem)]"></div>
+    {{ $navRoot := cond (eq .Site.Home.Type "docs") .Site.Home .FirstSection -}}
+    {{ $ulNr := 0 -}}
+    {{ $ulShow := 1 -}}
+    <ul class="h-full max-h-[calc(100vh-7rem)] overflow-y-auto pr-6">
+      {{ template "li" (dict "page" . "section" $navRoot "ulNr" $ulNr "ulShow" (add $ulShow 1)) }}
+    </ul>
+  </nav>
+</div>  */}}
+
+{{- $letters := split "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "" -}}
+{{- $pages := .Pages.ByTitle -}}
+{{- $pages_by_letters := dict -}}
+{{ range $pages }}
+  {{- $page := . -}}
+  {{- $first_letter := upper ( substr $page.Name 0 1 ) -}}
+  {{- if not (in $letters $first_letter) }}
+    {{ $first_letter = "#" }}
+  {{ end }}
+  {{- $new_list := slice -}}
+  {{ with index $pages_by_letters $first_letter }}
+    {{- $new_list = . | append $page -}}
+  {{ else }}
+    {{- $new_list = slice $page -}}
+  {{ end }}
+  {{- $pages_by_letters = merge $pages_by_letters (dict $first_letter $new_list) -}}
+{{ end }}
+
+<section id="alpha-filter" class="flex flex-col">
+  <button type="button" value="">#</button>
+  {{ range $key, $items := $pages_by_letters }}
+    <button type="button" value="{{ lower $key }}">
+      {{ $key }}
+    </button>
+  {{ end }}
+  <input type="hidden" value="">
+</section>

@@ -114,7 +114,7 @@ select {
 }
 
 #TableOfContents a {
-  @apply relative block hover:text-indigo-600 py-1.5 pl-5 transition-colors;
+  @apply relative block hover:text-indigo-600 py-0.5 pl-4 transition-colors leading-6;
 }
 
 #TableOfContents a:before {
@@ -247,7 +247,6 @@ select {
 .child-list a.active {
   @apply before:bg-indigo-600 pointer-events-none;
 }
-
 
 #search-cancel {
   appearance: none;

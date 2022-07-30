@@ -72,7 +72,6 @@ function filter() {
       }
     }
   }
-  // document.querySelector('#commands-break').style.display = hiddenCards.length > 0 ? 'none' : '';
 }
 
 const url = new URL(location);

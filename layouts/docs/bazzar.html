@@ -29,16 +29,18 @@
 
       <h1>{{ .Title }}</h1>
 
-      <p class="max-w-xl">
-        The recommended repositories are marked with a <i class="todo"></i></span>. Repositories with some activity within the latest six months are marked with a <i class="todo"></i>. Want your repository listed here? Just submit a PR to the <a href="https://github.com/redis/redis-doc/pull/new">redis-doc repository</a>.
+      <p>
+        The recommended repositories are marked with a <svg class="text-middle inline-flex shrink-0 h-[18px] w-[18px] opacity-50" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+        </svg>. Repositories with some activity within the latest six months are marked with a <i class="todo"></i>. Want your repository listed here? Just submit a PR to the <a href="https://github.com/redis/redis-doc/pull/new">redis-doc repository</a>.
       </p>
 
-      <div class="bazzar-list">
+      <dl class="">
         {{ range $id, $name := $groups }}
           {{ if $has_groups }}
-            <div id="{{ $id }}" class="bazzar-section">
-              <h3>{{ $name }}</h3>
-            </div>
+            <dt id="{{ $id }}" class="font-semibold text-slate-900 mt-6">
+              {{ $name }}
+            </dt>
           {{ end }}
           {{ $repos := (index (index $.Site.Data.repos $bazzar) $id) }}
           {{ $sorted := slice }}
@@ -47,44 +49,64 @@
             {{ $sorted = $sorted | append $data }}
           {{- end }}
           {{ $sorted = sort (sort $sorted "stargazers_count" "desc") "active" "desc" }}
-          {{ range $sorted }}
-            <div>
-              {{ .name }}
-            </div>
-            <div>{{ .description }}</div>
-            <div>
-              {{ $recommended := and (isSet . "recommended") (.recommended) }}
-              {{ $active := and (isSet . "active") (.active) }}
-              {{ if $recommended }}
-                <i class="todo"></i>
-              {{ else if $active }}
-                <i class="todo"></i>
-              {{- end }}
-            </div>
-            <div>
-              <a href="https://{{ .repository }}">
-                <i class="todo"></i>
-                {{ .license | default "Other" }}
-              </a>
-            </div>
-            <div>
-              {{ $stars := isSet . "stargazers_count" }}
-              {{ if $stars }}
-                <i class="todo"></i>
-                {{ .stargazers_count }}
-              {{ end }}
-            </div>
-            <div>
-              {{ $home := isSet . "homepage" }}
-              {{ if $home }}
-                <a href="{{ .home }}">
-                  <i class="fa fa-home"></i>
-                </a>
-              {{ end }}
-            </div>
-          {{ end }}
+          <dd class="border-t py-3">
+            {{ range $sorted }}
+              <div class="odd:bg-slate-50 grid grid-cols-[repeat(16,1fr)] items-start gap-4 p-3 rounded-md text-sm">
+                <strong class="col-span-4 truncate">
+                  {{ .name }}
+                </strong>
+                <p class="col-span-6 m-0">
+                  {{ .description }}
+                </p>
+                <div class="col-span-5 ml-auto">
+                  <div class="flex items-center self-start mb-1.5">
+                    {{ $stars := isSet . "stargazers_count" }}
+                    {{/*  {{ if $stars }}  */}}
+                      <div class="h-5 w-5 flex items-center justify-center mr-1">
+                        <svg class="shrink-0 h-5 w-5 opacity-50" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
+                      </div>
+                      200
+                      {{ .stargazers_count }}
+                    {{/*  {{ end }}  */}}
+                  </div>
+                  <a href="https://{{ .repository }}" class="flex items-center no-underline font-normal text-current hover:text-indigo-600">
+                    <div class="h-5 w-5 flex items-center justify-center mr-1">
+                      <svg class="shrink-0 h-[1.0625rem] w-[1.0625rem] opacity-50" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M5.998 2C4.731 2 3.694 3.054 3.694 4.321c0 1.02.671 1.886 1.594 2.189v6.98a2.334 2.334 0 00-1.594 2.205A2.311 2.311 0 005.998 18a2.317 2.317 0 002.311-2.305 2.34 2.34 0 00-1.6-2.205v-.111c0-1.053.323-1.464.917-1.838.594-.374 1.529-.603 2.538-.85 1.009-.246 2.104-.516 3.01-1.194.823-.615 1.415-1.613 1.516-2.982a2.315 2.315 0 001.616-2.194c0-1.267-1.042-2.321-2.31-2.321s-2.305 1.054-2.305 2.321a2.31 2.31 0 001.577 2.183c-.075.974-.425 1.468-.949 1.86-.594.445-1.498.708-2.488.95s-2.055.457-2.96 1.028a2.967 2.967 0 00-.161.105V6.51a2.317 2.317 0 001.599-2.188C8.309 3.054 7.266 2 5.999 2h-.001z" fill-rule="nonzero" />
+                      </svg>
+                    </div>
+                    {{ .license | default "BSD-3-Clause" }}
+                  </a>
+                </div>
+                <div>
+                  {{ $home := isSet . "homepage" }}
+                  {{ if $home }}
+                    <a href="{{ .home }}" class="text-current hover:text-indigo-600 opacity-50 hover:opacity-100">
+                      <svg class="ml-auto mb-1.5 shrink-0 h-[1.0625rem] w-[1.0625rem]" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                      </svg>
+                      <span class="sr-only">Library homepage</span>
+                    </a>
+                  {{ end }}
+                  {{ $recommended := and (isSet . "recommended") (.recommended) }}
+                  {{ $active := and (isSet . "active") (.active) }}
+                  {{ if $recommended }}
+                    <svg class="ml-auto shrink-0 h-[18px] w-[18px] opacity-50" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                    </svg>
+                  {{ else if $active}}
+                    <svg class="ml-auto shrink-0 h-[1.0625rem] w-[1.0625rem] opacity-50" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+                    </svg>
+                  {{- end }}
+                </div>
+              </div>
+            {{ end }}
+          </dd>
         {{ end }}
-      </div>
+        </dl>
     </section>
 
     {{ if $has_groups }}
