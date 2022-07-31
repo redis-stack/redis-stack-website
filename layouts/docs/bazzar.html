@@ -32,13 +32,15 @@
       <p>
         The recommended repositories are marked with a <svg class="text-middle inline-flex shrink-0 h-[18px] w-[18px] opacity-50" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
-        </svg>. Repositories with some activity within the latest six months are marked with a <i class="todo"></i>. Want your repository listed here? Just submit a PR to the <a href="https://github.com/redis/redis-doc/pull/new">redis-doc repository</a>.
+        </svg>. Repositories with some activity within the latest six months are marked with a <svg class="text-middle inline-flex shrink-0 h-[1.0625rem] w-[1.0625rem] opacity-50" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+        </svg>. Want your repository listed here? Just submit a PR to the <a href="https://github.com/redis/redis-doc/pull/new">redis-doc repository</a>.
       </p>
 
-      <dl class="">
+      <dl class="mt-8">
         {{ range $id, $name := $groups }}
           {{ if $has_groups }}
-            <dt id="{{ $id }}" class="font-semibold text-slate-900 mt-6">
+            <dt id="{{ $id }}" class="font-semibold text-slate-900 pb-3">
               {{ $name }}
             </dt>
           {{ end }}
@@ -49,9 +51,9 @@
             {{ $sorted = $sorted | append $data }}
           {{- end }}
           {{ $sorted = sort (sort $sorted "stargazers_count" "desc") "active" "desc" }}
-          <dd class="border-t py-3">
+          <dd class="mb-8">
             {{ range $sorted }}
-              <div class="odd:bg-slate-50 grid grid-cols-[repeat(16,1fr)] items-start gap-4 p-3 rounded-md text-sm">
+              <div class="grid grid-cols-[repeat(16,1fr)] items-start gap-4 py-4 border-t border-slate-200/75 text-sm">
                 <strong class="col-span-4 truncate">
                   {{ .name }}
                 </strong>
