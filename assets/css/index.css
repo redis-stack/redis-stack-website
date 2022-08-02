@@ -462,5 +462,9 @@ main.docs:before {
 }
 
 main.docs:after {
-  background-image: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, .25));
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, .875), rgba(255, 255, 255, .35));
+}
+
+#alpha-filter-container .active {
+  @apply bg-indigo-50 text-indigo-600 border-indigo-200;
 }
