@@ -1,10 +1,5 @@
-{{ define "head" }}
-  <script src="/js/cli.js" defer></script>
-  <link rel="stylesheet" href="/css/cli.css" defer></script>
-{{ end }}
-
 {{ define "main" }}
-  <main class="docs w-full max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 md:flex gap-16 relative">
+  <main class="docs w-full max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 md:flex gap-16">
     {{ partial "docs-nav.html" . }}
     <div class="w-full max-w-[47rem] py-12">
       {{ partial "breadcrumbs" . }}
@@ -71,7 +66,7 @@
     <aside class="hidden xl:block w-52 h-full shrink-0">
       {{ $related := .Site.Pages.RelatedIndices . "group" }}
       {{ with $related }}
-      <dl class="w-52 z-40 bg-white hidden md:block overflow-auto fixed top-28 h-full max-h-[calc(100vh-15rem)] text-[0.8125rem]">
+      <dl class="w-52 z-40 hidden bg-white/75 md:block overflow-auto fixed top-28 h-full max-h-[calc(100vh-15rem)] text-[0.8125rem]">
         <dt class="font-semibold mb-3">
           See also
         </dt>

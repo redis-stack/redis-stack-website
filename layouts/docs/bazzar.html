@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <main class="docs w-full max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 md:flex gap-16 relative">
+  <main class="docs w-full max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 md:flex gap-16">
     {{ partial "docs-nav.html" . }}
 
     <section class="prose prose-slate w-full max-w-[47rem] py-12">
@@ -97,10 +97,10 @@
     </section>
 
     {{ if $has_groups }}
-      <aside class="hidden xl:block w-52 h-full shrink-0">
-        <nav class="w-52 z-40 bg-white hidden md:block overflow-auto fixed top-28 h-full max-h-[calc(100vh-15rem)] text-[0.8125rem]">
-          <dt class="font-semibold mb-3">Browse by {{ $group_name }}</dt>
-          <dd class="text-slate-600">
+      <section class="hidden xl:block w-52 h-full shrink-0">
+        <div class="w-52 z-40 hidden bg-white/75 md:block overflow-auto fixed top-28 h-full max-h-[calc(100vh-15rem)] text-[0.8125rem]">
+          <h1 class="font-semibold mb-3">Browse by {{ $group_name }}</h1>
+          <nav class="text-slate-600">
             <ul id="TableOfContents">
               {{ range $id, $name := $groups }}
                 <li>
@@ -108,9 +108,9 @@
                 </li>
               {{ end }}
             </ul>
-          </dd>
-        </dl>
-      </aside>
+          </nav>
+        </div>
+      </section>
     {{ end }}
   </main>
 {{ end }}

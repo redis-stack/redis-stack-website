@@ -104,6 +104,15 @@
   @apply hidden;
 }
 
+.prose :where(code):not(:where([class~="not-prose"] *)):before,
+.prose :where(code):not(:where([class~="not-prose"] *)):after {
+  content: "";
+}
+
+.prose :where(code):not(:where([class~="not-prose"] *)) {
+  font-size: 0.9375em;
+}
+
 select {
   background-repeat: no-repeat;
   background-size: 1.5em 1.5em;
@@ -440,4 +449,18 @@ select {
 #redis-downloads:before,
 #redis-stack-downloads:before {
   @apply w-8 h-8;
+}
+
+main.docs:before,
+main.docs:after {
+  content: '';
+  @apply w-80 h-80 fixed right-0 bottom-0 z-[-1] bg-contain bg-no-repeat bg-center;
+}
+
+main.docs:before {
+  background-image: url("/images/dots.svg");
+}
+
+main.docs:after {
+  background-image: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, .25));
 }
