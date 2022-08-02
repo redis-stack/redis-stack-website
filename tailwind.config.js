@@ -3,7 +3,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
 
 module.exports = {
-  content: ["content/**/*.md", "layouts/**/*.html"],
+  content: ["content/**/*.md", "layouts/**/*.html", "./tailwindcss.whitelist.txt"],
   theme: {
     extend: {
       fontFamily: {

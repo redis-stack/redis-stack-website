@@ -55,6 +55,13 @@
     let firstFocusable
     let lastFocusable
 
+    function next (elem, selector) {
+      let nextElem = elem.nextElementSibling
+      if (!selector) return nextElem
+      if (nextElem && nextElem.matches(selector)) return nextElem
+      return null
+    }
+
     function debounce(callback, delay) {
       let timeout
       
@@ -125,33 +132,43 @@
   
       function displayData(data) {
         resultsContainer.innerHTML = ''
-  
-        sortData(data).forEach((result) => {
+        
+        if (data.results.length < 1) {
           resultsContainer.insertAdjacentHTML(
-            'beforeend', 
-            `<dt class="search-item-source">
-              ${result.category}
-            </dt>`
+            'beforeend',
+            `<dt class="sr-only">${searchTerm}:</dt>
+            <dd class="search-no-results">
+              No results for \"<span class="search-title">${searchTerm}</span>\"
+            </dd>`
           )
-  
-          delete result.category
-  
-          Object.keys(result).forEach((key, index) => {
+        } else {
+          sortData(data).forEach((result) => {
             resultsContainer.insertAdjacentHTML(
-              'beforeend',
-              `<dd class="search-item">
-                <a href="${result[key].url}">
-                  <span class="search-item-icon"></span>
-                  <span class="search-item-content">
-                    ${result[key].path ? `<span class="search-item-path">${result[key].path}</span>` : ''}
-                    <span class="search-item-title">${key.replace(new RegExp(`(^|)(${searchTerm})(|$)`, 'ig'), '$1<b class="font-semibold text-indigo-500 underline underline-offset-2 decoration-2 decoration-indigo-200">$2</b>$3')}</span>
-                  </span>
-                  <span class="search-item-action"></span>
-                </a>
-              </dd>`
+              'beforeend', 
+              `<dt class="search-item-source">
+                ${result.category}
+              </dt>`
             )
+    
+            delete result.category
+    
+            Object.keys(result).forEach((key, index) => {
+              resultsContainer.insertAdjacentHTML(
+                'beforeend',
+                `<dd class="search-item">
+                  <a href="${result[key].url}">
+                    <span class="search-item-icon"></span>
+                    <span class="search-item-content">
+                      ${result[key].path ? `<span class="search-item-path">${result[key].path}</span>` : ''}
+                      <span class="search-item-title">${key.replace(new RegExp(`(^|)(${searchTerm})(|$)`, 'ig'), '$1<b class="font-semibold text-indigo-500 underline underline-offset-2 decoration-2 decoration-indigo-200">$2</b>$3')}</span>
+                    </span>
+                    <span class="search-item-action"></span>
+                  </a>
+                </dd>`
+              )
+            })
           })
-        })
+        }
         return
       }
   
@@ -193,7 +210,7 @@
             break
           }
   
-          // Go back if shift is fired, tab backward
+          // If shift is fired, tab backward
           if (event.shiftKey) {
             if (document.activeElement === firstFocusable) {
               event.preventDefault()
@@ -229,7 +246,7 @@
     }
 
     function keyUpHandler(event) {
-      if (document.documentElement.dataset.searchState === 'off') return false
+      if (document.documentElement.dataset.searchState === 'off' || !document.activeElement.matches('.search-input')) return false
       searchSubmit(document.activeElement.closest('form'))
     }
 
@@ -251,7 +268,7 @@
     function clickHandler(event) {
       if (event.target.closest('#search-button')) {
         startSearch()
-      } else if (event.target.closest('#search-cancel')) {
+      } else if (event.target.closest('#search-cancel') || event.target.matches('#search-container')) {
         stopSearch()
       }
     }

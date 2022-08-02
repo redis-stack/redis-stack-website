@@ -264,7 +264,7 @@ select {
 }
 
 #search-results {
-  @apply flex-auto overflow-auto pb-6 text-slate-700 font-normal min-h-[12.5rem];
+  @apply flex-auto overflow-auto pb-6 text-slate-700 font-normal min-h-[12.5rem] relative;
 }
 
 .search-item .search-item-icon {
@@ -323,8 +323,7 @@ select {
 }
 
 .search-item-title {
-  grid-column-start: 2;
-  @apply leading-6 truncate;
+  @apply col-start-2 leading-6 truncate;
 }
 
 .search-item-title + .search-item-path {
@@ -362,10 +361,83 @@ select {
 }
 
 .search-no-results {
-  @apply pt-10 pb-8 px-4;
+  @apply absolute inset-0 flex justify-center items-center text-slate-400 text-lg leading-6;
 }
 
 .search-no-results .search-title {
-  text-align: center;
-  color: theme('colors.slate.400');
+  @apply text-slate-900 mb-0;
+}
+
+.redis-cli {
+  @apply font-mono;
+}
+
+.redis-cli > pre {
+  white-space: pre-wrap;
+}
+
+.redis-cli > .prompt {
+  display: flex;
+}
+
+.redis-cli > .prompt > span {
+  white-space: pre-wrap;
+}
+
+.redis-cli > .prompt > input {
+  flex: 1 1 auto;
+  padding: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font: inherit;
+  color: inherit;
+}
+
+#download-redis,
+#download-redis-stack {
+  @apply p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-lg flex flex-col justify-center;
+}
+
+#download-redis > h2,
+#download-redis-stack > h2 {
+  @apply mt-0;
+}
+
+#download-redis > h2:before,
+#redis-downloads:before {
+  content: '';
+  background-image: url("/images/redis-cube.svg");
+  @apply inline-block bg-contain bg-no-repeat bg-center align-middle mr-3;
+}
+
+#download-redis-stack > h2:before,
+#redis-stack-downloads:before {
+  content: '';
+  background-image: url("/images/stack-icon.svg");
+  @apply inline-block bg-contain bg-no-repeat bg-center align-middle mr-3;
+}
+
+#download-redis > h2:before,
+#download-redis-stack > h2:before {
+  @apply w-10 h-10;
+}
+
+#download-redis > h3,
+#download-redis-stack > h3 {
+  @apply mt-2;
+}
+
+#download-redis-stack {
+  @apply mt-5 mb-[3.25rem];
+}
+
+#redis-downloads,
+#redis-stack-downloads {
+  @apply border-b pb-2;
+}
+
+#redis-downloads:before,
+#redis-stack-downloads:before {
+  @apply w-8 h-8;
 }
