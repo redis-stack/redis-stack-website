@@ -403,9 +403,17 @@ select {
   color: inherit;
 }
 
+.download-cards {
+  @apply space-y-6 lg:space-y-0 max-w-[47rem] lg:max-w-full mx-auto lg:mx-0 lg:grid grid-cols-2 gap-x-6 items-start mb-[3.25rem];
+}
+
+.download-details {
+  @apply w-full max-w-[47rem] mx-auto;
+}
+
 #download-redis,
 #download-redis-stack {
-  @apply p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-lg flex flex-col justify-center;
+  @apply px-9 h-full py-8 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-lg;
 }
 
 #download-redis > h2,
@@ -435,10 +443,6 @@ select {
 #download-redis > h3,
 #download-redis-stack > h3 {
   @apply mt-2;
-}
-
-#download-redis-stack {
-  @apply mt-5 mb-[3.25rem];
 }
 
 #redis-downloads,
