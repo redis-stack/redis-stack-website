@@ -17,15 +17,20 @@
         <dl class="grid grid-cols-[auto,1fr]">
           <dt>Available since:</dt>
           <dd>{{ .Params.since }}</dd>
-          <dt>Time complexity:</dt>
-          <dd>{{ .Params.complexity | markdownify }}</dd>
+          {{ if and (.Params.acl_categories) (gt (len .Params.acl_categories) 0) }}
           <dt>ACL categories:</dt>
           <dd>
             {{ range .Params.acl_categories }}
               {{ printf "`%s`" . | markdownify }}
             {{ end}}
           </dd>
-        </dl>
+          {{ end }}
+
+          {{ if .Params.complexity }}
+          <dt>Time complexity:</dt>
+          <dd>{{ .Params.complexity | markdownify }}</dd>
+          {{ end }}
+          </dl>
         <div>
           <span class="title"></span>
           
