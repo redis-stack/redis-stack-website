@@ -1,28 +1,28 @@
 {{ define "head" }}
   <script src="/js/cli.js" defer></script>
-  <link rel="stylesheet" href="/css/cli.css" defer></script>
+  {{/*  <link rel="stylesheet" href="/css/cli.css" defer></script>  */}}
 {{ end }}
 
 {{ define "main" }}
   <main>
     <header class="bg-gradient-to-b from-indigo-50/30 via-indigo-50/30 to-white">
-      <div class="flex flex-col lg:grid grid-cols-2 gap-x-10 items-center container max-w-[85rem] mx-auto px-4 sm:px-8 pt-20 pb-28">
-        <div>
+      <div class="lg:grid grid-cols-2 gap-x-10 items-center container max-w-[85rem] mx-auto px-4 sm:px-8 pt-20 pb-28">
+        <div class="text-center lg:text-left">
           <h1 class="font-display text-6xl leading-none text-slate-900 font-semibold mb-4">Redis</h1>
-          <p class="text-slate-500 text-xl mb-7 max-w-xl">
+          <p class="text-slate-500 text-xl mb-7 max-w-2xl mx-auto lg:mx-0">
             The open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message&nbsp;broker.
           </p>
           <a href="/docs/getting-started/" class="button-xl button-indigo">Get Started</a>
           <a href="/docs/" class="button-xl button-outline ml-2">Read the docs</a>
         </div>
-        <div class="relative pt-7 pr-7 -mr-7 bg-no-repeat bg-right-top" style="background-image: url('/images/triangle-lines.svg')">
-          <div class="bg-slate-800 rounded-xl shadow-lg shadow-slate-900/10 h-80">
-            <div class="bg-slate-900 border-b border-slate-700 rounded-t-xl p-4 w-full flex space-x-2">
+        <div class="relative left-3.5 lg:left-0 mt-8 lg:mt-0 mx-auto lg:ml-0  lg:-mr-7 pt-7 pr-7 bg-no-repeat bg-right-top max-w-2xl lg:max-w-none" style="background-image: url('/images/triangle-lines.svg')">
+          <div class="bg-slate-900 rounded-xl shadow-lg shadow-slate-900/10 h-[22.8125rem]">
+            <div class="border-b border-slate-700 rounded-t-xl p-4 w-full flex space-x-2">
               <div class="w-3 h-3 border border-slate-700 rounded-full"></div>
               <div class="w-3 h-3 border border-slate-700 rounded-full"></div>
               <div class="w-3 h-3 border border-slate-700 rounded-full"></div>
             </div>            
-            <form class="redis-cli h-72 overflow-y-scroll" typewriter>
+            <form class="redis-cli h-80 overflow-y-scroll text-white p-6" typewriter>
               <pre tabindex="0">
                 PING
                 HSET db:1 name redis type NOSQL version 7.0.4
@@ -68,7 +68,7 @@
           </h2>
           <ul class="flex flex-col sm:grid md:grid-cols-2 xl:grid-cols-3 gap-14">
             <li class="flex flex-col h-full">
-              <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-xl mb-6"
+              <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-md mb-6"
                 >{{ with resources.Get "icons/in-memory-data-structures-icon.svg" }}{{
                 ( . | minify).Content | safeHTML }}{{ end }}</span
               >
@@ -85,7 +85,7 @@
               </a>
             </li>
             <li class="flex flex-col h-full">
-              <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-xl mb-6"
+              <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-md mb-6"
                 >{{ with resources.Get "icons/programmability.svg" }}{{ ( . |
                 minify).Content | safeHTML }}{{ end }}</span
               >
@@ -102,7 +102,7 @@
               </a>
             </li>
             <li class="flex flex-col h-full">
-              <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-xl mb-6"
+              <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-md mb-6"
                 >{{ with resources.Get "icons/extensibility-icon.svg" }}{{ ( . |
                 minify).Content | safeHTML }}{{ end }}</span
               >
@@ -119,7 +119,7 @@
               </a>
             </li>
             <li class="flex flex-col h-full">
-              <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-xl mb-6"
+              <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-md mb-6"
                 >{{ with resources.Get "icons/persistence-icon.svg" }}{{ ( . |
                 minify).Content | safeHTML }}{{ end }}</span
               >
@@ -136,7 +136,7 @@
               </a>
             </li>
             <li class="flex flex-col h-full">
-              <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-xl mb-6"
+              <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-md mb-6"
                 >{{ with resources.Get "icons/cluster.svg" }}{{ ( . | minify).Content
                 | safeHTML }}{{ end }}</span
               >
@@ -153,7 +153,7 @@
               </a>
             </li>
             <li class="flex flex-col h-full">
-              <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-xl mb-6"
+              <span class="inline-flex items-center justify-center w-14 h-14 p-3 bg-indigo-50 rounded-md mb-6"
                 >{{ with resources.Get "icons/availability.svg" }}{{ ( . |
                 minify).Content | safeHTML }}{{ end }}</span
               >

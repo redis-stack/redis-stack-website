@@ -8,33 +8,75 @@
     {{ range .Site.Menus.main }}
       {{ if .HasChildren }}
         <dl class="{{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }} group relative first:ml-auto ml-1 mt-3 mb-0 px-3 pt-2 pb-5 cursor-pointer">
-          <dt class="grid gap-x-2 gap-y-1 grid-cols-1 lg:grid-cols-auto-span items-center justify-items-center lg:justify-items-start group-hover:text-white/50 group-focus-within:text-white/50 whitespace-nowrap transition-colors" href="#">
-            {{ .Pre }}
+          <dt class="flex items-center justify-items-center group-hover:text-white/50 group-focus-within:text-white/50 whitespace-nowrap transition-colors" href="#">
+            {{ if .Pre }}
+              <span class="grid place-items-center w-5 h-5 mr-2.5">
+                {{ with resources.Get .Pre }}
+                {{ ( . | minify).Content | safeHTML }}{{ end }}
+              </span>
+            {{ end }}
             {{ .Name }}
           </dt>
-          <dd class="text-[0.8rem] lg:text-sm text-slate-900 absolute top-full -mt-1 right-[1000rem] group-hover:right-[unset] group-hover:-left-3 group-focus-within:right-[unset] group-focus-within:-left-3 flex flex-col bg-white transition-opacity rounded-lg border border-slate-500/10 bg-clip-padding shadow-md p-2">
+          <dd class="grid text-[0.8rem] lg:text-sm text-slate-600 absolute top-full -mt-1 right-[1000rem] p-2 group-hover:right-[unset] group-hover:-left-3 group-focus-within:right-[unset] group-focus-within:-left-3 bg-white transition-opacity rounded-lg border border-slate-500/10 bg-clip-padding shadow-md">
             {{ range .Children }}
-              <a href="{{ .URL }}" class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} grid gap-x-2 grid-cols-auto-span items-center whitespace-nowrap rounded-md min-w-[11rem] px-3 py-2 hover:bg-indigo-100 hover:text-indigo-600 focus:bg-indigo-100 focus:text-indigo-600 transition-colors">
+              {{ if .HasChildren }}
+                <div class="-my-2 pr-3 py-4 col-start-{{ .Weight }} {{ if gt .Weight 1 }} border-l pl-5 {{ else }} pl-3 {{ end }}">
+                  <a href="{{ .URL }}" class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} font-semibold text-[0.9375rem] text-slate-900 flex items-center whitespace-nowrap min-w-[10rem] hover:text-slate-600 focus:text-slate-600 transition-colors">
+                    {{ if .Pre }}
+                      <span class="grid place-items-center w-5 h-5 mr-2.5">
+                        {{ with resources.Get .Pre }}
+                        {{ ( . | minify).Content | safeHTML }}{{ end }}
+                      </span>
+                    {{ end }}
+                    {{ .Name }}
+                  </a>
+                  {{ range .Children }}
+                    <a href="{{ .URL }}" class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} pl-[1.875rem] flex items-center whitespace-nowrap rounded-md min-w-[10rem] pt-2 text-slate-500 hover:text-slate-900 focus:text-slate-900 transition-colors">
+                      {{ if .Pre }}
+                        <span class="grid place-items-center w-5 h-5 mr-2.5">
+                          {{ with resources.Get .Pre }}
+                          {{ ( . | minify).Content | safeHTML }}{{ end }}
+                        </span>
+                      {{ end }}
+                      {{ .Name }}
+                    </a>
+                  {{ end }}
+                </div>
+              {{ else }}
+              <a href="{{ .URL }}" class="{{ if $currentPage.IsMenuCurrent "main" . }}active{{ end }} px-3 flex items-center whitespace-nowrap rounded-md min-w-[10rem] py-1 text-slate-500 hover:text-slate-900 focus:text-slate-900 transition-colors">
+                {{ if .Pre }}
+                  <span class="grid place-items-center w-5 h-5 mr-2.5">
+                    {{ with resources.Get .Pre }}
+                    {{ ( . | minify).Content | safeHTML }}{{ end }}
+                  </span>
+                {{ end }}
                 {{ .Name }}
               </a>
+              {{ end }}
             {{ end }}
           </dd>
         </dl>
       {{ else }}
-        <a href="{{ .URL }}" class="group grid gap-x-2 gap-y-1 grid-cols-1 lg:grid-cols-auto-span items-center justify-items-center lg:justify-items-start first:ml-auto ml-1 px-3 py-2 rounded-md bg-transparent hover:text-white/50 focus:text-white/50 whitespace-nowrap transition-colors">
-          {{ .Pre }}
+        <a href="{{ .URL }}" class="group flex items-center justify-items-center first:ml-auto ml-1 px-3 py-2 rounded-md bg-transparent hover:text-white/50 focus:text-white/50 whitespace-nowrap transition-colors">
+          {{ if .Pre }}
+            {{ with resources.Get .Pre }}
+              <span class="grid place-items-center w-5 h-5">
+              {{ ( . | minify).Content | safeHTML }}{{ end }}
+            {{ end }}
+          </span>
           {{ .Name }}
         </a>
       {{ end }}
     {{ end }}
-    <div class="flex ml-auto space-x-2">
+    <div class="flex flex-col lg:flex-row ml-auto space-x-2">
       <button id="search-button" type="button" class="transition-colors shrink-0 flex-1 lg:flex-none mx-8 lg:ml-2 lg:mr-0 inline-flex items-center px-4 py-2 text-sm font-medium rounded-md border focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 border-white/50 hover:text-indigo-600 focus:text-indigo-600 hover:bg-white focus:bg-white focus:ring-white">
         <svg class="w-[0.875rem] h-[0.875rem] mr-0.5" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
           <circle cx="10" cy="10" r="7" />
           <line x1="21" y1="21" x2="15" y2="15" />
         </svg>
-        <span class="lg:sr-only flex-auto ml-1 mr-4">Quick search&hellip;</span>
+        <span class="sr-only">Quick search&hellip…</span>
+        <span class="lg:hidden xl:block flex-auto ml-1 mr-4" aria-hidden>Search&hellip;</span>
         <script>
           if (navigator.appVersion.indexOf("Win") != -1 || navigator.appVersion.indexOf("Linux") != -1) {
             document.querySelector('[title="Command"]').textContent = "&#8963;";

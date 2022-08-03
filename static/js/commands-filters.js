@@ -1,3 +1,17 @@
+document.addEventListener('click', function (event) {
+  if (event.target.matches('#alpha-filter-container [type=button]')) {
+    const element = event.target
+    const activeButton = document.querySelector('#alpha-filter-container .active')
+    const alphaInput = document.querySelector('#alpha-filter');
+
+    if (activeButton) activeButton.classList.remove('active')
+    if (element.value) element.classList.add('active');
+
+    alphaInput.value = event.target.value;
+    alphaInput.dispatchEvent(new Event("input"))
+  }
+});
+
 const FILTERS = {
   group: {
     element: document.querySelector('#group-filter'),
@@ -22,6 +36,10 @@ const FILTERS = {
   name: {
     element: document.querySelector('#name-filter'),
     partialMatch: true
+  },
+  alpha: {
+    element: document.querySelector('#alpha-filter'),
+    alphaMatch: true
   }
 };
 
@@ -44,12 +62,14 @@ function isVersionGreaterThan(a, b) {
   return true;
 }
 
-function match({ element: { value: filterValue }, versionMatch, partialMatch }, elementValue) {
+function match({ element: { value: filterValue }, versionMatch, partialMatch, alphaMatch }, elementValue) {
   if (versionMatch) {
     const version = elementValue.substring(elementValue.lastIndexOf('-') + 1);
     return isVersionGreaterThan(version, filterValue);
   } else if (partialMatch) {
     return elementValue.toLowerCase().includes(filterValue.toLowerCase());
+  } else if (alphaMatch) {
+    return elementValue && elementValue.toLowerCase().startsWith(filterValue.toLowerCase());
   } else {
     return filterValue === elementValue;
   }
@@ -64,7 +84,7 @@ function filter() {
     for (const [key, filter] of Object.entries(FILTERS)) {
       if (!filter.element.value) continue;
 
-      const elementValue = element.dataset[key];
+      const elementValue = key == 'alpha' ? element.dataset['name'] : element.dataset[key];
       if (!match(filter, elementValue)) {
         element.style.display = 'none';
         hiddenCards.push(element);
@@ -72,7 +92,6 @@ function filter() {
       }
     }
   }
-  // document.querySelector('#commands-break').style.display = hiddenCards.length > 0 ? 'none' : '';
 }
 
 const url = new URL(location);
