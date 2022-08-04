@@ -78,13 +78,13 @@
   @apply font-semibold text-slate-900 tracking-[-0.04em];
 }
 
-.prose pre {
-  @apply bg-slate-900 rounded-xl !important;
+/* .prose pre {
+  @apply bg-slate-900 rounded-xl;
 }
 
 .prose pre > code {
   @apply bg-none;
-}
+} */
 
 .prose h1 {
   @apply text-3xl;
@@ -107,10 +107,6 @@
 .prose :where(code):not(:where([class~="not-prose"] *)):before,
 .prose :where(code):not(:where([class~="not-prose"] *)):after {
   content: "";
-}
-
-.prose :where(code):not(:where([class~="not-prose"] *)) {
-  font-size: 0.9375em;
 }
 
 select {
@@ -378,11 +374,23 @@ select {
 }
 
 .redis-cli {
-  @apply font-mono;
+  @apply font-mono bg-slate-900 h-80 overflow-y-scroll text-white p-6 rounded-b-xl;
 }
 
 .redis-cli > pre {
   white-space: pre-wrap;
+}
+
+.prose .redis-cli {
+  @apply h-auto;
+}
+
+.prose .redis-cli > pre {
+  @apply text-white bg-transparent m-0 p-0;
+}
+
+.prose .redis-cli > .prompt {
+  font-size: 0.875em;
 }
 
 .redis-cli > .prompt {

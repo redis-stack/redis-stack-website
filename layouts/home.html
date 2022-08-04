@@ -1,6 +1,5 @@
 {{ define "head" }}
   <script src="/js/cli.js" defer></script>
-  {{/*  <link rel="stylesheet" href="/css/cli.css" defer></script>  */}}
 {{ end }}
 
 {{ define "main" }}
@@ -22,7 +21,7 @@
               <div class="w-3 h-3 border border-slate-700 rounded-full"></div>
               <div class="w-3 h-3 border border-slate-700 rounded-full"></div>
             </div>            
-            <form class="redis-cli h-80 overflow-y-scroll text-white p-6" typewriter>
+            <form class="redis-cli" typewriter>
               <pre tabindex="0">
                 PING
                 HSET db:1 name redis type NOSQL version 7.0.4
