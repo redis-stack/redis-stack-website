@@ -13,22 +13,6 @@ const mobileMenu = (() => {
   let firstFocusable
   let lastFocusable
 
-  function loadHandler() {
-    const style = document.createElement('style')
-    
-    style.innerHTML = `
-      [data-scroll-disabled="on"], 
-      [data-scroll-disabled="on"] body {
-        touch-action: none;
-        overscroll-behavior: none;
-        -webkit-overflow-scrolling: auto;
-        overflow: hidden;
-      }
-    `
-
-    document.head.appendChild(style)
-  }
-
   function keyHandler(event) {
     event = event || window.event
     if (document.documentElement.dataset.menuState !== 'on') return false
@@ -116,6 +100,5 @@ const mobileMenu = (() => {
   // Attach listeners
   document.addEventListener('click', clickHandler, false)
   document.addEventListener('keydown', keyHandler, false)
-  document.addEventListener('DOMContentLoaded', loadHandler, false)
 
 })()
