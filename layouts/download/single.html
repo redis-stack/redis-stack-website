@@ -3,7 +3,7 @@
 
     <section class="prose prose-slate w-full max-w-full py-12">
       <h1 class="lg:text-center max-w-[47rem] mx-auto">{{ .Title }}</h1>
-      {{ with .Params.description }}<p>{{ . | markdownify }}</p>{{ end }}
+      {{ with .Params.description }}<p class="text-lg -mt-5 mb-10">{{ . | markdownify }}</p>{{ end }}
       {{ .Content }}
     </section>
     

@@ -1,3 +1,7 @@
+{{ define "head" }}
+  <script src="/js/cli.js" defer></script>
+{{ end }}
+
 {{ define "main" }}
   <main class="docs w-full max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 md:flex gap-16">
     {{ partial "docs-nav.html" . }}
@@ -14,25 +18,20 @@
         {{ end }}
         <h1>{{ .Title }} {{ $syntax }}</h1>
 
-        <dl class="grid grid-cols-[auto,1fr]">
-          <dt>Available since:</dt>
+        <dl class="grid grid-cols-[auto,1fr] gap-x-2 mb-12">
+          <dt class="font-semibold text-slate-900">Available since:</dt>
           <dd>{{ .Params.since }}</dd>
-          {{ if .Params.acl_categories }}
-          {{ if (gt (len .Params.acl_categories) 0) }}
-          <dt>ACL categories:</dt>
-          <dd>
-            {{ range .Params.acl_categories }}
-              {{ printf "`%s`" . | markdownify }}
-            {{ end}}
-          </dd>
-          {{ end }}
-          {{ end }}
-
-          {{ if .Params.complexity }}
-          <dt>Time complexity:</dt>
+          <dt class="font-semibold text-slate-900">Time complexity:</dt>
           <dd>{{ .Params.complexity | markdownify }}</dd>
+          {{ if .Params.acl_categories }}
+          <dt class="font-semibold text-slate-900">ACL categories:</dt>
+            <dd>
+              {{ range .Params.acl_categories }}
+                {{ printf "`%s`<span class='mr-1 last:hidden'>,</span>" . | markdownify }}
+              {{ end}}
+            </dd>
           {{ end }}
-          </dl>
+        </dl>
         <div>
           <span class="title"></span>
           

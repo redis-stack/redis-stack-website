@@ -3,7 +3,6 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-/* @import 'syntax'; */
 
 .hljs, .hljs-operator, .hljs-punctuation, .hljs-subst {
   @apply text-slate-300;
@@ -79,7 +78,7 @@
 }
 
 .prose pre {
-  @apply bg-slate-900 rounded-xl !important;
+  @apply bg-slate-900 rounded-lg !important;
 }
 
 .prose pre > code {
@@ -109,8 +108,12 @@
   content: "";
 }
 
-.prose :where(code):not(:where([class~="not-prose"] *)) {
-  font-size: 0.9375em;
+.prose :where(a):not(:where([class~="not-prose"] *)) {
+  @apply text-indigo-500 decoration-transparent;
+}
+
+.prose :where(a):not(:where([class~="not-prose"] *)):hover {
+  @apply text-indigo-700 decoration-indigo-400;
 }
 
 select {
@@ -287,9 +290,13 @@ select {
   background-position: center center;
 }
 
-.search-item:hover .search-item-icon,
-.search-item:focus-within .search-item-icon {
+.search-item:not([aria-selected]):hover .search-item-icon,
+.search-item:not([aria-selected]):focus-within .search-item-icon {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24' stroke='%23818CF8' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' /%3E%3C/svg%3E");
+}
+
+.search-item[aria-selected] .search-item-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24' stroke='%23C7D2FE' stroke-width='1.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z' /%3E%3C/svg%3E");
 }
 
 .search-item + .search-item {
@@ -297,11 +304,15 @@ select {
 }
 
 .search-item {
-  @apply bg-slate-50 rounded-xl mx-6 relative transition-colors text-slate-700;
+  @apply bg-slate-50 rounded-xl mx-6 relative text-slate-700;
 }
 
-.search-item:hover,
-.search-item:focus-within {
+.search-item[aria-selected] {
+  @apply bg-indigo-500 text-white;
+}
+
+.search-item:not([aria-selected]):hover,
+.search-item:not([aria-selected]):focus-within {
   @apply bg-indigo-100 text-indigo-500;
 }
 
@@ -339,13 +350,25 @@ select {
   @apply mb-1;
 }
 
+.search-term-match {
+  @apply font-semibold text-indigo-500 underline underline-offset-2 decoration-2 decoration-indigo-200;
+}
+
+[aria-selected] .search-term-match {
+  @apply text-white;
+}
+
 .search-item-action {
   @apply flex-none ml-3.5 w-6 h-6;
   background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m11 9 3 3-3 3' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
-.search-item:hover .search-item-action,
-.search-item:focus-within .search-item-action {
+[aria-selected] .search-item-action {
+  background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m11 9 3 3-3 3' stroke='%23C7D2FE' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+.search-item:not([aria-selected]):hover .search-item-action,
+.search-item:not([aria-selected]):focus-within .search-item-action {
   background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='m11 9 3 3-3 3' stroke='%236466F1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
@@ -378,11 +401,23 @@ select {
 }
 
 .redis-cli {
-  @apply font-mono;
+  @apply font-mono bg-slate-900 h-80 overflow-y-scroll text-white p-6 rounded-b-xl;
 }
 
 .redis-cli > pre {
   white-space: pre-wrap;
+}
+
+.prose .redis-cli {
+  @apply h-auto;
+}
+
+.prose .redis-cli > pre {
+  @apply text-white bg-transparent m-0 p-0;
+}
+
+.prose .redis-cli > .prompt {
+  font-size: 0.875em;
 }
 
 .redis-cli > .prompt {
@@ -456,16 +491,20 @@ select {
 }
 
 main.docs:before,
-main.docs:after {
+main.docs:after,
+main.download:before,
+main.download:after {
   content: '';
   @apply w-80 h-80 fixed right-0 bottom-0 z-[-1] bg-contain bg-no-repeat bg-center;
 }
 
-main.docs:before {
+main.docs:before,
+main.download:before {
   background-image: url("/images/dots.svg");
 }
 
-main.docs:after {
+main.docs:after,
+main.download:after {
   background-image: linear-gradient(135deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, .875), rgba(255, 255, 255, .35));
 }
 
