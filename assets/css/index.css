@@ -57,7 +57,7 @@
 }
 
 .button-indigo {
-  @apply text-white border border-solid border-transparent bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-600 focus:ring-indigo-600;
+  @apply text-white border border-solid border-transparent bg-redis-indigo-500 hover:bg-redis-indigo-600 focus:bg-indigo-600 focus:ring-indigo-600;
 }
 
 .button-outline {
@@ -74,7 +74,7 @@
 .prose h4,
 .prose h5,
 .prose h6 {
-  @apply font-semibold text-slate-900 tracking-[-0.04em];
+  @apply font-semibold text-midnight-700 tracking-[-0.04em];
 }
 
 .prose pre {
