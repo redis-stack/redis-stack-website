@@ -40,9 +40,8 @@ up:
 	hugo server $(HUGO_DEBUG) $(HUGO_SERVER) -w --environment $(ENV)
 
 clean:
-	@rm -f config.toml
 	# @rm -f data/*.json
-	@rm -rf $(HUGO_CONTENT) assets layouts public static resources tmp
+	@rm -rf $(HUGO_CONTENT) public tmp
 
 ifneq ($(VOL),)
 DOCKER_VOL=-v $(VOL):$(VOL)
