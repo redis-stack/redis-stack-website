@@ -179,8 +179,7 @@ class Markdown:
                 return f'[{rep[1]}](/docs/reference/protocol-spec#{rep[0]})'
             return f'[]'
 
-        rep = re.sub(r'@(.+)-reply',
-                     reply, payload)
+        rep = re.sub(r'@([a-z\-]+)-reply', reply, payload)
         return rep
 
     @staticmethod
