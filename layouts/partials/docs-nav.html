@@ -11,7 +11,7 @@
   {{ $withChild := gt (len $pages) 0 -}}
   {{ $rootDir := lt $ulNr 1 -}}
 
-  {{ if $show }}
+  {{ if and $show (not (default false $s.Params.hidden)) }}
     <li>
       <a class="flex truncate{{- if $rootDir}} font-semibold text-slate-900{{- else if and ($active) (not $rootDir) }} active text-indigo-600{{- else }} text-slate-600 hover:text-indigo-600{{- end }}" href="{{ $s.RelPermalink }}">{{ $s.LinkTitle }}</a>
       {{- if $withChild }}

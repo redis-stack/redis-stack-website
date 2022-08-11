@@ -19,7 +19,7 @@
         {{ end }}
         {{ if (gt (len $syntax) 0) }}
         <div class="font-semibold text-slate-900">Syntax</div>
-        <div class="whitespace-pre font-mono bg-slate-100 px-2 py-1 mb-3">
+        <div class="whitespace-pre font-mono my-3">
           {{- $syntax -}}
         </div>
         {{ end }}
@@ -44,8 +44,6 @@
               {{ end}}
             </dd>
           {{ end }}
-          {{/*  <dt class="font-semibold text-slate-900">Summary:</dt>
-          <dd>{{ .Params.summary }}</dd>  */}}
         </dl>
 
         {{ if (isset .Params "deprecated_since") }}
@@ -72,6 +70,7 @@
     
     <aside class="hidden xl:block w-52 h-full shrink-0">
       {{ $related := .Site.Pages.RelatedIndices . "group" | append . }}
+      {{ $related = (where $related ".Params.hidden" "!=" true) }}
       {{ $this := . }}
       {{ with sort $related "Title" }}
       <dl class="w-52 z-40 hidden bg-white/75 md:block overflow-auto fixed top-28 h-full max-h-[calc(100vh-15rem)] text-[0.8125rem]">

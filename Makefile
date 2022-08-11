@@ -30,10 +30,6 @@ deps:
 	@pip install -r requirements.txt
 	@npm install
 
-deps:
-	@pip install -r requirements.txt
-	@npm install
-
 build:
 	# @python3 build/get_meta.py $(GET_META) --loglevel=$(LOGLEVEL)
 	@python3 build/make_stack.py $(SKIP_CLONE) --module=$(STACK_MODULE) --loglevel=$(LOGLEVEL)

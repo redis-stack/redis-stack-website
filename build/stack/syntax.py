@@ -152,6 +152,12 @@ class Command(Argument):
         s = ' '.join([arg.syntax() for arg in self._arguments[1:]])
         return s
 
+    def isPureContainer(self) -> bool:
+        return self._cdata.get('arguments') is None and self._cdata.get('arity',0) == -2 and len(self._cname.split(' ')) == 1
+
+    def isHelpCommand(self) -> bool:
+        return self._cname.endswith(' HELP')
+
     def syntax(self, **kwargs):
         opts = {
             'width': kwargs.get('width', 68),

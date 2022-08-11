@@ -195,12 +195,14 @@ class Markdown:
     def add_command_frontmatter(self, name, commands):
         """ Sets a JSON FrontMatter payload for a command page """
         data = commands.get(name)
+        c = Command(name, data)
         data.update({
             'title': name,
             'linkTitle': name,
             'description': data.get('summary'),
-            'syntax_str': str(Command(name, data)),
-            'syntax_fmt': Command(name, data).syntax()
+            'syntax_str': str(c),
+            'syntax_fmt': c.syntax(),
+            'hidden': c.isPureContainer() or c.isHelpCommand()
         })
         if 'replaced_by' in data:
             data['replaced_by'] = self.generate_commands_links(
