@@ -7,20 +7,33 @@
     {{ partial "docs-nav.html" . }}
     <div class="w-full max-w-[47rem] py-12">
       {{ partial "breadcrumbs" . }}
-
       <section class="prose prose-slate pt-10">
-        {{ $syntax := "" }}
-        {{ if isset .Params "arguments" }}
-          {{ $args := .Params.arguments }}
-          {{ if gt (len $args) 0 }}
-            {{ $syntax = partial "command-syntax.html" $args }}
+        <h1>{{ .Title }}</h1>
+        {{ $syntax := .Params.syntax_fmt }}
+        {{ if isset .Params "syntax" }}
+          {{ if .Params.syntax }}
+            {{ $syntax = .Params.syntax }}
+          {{ else }}
+            {{ $syntax = "" }}
           {{ end }}
         {{ end }}
-        <h1>{{ .Title }} {{ $syntax }}</h1>
-
+        {{ if (gt (len $syntax) 0) }}
+        <div class="font-semibold text-slate-900">Syntax</div>
+        <div class="whitespace-pre font-mono bg-slate-100 px-2 py-1 mb-3">
+          {{- $syntax -}}
+        </div>
+        {{ end }}
         <dl class="grid grid-cols-[auto,1fr] gap-x-2 mb-12">
+          {{ if not (isset .Params "module") }}
           <dt class="font-semibold text-slate-900">Available since:</dt>
           <dd>{{ .Params.since }}</dd>
+          {{ else }}
+          <dt class="font-semibold text-slate-900">Available in:</dt>
+          <dd>
+            <a href="/docs/stack">Redis Stack</a> /
+            <a href="/docs/stack/{{ .Params.group }}">{{ .Params.module }} {{ .Params.since }}</a>
+          </dd>
+          {{ end }}
           <dt class="font-semibold text-slate-900">Time complexity:</dt>
           <dd>{{ .Params.complexity | markdownify }}</dd>
           {{ if .Params.acl_categories }}
@@ -31,21 +44,9 @@
               {{ end}}
             </dd>
           {{ end }}
+          {{/*  <dt class="font-semibold text-slate-900">Summary:</dt>
+          <dd>{{ .Params.summary }}</dd>  */}}
         </dl>
-        <div>
-          <span class="title"></span>
-          
-        </div>
-
-        <div>
-          <span class="title"></span>
-          
-        </div>
-
-        <div>
-          <span class="title"></span>
-          
-        </div>
 
         {{ if (isset .Params "deprecated_since") }}
           <p class="deprecated">
