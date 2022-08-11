@@ -18,6 +18,9 @@ module.exports = {
 		'redis-indigo': {
 			500: '#5961ff',
 			600: '#454CD5'
+		},
+        'redis-neutral': {
+			800: '#4E545B'
 		}
 	  },
       typography: (theme) => (  {

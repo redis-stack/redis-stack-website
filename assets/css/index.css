@@ -81,6 +81,10 @@
   @apply bg-slate-900 rounded-lg !important;
 }
 
+.prose p, .prose ol, .prose ul {
+  @apply text-redis-neutral-800
+}
+
 .prose pre > code {
   @apply bg-none;
 }

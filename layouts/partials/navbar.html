@@ -19,7 +19,7 @@
             {{ end }}
             {{ .Name }}
           </dt>
-          <dd class="hidden lg:grid text-[0.8rem] lg:text-sm text-slate-600 absolute top-full -mt-1 right-[1000rem] p-2 group-hover:right-[unset] group-hover:-left-3 group-focus-within:right-[unset] group-focus-within:-left-3 bg-white rounded-lg border border-slate-500/10 bg-clip-padding shadow-md">
+          <dd class="hidden lg:grid text-[0.8rem] lg:text-sm text-redis-neutral-800 absolute top-full -mt-1 right-[1000rem] p-2 group-hover:right-[unset] group-hover:-left-3 group-focus-within:right-[unset] group-focus-within:-left-3 bg-white rounded-lg border border-slate-500/10 bg-clip-padding shadow-md">
             {{ range .Children }}
               {{ if .HasChildren }}
                 <div class="-my-2 pr-3 py-4 col-start-{{ .Weight }} {{ if gt .Weight 1 }} border-l pl-5 {{ else }} pl-3 {{ end }}">
