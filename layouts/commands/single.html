@@ -71,15 +71,16 @@
     </div>
     
     <aside class="hidden xl:block w-52 h-full shrink-0">
-      {{ $related := .Site.Pages.RelatedIndices . "group" }}
-      {{ with $related }}
+      {{ $related := .Site.Pages.RelatedIndices . "group" | append . }}
+      {{ $this := . }}
+      {{ with sort $related "Title" }}
       <dl class="w-52 z-40 hidden bg-white/75 md:block overflow-auto fixed top-28 h-full max-h-[calc(100vh-15rem)] text-[0.8125rem]">
         <dt class="font-semibold mb-3">
           See also
         </dt>
-        {{ range first 10 . }}
+        {{ range . }}
           <dd>
-            <a class="block font-mono font-medium mb-2" href="{{ .RelPermalink }}">{{ .Title }}</a>
+            <a class="block font-mono font-medium mb-2 {{- if eq $this . }} text-indigo-600{{- end }}" href="{{ .RelPermalink }}">{{ .Title }}</a>
           </dd>
         {{ end }}
       </dl>
