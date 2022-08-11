@@ -82,7 +82,7 @@
 }
 
 .prose p, .prose ol, .prose ul {
-  @apply text-redis-neutral-800
+  @apply text-redis-neutral-800;
 }
 
 .prose pre > code {
