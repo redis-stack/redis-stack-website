@@ -7,20 +7,46 @@
     {{ partial "docs-nav.html" . }}
     <div class="w-full max-w-[47rem] py-12">
       {{ partial "breadcrumbs" . }}
-
       <section class="prose prose-slate pt-10">
-        {{ $syntax := "" }}
-        {{ if isset .Params "arguments" }}
-          {{ $args := .Params.arguments }}
-          {{ if gt (len $args) 0 }}
-            {{ $syntax = partial "command-syntax.html" $args }}
+        <h1>
+          {{- .Title }}
+          {{- if (isset .Params "deprecated_since") }}
+          <span class="text-base">(deprecated)</span>
+          {{- end }}
+        </h1>
+        {{ if (isset .Params "deprecated_since") }}
+          <div class="border-l-8 pl-4">
+            <p>As of Redis version {{ .Params.deprecated_since }}, this command is regarded as deprecated.</p>
+            {{- if (isset .Params "replaced_by") }}
+            <p>It can be replaced by {{ .Params.replaced_by | markdownify }} when migrating or writing new code.</p>
+            {{- end }}
+          </div>
+        {{ end }}
+        {{ $syntax := .Params.syntax_fmt }}
+        {{ if isset .Params "syntax" }}
+          {{ if .Params.syntax }}
+            {{ $syntax = .Params.syntax }}
+          {{ else }}
+            {{ $syntax = "" }}
           {{ end }}
         {{ end }}
-        <h1>{{ .Title }} {{ $syntax }}</h1>
-
+        {{ if (gt (len $syntax) 0) }}
+        <div class="font-semibold text-slate-900">Syntax</div>
+        <div class="whitespace-pre font-mono mb-3">
+          {{- $syntax -}}
+        </div>
+        {{ end }}
         <dl class="grid grid-cols-[auto,1fr] gap-x-2 mb-12">
+          {{ if not (isset .Params "module") }}
           <dt class="font-semibold text-slate-900">Available since:</dt>
           <dd>{{ .Params.since }}</dd>
+          {{ else }}
+          <dt class="font-semibold text-slate-900">Available in:</dt>
+          <dd>
+            <a href="/docs/stack">Redis Stack</a> /
+            <a href="/docs/stack/{{ .Params.group }}">{{ .Params.module }} {{ .Params.since }}</a>
+          </dd>
+          {{ end }}
           <dt class="font-semibold text-slate-900">Time complexity:</dt>
           <dd>{{ .Params.complexity | markdownify }}</dd>
           {{ if .Params.acl_categories }}
@@ -32,29 +58,6 @@
             </dd>
           {{ end }}
         </dl>
-        <div>
-          <span class="title"></span>
-          
-        </div>
-
-        <div>
-          <span class="title"></span>
-          
-        </div>
-
-        <div>
-          <span class="title"></span>
-          
-        </div>
-
-        {{ if (isset .Params "deprecated_since") }}
-          <p class="deprecated">
-              As of Redis version {{ .Params.deprecated_since }}, this command is regarded as deprecated.
-              {{ if (isset .Params "replaced_by") }}
-                <br /><br />It can be replaced by {{ .Params.replaced_by | markdownify }} when migrating or writing new code.
-              {{ end }}
-          </p>
-        {{ end }}
 
         {{ .Content }}
 
@@ -70,15 +73,17 @@
     </div>
     
     <aside class="hidden xl:block w-52 h-full shrink-0">
-      {{ $related := .Site.Pages.RelatedIndices . "group" }}
-      {{ with $related }}
+      {{ $related := .Site.Pages.RelatedIndices . "group" | append . }}
+      {{ $related = (where $related ".Params.hidden" "!=" true) }}
+      {{ $this := . }}
+      {{ with sort $related "Title" }}
       <dl class="w-52 z-40 hidden bg-white/75 md:block overflow-auto fixed top-28 h-full max-h-[calc(100vh-15rem)] text-[0.8125rem]">
         <dt class="font-semibold mb-3">
           See also
         </dt>
-        {{ range first 10 . }}
+        {{ range . }}
           <dd>
-            <a class="block font-mono font-medium mb-2" href="{{ .RelPermalink }}">{{ .Title }}</a>
+            <a class="block font-mono font-medium mb-2 {{- if eq $this . }} text-indigo-600{{- end }}" href="{{ .RelPermalink }}">{{ .Title }}</a>
           </dd>
         {{ end }}
       </dl>

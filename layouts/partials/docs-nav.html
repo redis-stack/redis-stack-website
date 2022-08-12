@@ -11,9 +11,14 @@
   {{ $withChild := gt (len $pages) 0 -}}
   {{ $rootDir := lt $ulNr 1 -}}
 
-  {{ if $show }}
+  {{ if and $show (not (default false $s.Params.hidden)) }}
     <li>
-      <a class="flex truncate{{- if $rootDir}} font-semibold text-slate-900{{- else if and ($active) (not $rootDir) }} active text-indigo-600{{- else }} text-slate-600 hover:text-indigo-600{{- end }}" href="{{ $s.RelPermalink }}">{{ $s.LinkTitle }}</a>
+      <a class="flex justify-between items-center truncate{{- if $rootDir}} font-semibold text-slate-900{{- else if and ($active) (not $rootDir) }} active text-indigo-600{{- else }} text-slate-600 hover:text-indigo-600{{- end }}" href="{{ $s.RelPermalink }}">
+          <span>{{ $s.LinkTitle }}</span>
+          {{ if and $ulNr $withChild }}
+          {{ partial (cond $active "icons/docs-expanded" "icons/docs-collapsed") (dict "class" "shrink-0 h-[1.0rem] w-[1.0rem] stroke-slate-400") }}
+          {{ end }}
+      </a>
       {{- if $withChild }}
         {{- $ulNr := add $ulNr 1 }}
         <ul class="{{- if gt $ulNr 1}}child-list{{- end }}">

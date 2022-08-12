@@ -3,7 +3,7 @@ IP ?= 0.0.0.0
 LOGLEVEL ?= INFO
 ENV ?= development
 HUGO_CONTENT ?= ./content/en
-HUGO_BUILD ?= --gc --minify
+HUGO_BUILD ?= --gc
 HUGO_SERVER ?= --quiet --disableFastRender -b http://$(IP) --bind $(IP)
 DOCKER_IMAGE=image-redis-stack-website
 DOCKER_CONTAINER=container-$(DOCKER_IMAGE)
@@ -30,10 +30,6 @@ deps:
 	@pip install -r requirements.txt
 	@npm install
 
-deps:
-	@pip install -r requirements.txt
-	@npm install
-
 build:
 	# @python3 build/get_meta.py $(GET_META) --loglevel=$(LOGLEVEL)
 	@python3 build/make_stack.py $(SKIP_CLONE) --module=$(STACK_MODULE) --loglevel=$(LOGLEVEL)
@@ -44,9 +40,8 @@ up:
 	hugo server $(HUGO_DEBUG) $(HUGO_SERVER) -w --environment $(ENV)
 
 clean:
-	@rm -f config.toml
 	# @rm -f data/*.json
-	@rm -rf $(HUGO_CONTENT) assets layouts public static resources tmp
+	@rm -rf $(HUGO_CONTENT) public tmp
 
 ifneq ($(VOL),)
 DOCKER_VOL=-v $(VOL):$(VOL)
