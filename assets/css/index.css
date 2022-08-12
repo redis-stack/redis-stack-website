@@ -248,7 +248,7 @@ select {
 }
 
 .child-list a {
-  @apply relative block hover:text-indigo-600 py-0.5 pl-4 transition-colors leading-6;
+  @apply relative flex hover:text-indigo-600 py-0.5 pl-4 transition-colors leading-6;
 }
 
 .child-list a:before {
