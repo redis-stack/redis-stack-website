@@ -8,7 +8,20 @@
     <div class="w-full max-w-[47rem] py-12">
       {{ partial "breadcrumbs" . }}
       <section class="prose prose-slate pt-10">
-        <h1>{{ .Title }}</h1>
+        <h1>
+          {{- .Title }}
+          {{- if (isset .Params "deprecated_since") }}
+          <span class="text-base">(deprecated)</span>
+          {{- end }}
+        </h1>
+        {{ if (isset .Params "deprecated_since") }}
+          <div class="border-l-8 pl-4">
+            <p>As of Redis version {{ .Params.deprecated_since }}, this command is regarded as deprecated.</p>
+            {{- if (isset .Params "replaced_by") }}
+            <p>It can be replaced by {{ .Params.replaced_by | markdownify }} when migrating or writing new code.</p>
+            {{- end }}
+          </div>
+        {{ end }}
         {{ $syntax := .Params.syntax_fmt }}
         {{ if isset .Params "syntax" }}
           {{ if .Params.syntax }}
@@ -19,7 +32,7 @@
         {{ end }}
         {{ if (gt (len $syntax) 0) }}
         <div class="font-semibold text-slate-900">Syntax</div>
-        <div class="whitespace-pre font-mono my-3">
+        <div class="whitespace-pre font-mono mb-3">
           {{- $syntax -}}
         </div>
         {{ end }}
@@ -45,15 +58,6 @@
             </dd>
           {{ end }}
         </dl>
-
-        {{ if (isset .Params "deprecated_since") }}
-          <p class="deprecated">
-              As of Redis version {{ .Params.deprecated_since }}, this command is regarded as deprecated.
-              {{ if (isset .Params "replaced_by") }}
-                <br /><br />It can be replaced by {{ .Params.replaced_by | markdownify }} when migrating or writing new code.
-              {{ end }}
-          </p>
-        {{ end }}
 
         {{ .Content }}
 
