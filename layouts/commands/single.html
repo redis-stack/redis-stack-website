@@ -32,9 +32,9 @@
         {{ end }}
         {{ if (gt (len $syntax) 0) }}
         <div class="font-semibold text-slate-900">Syntax</div>
-        <div class="whitespace-pre font-mono mb-3">
+        <pre class="command-syntax">
           {{- $syntax -}}
-        </div>
+        </pre>
         {{ end }}
         <dl class="grid grid-cols-[auto,1fr] gap-x-2 mb-12">
           {{ if not (isset .Params "module") }}
