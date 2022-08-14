@@ -81,25 +81,8 @@ class Argument:
 
     def diagram(self) -> DiagramItem:
         if self._type == ArgumentType.COMMAND:
-            s = []
-            i = 0
-            optionals = []
-            while i < len(self._arguments):
-                arg = self._arguments[i].diagram()
-                if type(arg) is Optional:
-                    optionals.append(arg)
-                else:
-                    if len(optionals) != 0:
-                        optionals.sort(key=lambda x: x.width)
-                        s += optionals
-                        optionals = []
-                    s.append(arg)
-                i += 1
-            if len(optionals) != 0:
-                optionals.sort(key=lambda x: x.width)
-                s += optionals
-
             self._stack.append(Sequence(Terminal(self._name)))
+            s = [arg.diagram() for arg in self._arguments]
             for arg in s:
                 if type(arg) is not Sequence:
                     items = [arg]
@@ -113,7 +96,7 @@ class Argument:
                     else:
                         self._stack[-1] = Sequence(*self._stack[-1].items, a)
         else:
-            if self._type in [ArgumentType.BLOCK, ArgumentType.ONEOF] and len(self._arguments) > 0:
+            if self._type in [ArgumentType.BLOCK, ArgumentType.ONEOF]:
                 args = [arg.diagram() for arg in self._arguments]
                 if self._type == ArgumentType.BLOCK:
                     el = Sequence(*args)
@@ -122,15 +105,18 @@ class Argument:
             elif self._type != ArgumentType.PURE_TOKEN:
                 el = NonTerminal(self._name, title=self._type.value)
 
-            if self._multiple:
-                if self._multiple_token:
-                    el = Sequence(Terminal(self._token), el)
+            if self._multiple_token:
+                el = Sequence(Terminal(self._token), el)
                 el = OneOrMore(el)
-            elif self._token:
-                if self._type == ArgumentType.PURE_TOKEN:
-                    el = Terminal(self._token)
-                else:
-                    el = Sequence(Terminal(self._token), el)
+            else:
+                if self._token:
+                    if self._type == ArgumentType.PURE_TOKEN:
+                        el = Terminal(self._token)
+                    else:
+                        el = Sequence(Terminal(self._token), el)
+                if self._multiple:
+                    el = OneOrMore(el)
+
             if self._optional:
                 el = Optional(el, True)
 

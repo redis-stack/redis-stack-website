@@ -515,3 +515,38 @@ main.download:after {
 #alpha-filter-container .active {
   @apply bg-indigo-50 text-indigo-600 border-indigo-200;
 }
+
+svg.railroad-diagram {
+  background-color:rgba(0,0,0,0);
+}
+
+svg.railroad-diagram path {
+  stroke-width: 3;
+  stroke: black;
+  fill: none;
+}
+
+svg.railroad-diagram text {
+  font:bold 14px monospace;
+  text-anchor:middle;
+}
+
+svg.railroad-diagram text.label{
+  text-anchor:start;
+}
+
+svg.railroad-diagram text.comment{
+  font:italic 12px monospace;
+}
+
+svg.railroad-diagram rect{
+  stroke-width:3;
+  stroke:black;
+  fill:hsl(120,100%,90%);
+}
+
+svg.railroad-diagram rect.group-box {
+  stroke: gray;
+  stroke-dasharray: 10 5;
+  fill: none;
+}
