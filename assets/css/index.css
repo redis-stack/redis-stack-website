@@ -405,7 +405,7 @@ select {
 }
 
 .redis-cli {
-  @apply font-mono bg-slate-900 h-80 overflow-y-scroll text-white p-6 rounded-b-xl;
+  @apply font-mono bg-slate-900 h-80 overflow-y-scroll text-neutral-50 px-4 py-2 rounded-b-xl;
 }
 
 .redis-cli > pre {
@@ -417,7 +417,7 @@ select {
 }
 
 .prose .redis-cli > pre {
-  @apply text-white bg-transparent m-0 p-0;
+  @apply text-neutral-50 bg-transparent m-0 p-0;
 }
 
 .prose .redis-cli > .prompt {
