@@ -1,0 +1,207 @@
+baseURL = "/"
+title = "Redis"
+
+enableRobotsTXT = true
+enableGitInfo = true
+enableEmoji = true
+
+contentDir = "content/en"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = true
+enableMissingTranslationPlaceholders = true
+
+[related]
+[[related.indices]]
+  name = 'group'
+  weight = 1
+  includeNewer = true
+
+# Highlighting config
+pygmentsCodeFences = true
+pygmentsUseClasses = false
+# Use the new Chroma Go highlighter in Hugo.
+pygmentsUseClassic = false
+#pygmentsOptions = "linenos=table"
+# See https://help.farbox.com/pygments.html
+pygmentsStyle = "tango"
+
+# Configure how URLs look like per section.
+[permalinks]
+blog = "/:section/:year/:month/:day/:slug/"
+
+## Configuration for BlackFriday markdown parser: https://github.com/russross/blackfriday
+[blackfriday]
+plainIDAnchors = true
+hrefTargetBlank = true
+angledQuotes = false
+latexDashes = true
+
+# Image processing configuration.
+[imaging]
+resampleFilter = "CatmullRom"
+quality = 75
+anchor = "smart"
+
+[params]
+  tagManagerId = "GTM-T4MTBKP"
+
+# Language configuration
+
+[languages]
+
+[languages.en]
+title = "Redis"
+description = "Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker"
+languageName ="English"
+# Weight used for sorting.
+weight = 1
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+    [markup.goldmark.extensions]
+      typographer = false
+  [markup.highlight]
+      # See a complete list of available styles at https://xyproto.github.io/splash/docs/all.html
+      style = "tango"
+      # Uncomment if you want your chosen highlight style used for code blocks without a specified language
+      # guessSyntax = "true"
+
+# Everything below this are Site Params
+
+# Comment out if you don't want the "print entire section" link enabled.
+[outputs]
+section = ["HTML", "RSS"] # print
+
+[menu]
+  [[menu.main]]
+    identifier = "get-started"
+    name = "GET STARTED"
+    weight = 1
+    columns = 2
+  [[menu.main]]
+    identifier = "redis"
+    name = "Redis"
+    url = "/docs/about/"
+    pre = "icons/redis-cube.svg"
+    parent = "get-started"
+    weight = 1
+  [[menu.main]]
+    identifier = "redis-get-started"
+    name = "Get Started"
+    url = "/docs/getting-started/"
+    parent = "redis"
+    weight = 1
+  [[menu.main]]
+    identifier = "data-types"
+    name = "Data Types"
+    url = "/docs/manual/data-types/"
+    parent = "redis"
+    weight = 2
+  [[menu.main]]
+    identifier = "redis-cli"
+    name = "Redis CLI"
+    url = "/docs/manual/cli/"
+    parent = "redis"
+    weight = 3
+  [[menu.main]]
+    identifier = "persistence"
+    name = "Persistence"
+    url = "/docs/manual/persistence/"
+    parent = "redis"
+    weight = 4
+  [[menu.main]]
+    identifier = "scaling"
+    name = "Scaling"
+    url = "/docs/manual/scaling/"
+    parent = "redis"
+    weight = 5
+  [[menu.main]]
+    identifier = "redis-stack"
+    name = "Redis Stack"
+    url = "/docs/stack/"
+    pre = "icons/stack-icon.svg"
+    parent = "get-started"
+    weight = 2
+  [[menu.main]]
+    identifier = "stack-get-started"
+    name = "Get Started"
+    url = "/docs/stack/get-started/"
+    parent = "redis-stack"
+    weight = 1
+  [[menu.main]]
+    identifier = "stack-clients"
+    name = "Stack Clients"
+    url = "/docs/stack/get-started/clients/"
+    parent = "redis-stack"
+    weight = 2
+  [[menu.main]]
+    identifier = "insight"
+    name = "RedisInsight"
+    url = "/docs/stack/insight/"
+    parent = "redis-stack"
+    weight = 3
+  [[menu.main]]
+    identifier = "json"
+    name = "JSON"
+    url = "/docs/stack/json/"
+    parent = "redis-stack"
+    weight = 4
+  [[menu.main]]
+    identifier = "time-series"
+    name = "Time Series"
+    url = "/docs/stack/timeseries/"
+    parent = "redis-stack"
+    weight = 5
+  [[menu.main]]
+    identifier = "docs"
+    name = "DOCS"
+    url = "/docs/"
+    weight = 2
+  [[menu.main]]
+    identifier = "commands"
+    name = "COMMANDS"
+    url = "/commands/"
+    weight = 3
+  [[menu.main]]
+    identifier = "resources"
+    name = "RESOURCES"
+    weight = 4
+  [[menu.main]]
+    identifier = "resource-download"
+    name = "Download"
+    url = "/download/"
+    parent = "resources"
+    weight = 1
+  [[menu.main]]
+    identifier = "support"
+    name = "Support"
+    url = "/support/"
+    parent = "resources"
+    weight = 2
+  [[menu.main]]
+    identifier = "clients"
+    name = "Clients"
+    url = "/docs/clients/"
+    parent = "resources"
+    weight = 3
+  [[menu.main]]
+    identifier = "community"
+    name = "COMMUNITY"
+    url = "/community/"
+    weight = 5
+  [[menu.buttons]]
+    identifier = "download"
+    name = "Download"
+    url = "/download/"
+    weight = 1
+    [menu.buttons.params]
+      style = "solid"
+  [[menu.buttons]]
+    identifier = "try-free"
+    name = "Try Redis Cloud"
+    url = "http://redis.com/try-free/"
+    weight = 2
+    [menu.buttons.params]
+      style = "outline"

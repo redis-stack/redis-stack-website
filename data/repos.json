@@ -328,10 +328,6 @@
                 ],
                 "repository": "pypi.python.org/pypi/txredis"
             },
-            "aredis": {
-                "description": "An efficient and user-friendly async redis client ported from redis-py.",
-                "repository": "github.com/NoneGG/aredis"
-            },
             "Pypredis": {
                 "description": "A client focused on arbitrary sharding and parallel pipelining.",
                 "twitter": [
@@ -359,17 +355,16 @@
                 "description": "Python Client with support for Redis Cluster. Currently only Python 3 is supported.",
                 "repository": "github.com/schlitzered/pyredis"
             },
+            "coredis": {
+                "description": "Async redis client with support for redis server, cluster & sentinel",
+                "repository": "github.com/alisaifee/coredis"
+            },
             "Pottery": {
                 "description": "High level Pythonic dict, set, and list like containers around Redis data types (Python 3 only)",
                 "twitter": [
                     "brainix"
                 ],
                 "repository": "github.com/brainix/pottery"
-            },
-            "aioredis": {
-                "description": "Asyncio (PEP 3156) Redis client",
-                "homepage": "http://aioredis.readthedocs.org/",
-                "repository": "github.com/aio-libs/aioredis"
             },
             "pyton-redis-orm": {
                 "description": "Python Redis ORM library that gives redis easy-to-use objects with fields and speeds a developmet up, inspired by Django ORM",
@@ -398,7 +393,7 @@
                 "repository": "github.com/KissPeter/redis-streams"
             },
             "redis-py-cluster": {
-                "description": "Python cluster client for the official redis cluster. Redis 3.0+.",
+                "description": "Adds cluster support to redis-py < 4.1.0. Obsolete for 4.1.0 and above.",
                 "twitter": [
                     "grokzen"
                 ],
@@ -586,9 +581,40 @@
             }
         },
         "smalltalk": {
+            "RediStick": {
+                "language": "Smalltalk",
+                "repository": "github.com/RediStick/RediStick",
+                "description": "A Redis client for Pharo using Stick auto-reconnection layer.",
+                "authors": [
+                    "umejava"
+                ]
+            },
+            "SimpleRedisClient": {
+                "language": "Smalltalk",
+                "repository": "github.com/SimpleRedisClient/SimpleRedisClient",
+                "description": "A minimal Redis client for Pharo.",
+                "homepage": "https://medium.com/concerning-pharo/quick-write-me-a-redis-client-5fbe4ddfb13d",
+                "authors": [
+                    "SvenVC"
+                ]
+            },
+            "Pharo-Redis": {
+                "language": "Smalltalk",
+                "repository": "github.com/Pharo-Redis/Pharo-Redis",
+                "description": "A full featured Redis client for Pharo. This was forked from svenvc/SimpleRedisClient and that simple client is still at the center of this.",
+                "authors": [
+                    "ToddBlanchard10"
+                ]
+            },
             "Redis": {
-                "description": "Smalltalk Redis client.",
-                "repository": "squeaksource.com/Redis"
+                "language": "Smalltalk",
+                "repository": "squeaksource.com/Redis/Redis",
+                "description": "Smalltalk Redis client."
+            },
+            "RedisBinaryClient": {
+                "language": "Smalltalk",
+                "repository": "squeaksource.com/RedisBinaryClient/RedisBinaryClient",
+                "description": "A fork of the RedisConnection from Redis Client."
             }
         },
         "rust": {
@@ -797,14 +823,6 @@
                     "stefanwille"
                 ],
                 "repository": "github.com/stefanwille/crystal-redis"
-            },
-            "mini_redis": {
-                "description": "A light-weight low-level Redis client for Crystal",
-                "homepage": "http://github.vladfaust.com/mini_redis/",
-                "twitter": [
-                    "vladfaust"
-                ],
-                "repository": "github.com/vladfaust/mini_redis"
             }
         },
         "haskell": {
@@ -834,14 +852,6 @@
                     "JoL1hAHN"
                 ],
                 "repository": "github.com/nrk/predis"
-            },
-            "Rediska": {
-                "description": "A Redis client.",
-                "homepage": "http://rediska.geometria-lab.net",
-                "twitter": [
-                    "shumkov"
-                ],
-                "repository": "github.com/Shumkov/Rediska"
             },
             "Redisent": {
                 "description": "A Redis client.",
@@ -1550,6 +1560,11 @@
             "miniredis": {
                 "description": "Pure Go Redis server for Go unittests",
                 "repository": "github.com/alicebob/miniredis"
+            },
+            "godis": {
+                "description": "A Golang implemented Redis Server and Cluster",
+                "homepage": "https://github.com/hdt3213/godis",
+                "repository": "github.com/hdt3213/godis"
             },
             "Rediseen": {
                 "description": "Start a REST-like API service for your Redis database, without writing a single line of code.",
@@ -2619,6 +2634,14 @@
                 "description": "Developer GUI for Redis, by Redis.",
                 "recommended": true,
                 "repository": "github.com/RedisInsight/RedisInsight"
+            },
+            "Medis": {
+                "description": "Medis is a beautiful, easy-to-use Mac database management application for Redis.",
+                "homepage": "https://github.com/luin/medis",
+                "twitter": [
+                    "medisclient"
+                ],
+                "repository": "github.com/luin/medis"
             },
             "redis-browser": {
                 "description": "Cross platform GUI tool for redis that includes support for ReJSON",

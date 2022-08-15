@@ -3,7 +3,7 @@ IP ?= 0.0.0.0
 LOGLEVEL ?= INFO
 ENV ?= development
 HUGO_CONTENT ?= ./content/en
-HUGO_BUILD ?= --gc --minify
+HUGO_BUILD ?= --gc
 HUGO_SERVER ?= --quiet --disableFastRender -b http://$(IP) --bind $(IP)
 DOCKER_IMAGE=image-redis-stack-website
 DOCKER_CONTAINER=container-$(DOCKER_IMAGE)
@@ -16,7 +16,7 @@ GET_META=--production
 endif
 
 ifeq ($(DEBUG),1)
-HUGO_DEBUG=--debug
+HUGO_DEBUG=--debug --log
 LOGLEVEL ?= DEBUG
 endif
 
@@ -24,10 +24,7 @@ ifeq ($(SKIP_CLONE),1)
 SKIP_CLONE=--skip-clone
 endif
 
-all: init build
-
-init:
-	@git submodule update --init --recursive
+all: build
 
 deps:
 	@pip install -r requirements.txt
@@ -43,9 +40,8 @@ up:
 	hugo server $(HUGO_DEBUG) $(HUGO_SERVER) -w --environment $(ENV)
 
 clean:
-	@rm -f config.toml
 	# @rm -f data/*.json
-	@rm -rf $(HUGO_CONTENT) assets layouts public static resources tmp
+	@rm -rf $(HUGO_CONTENT) public tmp
 
 ifneq ($(VOL),)
 DOCKER_VOL=-v $(VOL):$(VOL)
@@ -70,7 +66,7 @@ docker-sh:
 	@docker run -it $(DOCKER_PORT) $(DOCKER_VOL) $(DOCKER_IMAGE) bash
 
 docker-all: docker-build docker-make
-	@docker create --name $(DOCKER_CONTAINER) $(DOCKER_IMAGE) 
+	@docker create --name $(DOCKER_CONTAINER) $(DOCKER_IMAGE)
 	@docker cp $(DOCKER_CONTAINER):/build/public - > public.tar
 	@docker rm -v $(DOCKER_CONTAINER)
 	@rm -rf public/

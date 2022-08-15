@@ -152,31 +152,20 @@ class Command(Argument):
         s = ' '.join([arg.syntax() for arg in self._arguments[1:]])
         return s
 
+    def isPureContainer(self) -> bool:
+        return self._cdata.get('arguments') is None and self._cdata.get('arity',0) == -2 and len(self._cname.split(' ')) == 1
+
+    def isHelpCommand(self) -> bool:
+        return self._cname.endswith(' HELP')
+
     def syntax(self, **kwargs):
-        indent = len(self._name) + 1
         opts = {
-            'width': kwargs.get('width', 58),
-            'subsequent_indent': ' ' * indent,
+            'width': kwargs.get('width', 68),
+            'subsequent_indent': ' ' * 2,
             'break_long_words': False,
             'break_on_hyphens': False
         }
-        i = 0
-        args = [self._name]
-        optionals = []
-        while i < len(self._arguments):
-            arg = self._arguments[i].syntax(**kwargs)
-            if arg.startswith('[') and not (arg.endswith('...]') or arg.endswith('...]]')):
-                optionals.append(arg)
-            else:
-                if len(optionals) != 0:
-                    optionals.sort(key=lambda x: len(x))
-                    args += optionals
-                    optionals = []
-                args.append(arg)
-            i += 1
-        if len(optionals) != 0:
-            optionals.sort(key=lambda x: len(x))
-            args += optionals
+        args = [self._name] + [arg.syntax() for arg in self._arguments]
         return fill(' '.join(args), **opts)
 
     def diagram(self) -> str:

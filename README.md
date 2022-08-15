@@ -1,10 +1,11 @@
 # Prereqs
-git
-python3
-make
-hugo
-npm
+`pip install -r requirements.txt`
+`npm install`
+`brew install hugo`
+`make netlify`
+`make up`
 
+---
 
 After cloning `redis-stack-website`, run `make docker` to build and run a container that serves hugo on `localhost:1313` with the components defined in `redis_stack_components.yml`.
 
