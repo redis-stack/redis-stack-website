@@ -57,7 +57,7 @@
 }
 
 .button-indigo {
-  @apply text-white border border-solid border-transparent bg-indigo-500 hover:bg-indigo-600 focus:bg-indigo-600 focus:ring-indigo-600;
+  @apply text-white border border-solid border-transparent bg-redis-indigo-500 hover:bg-redis-indigo-600 focus:bg-indigo-600 focus:ring-indigo-600;
 }
 
 .button-outline {
@@ -74,11 +74,15 @@
 .prose h4,
 .prose h5,
 .prose h6 {
-  @apply font-semibold text-slate-900 tracking-[-0.04em];
+  @apply font-semibold text-midnight-700 tracking-[-0.04em];
 }
 
 .prose pre {
   @apply bg-slate-900 rounded-lg !important;
+}
+
+.prose p, .prose ol, .prose ul {
+  @apply text-redis-neutral-800;
 }
 
 .prose pre > code {
@@ -248,7 +252,7 @@ select {
 }
 
 .child-list a {
-  @apply relative block hover:text-indigo-600 py-0.5 pl-4 transition-colors leading-6;
+  @apply relative flex hover:text-indigo-600 py-0.5 pl-4 transition-colors leading-6;
 }
 
 .child-list a:before {
@@ -401,7 +405,7 @@ select {
 }
 
 .redis-cli {
-  @apply font-mono bg-slate-900 h-80 overflow-y-scroll text-white p-6 rounded-b-xl;
+  @apply font-mono bg-slate-900 h-80 overflow-y-scroll text-neutral-50 px-4 py-2 rounded-b-xl;
 }
 
 .redis-cli > pre {
@@ -413,7 +417,7 @@ select {
 }
 
 .prose .redis-cli > pre {
-  @apply text-white bg-transparent m-0 p-0;
+  @apply text-neutral-50 bg-transparent m-0 p-0;
 }
 
 .prose .redis-cli > .prompt {

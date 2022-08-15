@@ -11,18 +11,29 @@ module.exports = {
 				mono: [ 'Fira Code', 'SF Mono', ...defaultTheme.fontFamily.mono ],
 				display: [ 'Inter Display', ...defaultTheme.fontFamily.sans ],
       },
+	  colors: {
+		midnight: {
+			700: '#161F31',
+		  },
+		'redis-indigo': {
+			500: '#5961ff',
+			600: '#454CD5'
+		},
+        'redis-neutral': {
+			800: '#4E545B'
+		}
+	  },
       typography: (theme) => (  {
         DEFAULT: {
           css: {
             color: theme('colors.slate.600'),
             a: {
               transition: '.2s all',
-              color: theme('colors.indigo.600'),
+              color: theme('colors.redis-indigo.500'),
               textDecorationColor: theme('colors.indigo.300'),
-              textDecorationThickness: '1px',
-              textUnderlineOffset: '1px',
+			  textDecoration: 'none',
               '&:hover': {
-                color: theme('colors.indigo.400'),
+                color: theme('colors.redis-indigo.600'),
               },
             },
             code: {
@@ -51,7 +62,7 @@ module.exports = {
 					justifyContent: 'center',
 					fontWeight: '600',
 					letterSpacing: theme('letterSpacing.normal'),
-					borderRadius: theme('borderRadius.DEFAULT'),
+					borderRadius: theme('borderRadius.sm'),
 					whiteSpace: 'nowrap',
 					transition: '.2s all',
 				},

@@ -108,7 +108,18 @@
   
             return a
           }, [])
-  
+
+        // If there's no natural section title, use the hierarchy
+        const constructSectionTitle = (record) => {
+          if (record.section_title) {
+            return record.section_title
+          } else if (record.hierarchy && record.hierarchy.length > 2) {
+            return record.hierarchy.slice(-2).join(' > ')
+          } else {
+            return null
+          }
+        }
+
         // Merge the data into a single list using the categories list as index
         const mergeData = (data, categories) =>
           categories.map((category) => {
@@ -118,7 +129,7 @@
             data.forEach((record) => {
               if (record.hierarchy[0] === category) {
                 obj[record.title] = {
-                  path: record.section_title,
+                  path: constructSectionTitle(record),
                   url: record.url,
                 }
               }

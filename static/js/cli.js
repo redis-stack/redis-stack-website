@@ -1,5 +1,5 @@
 const API_URL = 'https://cli.redis.io',
-  PROMPT_PREFIX = 'redis:6379> ';
+  PROMPT_PREFIX = 'redis> ';
 
 async function createCli(cli) {
   const toExecute = getCommandsToExecute(cli);
@@ -291,7 +291,7 @@ function typewriter(textNode, toWrite) {
       }
 
       textNode.nodeValue += toWrite[i++];
-    }, 25+Math.random()*25);
+    }, 10+Math.random()*25);
   });
 }
 
