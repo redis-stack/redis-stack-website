@@ -89,13 +89,13 @@ section = ["HTML", "RSS"] # print
     weight = 1
   [[menu.main]]
     identifier = "redis-get-started"
-    name = "Get Started"
+    name = "Get started"
     url = "/docs/getting-started/"
     parent = "redis"
     weight = 1
   [[menu.main]]
     identifier = "data-types"
-    name = "Data Types"
+    name = "Data types"
     url = "/docs/manual/data-types/"
     parent = "redis"
     weight = 2
@@ -126,13 +126,13 @@ section = ["HTML", "RSS"] # print
     weight = 2
   [[menu.main]]
     identifier = "stack-get-started"
-    name = "Get Started"
+    name = "Get started"
     url = "/docs/stack/get-started/"
     parent = "redis-stack"
     weight = 1
   [[menu.main]]
     identifier = "stack-clients"
-    name = "Stack Clients"
+    name = "Stack clients"
     url = "/docs/stack/get-started/clients/"
     parent = "redis-stack"
     weight = 2
@@ -150,8 +150,8 @@ section = ["HTML", "RSS"] # print
     weight = 4
   [[menu.main]]
     identifier = "time-series"
-    name = "Time Series"
-    url = "/docs/stack/timeseries/"
+    name = "Search"
+    url = "/docs/stack/search/"
     parent = "redis-stack"
     weight = 5
   [[menu.main]]
