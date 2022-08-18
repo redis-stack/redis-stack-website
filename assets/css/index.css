@@ -246,7 +246,7 @@ select {
   content: '';
   @apply w-[3px] h-full bg-slate-300/30 absolute left-0 top-0 rounded-xl transition;
 }
- 
+
 .child-list .child-list {
   @apply ml-4;
 }
@@ -514,4 +514,8 @@ main.download:after {
 
 #alpha-filter-container .active {
   @apply bg-indigo-50 text-indigo-600 border-indigo-200;
+}
+
+html {
+  scrollbar-gutter: stable;
 }
