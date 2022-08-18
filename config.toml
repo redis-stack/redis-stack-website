@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://redis.io/"
 title = "Redis"
 
 enableRobotsTXT = true
