@@ -22,6 +22,12 @@
             {{- end }}
           </div>
         {{ end }}
+
+      
+        {{ with .Resources.GetMatch "syntax.svg" }}
+        <div class="flex">{{ ( . | minify).Content | safeHTML }}</div>
+        {{ end }}
+  
         {{ $syntax := .Params.syntax_fmt }}
         {{ if isset .Params "syntax" }}
           {{ if .Params.syntax }}
