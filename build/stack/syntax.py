@@ -35,6 +35,7 @@ class Argument:
         self._multiple: bool = data.get('multiple', False)
         self._multiple_token: bool = data.get('multiple_token', False)
         self._token: str | None = data.get('token')
+        self._display: str = data.get('display', self._name)
         if self._token == '':
             self._token = '""'
         self._arguments: List[Argument] = [
@@ -48,7 +49,7 @@ class Argument:
         elif self._type == ArgumentType.ONEOF:
             args += f' | '.join([arg.syntax() for arg in self._arguments])
         elif self._type != ArgumentType.PURE_TOKEN:
-            args += self._name
+            args += self._display
             if show_types:
                 args += f':{self._type.value}'
 
@@ -99,7 +100,7 @@ class Argument:
                 optionals.sort(key=lambda x: x.width)
                 s += optionals
 
-            self._stack.append(Sequence(Terminal(self._name)))
+            self._stack.append(Sequence(Terminal(self._display)))
             for arg in s:
                 if type(arg) is not Sequence:
                     items = [arg]
@@ -120,7 +121,7 @@ class Argument:
                 elif self._type == ArgumentType.ONEOF:
                     el = Choice(round(len(args)/2), *args)
             elif self._type != ArgumentType.PURE_TOKEN:
-                el = NonTerminal(self._name, title=self._type.value)
+                el = NonTerminal(self._display, title=self._type.value)
 
             if self._multiple:
                 if self._multiple_token:
