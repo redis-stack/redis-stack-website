@@ -44,7 +44,7 @@
           <dt class="font-semibold text-slate-900">Available in:</dt>
           <dd>
             <a href="/docs/stack">Redis Stack</a> /
-            <a href="/docs/stack/{{ .Params.group }}">{{ .Params.module }} {{ .Params.since }}</a>
+            <a href="/docs/stack/{{ .Params.module | lower }}">{{ .Params.module }} {{ .Params.since }}</a>
           </dd>
           {{ end }}
           <dt class="font-semibold text-slate-900">Time complexity:</dt>
