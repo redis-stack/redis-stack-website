@@ -1,0 +1,15 @@
+{{ $gh_repo := .Params.github_repo }}
+{{ $gh_path := .Params.github_path }}
+{{ $gh_branch := .Params.github_branch }}
+{{ $editURL := printf "%s/edit/%s/%s" $gh_repo $gh_branch $gh_path }}
+{{ $issuesURL := printf "%s/issues/new?title=%s" $gh_repo (safeURL $.Title )}}
+<div>
+  <h2>Feedback</h2>
+  <p>
+    If you've found issues on this page, or have suggestions for improvement, please submit a request to merge or open an issue in the repository.
+  </p>
+  <div class="flex justify-evenly text-redis-neutral-800">
+    <a {{ printf "href=%q" $editURL | safeHTMLAttr }} class="button button-outline" target="_blank">Edit this page</a>
+    <a {{ printf "href=%q" $issuesURL | safeHTMLAttr }} class="button button-outline" target="_blank">Create an issue</a>
+  </div>
+</div>
