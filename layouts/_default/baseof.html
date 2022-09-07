@@ -48,6 +48,9 @@
     
     <script src="/js/index.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" integrity="sha512-yUUc0qWm2rhM7X0EFe82LNnv2moqArj5nro/w1bi05A09hRVeIZbN6jlMoyu0+4I/Bu4Ck/85JQIU82T82M28w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    {{ if .Params.math }}
+        {{ partial "mathjax.html" }}
+    {{ end }}
   </head>
   <body class="antialiased tracking-[-0.01em]">
     {{ if hugo.IsProduction -}}
