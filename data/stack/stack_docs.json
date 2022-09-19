@@ -23,6 +23,10 @@
             },
             {
                 "src": "terms/"
+            },
+            {
+                "src": "about/",
+                "dst": "docs/about/"
             }
         ]
     }
