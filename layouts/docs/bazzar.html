@@ -1,97 +1,92 @@
 {{ define "main" }}
+{{ $bazzar := $.Param "bazzar" }}
+{{ $has_groups := true }}
+{{ $group_name := "language" }}
+{{ $groups := dict }}
+{{ if or (eq $bazzar "clients") (eq $bazzar "libraries") }}
+  {{ range $k, $v := $.Site.Data.languages }}
+    {{ if (index (index $.Site.Data.repos $bazzar) $v) }}
+      {{ $groups = merge $groups (dict $v $k) }}
+    {{ end }}
+  {{ end }}
+{{ else if eq $bazzar "tools" }}
+  {{ $group_name = "tool type" }}
+  {{ range $k, $v := $.Site.Data.tool_types }}
+    {{ if (index (index $.Site.Data.repos $bazzar) $k) }}
+      {{ $groups = merge $groups (dict $k $v) }}
+    {{ end }}
+  {{ end }}
+{{ else }}
+  {{ $groups = merge $groups (dict "community" "Community") }}
+  {{ $has_groups = false }}
+{{ end }}
+
   <main class="docs w-full max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 md:flex gap-16">
     {{ partial "docs-nav.html" . }}
 
     <section class="prose prose-slate w-full max-w-[47rem] py-12">
-      {{ .Render "content" }}
-
-      {{ $bazzar := $.Param "bazzar" }}
-      {{ $has_groups := true }}
-      {{ $group_name := "language" }}
-      {{ $groups := dict }}
-      {{ if or (eq $bazzar "clients") (eq $bazzar "libraries") }}
-        {{ range $k, $v := $.Site.Data.languages }}
-          {{ if (index (index $.Site.Data.repos $bazzar) $v) }}
-            {{ $groups = merge $groups (dict $v $k) }}
-          {{ end }}
-        {{ end }}
-      {{ else if eq $bazzar "tools" }}
-        {{ $group_name = "tool type" }}
-        {{ range $k, $v := $.Site.Data.tool_types }}
-          {{ if (index (index $.Site.Data.repos $bazzar) $k) }}
-            {{ $groups = merge $groups (dict $k $v) }}
-          {{ end }}
-        {{ end }}
-      {{ else }}
-        {{ $groups = merge $groups (dict "community" "Community") }}
-        {{ $has_groups = false }}
-      {{ end }}
-
       <h1>{{ .Title }}</h1>
-
+      {{- .Render "content" -}}
       <p>
-        The recommended repositories are marked with a {{ partial "icons/heart" (dict "class" "align-text-top inline-flex shrink-0 h-[1.125rem] w-[1.125rem] opacity-50") }}. Repositories with some activity within the latest six months are marked with a {{ partial "icons/lightning" (dict "class" "align-text-bottom inline-flex shrink-0 h-[1.0625rem] w-[1.0625rem] opacity-50") }}. Want your repository listed here? Just submit a PR to the <a href="https://github.com/redis/redis-doc/pull/new">redis-doc repository</a>.
+        Recommended repositories are marked with a {{ partial "icons/heart" (dict "class" "align-text-top inline-flex shrink-0 h-[1.125rem] w-[1.125rem] color text-red-600") }}.<br />
+        Repositories with some activity within the last six months are marked with a {{ partial "icons/lightning" (dict "class" "align-text-bottom inline-flex shrink-0 h-[1.0625rem] w-[1.0625rem] color text-green-500") }}.<br />
+        Want your repository listed here? Just submit a PR to the <a href="https://github.com/redis/redis-doc/pull/new">redis-doc repository</a>.
       </p>
 
       <dl class="mt-8">
-        {{ range $id, $name := $groups }}
-          {{ if $has_groups }}
-            <dt id="{{ $id }}" class="font-semibold text-slate-900 pb-3">
-              {{ $name }}
-            </dt>
-          {{ end }}
-          {{ $repos := (index (index $.Site.Data.repos $bazzar) $id) }}
-          {{ $sorted := slice }}
-          {{ range $name, $data := $repos }}
-            {{ $data = merge $data (dict "name" $name) }}
-            {{ $sorted = $sorted | append $data }}
-          {{- end }}
-          {{ $sorted = sort (sort $sorted "stargazers_count" "desc") "active" "desc" }}
-          <dd class="mb-8">
-            {{ range $sorted }}
-              <div class="grid grid-cols-[repeat(16,1fr)] items-start gap-4 py-4 border-t border-slate-200/75 text-sm">
-                <strong class="col-span-4 truncate">
-                  {{ .name }}
-                </strong>
-                <p class="col-span-6 m-0">
-                  {{ .description }}
-                </p>
-                <div class="col-span-5 ml-auto">
-                  {{ $stars := isSet . "stargazers_count" }}
-                  {{ if $stars }}
+          {{ $pages := .Resources.ByType "page" }}
+          {{ range $id, $name := $groups }}
+            {{ if $has_groups }}
+              <dt id="{{ $id }}" class="font-semibold text-slate-900 pb-3">
+                {{- $name -}}
+              </dt>
+            {{ end }}
+            {{ $repos := (where $pages ".Params.group" $id) }}
+            {{ $sorted := sort (where $repos ".Params.recommended" true) ".Params.stargazers_count" "desc" }}
+            {{ $sorted = $sorted | append (sort (where (where $repos ".Params.recommended" false) ".Params.active" true) ".Params.stargazers_count" "desc") }}
+            {{ $sorted = $sorted | append (sort (where (where $repos ".Params.recommended" false) ".Params.active" "!=" true) ".Params.stargazers_count" "desc") }}
+            <dd class="mb-8">
+              {{ range $sorted }}
+                <div class="grid grid-cols-[repeat(16,1fr)] items-start gap-4 py-4 border-t border-slate-200/75 text-sm">
+                  <div class="col-span-12 flex flex-col">
+                    <a href="https://{{ .Params.repository }}" class="">
+                      <div class="flex items-center">
+                        {{ if and .Params.recommended .Params.active }}
+                          {{ partial "icons/heart" (dict "class" "shrink-0 h-[1.125rem] w-[1.125rem] text-red-500") }}
+                          <span class="sr-only">[recommended]</span>
+                        {{ end }}
+                        {{ if .Params.active }}
+                          <span class="sr-only">[active]</span>
+                          {{ partial "icons/lightning" (dict "class" "mr-2 shrink-0 h-[1.0625rem] w-[1.0625rem] text-green-500") }}
+                        {{- end }}
+                        <strong>{{ .Title }}</strong>
+                      </div>
+                      <p class="mt-1 mb-0">{{ .Description }}</p>
+                    </a>
+                  </div>
+                  <div class="col-span-4 mr-auto">
+                    {{ if .Params.stargazers_count }}
                     <div class="flex items-center self-start mb-1.5">
-                      <div class="h-5 w-5 flex items-center justify-center mr-1">
+                      GitHub
+                      <div class="h-5 w-5 flex items-center justify-center mx-1">
                         {{ partial "icons/star" (dict "class" "shrink-0 h-5 w-5 opacity-50") }}
                       </div>
-                      {{ .stargazers_count }}
+                      {{ .Params.stargazers_count }}
                     </div>
-                  {{ end }}
-                  <a href="https://{{ .repository }}" class="flex items-center no-underline font-normal text-current hover:text-indigo-600">
-                    <div class="h-5 w-5 flex items-center justify-center mr-1">
-                      {{ partial "icons/fork" (dict "class" "shrink-0 h-[1.0625rem] w-[1.0625rem] opacity-50") }}
+                    {{ end }}
+                    <div>
+                      License: {{ .Params.license | default "Other" }}
                     </div>
-                    {{ .license | default "Other" }}
-                  </a>
+                    {{ if .Params.homepage }}
+                      <a href="{{ .Params.homepage }}" class="mt-1.5 text-current hover:text-indigo-600 opacity-50 hover:opacity-100 flex">
+                        Homepage
+                        {{ partial "icons/home" (dict "class" "ml-1 shrink-0 h-[1.0625rem] w-[1.0625rem]") }}
+                      </a>
+                    {{ end }}
+                  </div>
                 </div>
-                <div>
-                  {{ $home := isSet . "homepage" }}
-                  {{ if $home }}
-                    <a href="{{ .home }}" class="text-current hover:text-indigo-600 opacity-50 hover:opacity-100">
-                      {{ partial "icons/home" (dict "class" "ml-auto mb-1.5 shrink-0 h-[1.0625rem] w-[1.0625rem]") }}
-                      <span class="sr-only">Library homepage</span>
-                    </a>
-                  {{ end }}
-                  {{ $recommended := and (isSet . "recommended") (.recommended) }}
-                  {{ $active := and (isSet . "active") (.active) }}
-                  {{ if $recommended }}
-                    {{ partial "icons/heart" (dict "class" "ml-auto shrink-0 h-[1.125rem] w-[1.125rem] opacity-50") }}
-                  {{ else if $active}}
-                    {{ partial "icons/lightning" (dict "class" "ml-auto shrink-0 h-[1.0625rem] w-[1.0625rem] opacity-50") }}
-                  {{- end }}
-                </div>
-              </div>
-            {{ end }}
-          </dd>
+              {{ end }}
+            </dd>
         {{ end }}
         </dl>
     </section>
@@ -114,15 +109,3 @@
     {{ end }}
   </main>
 {{ end }}
-
-{{/*
-  <!--
-    <h3>Browse by {{ $group_name }}</h3>
-    <div class="text-sm grid grid-cols-[repeat(auto-fit,minmax(10rem,1fr))] gap-2">
-      {{ range $id, $name := $groups }}
-        <a class="flex items-center justify-center rounded-md p-2 no-underline transition text-slate-900 hover:text-indigo-900 focus-within:text-indigo-900 bg-white hover:bg-indigo-50/50 focus-within:bg-indigo-50/50 border border-slate-900/10 hover:border-indigo-200 focus-within:border-indigo-300 focus-within:ring-indigo-200 focus-within:ring-[3px] focus-within:outline-none bg-clip-padding shadow shadow-slate-900/5" href="#{{ $id }}">{{ $name }}</a>
-      {{ end }}
-    </div>
-    {{ end }}
-  -->
-*/}}
