@@ -42,8 +42,9 @@
               </dt>
             {{ end }}
             {{ $repos := (where $pages ".Params.group" $id) }}
-            {{ $sorted := sort (where $repos ".Params.recommended" true) ".Params.stargazers_count" "desc" }}
+            {{ $sorted := sort (where (where $repos ".Params.recommended" true) ".Params.active" true) ".Params.stargazers_count" "desc" }}
             {{ $sorted = $sorted | append (sort (where (where $repos ".Params.recommended" false) ".Params.active" true) ".Params.stargazers_count" "desc") }}
+            {{ $sorted = $sorted | append (sort (where (where $repos ".Params.recommended" true) ".Params.active" "!=" true) ".Params.stargazers_count" "desc") }}
             {{ $sorted = $sorted | append (sort (where (where $repos ".Params.recommended" false) ".Params.active" "!=" true) ".Params.stargazers_count" "desc") }}
             <dd class="mb-8">
               {{ range $sorted }}
@@ -51,17 +52,17 @@
                   <div class="col-span-12 flex flex-col">
                     <a href="https://{{ .Params.repository }}" target="_blank">
                       <div class="flex items-center">
-                        {{ if and .Params.recommended .Params.active }}
-                          {{ partial "icons/heart" (dict "class" "shrink-0 h-[1.125rem] w-[1.125rem] text-red-500") }}
+                        {{ if and .Params.recommended }}
+                          {{ partial "icons/heart" (dict "class" "mr-1 shrink-0 h-[1.125rem] w-[1.125rem] text-red-500") }}
                           <span class="sr-only">[recommended]</span>
                         {{ end }}
                         {{ if .Params.active }}
                           <span class="sr-only">[active]</span>
-                          {{ partial "icons/lightning" (dict "class" "mr-2 shrink-0 h-[1.0625rem] w-[1.0625rem] text-green-500") }}
+                          {{ partial "icons/lightning" (dict "class" "mr-1 shrink-0 h-[1.0625rem] w-[1.0625rem] text-green-500") }}
                         {{- end }}
                         <strong>{{ .Title }}</strong>
                       </div>
-                      <p class="mt-1 mb-0">{{ .Description }}</p>
+                      <p class="ml-1 mt-1 mb-0">{{ .Description }}</p>
                     </a>
                   </div>
                   <div class="col-span-4 mr-auto">
