@@ -61,6 +61,16 @@
                 "repository": "github.com/danieleteti/delphiredisclient"
             }
         },
+        "deno": {
+            "r2d2": {
+                "description": "Fast, lightweight Redis client library for Deno.",
+                "repository": "github.com/iuioiua/r2d2"
+            },
+            "redis": {
+                "description": "\ud83e\udd95 Redis client for Deno \ud83c\udf55",
+                "repository": "github.com/denodrivers/redis"
+            }
+        },
         "prolog": {
             "Redis library for SWI-Prolog": {
                 "description": "Prolog redis client that exploits SWI-Prolog's extensions such as strings for compact replies and threads to deal with publish/subscribe.",
@@ -1485,6 +1495,18 @@
             }
         },
         "ruby": {
+            "redis-client": {
+                "description": "Simple low level client for Redis 6+",
+                "repository": "github.com/redis-rb/redis-client"
+            },
+            "redis-cluster-client": {
+                "description": "A simple client for Redis 6+ cluster",
+                "repository": "github.com/redis-rb/redis-cluster-client"
+            },
+            "redis-clustering": {
+                "description": "A Ruby client that tries to match Redis' Cluster API one-to-one, while still providing an idiomatic interface.",
+                "repository": "github.com/redis/redis-clustering"
+            },
             "redis-rb": {
                 "description": "Very stable and mature client. Install and require the hiredis gem before redis-rb for maximum performance.",
                 "recommended": true,
@@ -1729,8 +1751,8 @@
             }
         },
         "typescript": {
-            "Redis OM for Python": {
-                "description": "Object mapping, and more, for Redis and Node.js.",
+            "Redis OM for Node.js": {
+                "description": "Object mapping, and more, for Redis and Node.js. Written in TypeScript.",
                 "recommended": true,
                 "repository": "github.com/redis/redis-om-node"
             }
@@ -2502,6 +2524,14 @@
                 ],
                 "repository": "github.com/RedisAI/RedisAI"
             },
+            "redis-timer": {
+                "license": "MIT",
+                "description": "A module allows the delayed execution of LUA scripts, both periodic and one-time, supports replication and cluster.",
+                "github": [
+                    "tzongw"
+                ],
+                "repository": "github.com/tzongw/redis-timer"
+            },
             "lqrm": {
                 "license": "BSD",
                 "description": "A Laravel compatible queue driver for Redis that supports reliable blocking pop from FIFO and scheduled queues.",
@@ -2541,6 +2571,14 @@
                     "daTokenizer"
                 ],
                 "repository": "github.com/picotera/commentDis"
+            },
+            "redis-rope": {
+                "license": "MIT",
+                "description": "A native data type for manipulating large strings up to exponentially faster, based on splay trees.",
+                "github": [
+                    "ekzhang"
+                ],
+                "repository": "github.com/ekzhang/redis-rope"
             },
             "dbx": {
                 "license": "MIT",
