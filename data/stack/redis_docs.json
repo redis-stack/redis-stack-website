@@ -71,7 +71,7 @@
             "weight": 0
         },
         "server": {
-            "display": "Server managment",
+            "display": "Server management",
             "description": "Server management commands",
             "weight": 0
         },
