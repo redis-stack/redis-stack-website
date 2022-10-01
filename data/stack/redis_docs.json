@@ -124,7 +124,7 @@
                 "src": "_index.md"
             },
             {
-                "src": "community/index.md"
+                "src": "community/"
             }
         ]
     }
