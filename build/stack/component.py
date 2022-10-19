@@ -370,6 +370,21 @@ class Core(Component):
             data = self._make_data(f'{repo}/{src}')
             self._root._repos[src] = data
 
+    def _get_conf_file(self) -> None:
+        ''' Gets the unstable redis.conf and embeds it in the "template" '''
+        proj = self.get('repository')
+        repo = self._git_clone(proj)
+        branch = Component._get_dev_branch(proj)
+        self._checkout(branch, repo, proj)
+        src = f'{repo}/redis.conf'
+        dst = f'{self._content}/{self.get("config_file_template")}'
+        logging.info(f'Embedding {self._id} redis.conf into {dst}')
+        md = Markdown(dst)
+        with open(src, 'r') as f:
+            md.payload = f.read()
+        md.payload = f'\n```\n{md.payload}\n```\n'
+        md.persist()
+
     def apply(self) -> None:
         logging.info(f'Applying core {self._id}')
         files = self._get_docs()
@@ -377,6 +392,7 @@ class Core(Component):
         self._get_misc()
         self._get_groups()
         self._get_data()
+        self._get_conf_file()
         return files
 
 

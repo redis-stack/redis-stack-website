@@ -8,6 +8,7 @@
         "git_uri": "https://github.com/redis/redis",
         "dev_branch": "unstable"
     },
+    "config_file_template": "manual/config-file.md",
     "commands": {
         "git_uri": "https://github.com/redis/redis-doc",
         "dev_branch": "master",
