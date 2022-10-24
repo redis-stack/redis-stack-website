@@ -131,6 +131,7 @@ class Component(dict):
         if self._type == 'module':
             for key in cmds:
                 cmds[key]['module'] = self._name
+                cmds[key]['stack_path'] = self._stack_path
         self._root._commands.update(cmds)
 
         base = f'{repo}/{path}/'
