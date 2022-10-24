@@ -2,7 +2,7 @@
     "id": "redistimeseries",
     "module_id": "timeseries",
     "type": "module",
-    "name": "Time series",
+    "name": "TimeSeries",
     "description": "Time Series data structure",
     "stack_path": "docs/stack/timeseries",
     "stack_weight": 14,
