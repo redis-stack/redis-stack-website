@@ -8,7 +8,7 @@
     <div class="w-full max-w-[47rem] py-12">
       {{ partial "breadcrumbs" . }}
       <section class="prose prose-slate pt-10">
-        <h1>
+        <h1 class="command-name">
           {{- .Title }}
           {{- if (isset .Params "deprecated_since") }}
           <span class="text-base">(deprecated)</span>
