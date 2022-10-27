@@ -111,12 +111,10 @@
 
         // If there's no natural section title, use the hierarchy
         const constructSectionTitle = (record) => {
-          if (record.section_title) {
-            return record.section_title
-          } else if (record.hierarchy && record.hierarchy.length > 2) {
-            return record.hierarchy.slice(-2).join(' > ')
+          if (record.hierarchy && record.hierarchy.length > 2) {
+            return record.hierarchy[1]
           } else {
-            return null
+            return record.title
           }
         }
 
