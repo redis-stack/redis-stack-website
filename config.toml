@@ -106,17 +106,23 @@ section = ["HTML", "RSS"] # print
     parent = "redis"
     weight = 3
   [[menu.main]]
+    identifier = "redis-clients"
+    name = "Redis clients"
+    url = "/docs/clients/"
+    parent = "redis"
+    weight = 4
+  [[menu.main]]
     identifier = "persistence"
     name = "Persistence"
     url = "/docs/manual/persistence/"
     parent = "redis"
-    weight = 4
+    weight = 5
   [[menu.main]]
     identifier = "scaling"
     name = "Scaling"
     url = "/docs/manual/scaling/"
     parent = "redis"
-    weight = 5
+    weight = 6
   [[menu.main]]
     identifier = "redis-stack"
     name = "Redis Stack"
@@ -149,11 +155,17 @@ section = ["HTML", "RSS"] # print
     parent = "redis-stack"
     weight = 4
   [[menu.main]]
-    identifier = "time-series"
+    identifier = "search-stack"
     name = "Search"
     url = "/docs/stack/search/"
     parent = "redis-stack"
     weight = 5
+  [[menu.main]]
+    identifier = "blah"
+    name = "Probabilistic"
+    url = "/docs/stack/bloom/"
+    parent = "redis-stack"
+    weight = 6
   [[menu.main]]
     identifier = "docs"
     name = "DOCS"
