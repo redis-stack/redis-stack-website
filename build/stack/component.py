@@ -259,7 +259,7 @@ class Stack(Component):
         meta = load_dict(self.get('website').get('meta'))
         for kname, kind in self._repos.items():
             for gname, group in kind.items():
-                path = f'{self._content}/docs/{kname}'
+                path = f'{self._content}/ecosystem/{kname}'
                 mkdir_p(path)
                 for pname, project in group.items():
                     filename = f'{path}/{slugify(gname)}_{slugify(pname)}.md'

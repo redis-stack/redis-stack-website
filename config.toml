@@ -179,7 +179,7 @@ section = ["HTML", "RSS"] # print
   [[menu.main]]
     identifier = "resources"
     name = "RESOURCES"
-    weight = 4
+    weight = 5
   [[menu.main]]
     identifier = "resource-download"
     name = "Download"
@@ -193,16 +193,15 @@ section = ["HTML", "RSS"] # print
     parent = "resources"
     weight = 2
   [[menu.main]]
-    identifier = "clients"
-    name = "Clients"
-    url = "/docs/clients/"
-    parent = "resources"
-    weight = 3
+    identifier = "ecosystem"
+    name = "ECOSYSTEM"
+    url = "/ecosystem/"
+    weight = 4
   [[menu.main]]
     identifier = "community"
     name = "COMMUNITY"
     url = "/community/"
-    weight = 5
+    weight = 6
   [[menu.buttons]]
     identifier = "download"
     name = "Download"
