@@ -2,6 +2,7 @@ scheme = [ "http", "https" ]
 
 exclude = [
     "github.com",
+    "twitter.com",
     "googletagmanager.com",
     "packages.redis.io",
     "techstacks.io",
@@ -9,4 +10,13 @@ exclude = [
     "127.0.0.1"
 ]
 
+exclude_path = [
+    "public/docs/clients/index.html",
+    "public/docs/libraries/index.html",
+    "public/docs/modules/index.html",
+    "public/docs/tools/index.html"
+]
+
 timeout = 10
+
+user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36"
