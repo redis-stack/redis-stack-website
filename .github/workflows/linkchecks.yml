@@ -19,7 +19,8 @@ jobs:
           PRIVATE_ACCESS_TOKEN: ${{secrets.PRIVATE_ACCESS_TOKEN}}
       - name: Link Checker
         id: lychee
-        uses: lycheeverse/lychee-action@v1.5.0
+        uses: lycheeverse/lychee-action@v1.5.1
         with:
           fail: true
+          lycheeVersion: 0.10.1
           args: './public -c lychee.toml'
