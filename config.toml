@@ -161,7 +161,7 @@ section = ["HTML", "RSS"] # print
     parent = "redis-stack"
     weight = 5
   [[menu.main]]
-    identifier = "blah"
+    identifier = "probabilistic"
     name = "Probabilistic"
     url = "/docs/stack/bloom/"
     parent = "redis-stack"
@@ -179,28 +179,40 @@ section = ["HTML", "RSS"] # print
   [[menu.main]]
     identifier = "resources"
     name = "RESOURCES"
-    weight = 5
+    weight = 4
   [[menu.main]]
-    identifier = "resource-download"
-    name = "Download"
-    url = "/download/"
+    identifier = "clients"
+    name = "Clients"
+    url = "/resources/clients/"
     parent = "resources"
     weight = 1
   [[menu.main]]
-    identifier = "support"
-    name = "Support"
-    url = "/support/"
+    identifier = "Libraries"
+    name = "Libraries"
+    url = "/resources/libraries/"
     parent = "resources"
     weight = 2
   [[menu.main]]
-    identifier = "ecosystem"
-    name = "ECOSYSTEM"
-    url = "/ecosystem/"
+    identifier = "Tools"
+    name = "Tools"
+    url = "/resources/tools/"
+    parent = "resources"
+    weight = 3
+  [[menu.main]]
+    identifier = "Modules"
+    name = "Modules"
+    url = "/resources/modules/"
+    parent = "resources"
     weight = 4
   [[menu.main]]
     identifier = "community"
     name = "COMMUNITY"
     url = "/community/"
+    weight = 5
+  [[menu.main]]
+    identifier = "support"
+    name = "SUPPORT"
+    url = "/support/"
     weight = 6
   [[menu.buttons]]
     identifier = "download"
