@@ -10,8 +10,7 @@
     },
     "config_file_template": "manual/config-file.md",
     "commands": {
-        "git_uri": "../redis-doc",
-        "_git_uri": "https://github.com/redis/redis-doc",
+        "git_uri": "https://github.com/redis/redis-doc",
         "dev_branch": "master",
         "defs": "commands.json",
         "path": "commands",
@@ -104,14 +103,12 @@
         }
     },
     "docs": {
-        "git_uri": "../redis-doc",
-        "_git_uri": "https://github.com/redis/redis-doc",
+        "git_uri": "https://github.com/redis/redis-doc",
         "dev_branch": "master",
         "path": "docs"
     },
     "data": {
-        "git_uri": "../redis-doc",
-        "_git_uri": "https://github.com/redis/redis-doc",
+        "git_uri": "https://github.com/redis/redis-doc",
         "dev_branch": "master",
         "languages": "languages.json",
         "tool_types": "tool_types.json",
@@ -121,8 +118,7 @@
         "tools": "tools/"
     },
     "misc": {
-        "git_uri": "../redis-doc",
-        "_git_uri": "https://github.com/redis/redis-doc",
+        "git_uri": "https://github.com/redis/redis-doc",
         "dev_branch": "master",
         "payload": [
             {
@@ -132,7 +128,7 @@
                 "src": "community/"
             },
             {
-                "src": "ecosystem/"
+                "src": "resources/"
             }
         ]
     }
