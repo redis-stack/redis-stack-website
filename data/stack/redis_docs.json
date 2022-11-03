@@ -126,6 +126,9 @@
             },
             {
                 "src": "community/"
+            },
+            {
+                "src": "resources/"
             }
         ]
     }

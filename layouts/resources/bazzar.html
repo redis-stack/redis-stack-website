@@ -1,0 +1,123 @@
+{{ define "main" }}
+{{ $bazzar := $.Param "bazzar" }}
+{{ $has_groups := true }}
+{{ $group_name := "language" }}
+{{ $groups := dict }}
+{{ if or (eq $bazzar "clients") (eq $bazzar "libraries") }}
+  {{ range $k, $v := $.Site.Data.languages }}
+    {{ if (index (index $.Site.Data.repos $bazzar) $v) }}
+      {{ $groups = merge $groups (dict $v $k) }}
+    {{ end }}
+  {{ end }}
+{{ else if eq $bazzar "tools" }}
+  {{ $group_name = "tool type" }}
+  {{ range $k, $v := $.Site.Data.tool_types }}
+    {{ if (index (index $.Site.Data.repos $bazzar) $k) }}
+      {{ $groups = merge $groups (dict $k $v) }}
+    {{ end }}
+  {{ end }}
+{{ else }}
+  {{ $groups = merge $groups (dict "community" "Community") }}
+  {{ $has_groups = false }}
+{{ end }}
+
+  <main class="docs w-full max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 md:flex gap-16">
+    {{ partial "docs-nav.html" . }}
+
+    <section class="prose prose-slate w-full max-w-[47rem] py-12">
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.description }}<p class="text-lg -mt-5 mb-10">{{ . | markdownify }}</p>{{ end }}
+      {{- .Content -}}
+      <p>
+        Recommended repositories are marked with a {{ partial "icons/heart" (dict "class" "align-text-top inline-flex shrink-0 h-[1.125rem] w-[1.125rem] color text-red-600") }}.<br />
+        Repositories with some activity within the last six months are marked with a {{ partial "icons/lightning" (dict "class" "align-text-bottom inline-flex shrink-0 h-[1.0625rem] w-[1.0625rem] color text-green-500") }}.<br />
+        Want your repository listed here? Just submit a PR to the <a href="https://github.com/redis/redis-doc/pull/new" target="_blank">redis-doc repository</a>.
+      </p>
+
+      <dl class="mt-8">
+        {{ $pages := .Resources.ByType "page" }}
+        {{ range $id, $name := $groups }}
+          {{ $repos := (where $pages ".Params.group" $id) }}
+          {{ $active := sort (where (where $repos ".Params.recommended" true) ".Params.active" true) ".Params.stargazers_count" "desc" }}
+          {{ $active = $active | append (sort (where (where $repos ".Params.recommended" false) ".Params.active" true) ".Params.stargazers_count" "desc") }}
+          {{ $inactive := sort (where (where $repos ".Params.recommended" true) ".Params.active" "!=" true) ".Params.stargazers_count" "desc" }}
+          {{ $inactive = $inactive | append (sort (where (where $repos ".Params.recommended" false) ".Params.active" "!=" true) ".Params.stargazers_count" "desc") }}
+          {{ if $has_groups }}
+            <dt id="{{ $id }}" class="font-semibold text-slate-900 pb-3">
+              {{- $name -}}
+            </dt>
+          {{ end }}
+          {{ if gt (len $active) 0 }}
+            {{ template "rows" (dict "rows" $active) }}
+          {{ end }}
+          {{ if gt (len $inactive) 0 }}
+            {{ template "rows" (dict "rows" $inactive) }}
+          {{ end }}
+          <div class="mb-8"></div>
+        {{ end }}
+      </dl>
+    </section>
+
+    {{ if $has_groups }}
+      <section class="hidden xl:block w-52 h-full shrink-0">
+        <div class="w-52 z-40 hidden bg-white/75 md:block overflow-auto fixed top-28 h-full max-h-[calc(100vh-15rem)] text-[0.8125rem]">
+          <h1 class="font-semibold mb-3">Browse by {{ $group_name }}</h1>
+          <nav class="text-redis-neutral-800">
+            <ul id="TableOfContents">
+              {{ range $id, $name := $groups }}
+                <li>
+                  <a href="#{{ $id }}">{{ $name }}</a>
+                </li>
+              {{ end }}
+            </ul>
+          </nav>
+        </div>
+      </section>
+    {{ end }}
+  </main>
+{{ end }}
+
+{{ define "rows" }}
+<dd>
+  {{ range .rows }}
+    <div class="grid grid-cols-[repeat(16,1fr)] items-start gap-4 py-4 border-t border-slate-200/75 text-sm">
+      <div class="col-span-12 flex flex-col">
+        <a href="https://{{ .Params.repository }}" target="_blank">
+          <div class="flex items-center">
+            {{ if and .Params.recommended }}
+              {{ partial "icons/heart" (dict "class" "mr-1 shrink-0 h-[1.125rem] w-[1.125rem] text-red-500") }}
+              <span class="sr-only">[recommended]</span>
+            {{ end }}
+            {{ if .Params.active }}
+              <span class="sr-only">[active]</span>
+              {{ partial "icons/lightning" (dict "class" "mr-1 shrink-0 h-[1.0625rem] w-[1.0625rem] text-green-500") }}
+            {{- end }}
+            <strong>{{ .Title }}</strong>
+          </div>
+          <p class="ml-1 mt-1 mb-0">{{ .Description }}</p>
+        </a>
+      </div>
+      <div class="col-span-4 mr-auto">
+        {{ if .Params.stargazers_count }}
+        <div class="flex items-center self-start mb-1.5">
+          GitHub
+          <div class="h-5 w-5 flex items-center justify-center mx-1">
+            {{ partial "icons/star" (dict "class" "shrink-0 h-5 w-5 opacity-50") }}
+          </div>
+          {{ .Params.stargazers_count }}
+        </div>
+        {{ end }}
+        <div>
+          License: {{ .Params.license | default "Other" }}
+        </div>
+        {{ if .Params.homepage }}
+          <a href="{{ .Params.homepage }}" class="mt-1.5 text-current hover:text-indigo-600 opacity-50 hover:opacity-100 flex"  target="_blank">
+            Homepage
+            {{ partial "icons/home" (dict "class" "ml-1 shrink-0 h-[1.0625rem] w-[1.0625rem]") }}
+          </a>
+        {{ end }}
+      </div>
+    </div>
+  {{ end }}
+</dd>
+{{ end }}
