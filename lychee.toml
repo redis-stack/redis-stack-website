@@ -11,10 +11,10 @@ exclude = [
 ]
 
 exclude_path = [
-    "public/docs/clients/index.html",
-    "public/docs/libraries/index.html",
-    "public/docs/modules/index.html",
-    "public/docs/tools/index.html"
+    "public/resources/clients/index.html",
+    "public/resources/libraries/index.html",
+    "public/resources/modules/index.html",
+    "public/resources/tools/index.html"
 ]
 
 timeout = 10
