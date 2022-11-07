@@ -6,6 +6,7 @@ exclude = [
     "googletagmanager.com",
     "packages.redis.io",
     "techstacks.io",
+    "sciencedirect.com",
     "localhost",
     "127.0.0.1"
 ]
