@@ -32,28 +32,27 @@
         {{- .Content -}}
         <p>
           Recommended repositories are marked with a {{ partial "icons/heart" (dict "class" "align-text-top inline-flex shrink-0 h-[1.125rem] w-[1.125rem] color text-red-600") }}.<br />
-          Repositories with some activity within the last six months are marked with a {{ partial "icons/lightning" (dict "class" "align-text-bottom inline-flex shrink-0 h-[1.0625rem] w-[1.0625rem] color text-green-500") }}.<br />
+          Only repositories with some activity within the last six months are shown.<br />
           Want your repository listed here? Just submit a PR to the <a href="https://github.com/redis/redis-doc/pull/new" target="_blank">redis-doc repository</a>.
         </p>
 
         <dl class="mt-8">
           {{ $pages := .Resources.ByType "page" }}
+          {{ $toc := dict }}
           {{ range $id, $name := $groups }}
             {{ $repos := (where $pages ".Params.group" $id) }}
             {{ $active := sort (where (where $repos ".Params.recommended" true) ".Params.active" true) ".Params.stargazers_count" "desc" }}
             {{ $active = $active | append (sort (where (where $repos ".Params.recommended" false) ".Params.active" true) ".Params.stargazers_count" "desc") }}
             {{ $inactive := sort (where (where $repos ".Params.recommended" true) ".Params.active" "!=" true) ".Params.stargazers_count" "desc" }}
             {{ $inactive = $inactive | append (sort (where (where $repos ".Params.recommended" false) ".Params.active" "!=" true) ".Params.stargazers_count" "desc") }}
-            {{ if $has_groups }}
-              <dt id="{{ $id }}" class="font-semibold text-slate-900 pb-3">
-                {{- $name -}}
-              </dt>
-            {{ end }}
             {{ if gt (len $active) 0 }}
+              {{ if $has_groups }}
+                {{ $toc = merge $toc (dict $id $name)}}
+                <dt id="{{ $id }}" class="font-semibold text-slate-900 pb-3">
+                  {{- $name -}}
+                </dt>
+              {{ end }}
               {{ template "rows" (dict "rows" $active) }}
-            {{ end }}
-            {{ if gt (len $inactive) 0 }}
-              {{ template "rows" (dict "rows" $inactive) }}
             {{ end }}
             <div class="mb-8"></div>
           {{ end }}
@@ -67,7 +66,7 @@
           <h1 class="font-semibold mb-3">Browse by {{ $group_name }}</h1>
           <nav class="text-redis-neutral-800">
             <ul id="TableOfContents">
-              {{ range $id, $name := $groups }}
+              {{ range $id, $name := $toc }}
                 <li>
                   <a href="#{{ $id }}">{{ $name }}</a>
                 </li>
@@ -87,14 +86,10 @@
       <div class="col-span-12 flex flex-col">
         <a href="https://{{ .Params.repository }}" target="_blank">
           <div class="flex items-center">
-            {{ if and .Params.recommended }}
+            {{ if .Params.recommended }}
               {{ partial "icons/heart" (dict "class" "mr-1 shrink-0 h-[1.125rem] w-[1.125rem] text-red-500") }}
               <span class="sr-only">[recommended]</span>
             {{ end }}
-            {{ if .Params.active }}
-              <span class="sr-only">[active]</span>
-              {{ partial "icons/lightning" (dict "class" "mr-1 shrink-0 h-[1.0625rem] w-[1.0625rem] text-green-500") }}
-            {{- end }}
             <strong>{{ .Title }}</strong>
           </div>
           <p class="ml-1 mt-1 mb-0">{{ .Description }}</p>

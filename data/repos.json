@@ -751,7 +751,6 @@
             },
             "Redisson": {
                 "description": "distributed and scalable Java data structures on top of Redis server",
-                "recommended": true,
                 "twitter": [
                     "mrniko"
                 ],
@@ -1340,6 +1339,11 @@
                     "demisbellot"
                 ],
                 "repository": "github.com/ServiceStack/ServiceStack.Redis"
+            },
+            "XiaoFeng.Redis": {
+                "description": "A useful Redis client that supports the .NET FRAMEWORK,.NET CORE,.NET STANDARD. A client tool that is quite convenient to operate.",
+                "homepage": "https://github.com/zhuovi/XiaoFeng",
+                "repository": "github.com/XiaoFeng/XiaoFeng.Redis"
             },
             "redis-sharp": {
                 "description": "A Redis client.",

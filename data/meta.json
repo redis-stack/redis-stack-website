@@ -1,15 +1,15 @@
 {
     "github.com/janestreet/redis-async": {
         "active": true,
-        "forks_count": 2,
+        "forks_count": 4,
         "license": "MIT",
-        "pushed_at": 1657295937.0,
+        "pushed_at": 1665644807.0,
         "open_issues_count": null,
         "stargazers_count": 13,
         "archived": null,
         "description": "Redis client for Async applications",
         "homepage": null,
-        "fetched_at": 1663858484.513037
+        "fetched_at": 1667921075.484984
     },
     "github.com/0xffea/ocaml-redis": {
         "active": true,
@@ -21,7 +21,7 @@
         "archived": null,
         "description": "Redis bindings for OCaml",
         "homepage": null,
-        "fetched_at": 1663858485.003161
+        "fetched_at": 1667921076.259092
     },
     "github.com/carld/redis-client.egg": {
         "active": false,
@@ -33,7 +33,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858485.458854
+        "fetched_at": 1667921076.880175
     },
     "github.com/aconchillo/guile-redis": {
         "active": false,
@@ -45,7 +45,7 @@
         "archived": null,
         "description": "Redis module for Guile",
         "homepage": null,
-        "fetched_at": 1663858485.955446
+        "fetched_at": 1667921077.510429
     },
     "bitbucket.org/Gloegg/delphi-redis.git": {
         "active": null,
@@ -57,7 +57,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858485.955718
+        "fetched_at": 1667921077.510632
     },
     "github.com/ik5/redis_client.fpc": {
         "active": false,
@@ -65,11 +65,11 @@
         "license": null,
         "pushed_at": 1329653408.0,
         "open_issues_count": null,
-        "stargazers_count": 18,
+        "stargazers_count": 20,
         "archived": null,
         "description": "Object Pascal client implementation for the redis protocol and commands as a",
         "homepage": null,
-        "fetched_at": 1663858486.391746
+        "fetched_at": 1667921079.378117
     },
     "github.com/isyscore/fpredis": {
         "active": false,
@@ -81,67 +81,67 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858486.806341
+        "fetched_at": 1667921080.457318
     },
     "github.com/danieleteti/delphiredisclient": {
         "active": true,
-        "forks_count": 113,
+        "forks_count": 114,
         "license": "Apache-2.0",
         "pushed_at": 1660766112.0,
         "open_issues_count": 3,
-        "stargazers_count": 244,
+        "stargazers_count": 249,
         "archived": null,
         "description": "Redis client for Delphi",
         "homepage": null,
-        "fetched_at": 1663858487.238613
+        "fetched_at": 1667921082.370773
     },
     "github.com/iuioiua/r2d2": {
         "active": true,
         "forks_count": null,
         "license": "MIT",
-        "pushed_at": 1663541088.0,
+        "pushed_at": 1667765476.0,
         "open_issues_count": null,
-        "stargazers_count": 14,
+        "stargazers_count": 20,
         "archived": null,
-        "description": "Fast, lightweight Redis client library for Deno.",
+        "description": "Fast, simple and lightweight Redis client library for Deno.",
         "homepage": "https://deno.land/x/r2d2",
-        "fetched_at": 1663858487.68358
+        "fetched_at": 1667921083.353876
     },
     "github.com/denodrivers/redis": {
         "active": true,
-        "forks_count": 33,
+        "forks_count": 35,
         "license": "MIT",
-        "pushed_at": 1663821107.0,
-        "open_issues_count": 32,
-        "stargazers_count": 387,
+        "pushed_at": 1667836216.0,
+        "open_issues_count": 33,
+        "stargazers_count": 397,
         "archived": null,
         "description": "\ud83e\udd95 Redis client for Deno \ud83c\udf55",
         "homepage": "https://deno.land/x/redis",
-        "fetched_at": 1663858488.140599
+        "fetched_at": 1667921085.501924
     },
     "github.com/SWI-Prolog/packages-redis": {
         "active": true,
         "forks_count": 3,
         "license": null,
-        "pushed_at": 1663575006.0,
+        "pushed_at": 1666079362.0,
         "open_issues_count": null,
         "stargazers_count": 3,
         "archived": null,
         "description": "Redis client library",
         "homepage": null,
-        "fetched_at": 1663858488.584856
+        "fetched_at": 1667921086.057048
     },
     "github.com/camarojs/redis": {
-        "active": true,
+        "active": false,
         "forks_count": 3,
         "license": null,
         "pushed_at": 1648486934.0,
         "open_issues_count": 3,
-        "stargazers_count": 18,
+        "stargazers_count": 19,
         "archived": true,
         "description": "Redis client for node, support resp3 and redis6.",
         "homepage": null,
-        "fetched_at": 1663858489.097311
+        "fetched_at": 1667921087.718112
     },
     "github.com/djanowski/yoredis": {
         "active": false,
@@ -153,7 +153,7 @@
         "archived": null,
         "description": "A minimalistic Redis client using modern Node.js.",
         "homepage": null,
-        "fetched_at": 1663858489.549294
+        "fetched_at": 1667921088.239387
     },
     "github.com/fictorial/redis-node-client": {
         "active": false,
@@ -165,7 +165,7 @@
         "archived": null,
         "description": "Redis client for Node.js (abandoned)",
         "homepage": null,
-        "fetched_at": 1663858489.977745
+        "fetched_at": 1667921089.33388
     },
     "github.com/mjackson/then-redis": {
         "active": false,
@@ -177,7 +177,7 @@
         "archived": null,
         "description": "A fast, promise-based Redis client for node.js",
         "homepage": null,
-        "fetched_at": 1663858490.440201
+        "fetched_at": 1667921089.782564
     },
     "github.com/silkjs/tedis": {
         "active": false,
@@ -185,23 +185,23 @@
         "license": "MIT",
         "pushed_at": 1646473101.0,
         "open_issues_count": 20,
-        "stargazers_count": 147,
+        "stargazers_count": 149,
         "archived": null,
         "description": "redis client with typescript and esnext for nodejs",
         "homepage": "https://tedis.silkjs.org",
-        "fetched_at": 1663858490.884632
+        "fetched_at": 1667921091.145839
     },
     "github.com/redis/node-redis": {
         "active": true,
-        "forks_count": 1701,
+        "forks_count": 1729,
         "license": "MIT",
-        "pushed_at": 1663783895.0,
-        "open_issues_count": 225,
-        "stargazers_count": 15535,
+        "pushed_at": 1667710937.0,
+        "open_issues_count": 213,
+        "stargazers_count": 15640,
         "archived": null,
         "description": "A high-performance Node.js Redis client.",
         "homepage": "https://redis.js.org/",
-        "fetched_at": 1663858491.341143
+        "fetched_at": 1667921091.625084
     },
     "github.com/thunks/thunk-redis": {
         "active": false,
@@ -213,22 +213,22 @@
         "archived": null,
         "description": "The fastest thunk/promise-based redis client, support all redis features.",
         "homepage": null,
-        "fetched_at": 1663858491.803002
+        "fetched_at": 1667921093.130242
     },
     "github.com/luin/ioredis": {
         "active": true,
-        "forks_count": 1014,
+        "forks_count": 1021,
         "license": "MIT",
-        "pushed_at": 1663596523.0,
-        "open_issues_count": 200,
-        "stargazers_count": 11314,
+        "pushed_at": 1667736815.0,
+        "open_issues_count": 207,
+        "stargazers_count": 11424,
         "archived": null,
         "description": "\ud83d\ude80 A robust, performance-focused, and full-featured Redis client for Node.js.",
         "homepage": null,
-        "fetched_at": 1663858492.235572
+        "fetched_at": 1667921093.56888
     },
     "github.com/h0x91b/redis-fast-driver": {
-        "active": true,
+        "active": false,
         "forks_count": 12,
         "license": null,
         "pushed_at": 1649467944.0,
@@ -237,7 +237,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858492.676492
+        "fetched_at": 1667921094.968161
     },
     "github.com/h0x91b/fast-redis-cluster": {
         "active": false,
@@ -249,7 +249,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858493.121966
+        "fetched_at": 1667921098.381044
     },
     "github.com/CapacitorSet/rebridge": {
         "active": false,
@@ -261,19 +261,19 @@
         "archived": null,
         "description": "A transparent Javascript interface to Redis.",
         "homepage": null,
-        "fetched_at": 1663858493.587406
+        "fetched_at": 1667921099.154449
     },
     "github.com/mmkal/handy-redis": {
         "active": true,
         "forks_count": 10,
         "license": "Apache-2.0",
-        "pushed_at": 1656003506.0,
+        "pushed_at": 1664093290.0,
         "open_issues_count": 6,
-        "stargazers_count": 173,
+        "stargazers_count": 176,
         "archived": null,
         "description": "A wrapper around node_redis with Promise and TypeScript support.",
         "homepage": null,
-        "fetched_at": 1663858494.028463
+        "fetched_at": 1667921099.614264
     },
     "github.com/rootslab/spade": {
         "active": false,
@@ -285,7 +285,7 @@
         "archived": null,
         "description": "\u2660 Spade, a robust, full-featured, multi-module client for Redis.",
         "homepage": null,
-        "fetched_at": 1663858494.453961
+        "fetched_at": 1667921100.561363
     },
     "github.com/wallneradam/noderis": {
         "active": false,
@@ -297,7 +297,7 @@
         "archived": null,
         "description": "A standalone Node.js client for Redis",
         "homepage": null,
-        "fetched_at": 1663858494.895614
+        "fetched_at": 1667921101.096919
     },
     "github.com/razaellahi/xredis": {
         "active": false,
@@ -309,19 +309,19 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858495.348292
+        "fetched_at": 1667921102.449271
     },
     "github.com/kristoff-it/zig-okredis": {
         "active": true,
         "forks_count": 10,
         "license": "MIT",
-        "pushed_at": 1649334304.0,
+        "pushed_at": 1663961863.0,
         "open_issues_count": null,
-        "stargazers_count": 131,
+        "stargazers_count": 134,
         "archived": null,
         "description": "Zero-allocation Client for Redis 6+",
         "homepage": null,
-        "fetched_at": 1663858495.837918
+        "fetched_at": 1667921102.936363
     },
     "github.com/emacstheviking/gnuprolog-redisclient": {
         "active": false,
@@ -333,43 +333,43 @@
         "archived": null,
         "description": "A simple but effective pure GNU Prolog client connecting with Redis, no libraries required.",
         "homepage": null,
-        "fetched_at": 1663858496.293318
+        "fetched_at": 1667921103.946288
     },
     "github.com/carlosabalde/libvmod-redis": {
         "active": true,
         "forks_count": 21,
         "license": null,
-        "pushed_at": 1663247651.0,
+        "pushed_at": 1667804309.0,
         "open_issues_count": 2,
         "stargazers_count": 74,
         "archived": null,
         "description": "VMOD using the synchronous hiredis library API to access Redis servers from VCL.",
         "homepage": null,
-        "fetched_at": 1663858496.754669
+        "fetched_at": 1667921107.957184
     },
     "github.com/xuyu/goredis": {
         "active": false,
-        "forks_count": 28,
+        "forks_count": 27,
         "license": "MIT",
         "pushed_at": 1475104366.0,
         "open_issues_count": 4,
-        "stargazers_count": 62,
+        "stargazers_count": 63,
         "archived": null,
         "description": "redis client for golang",
         "homepage": null,
-        "fetched_at": 1663858497.208307
+        "fetched_at": 1667921109.342029
     },
     "github.com/rueian/rueidis": {
         "active": true,
-        "forks_count": 38,
+        "forks_count": 51,
         "license": "Apache-2.0",
-        "pushed_at": 1663753172.0,
-        "open_issues_count": 4,
-        "stargazers_count": 496,
+        "pushed_at": 1667909740.0,
+        "open_issues_count": 5,
+        "stargazers_count": 763,
         "archived": null,
         "description": "A fast Golang Redis client that supports Client Side Caching, Auto Pipelining, Generics OM, RedisJSON, RedisBloom, RediSearch, RedisAI, RedisGears, etc.",
         "homepage": null,
-        "fetched_at": 1663858498.106895
+        "fetched_at": 1667921109.820757
     },
     "github.com/keimoon/gore": {
         "active": false,
@@ -381,7 +381,7 @@
         "archived": null,
         "description": "A full feature redis client for Go",
         "homepage": null,
-        "fetched_at": 1663858498.550084
+        "fetched_at": 1667921110.91908
     },
     "github.com/simonz05/godis": {
         "active": false,
@@ -393,7 +393,7 @@
         "archived": null,
         "description": "godis - an old Redis client for Go",
         "homepage": "https://pkg.go.dev/insmo.com/godis",
-        "fetched_at": 1663858499.24441
+        "fetched_at": 1667921112.458431
     },
     "github.com/stfnmllr/go-resp3": {
         "active": false,
@@ -405,7 +405,7 @@
         "archived": null,
         "description": "Google Go Redis RESP3 client",
         "homepage": null,
-        "fetched_at": 1663858499.72254
+        "fetched_at": 1667921115.208809
     },
     "github.com/hoisie/redis": {
         "active": false,
@@ -413,11 +413,11 @@
         "license": "MIT",
         "pushed_at": 1469882759.0,
         "open_issues_count": 15,
-        "stargazers_count": 592,
+        "stargazers_count": 591,
         "archived": null,
         "description": "A simple, powerful Redis client for Go",
         "homepage": null,
-        "fetched_at": 1663858500.147561
+        "fetched_at": 1667921118.619784
     },
     "github.com/shipwire/redis": {
         "active": false,
@@ -429,7 +429,7 @@
         "archived": null,
         "description": "Redis client library in pure Go, with streaming, pub-sub, pipelining, and pooling.",
         "homepage": null,
-        "fetched_at": 1663858500.618636
+        "fetched_at": 1667921120.045979
     },
     "github.com/joomcode/redispipe": {
         "active": false,
@@ -437,15 +437,15 @@
         "license": "MIT",
         "pushed_at": 1647418144.0,
         "open_issues_count": 5,
-        "stargazers_count": 237,
+        "stargazers_count": 238,
         "archived": null,
         "description": "High-throughput Redis client for Go with implicit pipelining",
         "homepage": null,
-        "fetched_at": 1663858501.148188
+        "fetched_at": 1667921122.148729
     },
     "github.com/gosexy/redis": {
         "active": false,
-        "forks_count": 43,
+        "forks_count": 44,
         "license": "MIT",
         "pushed_at": 1433287537.0,
         "open_issues_count": 12,
@@ -453,7 +453,7 @@
         "archived": null,
         "description": "Redis client for Go that maps the full redis command list into equivalent Go functions.",
         "homepage": null,
-        "fetched_at": 1663858501.645753
+        "fetched_at": 1667921127.9933
     },
     "github.com/gistao/RedisGo-Async": {
         "active": false,
@@ -465,55 +465,55 @@
         "archived": null,
         "description": "RedisGo-Async  is a Go client for Redis, both asynchronous and synchronous modes are supported,its API is fully compatible with redigo.",
         "homepage": null,
-        "fetched_at": 1663858502.150059
+        "fetched_at": 1667921129.352032
     },
     "github.com/alphazero/Go-Redis": {
         "active": false,
-        "forks_count": 133,
+        "forks_count": 134,
         "license": "Apache-2.0",
         "pushed_at": 1499141122.0,
         "open_issues_count": 16,
-        "stargazers_count": 441,
+        "stargazers_count": 442,
         "archived": null,
         "description": "Google Go Client and Connectors for Redis",
         "homepage": null,
-        "fetched_at": 1663858502.769807
+        "fetched_at": 1667921131.285147
     },
     "github.com/mediocregopher/radix": {
         "active": true,
-        "forks_count": 104,
+        "forks_count": 108,
         "license": "MIT",
-        "pushed_at": 1663657830.0,
-        "open_issues_count": 6,
-        "stargazers_count": 582,
+        "pushed_at": 1666678683.0,
+        "open_issues_count": 10,
+        "stargazers_count": 587,
         "archived": null,
         "description": "Redis client for Go",
         "homepage": null,
-        "fetched_at": 1663858503.240967
+        "fetched_at": 1667921133.758797
     },
     "github.com/gomodule/redigo": {
         "active": true,
-        "forks_count": 1264,
+        "forks_count": 1267,
         "license": "Apache-2.0",
         "pushed_at": 1658792250.0,
-        "open_issues_count": 17,
-        "stargazers_count": 9281,
+        "open_issues_count": 18,
+        "stargazers_count": 9324,
         "archived": null,
         "description": "Go client for Redis",
         "homepage": null,
-        "fetched_at": 1663858503.747932
+        "fetched_at": 1667921136.856958
     },
     "github.com/go-redis/redis": {
         "active": true,
-        "forks_count": 1881,
+        "forks_count": 1913,
         "license": "BSD-2-Clause",
-        "pushed_at": 1663325767.0,
-        "open_issues_count": 175,
-        "stargazers_count": 15441,
+        "pushed_at": 1667775706.0,
+        "open_issues_count": 167,
+        "stargazers_count": 15832,
         "archived": null,
         "description": "Type-safe Redis client for Golang",
         "homepage": "https://redis.uptrace.dev",
-        "fetched_at": 1663858504.19249
+        "fetched_at": 1667921139.761344
     },
     "github.com/tideland/golib": {
         "active": false,
@@ -521,11 +521,11 @@
         "license": "BSD-3-Clause",
         "pushed_at": 1505200668.0,
         "open_issues_count": 2,
-        "stargazers_count": 194,
+        "stargazers_count": 195,
         "archived": null,
         "description": "Go Library [DEPRECATED]",
         "homepage": null,
-        "fetched_at": 1663858504.647749
+        "fetched_at": 1667921143.386826
     },
     "github.com/pascaldekloe/redis": {
         "active": true,
@@ -537,7 +537,7 @@
         "archived": null,
         "description": "efficient client \u26a1\ufe0f",
         "homepage": null,
-        "fetched_at": 1663858505.087844
+        "fetched_at": 1667921144.707617
     },
     "github.com/eu90h/rackdis": {
         "active": false,
@@ -549,7 +549,7 @@
         "archived": null,
         "description": "Redis bindings for Racket",
         "homepage": null,
-        "fetched_at": 1663858505.505076
+        "fetched_at": 1667921145.425099
     },
     "github.com/stchang/redis": {
         "active": false,
@@ -561,19 +561,19 @@
         "archived": null,
         "description": "A redis client for Racket.",
         "homepage": null,
-        "fetched_at": 1663858505.978262
+        "fetched_at": 1667921148.894611
     },
     "github.com/nim-lang/redis": {
         "active": true,
         "forks_count": 29,
         "license": null,
         "pushed_at": 1656606208.0,
-        "open_issues_count": 8,
+        "open_issues_count": 9,
         "stargazers_count": 103,
         "archived": null,
         "description": "Official redis wrapper for Nim.",
         "homepage": null,
-        "fetched_at": 1663858506.425894
+        "fetched_at": 1667921150.397273
     },
     "github.com/xmonader/nim-redisclient": {
         "active": false,
@@ -585,7 +585,7 @@
         "archived": null,
         "description": "sync/async redis clients for Nim",
         "homepage": null,
-        "fetched_at": 1663858506.889076
+        "fetched_at": 1667921153.824625
     },
     "pypi.python.org/pypi/txredis": {
         "active": null,
@@ -597,7 +597,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858506.889284
+        "fetched_at": 1667921153.824897
     },
     "github.com/pepijndevos/pypredis": {
         "active": false,
@@ -609,7 +609,7 @@
         "archived": null,
         "description": "A havy-duty Redis library",
         "homepage": null,
-        "fetched_at": 1663858507.346629
+        "fetched_at": 1667921156.878036
     },
     "github.com/evilkost/brukva": {
         "active": false,
@@ -617,11 +617,11 @@
         "license": null,
         "pushed_at": 1318778176.0,
         "open_issues_count": 18,
-        "stargazers_count": 266,
+        "stargazers_count": 267,
         "archived": null,
         "description": "Asynchronous Redis client that works within Tornado IO loop.",
         "homepage": null,
-        "fetched_at": 1663858507.854728
+        "fetched_at": 1667921160.274096
     },
     "github.com/khamin/redisca2": {
         "active": false,
@@ -633,19 +633,19 @@
         "archived": null,
         "description": "Lightweight Python Data Mapper for Redis",
         "homepage": null,
-        "fetched_at": 1663858508.354462
+        "fetched_at": 1667921161.479838
     },
     "github.com/redis/redis-py": {
         "active": true,
-        "forks_count": 2218,
+        "forks_count": 2247,
         "license": "MIT",
-        "pushed_at": 1663769955.0,
-        "open_issues_count": 156,
-        "stargazers_count": 10763,
+        "pushed_at": 1667912941.0,
+        "open_issues_count": 160,
+        "stargazers_count": 10901,
         "archived": null,
         "description": "Redis Python Client",
         "homepage": null,
-        "fetched_at": 1663858508.842059
+        "fetched_at": 1667921163.73231
     },
     "github.com/schlitzered/pyredis": {
         "active": false,
@@ -657,31 +657,31 @@
         "archived": null,
         "description": "Redis Client Implementation for Python",
         "homepage": null,
-        "fetched_at": 1663858509.316246
+        "fetched_at": 1667921166.546867
     },
     "github.com/alisaifee/coredis": {
         "active": true,
-        "forks_count": 6,
+        "forks_count": 7,
         "license": "MIT",
-        "pushed_at": 1663317263.0,
-        "open_issues_count": 1,
-        "stargazers_count": 28,
+        "pushed_at": 1667866150.0,
+        "open_issues_count": 2,
+        "stargazers_count": 35,
         "archived": null,
-        "description": "coredis is an async redis client with support for redis server, cluster & sentinel.",
+        "description": "coredis is an async redis client for python with support for redis cluster & sentinel.",
         "homepage": "http://coredis.readthedocs.io/en/latest/",
-        "fetched_at": 1663858509.762638
+        "fetched_at": 1667921170.134289
     },
     "github.com/brainix/pottery": {
         "active": true,
         "forks_count": 30,
         "license": "Apache-2.0",
-        "pushed_at": 1663040035.0,
-        "open_issues_count": 13,
-        "stargazers_count": 750,
+        "pushed_at": 1665065625.0,
+        "open_issues_count": 14,
+        "stargazers_count": 769,
         "archived": null,
         "description": "Redis for humans. \ud83c\udf0e\ud83c\udf0d\ud83c\udf0f",
         "homepage": null,
-        "fetched_at": 1663858510.211713
+        "fetched_at": 1667921175.124365
     },
     "github.com/gh0st-work/python_redis_orm": {
         "active": false,
@@ -693,7 +693,7 @@
         "archived": null,
         "description": "Python Redis ORM library that gives redis easy-to-use objects with fields and speeds a development up, inspired by Django ORM",
         "homepage": null,
-        "fetched_at": 1663858510.630548
+        "fetched_at": 1667921176.899288
     },
     "github.com/groove-x/gxredis": {
         "active": false,
@@ -705,7 +705,7 @@
         "archived": null,
         "description": "Simple redis-py wrapper library",
         "homepage": null,
-        "fetched_at": 1663858511.10402
+        "fetched_at": 1667921178.45769
     },
     "github.com/cf020031308/redisio": {
         "active": false,
@@ -717,11 +717,11 @@
         "archived": null,
         "description": "A tiny redis client with high performance, optimized especially for massive insertion.",
         "homepage": "https://cf020031308.github.io/blog/speedup-redispy-pipeline.html",
-        "fetched_at": 1663858511.535186
+        "fetched_at": 1667921183.062619
     },
     "github.com/fiorix/txredisapi": {
         "active": false,
-        "forks_count": 92,
+        "forks_count": 93,
         "license": "Apache-2.0",
         "pushed_at": 1623059960.0,
         "open_issues_count": 21,
@@ -729,7 +729,7 @@
         "archived": null,
         "description": "non-blocking redis client for python twisted",
         "homepage": null,
-        "fetched_at": 1663858512.196139
+        "fetched_at": 1667921185.583266
     },
     "github.com/KissPeter/redis-streams": {
         "active": false,
@@ -737,35 +737,35 @@
         "license": "GPL-3.0",
         "pushed_at": 1644084495.0,
         "open_issues_count": null,
-        "stargazers_count": 2,
+        "stargazers_count": 3,
         "archived": null,
         "description": "Batch processing based on Redis Stream",
         "homepage": null,
-        "fetched_at": 1663858512.647647
+        "fetched_at": 1667921189.873626
     },
     "github.com/Grokzen/redis-py-cluster": {
         "active": false,
-        "forks_count": 313,
+        "forks_count": 314,
         "license": "MIT",
         "pushed_at": 1647078641.0,
-        "open_issues_count": 36,
-        "stargazers_count": 1066,
+        "open_issues_count": 32,
+        "stargazers_count": 1069,
         "archived": null,
         "description": "Python cluster client for the official redis cluster. Redis 3.0+. ",
         "homepage": "https://redis-py-cluster.readthedocs.io/",
-        "fetched_at": 1663858513.087561
+        "fetched_at": 1667921191.56081
     },
     "github.com/coleifer/walrus": {
         "active": true,
-        "forks_count": 88,
+        "forks_count": 89,
         "license": "MIT",
-        "pushed_at": 1656596378.0,
+        "pushed_at": 1667572231.0,
         "open_issues_count": null,
-        "stargazers_count": 1019,
+        "stargazers_count": 1032,
         "archived": null,
         "description": "Lightweight Python utilities for working with Redis",
         "homepage": "https://walrus.readthedocs.org/",
-        "fetched_at": 1663858513.520195
+        "fetched_at": 1667921195.337815
     },
     "github.com/thefab/tornadis": {
         "active": false,
@@ -777,7 +777,7 @@
         "archived": null,
         "description": "async minimal redis client for tornado ioloop designed for performances (use C hiredis parser)",
         "homepage": null,
-        "fetched_at": 1663858513.973406
+        "fetched_at": 1667921197.286189
     },
     "github.com/aallamaa/desir": {
         "active": false,
@@ -789,43 +789,43 @@
         "archived": null,
         "description": "python redis client",
         "homepage": null,
-        "fetched_at": 1663858514.409599
+        "fetched_at": 1667921198.042193
     },
     "github.com/jonathanslenders/asyncio-redis": {
         "active": false,
-        "forks_count": 74,
+        "forks_count": 73,
         "license": null,
         "pushed_at": 1597143413.0,
         "open_issues_count": 52,
-        "stargazers_count": 546,
+        "stargazers_count": 550,
         "archived": null,
         "description": "Redis client for Python asyncio (PEP 3156)",
         "homepage": "http://asyncio-redis.readthedocs.org/",
-        "fetched_at": 1663858514.847608
+        "fetched_at": 1667921199.693926
     },
     "github.com/ptaoussanis/carmine": {
         "active": true,
         "forks_count": 124,
         "license": "EPL-1.0",
-        "pushed_at": 1661203799.0,
-        "open_issues_count": 31,
-        "stargazers_count": 1073,
+        "pushed_at": 1667912344.0,
+        "open_issues_count": 20,
+        "stargazers_count": 1083,
         "archived": null,
         "description": "Redis client and message queue for Clojure",
         "homepage": "https://www.taoensso.com",
-        "fetched_at": 1663858515.297921
+        "fetched_at": 1667921202.970114
     },
     "github.com/whatyouhide/redix": {
         "active": true,
-        "forks_count": 112,
+        "forks_count": 113,
         "license": "MIT",
-        "pushed_at": 1663778040.0,
-        "open_issues_count": null,
-        "stargazers_count": 960,
+        "pushed_at": 1666524128.0,
+        "open_issues_count": 2,
+        "stargazers_count": 979,
         "archived": null,
         "description": "Fast, pipelined, resilient Redis driver for Elixir. \ud83d\udecd",
         "homepage": "http://hexdocs.pm/redix",
-        "fetched_at": 1663858515.765477
+        "fetched_at": 1667921205.439927
     },
     "github.com/artemeff/exredis": {
         "active": false,
@@ -833,11 +833,11 @@
         "license": "MIT",
         "pushed_at": 1547362940.0,
         "open_issues_count": 6,
-        "stargazers_count": 356,
+        "stargazers_count": 357,
         "archived": null,
         "description": "Redis commands for Elixir",
         "homepage": null,
-        "fetched_at": 1663858516.442646
+        "fetched_at": 1667921207.919562
     },
     "github.com/himulawang/i_redis": {
         "active": false,
@@ -849,19 +849,19 @@
         "archived": null,
         "description": "A redis client for dart",
         "homepage": null,
-        "fetched_at": 1663858516.901707
+        "fetched_at": 1667921209.043621
     },
     "github.com/ra1u/redis-dart": {
-        "active": true,
-        "forks_count": 25,
+        "active": false,
+        "forks_count": 26,
         "license": "AGPL-3.0",
         "pushed_at": 1651997026.0,
         "open_issues_count": 2,
-        "stargazers_count": 59,
+        "stargazers_count": 62,
         "archived": null,
         "description": "fast redis protocol  parser and client",
         "homepage": null,
-        "fetched_at": 1663858517.349359
+        "fetched_at": 1667921209.951265
     },
     "github.com/dartist/redis_client": {
         "active": false,
@@ -873,31 +873,31 @@
         "archived": null,
         "description": "A high-performance async/non-blocking Redis client for Dart",
         "homepage": null,
-        "fetched_at": 1663858517.813901
+        "fetched_at": 1667921213.118459
     },
     "github.com/SiLeader/dedis": {
         "active": false,
         "forks_count": null,
         "license": "Apache-2.0",
         "pushed_at": 1643364349.0,
-        "open_issues_count": 2,
+        "open_issues_count": 3,
         "stargazers_count": 1,
         "archived": null,
         "description": "Simple Redis Client for Dart",
         "homepage": null,
-        "fetched_at": 1663858518.282169
+        "fetched_at": 1667921214.055669
     },
     "github.com/jcmellado/dartis": {
         "active": false,
         "forks_count": 15,
         "license": "MIT",
         "pushed_at": 1639791496.0,
-        "open_issues_count": 10,
+        "open_issues_count": 11,
         "stargazers_count": 58,
         "archived": null,
         "description": "Redis client for Dart",
         "homepage": null,
-        "fetched_at": 1663858518.744373
+        "fetched_at": 1667921214.857929
     },
     "github.com/wjackson/AnyEvent-Hiredis": {
         "active": false,
@@ -909,31 +909,31 @@
         "archived": null,
         "description": "hiredis AnyEvent client",
         "homepage": null,
-        "fetched_at": 1663858519.177431
+        "fetched_at": 1667921216.607787
     },
     "github.com/PerlRedis/perl-redis": {
         "active": true,
-        "forks_count": 62,
+        "forks_count": 63,
         "license": null,
-        "pushed_at": 1660131403.0,
-        "open_issues_count": 31,
+        "pushed_at": 1664380086.0,
+        "open_issues_count": 33,
         "stargazers_count": 100,
         "archived": null,
         "description": "Perl binding for Redis database",
         "homepage": "http://metacpan.org/release/Redis/",
-        "fetched_at": 1663858519.63117
+        "fetched_at": 1667921218.265863
     },
     "github.com/trinitum/RedisDB": {
         "active": false,
         "forks_count": 11,
         "license": null,
         "pushed_at": 1631211048.0,
-        "open_issues_count": 9,
+        "open_issues_count": 10,
         "stargazers_count": 22,
         "archived": null,
         "description": "Perl extension to access Redis",
         "homepage": null,
-        "fetched_at": 1663858520.340948
+        "fetched_at": 1667921219.231293
     },
     "github.com/smsonline/redis-cluster-perl": {
         "active": false,
@@ -945,7 +945,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858520.814194
+        "fetched_at": 1667921220.829086
     },
     "github.com/iph0/Redis-ClusterRider": {
         "active": false,
@@ -957,7 +957,7 @@
         "archived": null,
         "description": "Daring Redis Cluster client",
         "homepage": null,
-        "fetched_at": 1663858521.244556
+        "fetched_at": 1667921223.993216
     },
     "github.com/iph0/AnyEvent-RipeRedis": {
         "active": false,
@@ -969,7 +969,7 @@
         "archived": null,
         "description": "Flexible non-blocking Redis client with reconnect feature. The client supports subscriptions, transactions and connection via UNIX-socket.",
         "homepage": null,
-        "fetched_at": 1663858521.702936
+        "fetched_at": 1667921225.001211
     },
     "github.com/iph0/AnyEvent-RipeRedis-Cluster": {
         "active": false,
@@ -981,7 +981,7 @@
         "archived": null,
         "description": "Non-blocking Redis Cluster client",
         "homepage": null,
-        "fetched_at": 1663858522.159741
+        "fetched_at": 1667921226.405743
     },
     "github.com/miyagawa/AnyEvent-Redis": {
         "active": false,
@@ -993,19 +993,19 @@
         "archived": null,
         "description": "Asynchronous Redis client",
         "homepage": "http://search.cpan.org/dist/AnyEvent-Redis",
-        "fetched_at": 1663858522.594344
+        "fetched_at": 1667921227.003959
     },
     "github.com/shogo82148/Redis-Fast": {
         "active": true,
         "forks_count": 17,
         "license": null,
-        "pushed_at": 1654629775.0,
+        "pushed_at": 1667813140.0,
         "open_issues_count": 7,
         "stargazers_count": 22,
         "archived": null,
         "description": "fast perl binding for Redis database",
         "homepage": "https://metacpan.org/release/Redis-Fast",
-        "fetched_at": 1663858523.054452
+        "fetched_at": 1667921227.875765
     },
     "github.com/marcusramberg/mojo-redis": {
         "active": false,
@@ -1017,7 +1017,7 @@
         "archived": null,
         "description": "ASync Redis driver for Mojo IOLoop",
         "homepage": null,
-        "fetched_at": 1663858523.467006
+        "fetched_at": 1667921228.551102
     },
     "search.cpan.org/dist/Redis-hiredis": {
         "active": null,
@@ -1029,7 +1029,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858523.467268
+        "fetched_at": 1667921228.551243
     },
     "search.cpan.org/dist/Danga-Socket-Redis": {
         "active": null,
@@ -1041,7 +1041,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858523.467406
+        "fetched_at": 1667921228.551363
     },
     "github.com/RediStick/RediStick": {
         "active": null,
@@ -1053,7 +1053,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858523.853825
+        "fetched_at": 1667921229.953276
     },
     "github.com/SimpleRedisClient/SimpleRedisClient": {
         "active": null,
@@ -1065,7 +1065,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858524.243237
+        "fetched_at": 1667921231.69841
     },
     "github.com/Pharo-Redis/Pharo-Redis": {
         "active": null,
@@ -1077,7 +1077,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858524.65785
+        "fetched_at": 1667921232.188849
     },
     "squeaksource.com/Redis/Redis": {
         "active": null,
@@ -1089,7 +1089,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858524.658123
+        "fetched_at": 1667921232.18912
     },
     "squeaksource.com/RedisBinaryClient/RedisBinaryClient": {
         "active": null,
@@ -1101,7 +1101,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858524.658313
+        "fetched_at": 1667921232.189311
     },
     "github.com/ltoddy/redis-rs": {
         "active": false,
@@ -1113,19 +1113,19 @@
         "archived": null,
         "description": "Redis client for Rust.",
         "homepage": null,
-        "fetched_at": 1663858525.109053
+        "fetched_at": 1667921233.321368
     },
     "github.com/mitsuhiko/redis-rs": {
         "active": true,
-        "forks_count": 405,
+        "forks_count": 412,
         "license": null,
-        "pushed_at": 1663847451.0,
-        "open_issues_count": 128,
-        "stargazers_count": 2646,
+        "pushed_at": 1667913749.0,
+        "open_issues_count": 133,
+        "stargazers_count": 2716,
         "archived": null,
         "description": "Redis library for rust",
         "homepage": "https://docs.rs/redis",
-        "fetched_at": 1663858525.806648
+        "fetched_at": 1667921234.650855
     },
     "github.com/mneumann/rust-redis": {
         "active": false,
@@ -1137,7 +1137,7 @@
         "archived": null,
         "description": "A Rust client/server library for Redis",
         "homepage": null,
-        "fetched_at": 1663858526.241751
+        "fetched_at": 1667921235.927055
     },
     "github.com/AsoSunag/redis-client": {
         "active": false,
@@ -1149,7 +1149,7 @@
         "archived": null,
         "description": "Redis client in Rust",
         "homepage": null,
-        "fetched_at": 1663858526.683789
+        "fetched_at": 1667921238.262951
     },
     "github.com/vangberg/iodis": {
         "active": false,
@@ -1157,11 +1157,11 @@
         "license": null,
         "pushed_at": 1271879245.0,
         "open_issues_count": null,
-        "stargazers_count": 22,
+        "stargazers_count": 23,
         "archived": null,
         "description": "a redis client library for io",
         "homepage": null,
-        "fetched_at": 1663858527.114221
+        "fetched_at": 1667921238.721835
     },
     "github.com/lp/puredis": {
         "active": false,
@@ -1173,11 +1173,11 @@
         "archived": null,
         "description": "Pure-Data Redis External",
         "homepage": null,
-        "fetched_at": 1663858527.548733
+        "fetched_at": 1667921239.935419
     },
     "github.com/Nordix/eredis_cluster": {
         "active": true,
-        "forks_count": 11,
+        "forks_count": 10,
         "license": "MIT",
         "pushed_at": 1659506580.0,
         "open_issues_count": 6,
@@ -1185,7 +1185,7 @@
         "archived": null,
         "description": "eredis_cluster is a Redis Cluster client in Erlang. This is an actively maintained fork used and sponsored by Ericsson via Nordix Foundation.",
         "homepage": null,
-        "fetched_at": 1663858528.055785
+        "fetched_at": 1667921240.530218
     },
     "github.com/Nordix/eredis": {
         "active": true,
@@ -1193,11 +1193,11 @@
         "license": "MIT",
         "pushed_at": 1661923209.0,
         "open_issues_count": null,
-        "stargazers_count": 22,
+        "stargazers_count": 21,
         "archived": null,
         "description": "Erlang Redis client. This is an actively maintained fork used and sponsored by Ericsson via Nordix Foundation.",
         "homepage": null,
-        "fetched_at": 1663858528.579683
+        "fetched_at": 1667921242.030892
     },
     "github.com/adrienmo/eredis_cluster": {
         "active": false,
@@ -1209,7 +1209,7 @@
         "archived": null,
         "description": "eredis_cluster is an erlang wrapper for eredis to support cluster mode of redis 3.0.0+",
         "homepage": null,
-        "fetched_at": 1663858529.036809
+        "fetched_at": 1667921242.785488
     },
     "github.com/HalloAppInc/ecredis": {
         "active": true,
@@ -1221,7 +1221,7 @@
         "archived": null,
         "description": "Erlang Cluster Redis Client",
         "homepage": null,
-        "fetched_at": 1663858529.52708
+        "fetched_at": 1667921243.466378
     },
     "github.com/wooga/eredis": {
         "active": true,
@@ -1229,11 +1229,11 @@
         "license": "MIT",
         "pushed_at": 1653304528.0,
         "open_issues_count": 27,
-        "stargazers_count": 613,
+        "stargazers_count": 616,
         "archived": null,
         "description": "Erlang Redis client",
         "homepage": null,
-        "fetched_at": 1663858529.995346
+        "fetched_at": 1667921244.129418
     },
     "bitbucket.org/cmbce/r-package-rediscli": {
         "active": null,
@@ -1245,7 +1245,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858529.995619
+        "fetched_at": 1667921244.129677
     },
     "github.com/richfitz/redux": {
         "active": true,
@@ -1253,35 +1253,35 @@
         "license": null,
         "pushed_at": 1660206326.0,
         "open_issues_count": 13,
-        "stargazers_count": 76,
+        "stargazers_count": 78,
         "archived": null,
         "description": ":telephone_receiver::computer: Redis client for R",
         "homepage": "https://richfitz.github.io/redux",
-        "fetched_at": 1663858530.42947
+        "fetched_at": 1667921245.290766
     },
     "github.com/eddelbuettel/rcppredis": {
         "active": true,
         "forks_count": 16,
         "license": "GPL-2.0",
-        "pushed_at": 1649927663.0,
+        "pushed_at": 1667253309.0,
         "open_issues_count": null,
         "stargazers_count": 47,
         "archived": null,
         "description": "R interface to Redis using the hiredis library",
         "homepage": null,
-        "fetched_at": 1663858530.892563
+        "fetched_at": 1667921245.971173
     },
     "github.com/bwlewis/rredis": {
         "active": false,
-        "forks_count": 26,
+        "forks_count": 25,
         "license": null,
         "pushed_at": 1641214626.0,
         "open_issues_count": 8,
-        "stargazers_count": 94,
+        "stargazers_count": 95,
         "archived": null,
         "description": "R client for Redis",
         "homepage": "http://illposed.net/",
-        "fetched_at": 1663858531.331007
+        "fetched_at": 1667921246.450043
     },
     "sourceforge.net/projects/aredis": {
         "active": null,
@@ -1293,7 +1293,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858531.331194
+        "fetched_at": 1667921246.450253
     },
     "github.com/drm/java-redis-client": {
         "active": false,
@@ -1301,23 +1301,23 @@
         "license": "MIT",
         "pushed_at": 1607432675.0,
         "open_issues_count": 1,
-        "stargazers_count": 44,
+        "stargazers_count": 46,
         "archived": null,
         "description": "Low level Redis client (but you won't need more than this)",
         "homepage": null,
-        "fetched_at": 1663858531.779121
+        "fetched_at": 1667921246.928383
     },
     "github.com/mrniko/redisson": {
         "active": true,
-        "forks_count": 4800,
+        "forks_count": 4852,
         "license": "Apache-2.0",
-        "pushed_at": 1663815483.0,
-        "open_issues_count": 337,
-        "stargazers_count": 19843,
+        "pushed_at": 1667885036.0,
+        "open_issues_count": 350,
+        "stargazers_count": 20098,
         "archived": null,
         "description": "Redisson - Redis Java client with features of In-Memory Data Grid. Over 50 Redis based Java objects and services: Set, Multimap, SortedSet, Map, List, Queue, Deque, Semaphore, Lock, AtomicLong, Map Reduce, Publish / Subscribe, Bloom filter, Spring Cache, Tomcat, Scheduler, JCache API, Hibernate, MyBatis, RPC, local cache ...",
         "homepage": "https://redisson.pro",
-        "fetched_at": 1663858532.489862
+        "fetched_at": 1667921247.794329
     },
     "github.com/virendradhankar/viredis": {
         "active": false,
@@ -1329,7 +1329,7 @@
         "archived": null,
         "description": "Java client for Redis Cache",
         "homepage": null,
-        "fetched_at": 1663858532.968825
+        "fetched_at": 1667921248.882583
     },
     "github.com/e-mzungu/rjc": {
         "active": false,
@@ -1341,31 +1341,31 @@
         "archived": null,
         "description": "Redis Java Client",
         "homepage": null,
-        "fetched_at": 1663858533.429181
+        "fetched_at": 1667921249.34876
     },
     "github.com/redis/jedis": {
         "active": true,
-        "forks_count": 3691,
+        "forks_count": 3704,
         "license": "MIT",
-        "pushed_at": 1663667728.0,
-        "open_issues_count": 185,
-        "stargazers_count": 10680,
+        "pushed_at": 1667829614.0,
+        "open_issues_count": 184,
+        "stargazers_count": 10771,
         "archived": null,
         "description": "Redis Java client designed for performance and ease of use.",
         "homepage": null,
-        "fetched_at": 1663858533.872247
+        "fetched_at": 1667921249.830114
     },
     "github.com/alphazero/jredis": {
-        "active": true,
+        "active": false,
         "forks_count": 135,
         "license": "Apache-2.0",
         "pushed_at": 1650657644.0,
         "open_issues_count": 19,
-        "stargazers_count": 312,
+        "stargazers_count": 313,
         "archived": null,
         "description": "Java Client and Connectors for Redis",
         "homepage": "http://code.google.com/p/jredis/",
-        "fetched_at": 1663858534.334454
+        "fetched_at": 1667921250.315435
     },
     "github.com/spullara/redis-protocol": {
         "active": false,
@@ -1377,31 +1377,31 @@
         "archived": null,
         "description": "Java client and server implementation of Redis",
         "homepage": null,
-        "fetched_at": 1663858534.771325
+        "fetched_at": 1667921251.315629
     },
     "github.com/vert-x3/vertx-redis-client": {
         "active": true,
-        "forks_count": 105,
+        "forks_count": 106,
         "license": "Apache-2.0",
-        "pushed_at": 1663580296.0,
-        "open_issues_count": 26,
-        "stargazers_count": 115,
+        "pushed_at": 1666690622.0,
+        "open_issues_count": 28,
+        "stargazers_count": 117,
         "archived": null,
         "description": "Redis client for Vert.x",
         "homepage": "http://vertx.io",
-        "fetched_at": 1663858535.203092
+        "fetched_at": 1667921251.887182
     },
     "github.com/lettuce-io/lettuce-core": {
         "active": true,
-        "forks_count": 855,
+        "forks_count": 867,
         "license": "Apache-2.0",
-        "pushed_at": 1663661851.0,
-        "open_issues_count": 87,
-        "stargazers_count": 4715,
+        "pushed_at": 1665423927.0,
+        "open_issues_count": 91,
+        "stargazers_count": 4771,
         "archived": null,
         "description": "Advanced Java Redis client for thread-safe sync, async, and reactive usage. Supports Cluster, Sentinel, Pipelining, and codecs.",
         "homepage": "https://lettuce.io",
-        "fetched_at": 1663858535.665995
+        "fetched_at": 1667921252.375333
     },
     "code.google.com/p/browse": {
         "active": null,
@@ -1413,43 +1413,43 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858535.666205
+        "fetched_at": 1667921252.375594
     },
     "github.com/crackthecodeabhi/kreds": {
         "active": true,
-        "forks_count": 9,
+        "forks_count": 12,
         "license": "Apache-2.0",
-        "pushed_at": 1663841816.0,
-        "open_issues_count": 11,
-        "stargazers_count": 92,
+        "pushed_at": 1667902313.0,
+        "open_issues_count": 17,
+        "stargazers_count": 106,
         "archived": null,
         "description": "A thread-safe, non-blocking, coroutine-based Redis client implementation for Kotlin.",
         "homepage": "https://crackthecodeabhi.github.io/kreds",
-        "fetched_at": 1663858536.109232
+        "fetched_at": 1667921253.134903
     },
     "github.com/stefanwille/crystal-redis": {
         "active": false,
-        "forks_count": 60,
+        "forks_count": 61,
         "license": "MIT",
         "pushed_at": 1634968420.0,
-        "open_issues_count": 8,
-        "stargazers_count": 373,
+        "open_issues_count": 9,
+        "stargazers_count": 375,
         "archived": null,
         "description": "Full featured Redis client for Crystal",
         "homepage": null,
-        "fetched_at": 1663858536.557146
+        "fetched_at": 1667921253.965522
     },
     "github.com/informatikr/hedis": {
         "active": true,
-        "forks_count": 87,
+        "forks_count": 89,
         "license": "BSD-3-Clause",
-        "pushed_at": 1663224998.0,
-        "open_issues_count": 31,
-        "stargazers_count": 311,
+        "pushed_at": 1664031003.0,
+        "open_issues_count": 32,
+        "stargazers_count": 313,
         "archived": null,
         "description": "A Redis client library for Haskell.",
         "homepage": "http://hackage.haskell.org/package/hedis",
-        "fetched_at": 1663858537.009988
+        "fetched_at": 1667921255.312112
     },
     "github.com/ziogas/PHP-Redis-implementation": {
         "active": false,
@@ -1461,7 +1461,7 @@
         "archived": null,
         "description": "Raw wrapper for real Redis fans.",
         "homepage": null,
-        "fetched_at": 1663858537.425296
+        "fetched_at": 1667921255.776523
     },
     "github.com/swoole/redis-async": {
         "active": false,
@@ -1473,22 +1473,22 @@
         "archived": true,
         "description": "Asynchronous redis client library for PHP. Built-in connection pool.",
         "homepage": null,
-        "fetched_at": 1663858537.88802
+        "fetched_at": 1667921256.250144
     },
     "github.com/nrk/predis": {
         "active": true,
-        "forks_count": 954,
+        "forks_count": 957,
         "license": "MIT",
-        "pushed_at": 1663679592.0,
-        "open_issues_count": 8,
-        "stargazers_count": 7210,
+        "pushed_at": 1667426852.0,
+        "open_issues_count": 7,
+        "stargazers_count": 7238,
         "archived": null,
         "description": "A flexible and feature-complete Redis client for PHP.",
         "homepage": "https://github.com/predis/predis/wiki",
-        "fetched_at": 1663858538.592095
+        "fetched_at": 1667921257.998812
     },
     "github.com/jdp/redisent": {
-        "active": true,
+        "active": false,
         "forks_count": 195,
         "license": "ISC",
         "pushed_at": 1649333632.0,
@@ -1497,55 +1497,55 @@
         "archived": null,
         "description": "a no-nonsense Redis client for PHP",
         "homepage": "http://jdp.github.com/redisent/",
-        "fetched_at": 1663858539.066811
+        "fetched_at": 1667921259.134484
     },
     "github.com/phpredis/phpredis": {
         "active": true,
         "forks_count": 2109,
         "license": null,
-        "pushed_at": 1663628666.0,
-        "open_issues_count": 161,
-        "stargazers_count": 9461,
+        "pushed_at": 1667866669.0,
+        "open_issues_count": 115,
+        "stargazers_count": 9501,
         "archived": null,
         "description": "A PHP extension for Redis",
         "homepage": null,
-        "fetched_at": 1663858539.525868
+        "fetched_at": 1667921259.620406
     },
     "github.com/amphp/redis": {
         "active": true,
-        "forks_count": 27,
+        "forks_count": 29,
         "license": "MIT",
-        "pushed_at": 1652295426.0,
-        "open_issues_count": 5,
-        "stargazers_count": 131,
+        "pushed_at": 1667853940.0,
+        "open_issues_count": 7,
+        "stargazers_count": 132,
         "archived": null,
         "description": "Async Redis Client for PHP based on Amp.",
         "homepage": null,
-        "fetched_at": 1663858539.975772
+        "fetched_at": 1667921260.089072
     },
     "github.com/colinmollenhour/credis": {
         "active": true,
-        "forks_count": 141,
+        "forks_count": 142,
         "license": "MIT",
-        "pushed_at": 1655755103.0,
-        "open_issues_count": 18,
-        "stargazers_count": 360,
+        "pushed_at": 1667862096.0,
+        "open_issues_count": 20,
+        "stargazers_count": 362,
         "archived": null,
         "description": "Lightweight PHP Redis client that can run standalone or wrap phpredis.",
         "homepage": null,
-        "fetched_at": 1663858540.475136
+        "fetched_at": 1667921260.836188
     },
     "github.com/cheprasov/php-redis-client": {
         "active": true,
-        "forks_count": 43,
+        "forks_count": 45,
         "license": "MIT",
         "pushed_at": 1657658748.0,
         "open_issues_count": 8,
-        "stargazers_count": 124,
+        "stargazers_count": 123,
         "archived": null,
         "description": "RedisClient is a fast, fully-functional and user-friendly client for Redis, optimized for performance. RedisClient supports the latest versions of Redis starting from 2.6 to 6.0",
         "homepage": null,
-        "fetched_at": 1663858540.918472
+        "fetched_at": 1667921262.19914
     },
     "github.com/jamescauwelier/PSRedis": {
         "active": false,
@@ -1553,11 +1553,11 @@
         "license": null,
         "pushed_at": 1612258378.0,
         "open_issues_count": 2,
-        "stargazers_count": 78,
+        "stargazers_count": 77,
         "archived": null,
         "description": "A PHP client for redis sentinel connections as a wrapper on other redis clients",
         "homepage": null,
-        "fetched_at": 1663858541.378323
+        "fetched_at": 1667921262.667513
     },
     "github.com/yampee/Redis": {
         "active": false,
@@ -1569,7 +1569,7 @@
         "archived": null,
         "description": "A full-featured Redis client for PHP 5.2. Easy to use and to extend.",
         "homepage": null,
-        "fetched_at": 1663858541.851191
+        "fetched_at": 1667921264.321424
     },
     "github.com/ktekinay/XOJO-Redis": {
         "active": false,
@@ -1581,7 +1581,7 @@
         "archived": null,
         "description": "Redis class for Xojo",
         "homepage": null,
-        "fetched_at": 1663858542.437709
+        "fetched_at": 1667921266.570448
     },
     "github.com/nrk/redis-lua": {
         "active": false,
@@ -1589,11 +1589,11 @@
         "license": "MIT",
         "pushed_at": 1613760478.0,
         "open_issues_count": 36,
-        "stargazers_count": 701,
+        "stargazers_count": 706,
         "archived": null,
         "description": "A Lua client library for the redis key value storage system.",
         "homepage": null,
-        "fetched_at": 1663858542.877686
+        "fetched_at": 1667921267.055289
     },
     "github.com/agladysh/lua-hiredis": {
         "active": false,
@@ -1605,7 +1605,7 @@
         "archived": null,
         "description": "Bindings for hiredis Redis-client library",
         "homepage": null,
-        "fetched_at": 1663858543.324683
+        "fetched_at": 1667921267.528627
     },
     "github.com/daurnimator/lredis": {
         "active": false,
@@ -1617,31 +1617,31 @@
         "archived": null,
         "description": "A redis client for lua",
         "homepage": null,
-        "fetched_at": 1663858543.855575
+        "fetched_at": 1667921268.002175
     },
     "github.com/SomajitDey/redis-client": {
         "active": false,
         "forks_count": 7,
         "license": "LGPL-2.1",
         "pushed_at": 1632386820.0,
-        "open_issues_count": null,
-        "stargazers_count": 17,
+        "open_issues_count": 1,
+        "stargazers_count": 19,
         "archived": null,
         "description": "Bash scripting library +  CLI + Connection-pool",
         "homepage": null,
-        "fetched_at": 1663858544.312306
+        "fetched_at": 1667921268.476544
     },
     "github.com/crypt1d/redi.sh": {
         "active": false,
-        "forks_count": 92,
+        "forks_count": 94,
         "license": null,
         "pushed_at": 1599056703.0,
         "open_issues_count": 11,
-        "stargazers_count": 243,
+        "stargazers_count": 245,
         "archived": null,
         "description": "Primitive redis client written entirely in Bash",
         "homepage": null,
-        "fetched_at": 1663858544.750975
+        "fetched_at": 1667921269.102507
     },
     "github.com/hishamco/vRedis": {
         "active": false,
@@ -1653,31 +1653,31 @@
         "archived": null,
         "description": "Redis client using VB.NET",
         "homepage": null,
-        "fetched_at": 1663858546.20272
+        "fetched_at": 1667921271.496922
     },
     "github.com/Asmod4n/mruby-hiredis": {
-        "active": false,
+        "active": true,
         "forks_count": 3,
         "license": "Apache-2.0",
-        "pushed_at": 1635958618.0,
+        "pushed_at": 1664966980.0,
         "open_issues_count": null,
         "stargazers_count": 13,
         "archived": null,
         "description": "mruby bindings for https://github.com/redis/hiredis",
         "homepage": null,
-        "fetched_at": 1663858546.659804
+        "fetched_at": 1667921271.967798
     },
     "github.com/matsumoto-r/mruby-redis": {
         "active": false,
         "forks_count": 31,
         "license": null,
         "pushed_at": 1647561185.0,
-        "open_issues_count": 3,
+        "open_issues_count": 4,
         "stargazers_count": 49,
         "archived": null,
         "description": "redis class for mruby.",
         "homepage": null,
-        "fetched_at": 1663858547.317703
+        "fetched_at": 1667921272.926645
     },
     "github.com/redis/redis.tcl": {
         "active": null,
@@ -1689,7 +1689,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858547.691361
+        "fetched_at": 1667921273.352777
     },
     "github.com/gahr/retcl": {
         "active": false,
@@ -1701,7 +1701,7 @@
         "archived": null,
         "description": "Tcl client library for Redis",
         "homepage": "https://gahr.github.io/retcl/",
-        "fetched_at": 1663858548.145047
+        "fetched_at": 1667921273.86697
     },
     "github.com/chiradip/RedisClient": {
         "active": false,
@@ -1713,7 +1713,7 @@
         "archived": null,
         "description": "A no nonsense Redis Client using pure scala",
         "homepage": null,
-        "fetched_at": 1663858548.582142
+        "fetched_at": 1667921274.364978
     },
     "github.com/twitter/finagle-redis": {
         "active": null,
@@ -1725,7 +1725,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858548.967951
+        "fetched_at": 1667921275.32369
     },
     "github.com/yarosman/redis-client-scala-netty": {
         "active": false,
@@ -1737,43 +1737,43 @@
         "archived": null,
         "description": "Scala redis client built with netty framework",
         "homepage": null,
-        "fetched_at": 1663858549.521437
+        "fetched_at": 1667921276.015758
     },
     "github.com/scredis/scredis": {
         "active": true,
         "forks_count": 35,
         "license": "Apache-2.0",
-        "pushed_at": 1663261431.0,
-        "open_issues_count": 18,
-        "stargazers_count": 134,
+        "pushed_at": 1667604071.0,
+        "open_issues_count": 14,
+        "stargazers_count": 135,
         "archived": null,
         "description": " Non-blocking, ultra-fast Scala Redis client built on top of Akka IO.",
         "homepage": "https://scredis.github.io/scredis/",
-        "fetched_at": 1663858549.957714
+        "fetched_at": 1667921276.500702
     },
     "github.com/monix/monix-connect": {
         "active": true,
-        "forks_count": 19,
+        "forks_count": 17,
         "license": "Apache-2.0",
-        "pushed_at": 1663604531.0,
-        "open_issues_count": 45,
-        "stargazers_count": 57,
+        "pushed_at": 1667850553.0,
+        "open_issues_count": 42,
+        "stargazers_count": 58,
         "archived": null,
         "description": "A set of connectors for Monix. \ud83d\udd1b",
         "homepage": "https://connect.monix.io",
-        "fetched_at": 1663858550.426438
+        "fetched_at": 1667921276.984163
     },
     "github.com/profunktor/redis4cats": {
         "active": true,
-        "forks_count": 65,
+        "forks_count": 66,
         "license": "Apache-2.0",
-        "pushed_at": 1663826970.0,
-        "open_issues_count": 7,
-        "stargazers_count": 268,
+        "pushed_at": 1667891776.0,
+        "open_issues_count": 6,
+        "stargazers_count": 277,
         "archived": null,
         "description": ":bookmark: Redis client built on top of Cats Effect, Fs2 and Lettuce",
         "homepage": "https://redis4cats.profunktor.dev/",
-        "fetched_at": 1663858550.885944
+        "fetched_at": 1667921277.704335
     },
     "github.com/etaty/rediscala": {
         "active": false,
@@ -1781,11 +1781,11 @@
         "license": "Apache-2.0",
         "pushed_at": 1622942062.0,
         "open_issues_count": 81,
-        "stargazers_count": 797,
+        "stargazers_count": 798,
         "archived": null,
         "description": "Non-blocking, Reactive Redis driver for Scala (with Sentinel support)",
         "homepage": null,
-        "fetched_at": 1663858551.31628
+        "fetched_at": 1667921278.201954
     },
     "github.com/chrisdinn/brando": {
         "active": true,
@@ -1797,7 +1797,7 @@
         "archived": null,
         "description": "A Redis client written with Akka's IO package",
         "homepage": null,
-        "fetched_at": 1663858551.73516
+        "fetched_at": 1667921279.684304
     },
     "github.com/andreyk0/redis-client-scala-netty": {
         "active": false,
@@ -1809,7 +1809,7 @@
         "archived": true,
         "description": "Scala redis client built with netty framework",
         "homepage": null,
-        "fetched_at": 1663858552.17904
+        "fetched_at": 1667921280.15332
     },
     "github.com/pk11/sedis": {
         "active": false,
@@ -1821,31 +1821,31 @@
         "archived": null,
         "description": "a thin scala wrapper for jedis (https://github.com/xetorthio/jedis)",
         "homepage": null,
-        "fetched_at": 1663858552.647477
+        "fetched_at": 1667921280.699957
     },
     "github.com/laserdisc-io/laserdisc": {
         "active": true,
         "forks_count": 12,
         "license": "MIT",
-        "pushed_at": 1663247757.0,
-        "open_issues_count": 18,
-        "stargazers_count": 87,
+        "pushed_at": 1666531633.0,
+        "open_issues_count": 13,
+        "stargazers_count": 88,
         "archived": null,
         "description": "A Future-free Fs2 native pure FP Redis client",
         "homepage": "http://laserdisc.io",
-        "fetched_at": 1663858553.13031
+        "fetched_at": 1667921281.251118
     },
     "github.com/naoh87/lettucef": {
         "active": true,
         "forks_count": 2,
         "license": null,
-        "pushed_at": 1663737779.0,
-        "open_issues_count": 1,
+        "pushed_at": 1667410718.0,
+        "open_issues_count": 3,
         "stargazers_count": 3,
         "archived": null,
         "description": "Scala FP wrapper for Lettuce with Cats Effect",
         "homepage": null,
-        "fetched_at": 1663858553.628868
+        "fetched_at": 1667921282.083627
     },
     "github.com/redislabs/spark-redis": {
         "active": null,
@@ -1857,7 +1857,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858554.075106
+        "fetched_at": 1667921283.390718
     },
     "sourceforge.net/projects/gawkextlib": {
         "active": null,
@@ -1869,7 +1869,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858554.075324
+        "fetched_at": 1667921283.391101
     },
     "github.com/wusongwei/soce-redis": {
         "active": null,
@@ -1881,7 +1881,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858554.764968
+        "fetched_at": 1667921284.299371
     },
     "github.com/icerlion/FlyRedis": {
         "active": true,
@@ -1893,7 +1893,7 @@
         "archived": null,
         "description": "C++ Redis Client, base on Boost.asio, auto detect redis cluster",
         "homepage": null,
-        "fetched_at": 1663858555.240879
+        "fetched_at": 1667921284.828316
     },
     "github.com/shawn246/redis_client": {
         "active": false,
@@ -1901,11 +1901,11 @@
         "license": null,
         "pushed_at": 1563249248.0,
         "open_issues_count": 10,
-        "stargazers_count": 68,
+        "stargazers_count": 72,
         "archived": null,
         "description": "a redis client supports cluster",
         "homepage": null,
-        "fetched_at": 1663858555.721979
+        "fetched_at": 1667921285.435154
     },
     "github.com/eyjian/r3c": {
         "active": true,
@@ -1917,43 +1917,43 @@
         "archived": null,
         "description": "Redis C++ Client",
         "homepage": null,
-        "fetched_at": 1663858556.152928
+        "fetched_at": 1667921286.339219
     },
     "github.com/nekipelov/redisclient": {
         "active": false,
-        "forks_count": 139,
+        "forks_count": 141,
         "license": "MIT",
         "pushed_at": 1621309217.0,
         "open_issues_count": 18,
-        "stargazers_count": 312,
+        "stargazers_count": 313,
         "archived": null,
         "description": "Boost.asio based Redis-client library. ",
         "homepage": null,
-        "fetched_at": 1663858556.595493
+        "fetched_at": 1667921287.834901
     },
     "github.com/sewenew/redis-plus-plus": {
         "active": true,
-        "forks_count": 244,
+        "forks_count": 255,
         "license": "Apache-2.0",
-        "pushed_at": 1663553858.0,
-        "open_issues_count": 35,
-        "stargazers_count": 932,
+        "pushed_at": 1667647645.0,
+        "open_issues_count": 33,
+        "stargazers_count": 974,
         "archived": null,
         "description": "Redis client written in C++",
         "homepage": null,
-        "fetched_at": 1663858557.10895
+        "fetched_at": 1667921288.323461
     },
     "github.com/hmartiro/redox": {
         "active": true,
-        "forks_count": 101,
+        "forks_count": 103,
         "license": "Apache-2.0",
         "pushed_at": 1660994035.0,
         "open_issues_count": 35,
-        "stargazers_count": 376,
+        "stargazers_count": 377,
         "archived": null,
         "description": "Modern, asynchronous, and wicked fast C++11 client for Redis",
         "homepage": null,
-        "fetched_at": 1663858557.572467
+        "fetched_at": 1667921289.422344
     },
     "github.com/Levhav/SimpleRedisClient": {
         "active": false,
@@ -1965,7 +1965,7 @@
         "archived": null,
         "description": "C++ \u043a\u043b\u0438\u0435\u043d\u0442 \u0434\u043b\u044f Redis (Unix only)",
         "homepage": null,
-        "fetched_at": 1663858558.264183
+        "fetched_at": 1667921291.788757
     },
     "github.com/nokia/wiredis": {
         "active": false,
@@ -1977,19 +1977,19 @@
         "archived": null,
         "description": "A C++ client for Redis (https://redis.io/)",
         "homepage": null,
-        "fetched_at": 1663858558.749547
+        "fetched_at": 1667921292.286439
     },
     "github.com/acl-dev/redis": {
-        "active": null,
-        "forks_count": null,
-        "license": null,
-        "pushed_at": null,
+        "active": true,
+        "forks_count": 1,
+        "license": "LGPL-2.1",
+        "pushed_at": 1664406340.0,
         "open_issues_count": null,
         "stargazers_count": null,
         "archived": null,
-        "description": null,
+        "description": "The powerful redis client in Acl project",
         "homepage": null,
-        "fetched_at": 1663858559.483851
+        "fetched_at": 1667921292.800098
     },
     "github.com/luca3m/redis3m": {
         "active": false,
@@ -2001,31 +2001,31 @@
         "archived": null,
         "description": "A C++ Redis client",
         "homepage": null,
-        "fetched_at": 1663858560.008908
+        "fetched_at": 1667921293.281785
     },
     "github.com/0xsky/xredis": {
         "active": false,
-        "forks_count": 156,
+        "forks_count": 158,
         "license": "GPL-3.0",
         "pushed_at": 1647960967.0,
         "open_issues_count": 14,
-        "stargazers_count": 304,
+        "stargazers_count": 309,
         "archived": null,
         "description": "Redis C++ client, support the data slice storage, support redis cluster, thread-safe,multi-platform,connection pool, read/write separation.",
         "homepage": null,
-        "fetched_at": 1663858560.485146
+        "fetched_at": 1667921293.765883
     },
     "github.com/mzimbres/aedis": {
         "active": true,
-        "forks_count": 10,
+        "forks_count": 12,
         "license": "BSL-1.0",
-        "pushed_at": 1663524679.0,
-        "open_issues_count": 4,
-        "stargazers_count": 61,
+        "pushed_at": 1667855167.0,
+        "open_issues_count": null,
+        "stargazers_count": 65,
         "archived": null,
         "description": "An async redis client designed for performance and scalability",
         "homepage": "https://mzimbres.github.io/aedis",
-        "fetched_at": 1663858561.011183
+        "fetched_at": 1667921295.565008
     },
     "github.com/basiliscos/cpp-bredis": {
         "active": false,
@@ -2033,23 +2033,23 @@
         "license": "MIT",
         "pushed_at": 1638546306.0,
         "open_issues_count": 10,
-        "stargazers_count": 141,
+        "stargazers_count": 142,
         "archived": null,
         "description": "Boost::ASIO low-level redis client (connector)",
         "homepage": null,
-        "fetched_at": 1663858561.481148
+        "fetched_at": 1667921296.823047
     },
     "github.com/cpp-redis/cpp_redis": {
         "active": true,
-        "forks_count": 164,
+        "forks_count": 167,
         "license": "MIT",
-        "pushed_at": 1662092161.0,
-        "open_issues_count": 40,
-        "stargazers_count": 531,
+        "pushed_at": 1667312070.0,
+        "open_issues_count": 39,
+        "stargazers_count": 548,
         "archived": null,
         "description": "C++11 Lightweight Redis client: async, thread-safe, no dependency, pipelining, multi-platform",
         "homepage": null,
-        "fetched_at": 1663858562.064652
+        "fetched_at": 1667921297.37645
     },
     "github.com/tdv/redis-cpp": {
         "active": true,
@@ -2061,7 +2061,7 @@
         "archived": null,
         "description": "redis-cpp is a header-only library in C++17 for Redis (and C++11 backport)",
         "homepage": null,
-        "fetched_at": 1663858562.600531
+        "fetched_at": 1667921297.840743
     },
     "github.com/mrpi/redis-cplusplus-client": {
         "active": false,
@@ -2073,19 +2073,19 @@
         "archived": null,
         "description": "A C++ client for Redis. It supports consistent hashing, redis-server v2.0 and has a high level api for shared strings, integers, lists and sets",
         "homepage": null,
-        "fetched_at": 1663858563.088525
+        "fetched_at": 1667921300.731514
     },
     "github.com/uglide/qredisclient": {
         "active": true,
-        "forks_count": 84,
+        "forks_count": 82,
         "license": null,
-        "pushed_at": 1662639709.0,
+        "pushed_at": 1664970623.0,
         "open_issues_count": 9,
         "stargazers_count": 148,
         "archived": null,
         "description": ":key: Asynchronous Qt-based Redis client with TLS support.",
         "homepage": null,
-        "fetched_at": 1663858563.590766
+        "fetched_at": 1667921303.18631
     },
     "github.com/hamidr/async-redis": {
         "active": false,
@@ -2097,7 +2097,7 @@
         "archived": null,
         "description": "[discontinued] An async redis library based on your app's event loop using libevpp and AsIO.",
         "homepage": null,
-        "fetched_at": 1663858564.10286
+        "fetched_at": 1667921303.986708
     },
     "github.com/Zewo/Redis": {
         "active": false,
@@ -2109,7 +2109,7 @@
         "archived": null,
         "description": "Redis client for (pure) Swift",
         "homepage": null,
-        "fetched_at": 1663858564.782337
+        "fetched_at": 1667921306.23015
     },
     "github.com/seznam/swift-uniredis": {
         "active": false,
@@ -2121,7 +2121,7 @@
         "archived": null,
         "description": "Redis client for Swift on macOS and Linux",
         "homepage": null,
-        "fetched_at": 1663858565.262615
+        "fetched_at": 1667921308.866938
     },
     "github.com/Farhaddc/Swidis": {
         "active": false,
@@ -2133,7 +2133,7 @@
         "archived": null,
         "description": "iOS Framework Allowing you to connect to Redis server with Swift programming language.",
         "homepage": null,
-        "fetched_at": 1663858565.999621
+        "fetched_at": 1667921309.915027
     },
     "github.com/perrystreetsoftware/PSSRedisClient": {
         "active": false,
@@ -2145,7 +2145,7 @@
         "archived": null,
         "description": "Swift based redis client using CocoaAsyncSocket",
         "homepage": null,
-        "fetched_at": 1663858566.460916
+        "fetched_at": 1667921312.982412
     },
     "github.com/czechboy0/Redbird": {
         "active": true,
@@ -2153,11 +2153,11 @@
         "license": "MIT",
         "pushed_at": 1652437297.0,
         "open_issues_count": 5,
-        "stargazers_count": 452,
+        "stargazers_count": 454,
         "archived": null,
         "description": "Vapor provider for RediStack",
         "homepage": null,
-        "fetched_at": 1663858567.196321
+        "fetched_at": 1667921314.554409
     },
     "github.com/ronp001/SwiftRedis": {
         "active": false,
@@ -2169,19 +2169,19 @@
         "archived": null,
         "description": "A Swift client for Redis, providing asynchronous operation",
         "homepage": null,
-        "fetched_at": 1663858567.665761
+        "fetched_at": 1667921315.341989
     },
     "github.com/Mordil/RediStack": {
         "active": true,
         "forks_count": 5,
         "license": "Apache-2.0",
-        "pushed_at": 1661039222.0,
+        "pushed_at": 1664129177.0,
         "open_issues_count": 2,
         "stargazers_count": 72,
         "archived": null,
         "description": "Non-blocking, event-driven Swift client for Redis.",
         "homepage": "http://docs.redistack.info",
-        "fetched_at": 1663858568.104503
+        "fetched_at": 1667921318.530743
     },
     "github.com/markuman/go-redis": {
         "active": false,
@@ -2193,7 +2193,7 @@
         "archived": null,
         "description": "GNU Octave Redis client (for Matlab too)",
         "homepage": null,
-        "fetched_at": 1663858568.574817
+        "fetched_at": 1667921319.92218
     },
     "github.com/GummyJum/MatlabRedis": {
         "active": true,
@@ -2205,7 +2205,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858569.020924
+        "fetched_at": 1667921320.82066
     },
     "github.com/rebolek/prot-redis": {
         "active": false,
@@ -2217,7 +2217,7 @@
         "archived": null,
         "description": "Redis DB scheme for Rebol3",
         "homepage": null,
-        "fetched_at": 1663858569.450935
+        "fetched_at": 1667921321.423955
     },
     "github.com/bakkdoor/redis.fy": {
         "active": false,
@@ -2229,31 +2229,31 @@
         "archived": null,
         "description": "A Fancy client library for Redis, the open source, advanced key-value store.",
         "homepage": "http://www.fancy-lang.org",
-        "fetched_at": 1663858569.907779
+        "fetched_at": 1667921324.036629
     },
     "github.com/StackExchange/StackExchange.Redis": {
         "active": true,
-        "forks_count": 1432,
+        "forks_count": 1439,
         "license": null,
-        "pushed_at": 1663672444.0,
+        "pushed_at": 1667389508.0,
         "open_issues_count": 121,
-        "stargazers_count": 5303,
+        "stargazers_count": 5355,
         "archived": null,
         "description": "General purpose redis client",
         "homepage": "https://stackexchange.github.io/StackExchange.Redis/",
-        "fetched_at": 1663858570.378565
+        "fetched_at": 1667921326.530859
     },
     "github.com/NewLifeX/NewLife.Redis": {
         "active": true,
         "forks_count": 152,
         "license": "MIT",
-        "pushed_at": 1662002215.0,
+        "pushed_at": 1667282539.0,
         "open_issues_count": 1,
-        "stargazers_count": 687,
+        "stargazers_count": 694,
         "archived": null,
         "description": "High performance redis client, support NETCore/. NET4. 0/. NET4. 5. It is specially optimized for big data and message queue. The average daily consumption of online single application is 10 billion. \u9ad8\u6027\u80fdRedis\u5ba2\u6237\u7aef\uff0c\u652f\u6301.NETCore/.NET4.0/.NET4.5\uff0c\u4e3a\u5927\u6570\u636e\u4e0e\u6d88\u606f\u961f\u5217\u800c\u7279\u522b\u4f18\u5316\uff0c\u7ebf\u4e0a\u5355\u5e94\u7528\u65e5\u5747100\u4ebf\u8c03\u7528\u91cf",
         "homepage": null,
-        "fetched_at": 1663858570.817904
+        "fetched_at": 1667921327.25552
     },
     "github.com/mhowlett/Nhiredis": {
         "active": false,
@@ -2265,31 +2265,43 @@
         "archived": null,
         "description": ".NET wrapper for hiredis",
         "homepage": null,
-        "fetched_at": 1663858571.289948
+        "fetched_at": 1667921327.724046
     },
     "github.com/IKende/BeetleX.Redis": {
         "active": true,
         "forks_count": 29,
         "license": "Apache-2.0",
-        "pushed_at": 1663759763.0,
-        "open_issues_count": 12,
-        "stargazers_count": 186,
+        "pushed_at": 1663991952.0,
+        "open_issues_count": 13,
+        "stargazers_count": 187,
         "archived": null,
         "description": "A high-performance async/non-blocking  redis client components for dotnet core,default data formater json protobuf and messagepack,support ssl",
         "homepage": null,
-        "fetched_at": 1663858571.962964
+        "fetched_at": 1667921328.502008
     },
     "github.com/ServiceStack/ServiceStack.Redis": {
         "active": false,
-        "forks_count": 888,
+        "forks_count": 893,
         "license": null,
         "pushed_at": 1644979560.0,
         "open_issues_count": 17,
-        "stargazers_count": 2273,
+        "stargazers_count": 2276,
         "archived": null,
         "description": ".NET's leading C# Redis Client",
         "homepage": "https://servicestack.net/redis",
-        "fetched_at": 1663858572.44813
+        "fetched_at": 1667921328.967546
+    },
+    "github.com/XiaoFeng/XiaoFeng.Redis": {
+        "active": null,
+        "forks_count": null,
+        "license": null,
+        "pushed_at": null,
+        "open_issues_count": null,
+        "stargazers_count": null,
+        "archived": null,
+        "description": null,
+        "homepage": null,
+        "fetched_at": 1667921329.739484
     },
     "github.com/migueldeicaza/redis-sharp": {
         "active": false,
@@ -2301,19 +2313,19 @@
         "archived": null,
         "description": "A C#/.NET binding for the Redis server.",
         "homepage": null,
-        "fetched_at": 1663858572.890044
+        "fetched_at": 1667921330.212751
     },
     "github.com/2881099/FreeRedis": {
         "active": true,
-        "forks_count": 131,
+        "forks_count": 135,
         "license": "MIT",
-        "pushed_at": 1663217578.0,
-        "open_issues_count": 46,
-        "stargazers_count": 699,
+        "pushed_at": 1667889624.0,
+        "open_issues_count": 47,
+        "stargazers_count": 731,
         "archived": null,
         "description": "\ud83e\udd84 FreeRedis is .NET40+ redis client. supports cluster, sentinel, master-slave, pub-sub, lua, pipeline, transaction, streams, client-side-caching, and pooling.",
         "homepage": null,
-        "fetched_at": 1663858573.323282
+        "fetched_at": 1667921330.684362
     },
     "github.com/pepelev/Rediska": {
         "active": true,
@@ -2325,7 +2337,7 @@
         "archived": null,
         "description": "Rediska is a Redis client for .NET with a focus on flexibility and extensibility.",
         "homepage": null,
-        "fetched_at": 1663858573.749328
+        "fetched_at": 1667921332.046271
     },
     "github.com/andrew-bn/RedisBoost": {
         "active": false,
@@ -2337,7 +2349,7 @@
         "archived": null,
         "description": ".NET 4.0 thread-safe asynchronous Redis client. Supports pipelining, Redis channels, has built-in serializer and clients pool. Can be used along with async/await pattern.",
         "homepage": "http://andrew-bn.github.io/RedisBoost/",
-        "fetched_at": 1663858574.191459
+        "fetched_at": 1667921334.339259
     },
     "github.com/ctstone/csredis": {
         "active": false,
@@ -2349,7 +2361,7 @@
         "archived": null,
         "description": ".NET client for Redis and Redis Sentinel (2.8). Includes both synchronous and asynchronous clients.",
         "homepage": null,
-        "fetched_at": 1663858574.621831
+        "fetched_at": 1667921335.029303
     },
     "www.nuget.org/packages/Sider": {
         "active": null,
@@ -2361,19 +2373,19 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858574.622116
+        "fetched_at": 1667921335.029509
     },
     "github.com/captchanjack/Jedis.jl": {
         "active": true,
         "forks_count": 2,
         "license": "MIT",
         "pushed_at": 1661374945.0,
-        "open_issues_count": null,
-        "stargazers_count": 7,
+        "open_issues_count": 1,
+        "stargazers_count": 9,
         "archived": null,
         "description": "A fully featured Julia Redis client.",
         "homepage": null,
-        "fetched_at": 1663858575.474431
+        "fetched_at": 1667921335.529842
     },
     "github.com/jkaye2012/redis.jl": {
         "active": false,
@@ -2381,11 +2393,11 @@
         "license": null,
         "pushed_at": 1647610807.0,
         "open_issues_count": 7,
-        "stargazers_count": 89,
+        "stargazers_count": 90,
         "archived": null,
         "description": "A fully-featured Redis client for the Julia programming language",
         "homepage": null,
-        "fetched_at": 1663858576.199587
+        "fetched_at": 1667921337.052378
     },
     "github.com/Zeroloop/lasso-redis": {
         "active": false,
@@ -2397,7 +2409,7 @@
         "archived": null,
         "description": "Redis Client for Lasso 9",
         "homepage": null,
-        "fetched_at": 1663858576.67637
+        "fetched_at": 1667921338.363377
     },
     "github.com/SeYoungLee/oredis": {
         "active": false,
@@ -2409,31 +2421,31 @@
         "archived": null,
         "description": "Redis client library for PL/SQL",
         "homepage": null,
-        "fetched_at": 1663858577.12651
+        "fetched_at": 1667921339.90158
     },
     "github.com/Nordix/hiredis-cluster": {
         "active": true,
-        "forks_count": 28,
+        "forks_count": 27,
         "license": "BSD-3-Clause",
-        "pushed_at": 1662693423.0,
-        "open_issues_count": 15,
-        "stargazers_count": 42,
+        "pushed_at": 1664387769.0,
+        "open_issues_count": 16,
+        "stargazers_count": 45,
         "archived": null,
         "description": "C client library for Redis Cluster. This project is used and sponsored by Ericsson. It is a fork of the now unmaintained hiredis-vip.",
         "homepage": null,
-        "fetched_at": 1663858577.581792
+        "fetched_at": 1667921340.95455
     },
     "github.com/redis/hiredis": {
         "active": true,
-        "forks_count": 1702,
+        "forks_count": 1722,
         "license": "BSD-3-Clause",
-        "pushed_at": 1663787440.0,
+        "pushed_at": 1667786455.0,
         "open_issues_count": 51,
-        "stargazers_count": 5421,
+        "stargazers_count": 5487,
         "archived": null,
         "description": "Minimalistic C client for Redis >= 1.2",
         "homepage": null,
-        "fetched_at": 1663858578.199437
+        "fetched_at": 1667921342.145297
     },
     "github.com/aclisp/hiredispool": {
         "active": false,
@@ -2441,11 +2453,11 @@
         "license": "Apache-2.0",
         "pushed_at": 1615638980.0,
         "open_issues_count": 1,
-        "stargazers_count": 44,
+        "stargazers_count": 45,
         "archived": null,
         "description": "Provides connection pooling and auto-reconnect for hiredis. It is also minimalistic and easy to do customization. ",
         "homepage": null,
-        "fetched_at": 1663858578.650224
+        "fetched_at": 1667921344.045243
     },
     "github.com/toymachine/libredis": {
         "active": false,
@@ -2457,7 +2469,7 @@
         "archived": null,
         "description": "A C based general low-level PHP extension and client library for Redis, focusing on performance, generality and efficient parallel communication with multiple Redis servers. As a bonus, a  Ketama Consistent Hashing implementation is provided as well.",
         "homepage": null,
-        "fetched_at": 1663858579.11712
+        "fetched_at": 1667921344.59962
     },
     "github.com/EulerianTechnologies/eredis": {
         "active": false,
@@ -2469,7 +2481,7 @@
         "archived": null,
         "description": "Fast and light Redis C client library built over Hiredis, thread-safe, write replication, auto-reconnect, sync pool, async libev.",
         "homepage": null,
-        "fetched_at": 1663858579.587653
+        "fetched_at": 1667921345.913941
     },
     "github.com/vipshop/hiredis-vip": {
         "active": false,
@@ -2477,11 +2489,11 @@
         "license": "BSD-3-Clause",
         "pushed_at": 1606211761.0,
         "open_issues_count": 82,
-        "stargazers_count": 299,
+        "stargazers_count": 301,
         "archived": null,
         "description": "Support redis cluster.  Maintained and used at vipshop.",
         "homepage": null,
-        "fetched_at": 1663858580.116095
+        "fetched_at": 1667921347.653331
     },
     "github.com/adilbaig/Tiny-Redis": {
         "active": true,
@@ -2489,11 +2501,11 @@
         "license": "ISC",
         "pushed_at": 1660310230.0,
         "open_issues_count": 1,
-        "stargazers_count": 80,
+        "stargazers_count": 81,
         "archived": null,
         "description": "Redis driver for D",
         "homepage": "http://adilbaig.github.io/Tiny-Redis/",
-        "fetched_at": 1663858580.564369
+        "fetched_at": 1667921348.258574
     },
     "gitlab.com/erik4/redis-com-client": {
         "active": null,
@@ -2505,7 +2517,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858580.564589
+        "fetched_at": 1667921348.258739
     },
     "github.com/vseloved/cl-redis": {
         "active": false,
@@ -2513,11 +2525,11 @@
         "license": null,
         "pushed_at": 1594919791.0,
         "open_issues_count": 3,
-        "stargazers_count": 173,
+        "stargazers_count": 172,
         "archived": null,
         "description": "Redis client for Common Lisp",
         "homepage": null,
-        "fetched_at": 1663858581.024405
+        "fetched_at": 1667921349.738511
     },
     "github.com/lp/ObjCHiredis": {
         "active": false,
@@ -2529,7 +2541,7 @@
         "archived": null,
         "description": "Hiredis with Objective-C Interface",
         "homepage": null,
-        "fetched_at": 1663858581.625863
+        "fetched_at": 1667921350.673435
     },
     "github.com/dizzus/RedisKit": {
         "active": false,
@@ -2541,31 +2553,31 @@
         "archived": null,
         "description": "RedisKit is an asyncronious Objective-C framework to work with Redis key-value server",
         "homepage": null,
-        "fetched_at": 1663858582.090376
+        "fetched_at": 1667921351.882107
     },
     "github.com/redis-rb/redis-client": {
         "active": true,
-        "forks_count": 6,
+        "forks_count": 10,
         "license": "MIT",
-        "pushed_at": 1663830926.0,
-        "open_issues_count": null,
-        "stargazers_count": 45,
+        "pushed_at": 1667763077.0,
+        "open_issues_count": 3,
+        "stargazers_count": 59,
         "archived": null,
         "description": "Simple low level client for Redis 6+",
         "homepage": null,
-        "fetched_at": 1663858582.532785
+        "fetched_at": 1667921352.923327
     },
     "github.com/redis-rb/redis-cluster-client": {
         "active": true,
-        "forks_count": 2,
+        "forks_count": 3,
         "license": "MIT",
-        "pushed_at": 1663832509.0,
-        "open_issues_count": 3,
+        "pushed_at": 1666598920.0,
+        "open_issues_count": 2,
         "stargazers_count": 4,
         "archived": null,
         "description": "A simple client for Redis 6+ cluster",
         "homepage": "https://rubygems.org/gems/redis-cluster-client",
-        "fetched_at": 1663858583.020126
+        "fetched_at": 1667921353.925191
     },
     "github.com/redis/redis-clustering": {
         "active": null,
@@ -2577,19 +2589,19 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858583.437411
+        "fetched_at": 1667921354.753051
     },
     "github.com/redis/redis-rb": {
         "active": true,
-        "forks_count": 989,
+        "forks_count": 998,
         "license": "MIT",
-        "pushed_at": 1663834487.0,
+        "pushed_at": 1667847964.0,
         "open_issues_count": 31,
-        "stargazers_count": 3839,
+        "stargazers_count": 3854,
         "archived": null,
         "description": "A Ruby client library for Redis",
         "homepage": null,
-        "fetched_at": 1663858583.90572
+        "fetched_at": 1667921356.102915
     },
     "github.com/amakawa/redic": {
         "active": false,
@@ -2601,11 +2613,11 @@
         "archived": null,
         "description": "Lightweight Redis Client",
         "homepage": null,
-        "fetched_at": 1663858584.363198
+        "fetched_at": 1667921356.930464
     },
     "github.com/madsimian/em-redis": {
         "active": false,
-        "forks_count": 39,
+        "forks_count": 38,
         "license": null,
         "pushed_at": 1504053561.0,
         "open_issues_count": 8,
@@ -2613,7 +2625,7 @@
         "archived": null,
         "description": "An eventmachine-based implementation of the Redis protocol",
         "homepage": null,
-        "fetched_at": 1663858585.805026
+        "fetched_at": 1667921357.898504
     },
     "github.com/etehtsea/oxblood": {
         "active": false,
@@ -2625,11 +2637,11 @@
         "archived": true,
         "description": "A straightforward Redis Ruby library",
         "homepage": null,
-        "fetched_at": 1663858586.261444
+        "fetched_at": 1667921359.693802
     },
     "github.com/mloughran/em-hiredis": {
         "active": false,
-        "forks_count": 62,
+        "forks_count": 63,
         "license": "MIT",
         "pushed_at": 1642681943.0,
         "open_issues_count": 13,
@@ -2637,7 +2649,7 @@
         "archived": null,
         "description": "Eventmachine redis client",
         "homepage": null,
-        "fetched_at": 1663858586.726372
+        "fetched_at": 1667921360.989074
     },
     "github.com/bukalapak/redis-cluster": {
         "active": false,
@@ -2649,7 +2661,7 @@
         "archived": null,
         "description": "Redis Cluster client for Ruby",
         "homepage": null,
-        "fetched_at": 1663858587.259037
+        "fetched_at": 1667921362.324062
     },
     "github.com/mikeheier/Redis-AS3": {
         "active": false,
@@ -2661,7 +2673,7 @@
         "archived": null,
         "description": "An as3 library for redis",
         "homepage": null,
-        "fetched_at": 1663858587.72786
+        "fetched_at": 1667921364.262857
     },
     "code.google.com/p/eredis": {
         "active": null,
@@ -2673,7 +2685,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858587.728129
+        "fetched_at": 1667921364.263063
     },
     "github.com/zachary-samsel/boomi-redis-connector": {
         "active": false,
@@ -2685,31 +2697,31 @@
         "archived": null,
         "description": "Redis connector for Dell Boomi",
         "homepage": null,
-        "fetched_at": 1663858588.181829
+        "fetched_at": 1667921366.048548
     },
     "github.com/alicebob/miniredis": {
         "active": true,
-        "forks_count": 157,
+        "forks_count": 167,
         "license": "MIT",
-        "pushed_at": 1663825828.0,
-        "open_issues_count": 23,
-        "stargazers_count": 2326,
+        "pushed_at": 1667742136.0,
+        "open_issues_count": 25,
+        "stargazers_count": 2378,
         "archived": null,
         "description": "Pure Go Redis server for Go unittests",
         "homepage": null,
-        "fetched_at": 1663858588.617975
+        "fetched_at": 1667921367.441716
     },
     "github.com/hdt3213/godis": {
         "active": true,
-        "forks_count": 368,
+        "forks_count": 392,
         "license": "GPL-3.0",
-        "pushed_at": 1661022067.0,
-        "open_issues_count": 1,
-        "stargazers_count": 2180,
+        "pushed_at": 1667909884.0,
+        "open_issues_count": 4,
+        "stargazers_count": 2312,
         "archived": null,
         "description": "A Golang implemented Redis Server and Cluster. Go \u8bed\u8a00\u5b9e\u73b0\u7684 Redis \u670d\u52a1\u5668\u548c\u5206\u5e03\u5f0f\u96c6\u7fa4",
         "homepage": "https://www.cnblogs.com/Finley/category/1598973.html",
-        "fetched_at": 1663858589.126044
+        "fetched_at": 1667921369.050462
     },
     "github.com/XD-DENG/rediseen": {
         "active": true,
@@ -2717,11 +2729,11 @@
         "license": "Apache-2.0",
         "pushed_at": 1652617018.0,
         "open_issues_count": 1,
-        "stargazers_count": 36,
+        "stargazers_count": 37,
         "archived": null,
         "description": "Create REST-like API service for Redis DB or expose Redis metrics in Prometheus-compatible format, easily.",
         "homepage": null,
-        "fetched_at": 1663858589.571475
+        "fetched_at": 1667921370.223357
     },
     "github.com/lsbardel/python-stdnet": {
         "active": false,
@@ -2733,7 +2745,7 @@
         "archived": true,
         "description": "Object-data mapper and advanced query manager for non relational databases",
         "homepage": "http://lsbardel.github.com/python-stdnet/",
-        "fetched_at": 1663858590.039742
+        "fetched_at": 1667921371.312064
     },
     "github.com/wingify/agentredrabbit": {
         "active": false,
@@ -2745,7 +2757,7 @@
         "archived": null,
         "description": "Transport agent that moves data from Redis to RabbitMQ",
         "homepage": null,
-        "fetched_at": 1663858590.486891
+        "fetched_at": 1667921371.965724
     },
     "github.com/binarydud/pyres": {
         "active": false,
@@ -2757,7 +2769,7 @@
         "archived": null,
         "description": "a resque clone in python",
         "homepage": "http://github.com/binarydud/pyres",
-        "fetched_at": 1663858591.152304
+        "fetched_at": 1667921372.693586
     },
     "github.com/iamteem/redisco": {
         "active": false,
@@ -2769,7 +2781,7 @@
         "archived": true,
         "description": "A Python Library for Simple Models and Containers Persisted in Redis ",
         "homepage": null,
-        "fetched_at": 1663858591.565185
+        "fetched_at": 1667921373.379332
     },
     "github.com/mjwestcott/runnel": {
         "active": false,
@@ -2777,23 +2789,23 @@
         "license": null,
         "pushed_at": 1598539748.0,
         "open_issues_count": 8,
-        "stargazers_count": 99,
+        "stargazers_count": 102,
         "archived": null,
         "description": "Distributed event processing for Python based on Redis Streams",
         "homepage": "https://runnel.dev",
-        "fetched_at": 1663858592.005292
+        "fetched_at": 1667921374.095236
     },
     "github.com/stephenmcd/hot-redis": {
         "active": false,
-        "forks_count": 31,
+        "forks_count": 30,
         "license": "BSD-2-Clause",
         "pushed_at": 1578184926.0,
-        "open_issues_count": 8,
+        "open_issues_count": 7,
         "stargazers_count": 280,
         "archived": null,
         "description": "Rich Python data types for Redis",
         "homepage": null,
-        "fetched_at": 1663858592.47583
+        "fetched_at": 1667921374.572718
     },
     "github.com/ask/celery": {
         "active": false,
@@ -2805,43 +2817,43 @@
         "archived": null,
         "description": "MOVED TO: celery/celery",
         "homepage": "https://github.com/celery/celery",
-        "fetched_at": 1663858593.089052
+        "fetched_at": 1667921376.299082
     },
     "github.com/redis/redis-om-python": {
         "active": true,
-        "forks_count": 45,
+        "forks_count": 49,
         "license": "MIT",
-        "pushed_at": 1663566872.0,
-        "open_issues_count": 64,
-        "stargazers_count": 452,
+        "pushed_at": 1667870015.0,
+        "open_issues_count": 76,
+        "stargazers_count": 502,
         "archived": null,
         "description": "Objecting mapping, and more, for Redis and Python",
         "homepage": null,
-        "fetched_at": 1663858593.551292
+        "fetched_at": 1667921377.33832
     },
     "github.com/sripathikrishnan/redis-rdb-tools": {
         "active": false,
-        "forks_count": 695,
+        "forks_count": 699,
         "license": "MIT",
         "pushed_at": 1646323537.0,
-        "open_issues_count": 81,
-        "stargazers_count": 4559,
+        "open_issues_count": 83,
+        "stargazers_count": 4594,
         "archived": null,
         "description": "Parse Redis dump.rdb files, Analyze Memory, and Export Data to JSON",
         "homepage": "https://rdbtools.com",
-        "fetched_at": 1663858593.975119
+        "fetched_at": 1667921378.108767
     },
     "github.com/nvie/rq": {
         "active": true,
-        "forks_count": 1311,
+        "forks_count": 1321,
         "license": null,
-        "pushed_at": 1663807880.0,
+        "pushed_at": 1667738747.0,
         "open_issues_count": 203,
-        "stargazers_count": 8515,
+        "stargazers_count": 8590,
         "archived": null,
         "description": "Simple job queues for Python",
         "homepage": "https://python-rq.org",
-        "fetched_at": 1663858594.678058
+        "fetched_at": 1667921380.135593
     },
     "github.com/percolate/redset": {
         "active": false,
@@ -2853,7 +2865,7 @@
         "archived": null,
         "description": "A Redis-backed sorted set useful for coordinating distributed work.",
         "homepage": null,
-        "fetched_at": 1663858595.148275
+        "fetched_at": 1667921380.739276
     },
     "github.com/dahlia/sider": {
         "active": false,
@@ -2865,7 +2877,7 @@
         "archived": true,
         "description": "ABANDONED. Sider is a persistent object library based on Redis.",
         "homepage": "https://sider.dahlia.kr/",
-        "fetched_at": 1663858595.608668
+        "fetched_at": 1667921383.420066
     },
     "github.com/pbotros/river": {
         "active": true,
@@ -2873,11 +2885,11 @@
         "license": "MIT",
         "pushed_at": 1657117545.0,
         "open_issues_count": 2,
-        "stargazers_count": 12,
+        "stargazers_count": 14,
         "archived": null,
         "description": "A high-throughput, structured streaming framework built atop Redis Streams. C++, Python, and MATLAB support.",
         "homepage": null,
-        "fetched_at": 1663858596.043269
+        "fetched_at": 1667921385.161369
     },
     "github.com/bbangert/retools": {
         "active": false,
@@ -2889,31 +2901,31 @@
         "archived": null,
         "description": "Redis Tools",
         "homepage": null,
-        "fetched_at": 1663858596.50176
+        "fetched_at": 1667921387.076023
     },
     "github.com/celery/kombu": {
         "active": true,
-        "forks_count": 855,
+        "forks_count": 862,
         "license": "BSD-3-Clause",
-        "pushed_at": 1663730648.0,
+        "pushed_at": 1667617221.0,
         "open_issues_count": 163,
-        "stargazers_count": 2425,
+        "stargazers_count": 2450,
         "archived": null,
         "description": "Messaging library for Python.",
         "homepage": "http://kombu.readthedocs.org/",
-        "fetched_at": 1663858596.926026
+        "fetched_at": 1667921389.622224
     },
     "github.com/coleifer/huey": {
         "active": true,
-        "forks_count": 355,
+        "forks_count": 358,
         "license": "MIT",
-        "pushed_at": 1660817104.0,
+        "pushed_at": 1666374704.0,
         "open_issues_count": null,
-        "stargazers_count": 4203,
+        "stargazers_count": 4260,
         "archived": null,
         "description": "a little task queue for python",
         "homepage": "https://huey.readthedocs.io/",
-        "fetched_at": 1663858597.380422
+        "fetched_at": 1667921390.843524
     },
     "github.com/josiahcarlson/rom": {
         "active": false,
@@ -2921,35 +2933,35 @@
         "license": "LGPL-2.1",
         "pushed_at": 1626249390.0,
         "open_issues_count": 6,
-        "stargazers_count": 348,
+        "stargazers_count": 352,
         "archived": null,
         "description": "Redis object mapper for Python",
         "homepage": null,
-        "fetched_at": 1663858597.818177
+        "fetched_at": 1667921391.384583
     },
     "github.com/josiahcarlson/rpqueue": {
-        "active": false,
+        "active": true,
         "forks_count": 26,
         "license": "LGPL-2.1",
-        "pushed_at": 1622072399.0,
-        "open_issues_count": 7,
+        "pushed_at": 1666989306.0,
+        "open_issues_count": 5,
         "stargazers_count": 144,
         "archived": null,
         "description": "Redis Priority Queue offers a priority/timeline based queue for use with Redis",
         "homepage": null,
-        "fetched_at": 1663858598.323347
+        "fetched_at": 1667921393.658427
     },
     "github.com/hjlarry/flask-redisboard": {
         "active": true,
-        "forks_count": 9,
+        "forks_count": 10,
         "license": "MIT",
         "pushed_at": 1658305769.0,
         "open_issues_count": 11,
-        "stargazers_count": 19,
+        "stargazers_count": 20,
         "archived": null,
         "description": "A flask extension to support user view and manage redis with beautiful interface.",
         "homepage": null,
-        "fetched_at": 1663858598.76366
+        "fetched_at": 1667921395.449154
     },
     "github.com/no13bus/redispapa": {
         "active": true,
@@ -2957,23 +2969,23 @@
         "license": "MIT",
         "pushed_at": 1661888005.0,
         "open_issues_count": 1,
-        "stargazers_count": 390,
+        "stargazers_count": 391,
         "archived": null,
         "description": "another redis monitor by using flask, react, vite, socket.io",
         "homepage": null,
-        "fetched_at": 1663858599.213851
+        "fetched_at": 1667921396.514944
     },
     "github.com/disqus/nydus": {
-        "active": false,
+        "active": true,
         "forks_count": 33,
         "license": "Apache-2.0",
-        "pushed_at": 1545997989.0,
-        "open_issues_count": 5,
+        "pushed_at": 1666209789.0,
+        "open_issues_count": 6,
         "stargazers_count": 377,
         "archived": null,
         "description": "Nydus is a Python toolkit for managing database connections and routing operations, primarily for Redis",
         "homepage": null,
-        "fetched_at": 1663858599.660427
+        "fetched_at": 1667921397.573901
     },
     "github.com/caio/Redis-NaiveBayes": {
         "active": false,
@@ -2985,7 +2997,7 @@
         "archived": true,
         "description": "A generic Redis-backed NaiveBayes implementation",
         "homepage": null,
-        "fetched_at": 1663858600.08963
+        "fetched_at": 1667921399.014649
     },
     "github.com/flygoast/Redis-RdbParser": {
         "active": false,
@@ -2997,47 +3009,47 @@
         "archived": null,
         "description": "Redis::RdbParser is a streaming parser for Redis' rdb dump files.",
         "homepage": null,
-        "fetched_at": 1663858600.515505
+        "fetched_at": 1667921400.079441
     },
     "github.com/redis/redis-om-node": {
         "active": true,
-        "forks_count": 48,
+        "forks_count": 51,
         "license": "MIT",
-        "pushed_at": 1663695791.0,
-        "open_issues_count": 35,
-        "stargazers_count": 659,
+        "pushed_at": 1666890642.0,
+        "open_issues_count": 39,
+        "stargazers_count": 719,
         "archived": null,
         "description": "Object mapping, and more, for Redis and Node.js. Written in TypeScript.",
         "homepage": null,
-        "fetched_at": 1663858600.972457
+        "fetched_at": 1667921401.371205
     },
     "github.com/spring-projects/spring-data-redis": {
         "active": true,
-        "forks_count": 1005,
+        "forks_count": 1011,
         "license": "Apache-2.0",
-        "pushed_at": 1663821663.0,
-        "open_issues_count": 144,
-        "stargazers_count": 1498,
+        "pushed_at": 1667902242.0,
+        "open_issues_count": 142,
+        "stargazers_count": 1512,
         "archived": null,
         "description": "Provides support to increase developer productivity in Java when using Redis, a key-value store. Uses familiar Spring concepts such as a template classes for core API usage and lightweight repository style data access.",
         "homepage": "http://projects.spring.io/spring-data/",
-        "fetched_at": 1663858601.451018
+        "fetched_at": 1667921403.120928
     },
     "github.com/redis/redis-om-spring": {
         "active": true,
-        "forks_count": 36,
+        "forks_count": 42,
         "license": "MIT",
-        "pushed_at": 1663603823.0,
-        "open_issues_count": 19,
-        "stargazers_count": 250,
+        "pushed_at": 1667568485.0,
+        "open_issues_count": 25,
+        "stargazers_count": 273,
         "archived": null,
         "description": "Spring Data Redis extensions for better search, documents models, and more",
         "homepage": null,
-        "fetched_at": 1663858601.909059
+        "fetched_at": 1667921404.25288
     },
     "github.com/hibernate/hibernate-ogm": {
         "active": false,
-        "forks_count": 204,
+        "forks_count": 206,
         "license": "LGPL-2.1",
         "pushed_at": 1627021861.0,
         "open_issues_count": 4,
@@ -3045,7 +3057,7 @@
         "archived": null,
         "description": "Hibernate OGM - Domain model persistence for NoSQL datastores",
         "homepage": "http://hibernate.org/ogm/",
-        "fetched_at": 1663858602.391254
+        "fetched_at": 1667921406.01598
     },
     "github.com/qi4j/qi4j-sdk": {
         "active": false,
@@ -3057,19 +3069,19 @@
         "archived": null,
         "description": "The Qi4j SDK",
         "homepage": "http://www.qi4j.org",
-        "fetched_at": 1663858602.85098
+        "fetched_at": 1667921407.789988
     },
     "github.com/jwhitbeck/java-rdb-parser": {
         "active": false,
-        "forks_count": 19,
+        "forks_count": 20,
         "license": null,
         "pushed_at": 1624385628.0,
         "open_issues_count": 1,
-        "stargazers_count": 41,
+        "stargazers_count": 42,
         "archived": null,
         "description": "A simple Redis RDB file parser for Java",
         "homepage": null,
-        "fetched_at": 1663858603.285835
+        "fetched_at": 1667921410.323257
     },
     "github.com/hollodotme/readis": {
         "active": false,
@@ -3081,7 +3093,7 @@
         "archived": null,
         "description": " Lightweight web frontend in PHP for reading data, stats and config from multiple redis servers.",
         "homepage": null,
-        "fetched_at": 1663858603.714215
+        "fetched_at": 1667921412.286354
     },
     "github.com/redtrine/redtrine": {
         "active": false,
@@ -3093,19 +3105,19 @@
         "archived": null,
         "description": "Redis-based advanced PHP data structures.",
         "homepage": null,
-        "fetched_at": 1663858604.169285
+        "fetched_at": 1667921412.861264
     },
     "github.com/tessus/redis-stats": {
         "active": true,
-        "forks_count": 6,
+        "forks_count": 8,
         "license": "MIT",
         "pushed_at": 1655014577.0,
         "open_issues_count": null,
-        "stargazers_count": 26,
+        "stargazers_count": 27,
         "archived": null,
         "description": "A lightweight dashboard to show statistics about a Redis server.",
         "homepage": null,
-        "fetched_at": 1663858604.629053
+        "fetched_at": 1667921415.293095
     },
     "github.com/sasanrose/phpredmin": {
         "active": false,
@@ -3117,19 +3129,19 @@
         "archived": null,
         "description": "Yet another web interface for Redis",
         "homepage": null,
-        "fetched_at": 1663858605.065166
+        "fetched_at": 1667921417.657671
     },
     "github.com/eugef/phpRedExpert": {
         "active": false,
-        "forks_count": 6,
+        "forks_count": 7,
         "license": "GPL-2.0",
         "pushed_at": 1444378716.0,
         "open_issues_count": 14,
-        "stargazers_count": 25,
+        "stargazers_count": 26,
         "archived": null,
         "description": "Simple and powerful web tool for Redis databases and servers management, written in PHP and JavaScript.",
         "homepage": null,
-        "fetched_at": 1663858605.481511
+        "fetched_at": 1667921418.735661
     },
     "github.com/cheprasov/php-redis-lock": {
         "active": false,
@@ -3141,7 +3153,7 @@
         "archived": null,
         "description": "RedisLock for PHP is a synchronization mechanism for enforcing limits on access to a resource in an environment where there are many threads of execution. A lock is designed to enforce a mutual exclusion concurrency control policy.",
         "homepage": null,
-        "fetched_at": 1663858605.923517
+        "fetched_at": 1667921420.699512
     },
     "github.com/stephpy/timeline-bundle": {
         "active": false,
@@ -3153,55 +3165,55 @@
         "archived": null,
         "description": "Symfony2 bundle to make timeline",
         "homepage": null,
-        "fetched_at": 1663858606.360022
+        "fetched_at": 1667921421.838061
     },
     "github.com/ienaga/RedisPlugin": {
         "active": false,
-        "forks_count": 1,
+        "forks_count": 2,
         "license": "MIT",
         "pushed_at": 1554748650.0,
         "open_issues_count": null,
-        "stargazers_count": 15,
+        "stargazers_count": 16,
         "archived": null,
         "description": "RedisPlugin for Phalcon",
         "homepage": null,
-        "fetched_at": 1663858606.792936
+        "fetched_at": 1667921423.417589
     },
     "github.com/ErikDubbelboer/phpRedisAdmin": {
         "active": true,
-        "forks_count": 661,
+        "forks_count": 665,
         "license": null,
-        "pushed_at": 1661397363.0,
-        "open_issues_count": 7,
-        "stargazers_count": 2917,
+        "pushed_at": 1667118796.0,
+        "open_issues_count": 6,
+        "stargazers_count": 2937,
         "archived": null,
         "description": "Simple web interface to manage Redis databases.",
         "homepage": "http://dubbelboer.com/phpRedisAdmin/",
-        "fetched_at": 1663858607.254347
+        "fetched_at": 1667921427.763997
     },
     "github.com/chrisboulton/php-resque": {
         "active": false,
-        "forks_count": 780,
+        "forks_count": 781,
         "license": "MIT",
         "pushed_at": 1601480027.0,
         "open_issues_count": 104,
-        "stargazers_count": 3469,
+        "stargazers_count": 3465,
         "archived": null,
         "description": "PHP port of resque (Workers and Queueing)",
         "homepage": null,
-        "fetched_at": 1663858607.688319
+        "fetched_at": 1667921431.015052
     },
     "github.com/pkulchenko/ZeroBranePackage": {
         "active": true,
-        "forks_count": 143,
+        "forks_count": 146,
         "license": "MIT",
-        "pushed_at": 1660256731.0,
-        "open_issues_count": 20,
-        "stargazers_count": 207,
+        "pushed_at": 1667766926.0,
+        "open_issues_count": 21,
+        "stargazers_count": 214,
         "archived": null,
         "description": "Packages for ZeroBrane Studio (https://studio.zerobrane.com)",
         "homepage": null,
-        "fetched_at": 1663858608.112696
+        "fetched_at": 1667921433.841368
     },
     "github.com/Redsmin/redis-lua-unit": {
         "active": false,
@@ -3213,19 +3225,19 @@
         "archived": null,
         "description": "Redis-lua-unit - Framework agnostic unit-testing for Redis Lua scripts",
         "homepage": "https://redsmin.com",
-        "fetched_at": 1663858608.592119
+        "fetched_at": 1667921437.591779
     },
     "github.com/lifeblood/lua-redis-admin": {
         "active": false,
-        "forks_count": 5,
+        "forks_count": 6,
         "license": null,
         "pushed_at": 1579154922.0,
         "open_issues_count": 1,
-        "stargazers_count": 27,
+        "stargazers_count": 28,
         "archived": null,
         "description": "Redis client tool, Redis web client, Redis web UI, openresty  lor Lua ",
         "homepage": null,
-        "fetched_at": 1663858609.046593
+        "fetched_at": 1667921440.922946
     },
     "github.com/slact/lua-ohm": {
         "active": false,
@@ -3237,19 +3249,19 @@
         "archived": null,
         "description": "Lua Redis Object-hash-mapping and more",
         "homepage": null,
-        "fetched_at": 1663858609.473123
+        "fetched_at": 1667921443.897073
     },
     "github.com/redis/redis-om-dotnet": {
         "active": true,
-        "forks_count": 42,
+        "forks_count": 48,
         "license": "MIT",
-        "pushed_at": 1663793067.0,
-        "open_issues_count": 30,
-        "stargazers_count": 233,
+        "pushed_at": 1667838114.0,
+        "open_issues_count": 39,
+        "stargazers_count": 254,
         "archived": null,
         "description": "Object mapping, and more, for Redis and .NET",
         "homepage": null,
-        "fetched_at": 1663858609.929673
+        "fetched_at": 1667921445.284382
     },
     "github.com/bradvoth/redis-tcl": {
         "active": false,
@@ -3261,7 +3273,7 @@
         "archived": null,
         "description": "Tcl library for redis access",
         "homepage": null,
-        "fetched_at": 1663858610.397168
+        "fetched_at": 1667921446.180931
     },
     "github.com/fastogt/fastoredis": {
         "active": false,
@@ -3273,31 +3285,31 @@
         "archived": null,
         "description": "FastoRedis is a crossplatform Redis GUI management tool.",
         "homepage": "https://fastoredis.com",
-        "fetched_at": 1663858610.839532
+        "fetched_at": 1667921448.048489
     },
     "github.com/zhengshuxin/redis_builder": {
-        "active": null,
+        "active": true,
         "forks_count": null,
         "license": null,
-        "pushed_at": null,
+        "pushed_at": 1664787954.0,
         "open_issues_count": null,
         "stargazers_count": null,
         "archived": null,
-        "description": null,
+        "description": "The powerful redis tools to build and manage redis cluster.",
         "homepage": null,
-        "fetched_at": 1663858611.237592
+        "fetched_at": 1667921450.141666
     },
     "github.com/joyieldInc/predixy": {
-        "active": true,
-        "forks_count": 285,
+        "active": false,
+        "forks_count": 289,
         "license": "BSD-3-Clause",
         "pushed_at": 1649503933.0,
         "open_issues_count": 86,
-        "stargazers_count": 1199,
+        "stargazers_count": 1220,
         "archived": null,
         "description": "A high performance and fully featured proxy for redis, support redis sentinel and redis cluster",
         "homepage": null,
-        "fetched_at": 1663858611.685297
+        "fetched_at": 1667921451.974896
     },
     "github.com/Oriflame/RedisMessaging.ReliableDelivery": {
         "active": false,
@@ -3309,7 +3321,7 @@
         "archived": null,
         "description": "This library is written in .NET standard and provides reliability to delivering messages via Redis. By design Redis pub/sub message delivery is not reliable so it can happen that some messages can be lost due to network issues or they can be delivered more than once in case of Redis replication failure.",
         "homepage": null,
-        "fetched_at": 1663858612.170755
+        "fetched_at": 1667921452.749891
     },
     "github.com/jasonpunyon/rol": {
         "active": false,
@@ -3321,19 +3333,19 @@
         "archived": null,
         "description": "Redis, as easy as declaring an interface.",
         "homepage": null,
-        "fetched_at": 1663858612.602349
+        "fetched_at": 1667921453.707927
     },
     "github.com/HangfireIO/Hangfire": {
         "active": true,
-        "forks_count": 1557,
+        "forks_count": 1560,
         "license": null,
-        "pushed_at": 1663757396.0,
-        "open_issues_count": 726,
-        "stargazers_count": 7779,
+        "pushed_at": 1667548825.0,
+        "open_issues_count": 740,
+        "stargazers_count": 7867,
         "archived": null,
         "description": "An easy way to perform background job processing in your .NET and .NET Core applications. No Windows Service or separate process required",
         "homepage": "https://www.hangfire.io",
-        "fetched_at": 1663858613.065806
+        "fetched_at": 1667921455.717527
     },
     "decibel.ni.com/content/DOC-36322": {
         "active": null,
@@ -3345,7 +3357,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858613.066102
+        "fetched_at": 1667921455.717782
     },
     "github.com/chriso/redback": {
         "active": false,
@@ -3357,7 +3369,7 @@
         "archived": null,
         "description": "A high-level Redis library",
         "homepage": null,
-        "fetched_at": 1663858613.528307
+        "fetched_at": 1667921456.563873
     },
     "github.com/adriano-di-giovanni/node-redis-keychain": {
         "active": false,
@@ -3369,19 +3381,19 @@
         "archived": null,
         "description": "A Node.js library for streamlining the configuration and maintenance of your Redis namespace",
         "homepage": null,
-        "fetched_at": 1663858613.965716
+        "fetched_at": 1667921457.471319
     },
     "github.com/qishibo/AnotherRedisDesktopManager": {
         "active": true,
-        "forks_count": 2148,
+        "forks_count": 2188,
         "license": "MIT",
-        "pushed_at": 1663834441.0,
-        "open_issues_count": 118,
-        "stargazers_count": 22751,
+        "pushed_at": 1667790666.0,
+        "open_issues_count": 130,
+        "stargazers_count": 23327,
         "archived": null,
         "description": "\ud83d\ude80\ud83d\ude80\ud83d\ude80A faster, better and more stable redis desktop manager [GUI client], compatible with Linux, Windows, Mac. What's more, it won't crash when loading massive keys.",
         "homepage": null,
-        "fetched_at": 1663858614.416295
+        "fetched_at": 1667921460.174034
     },
     "github.com/maxbrieiev/promise-redis": {
         "active": false,
@@ -3393,11 +3405,11 @@
         "archived": true,
         "description": "A tiny library that turns each command to a Redis server into a promise.",
         "homepage": null,
-        "fetched_at": 1663858614.942832
+        "fetched_at": 1667921462.061132
     },
     "github.com/pconstr/rdb-parser": {
         "active": false,
-        "forks_count": 12,
+        "forks_count": 11,
         "license": "MIT",
         "pushed_at": 1343306126.0,
         "open_issues_count": 1,
@@ -3405,7 +3417,7 @@
         "archived": null,
         "description": "node.js asynchronous streaming parser for redis RDB database dumps",
         "homepage": "http://perceptiveconstructs.com",
-        "fetched_at": 1663858615.361459
+        "fetched_at": 1667921463.558274
     },
     "github.com/pconstr/redis-sync": {
         "active": false,
@@ -3417,7 +3429,7 @@
         "archived": null,
         "description": "A node.js redis replication slave toolkit",
         "homepage": "http://perceptiveconstructs.com",
-        "fetched_at": 1663858615.801959
+        "fetched_at": 1667921465.064399
     },
     "github.com/pconstr/recurrent": {
         "active": false,
@@ -3429,7 +3441,7 @@
         "archived": null,
         "description": "A redis-backed manager of recurrent jobs, for node.js",
         "homepage": null,
-        "fetched_at": 1663858616.257628
+        "fetched_at": 1667921466.23389
     },
     "github.com/FGRibreau/redistree": {
         "active": false,
@@ -3441,7 +3453,7 @@
         "archived": null,
         "description": "RedisTree - load & save Trees to Redis using sets",
         "homepage": "http://bit.ly/17HbKLs",
-        "fetched_at": 1663858616.691434
+        "fetched_at": 1667921467.687356
     },
     "github.com/FGRibreau/redis-tool": {
         "active": false,
@@ -3453,7 +3465,7 @@
         "archived": null,
         "description": "Redis-tool - Little helpers for Redis",
         "homepage": "http://twitter.com/FGRibreau",
-        "fetched_at": 1663858617.114987
+        "fetched_at": 1667921468.848502
     },
     "github.com/FGRibreau/node-redis-info": {
         "active": false,
@@ -3465,7 +3477,7 @@
         "archived": null,
         "description": "Redis info string parser for NodeJS",
         "homepage": "http://twitter.com/FGRibreau",
-        "fetched_at": 1663858617.555266
+        "fetched_at": 1667921469.778899
     },
     "github.com/reidwmulkey/noncis": {
         "active": false,
@@ -3477,7 +3489,7 @@
         "archived": null,
         "description": "A Redis adapter for syncing nonces across NodeJS instances based on IP",
         "homepage": null,
-        "fetched_at": 1663858617.98192
+        "fetched_at": 1667921470.790348
     },
     "github.com/sneakybeaky/mod_redis": {
         "active": false,
@@ -3489,7 +3501,7 @@
         "archived": null,
         "description": "An Apache HTTPD module for speaking to redis via HTTP",
         "homepage": null,
-        "fetched_at": 1663858618.400879
+        "fetched_at": 1667921471.692872
     },
     "github.com/jacket-code/redisPlatform": {
         "active": false,
@@ -3501,55 +3513,55 @@
         "archived": null,
         "description": "a rpc platform base on redis",
         "homepage": null,
-        "fetched_at": 1663858618.975758
+        "fetched_at": 1667921472.507476
     },
     "github.com/rsyslog/rsyslog": {
         "active": true,
-        "forks_count": 593,
+        "forks_count": 597,
         "license": "LGPL-3.0",
-        "pushed_at": 1663131426.0,
-        "open_issues_count": 653,
-        "stargazers_count": 1656,
+        "pushed_at": 1667822562.0,
+        "open_issues_count": 666,
+        "stargazers_count": 1687,
         "archived": null,
         "description": "a Rocket-fast SYStem for LOG processing",
         "homepage": "http://www.rsyslog.com",
-        "fetched_at": 1663858619.447324
+        "fetched_at": 1667921473.010635
     },
     "github.com/boazsegev/facil.io": {
         "active": false,
-        "forks_count": 107,
+        "forks_count": 109,
         "license": "MIT",
         "pushed_at": 1645262976.0,
         "open_issues_count": 23,
-        "stargazers_count": 1623,
+        "stargazers_count": 1650,
         "archived": null,
         "description": "Your high performance web application C framework",
         "homepage": "http://facil.io",
-        "fetched_at": 1663858619.888465
+        "fetched_at": 1667921474.468812
     },
     "github.com/vipshop/redis-migrate-tool": {
         "active": false,
-        "forks_count": 308,
+        "forks_count": 310,
         "license": "Apache-2.0",
         "pushed_at": 1571186552.0,
         "open_issues_count": 63,
-        "stargazers_count": 901,
+        "stargazers_count": 902,
         "archived": null,
         "description": "A convenient and useful tool for migrating data between redis group.",
         "homepage": null,
-        "fetched_at": 1663858620.356386
+        "fetched_at": 1667921475.1839
     },
     "github.com/nicolasff/webdis": {
         "active": true,
-        "forks_count": 288,
+        "forks_count": 291,
         "license": "BSD-2-Clause",
         "pushed_at": 1658658212.0,
-        "open_issues_count": 53,
-        "stargazers_count": 2577,
+        "open_issues_count": 52,
+        "stargazers_count": 2603,
         "archived": null,
         "description": "A Redis HTTP interface with JSON output",
         "homepage": "https://webd.is",
-        "fetched_at": 1663858620.83816
+        "fetched_at": 1667921476.448558
     },
     "github.com/hedisdb/hedis": {
         "active": false,
@@ -3557,11 +3569,11 @@
         "license": "BSD-3-Clause",
         "pushed_at": 1469580989.0,
         "open_issues_count": 10,
-        "stargazers_count": 92,
+        "stargazers_count": 94,
         "archived": null,
         "description": "Hedis can retrieve data from **ANY** database directly via Redis",
         "homepage": "http://hedis.io",
-        "fetched_at": 1663858621.348553
+        "fetched_at": 1667921477.225679
     },
     "github.com/carlhoerberg/meerkat": {
         "active": false,
@@ -3573,7 +3585,7 @@
         "archived": null,
         "description": "Rack middleware for Server-Sent Events (HTML5 SSE)",
         "homepage": "http://carlhoerberg.github.com/meerkat",
-        "fetched_at": 1663858621.816891
+        "fetched_at": 1667921478.52409
     },
     "github.com/nrk/redis-rdb": {
         "active": false,
@@ -3585,19 +3597,19 @@
         "archived": null,
         "description": "A set of utilities to handle Redis .rdb files with Ruby.",
         "homepage": null,
-        "fetched_at": 1663858622.27165
+        "fetched_at": 1667921479.071905
     },
     "github.com/nateware/redis-objects": {
         "active": true,
-        "forks_count": 232,
+        "forks_count": 235,
         "license": "Artistic-2.0",
-        "pushed_at": 1660813201.0,
-        "open_issues_count": 14,
+        "pushed_at": 1667447306.0,
+        "open_issues_count": 16,
         "stargazers_count": 2071,
         "archived": null,
         "description": "Map Redis types directly to Ruby objects",
         "homepage": null,
-        "fetched_at": 1663858622.784992
+        "fetched_at": 1667921479.610554
     },
     "github.com/steelThread/redmon": {
         "active": false,
@@ -3605,23 +3617,23 @@
         "license": null,
         "pushed_at": 1589645635.0,
         "open_issues_count": 25,
-        "stargazers_count": 1564,
+        "stargazers_count": 1565,
         "archived": null,
         "description": "A web interface for managing redis: cli, admin, and live monitoring",
         "homepage": "http://steelthread.github.com/redmon/",
-        "fetched_at": 1663858623.224317
+        "fetched_at": 1667921480.316873
     },
     "github.com/FetLife/rollout": {
         "active": true,
-        "forks_count": 212,
+        "forks_count": 213,
         "license": "MIT",
         "pushed_at": 1662914570.0,
-        "open_issues_count": 11,
-        "stargazers_count": 2816,
+        "open_issues_count": 12,
+        "stargazers_count": 2818,
         "archived": null,
         "description": "Feature flippers.",
         "homepage": null,
-        "fetched_at": 1663858623.808539
+        "fetched_at": 1667921481.639734
     },
     "github.com/ryanlecompte/redis_failover": {
         "active": false,
@@ -3633,7 +3645,7 @@
         "archived": null,
         "description": "redis_failover is a ZooKeeper-based automatic master/slave failover solution for Ruby.",
         "homepage": "http://github.com/ryanlecompte/redis_failover",
-        "fetched_at": 1663858624.320693
+        "fetched_at": 1667921482.083206
     },
     "github.com/agoragames/amico": {
         "active": false,
@@ -3645,7 +3657,7 @@
         "archived": null,
         "description": "Relationships (e.g. friendships) backed by Redis",
         "homepage": null,
-        "fetched_at": 1663858624.833849
+        "fetched_at": 1667921482.722454
     },
     "github.com/agoragames/leaderboard": {
         "active": false,
@@ -3653,11 +3665,11 @@
         "license": "MIT",
         "pushed_at": 1615471987.0,
         "open_issues_count": 8,
-        "stargazers_count": 477,
+        "stargazers_count": 475,
         "archived": null,
         "description": "Leaderboards backed by Redis in Ruby",
         "homepage": "https://rubygems.org/gems/leaderboard",
-        "fetched_at": 1663858625.303861
+        "fetched_at": 1667921483.258689
     },
     "github.com/delano/redis-dump": {
         "active": true,
@@ -3665,35 +3677,35 @@
         "license": "MIT",
         "pushed_at": 1655652623.0,
         "open_issues_count": 11,
-        "stargazers_count": 761,
+        "stargazers_count": 764,
         "archived": null,
         "description": "Backup and restore your Redis data to and from JSON.",
         "homepage": "http://delanotes.com/redis-dump/",
-        "fetched_at": 1663858625.777958
+        "fetched_at": 1667921484.180041
     },
     "github.com/OpenGems/redis_web_manager": {
         "active": true,
-        "forks_count": 21,
+        "forks_count": 23,
         "license": "MIT",
-        "pushed_at": 1657644274.0,
-        "open_issues_count": 12,
-        "stargazers_count": 159,
+        "pushed_at": 1666349718.0,
+        "open_issues_count": 14,
+        "stargazers_count": 161,
         "archived": null,
         "description": "Manage your Redis instance (see keys, memory used, connected client, etc...)",
         "homepage": null,
-        "fetched_at": 1663858626.267421
+        "fetched_at": 1667921484.680017
     },
     "github.com/resque/resque": {
         "active": true,
-        "forks_count": 1663,
+        "forks_count": 1670,
         "license": "MIT",
-        "pushed_at": 1663763000.0,
-        "open_issues_count": 69,
-        "stargazers_count": 9185,
+        "pushed_at": 1667811855.0,
+        "open_issues_count": 73,
+        "stargazers_count": 9209,
         "archived": null,
         "description": "Resque is a Redis-backed Ruby library for creating background jobs, placing them on multiple queues, and processing them later.",
         "homepage": "http://resque.github.io/",
-        "fetched_at": 1663858626.768882
+        "fetched_at": 1667921485.443775
     },
     "github.com/antirez/redis-sampler": {
         "active": true,
@@ -3705,31 +3717,31 @@
         "archived": null,
         "description": "Small program to understand the composition of your Redis data set",
         "homepage": null,
-        "fetched_at": 1663858627.245199
+        "fetched_at": 1667921486.665539
     },
     "github.com/mperham/sidekiq": {
         "active": true,
-        "forks_count": 2194,
+        "forks_count": 2216,
         "license": null,
-        "pushed_at": 1663781754.0,
-        "open_issues_count": 21,
-        "stargazers_count": 12038,
+        "pushed_at": 1667857885.0,
+        "open_issues_count": 17,
+        "stargazers_count": 12135,
         "archived": null,
         "description": "Simple, efficient background processing for Ruby",
         "homepage": "https://sidekiq.org",
-        "fetched_at": 1663858627.696339
+        "fetched_at": 1667921487.846373
     },
     "github.com/boazsegev/iodine": {
         "active": true,
-        "forks_count": 43,
+        "forks_count": 44,
         "license": "MIT",
-        "pushed_at": 1663800710.0,
-        "open_issues_count": 17,
-        "stargazers_count": 800,
+        "pushed_at": 1667056792.0,
+        "open_issues_count": 18,
+        "stargazers_count": 804,
         "archived": null,
         "description": "iodine - HTTP / WebSockets Server for Ruby with Pub/Sub support",
         "homepage": null,
-        "fetched_at": 1663858628.154524
+        "fetched_at": 1667921488.318043
     },
     "github.com/paulasmuth/fnordmetric": {
         "active": false,
@@ -3737,11 +3749,11 @@
         "license": "Apache-2.0",
         "pushed_at": 1591907123.0,
         "open_issues_count": 3,
-        "stargazers_count": 5120,
+        "stargazers_count": 5124,
         "archived": null,
         "description": "Create charts from the command line",
         "homepage": "https://clip-lang.org",
-        "fetched_at": 1663858628.889555
+        "fetched_at": 1667921489.161156
     },
     "github.com/paulasmuth/recommendify": {
         "active": false,
@@ -3753,19 +3765,19 @@
         "archived": null,
         "description": "Generate recommendations using collaborative filtering",
         "homepage": null,
-        "fetched_at": 1663858629.576437
+        "fetched_at": 1667921490.040445
     },
     "github.com/soveran/ohm": {
-        "active": true,
+        "active": false,
         "forks_count": 169,
         "license": "MIT",
         "pushed_at": 1652243918.0,
         "open_issues_count": 13,
-        "stargazers_count": 1388,
+        "stargazers_count": 1389,
         "archived": null,
         "description": "Object-Hash Mapping for Redis",
         "homepage": "http://ohm.keyvalue.org",
-        "fetched_at": 1663858630.033192
+        "fetched_at": 1667921490.56087
     },
     "github.com/soveran/ost": {
         "active": false,
@@ -3777,23 +3789,23 @@
         "archived": null,
         "description": "Redis based queues and workers.",
         "homepage": null,
-        "fetched_at": 1663858630.463642
+        "fetched_at": 1667921491.050436
     },
     "github.com/redis-store/redis-store": {
         "active": true,
-        "forks_count": 332,
+        "forks_count": 335,
         "license": "MIT",
-        "pushed_at": 1663672744.0,
-        "open_issues_count": 2,
-        "stargazers_count": 1467,
+        "pushed_at": 1667787137.0,
+        "open_issues_count": 5,
+        "stargazers_count": 1468,
         "archived": null,
         "description": "Namespaced Rack::Session, Rack::Cache, I18n and cache Redis stores for Ruby web frameworks",
         "homepage": "http://redis-store.org/redis-store",
-        "fetched_at": 1663858630.917887
+        "fetched_at": 1667921491.665314
     },
     "github.com/seatgeek/soulmate": {
         "active": false,
-        "forks_count": 127,
+        "forks_count": 126,
         "license": "MIT",
         "pushed_at": 1490724355.0,
         "open_issues_count": null,
@@ -3801,19 +3813,19 @@
         "archived": true,
         "description": "Unmaintained, use Soulheart!",
         "homepage": "https://github.com/sethherr/soulheart",
-        "fetched_at": 1663858631.380149
+        "fetched_at": 1667921492.194461
     },
     "github.com/trinodb/trino": {
         "active": true,
-        "forks_count": 1963,
+        "forks_count": 2033,
         "license": "Apache-2.0",
-        "pushed_at": 1663847358.0,
-        "open_issues_count": 2293,
-        "stargazers_count": 6158,
+        "pushed_at": 1667912945.0,
+        "open_issues_count": 2197,
+        "stargazers_count": 6493,
         "archived": null,
         "description": "Official repository of Trino, the distributed SQL query engine for big data, formerly known as PrestoSQL (https://trino.io)",
         "homepage": "https://trino.io",
-        "fetched_at": 1663858631.872347
+        "fetched_at": 1667921493.861518
     },
     "github.com/infobip/redis-fpn": {
         "active": false,
@@ -3825,19 +3837,19 @@
         "archived": null,
         "description": "Redis module for Fixed Point Number data type",
         "homepage": null,
-        "fetched_at": 1663858632.319554
+        "fetched_at": 1667921494.335989
     },
     "github.com/RedisTimeSeries/RedisTimeSeries": {
         "active": true,
-        "forks_count": 114,
+        "forks_count": 116,
         "license": null,
-        "pushed_at": 1663769243.0,
-        "open_issues_count": 107,
-        "stargazers_count": 772,
+        "pushed_at": 1667824828.0,
+        "open_issues_count": 108,
+        "stargazers_count": 791,
         "archived": null,
         "description": "Time Series data structure for Redis",
         "homepage": "https://redis.io/docs/stack/timeseries/",
-        "fetched_at": 1663858632.7875
+        "fetched_at": 1667921494.823831
     },
     "github.com/starkdg/Redis-ImageScout.git": {
         "active": null,
@@ -3849,7 +3861,7 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858633.190901
+        "fetched_at": 1667921495.28922
     },
     "github.com/starkdg/reventis": {
         "active": false,
@@ -3857,11 +3869,11 @@
         "license": null,
         "pushed_at": 1635702077.0,
         "open_issues_count": null,
-        "stargazers_count": 26,
+        "stargazers_count": 27,
         "archived": null,
         "description": "Fast spatio-temporal system to index events.",
         "homepage": "https://phash.dev/post/reventis-a-better-way-to-redis-geohash",
-        "fetched_at": 1663858633.67143
+        "fetched_at": 1667921495.896188
     },
     "github.com/starkdg/Redis-AudioScout": {
         "active": false,
@@ -3873,23 +3885,23 @@
         "archived": null,
         "description": "Redis Audio Track Recognition",
         "homepage": "https://phash.dev/post/audioscout-audio-fingerprint-retrieval-system",
-        "fetched_at": 1663858634.096042
+        "fetched_at": 1667921496.377024
     },
     "github.com/RediSearch/RediSearch": {
         "active": true,
-        "forks_count": 415,
+        "forks_count": 424,
         "license": null,
-        "pushed_at": 1663846327.0,
-        "open_issues_count": 420,
-        "stargazers_count": 3932,
+        "pushed_at": 1667889595.0,
+        "open_issues_count": 438,
+        "stargazers_count": 3990,
         "archived": null,
         "description": "A query and indexing engine for Redis, providing secondary indexing, full-text search, and aggregations. ",
         "homepage": "https://redis.io/docs/stack/search/",
-        "fetched_at": 1663858634.559168
+        "fetched_at": 1667921496.889235
     },
     "github.com/TamarLabs/ReDe": {
         "active": false,
-        "forks_count": 10,
+        "forks_count": 11,
         "license": "MIT",
         "pushed_at": 1583229327.0,
         "open_issues_count": 2,
@@ -3897,7 +3909,7 @@
         "archived": null,
         "description": "A Redis dehydrator module",
         "homepage": null,
-        "fetched_at": 1663858635.054105
+        "fetched_at": 1667921497.372632
     },
     "github.com/limithit/RedisPushIptables": {
         "active": false,
@@ -3909,7 +3921,7 @@
         "archived": null,
         "description": "RedisPushIptables is  used to update firewall rules to reject the IP addresses for a specified amount of time or forever reject.",
         "homepage": null,
-        "fetched_at": 1663858635.562362
+        "fetched_at": 1667921499.014269
     },
     "github.com/zhao-lang/redis_hnsw": {
         "active": false,
@@ -3917,11 +3929,11 @@
         "license": "MIT",
         "pushed_at": 1598993851.0,
         "open_issues_count": 4,
-        "stargazers_count": 38,
+        "stargazers_count": 43,
         "archived": null,
         "description": "HSNW module for Redis",
         "homepage": null,
-        "fetched_at": 1663858636.041995
+        "fetched_at": 1667921500.562353
     },
     "github.com/usmanm/redis-tdigest": {
         "active": false,
@@ -3933,19 +3945,19 @@
         "archived": null,
         "description": "t-digest module for Redis",
         "homepage": "http://redismodules.com/modules/redis-tdigest/",
-        "fetched_at": 1663858636.480699
+        "fetched_at": 1667921501.847434
     },
     "github.com/RedisBloom/RedisBloom": {
         "active": true,
         "forks_count": 210,
         "license": null,
-        "pushed_at": 1663830152.0,
-        "open_issues_count": 26,
-        "stargazers_count": 1246,
+        "pushed_at": 1667718264.0,
+        "open_issues_count": 20,
+        "stargazers_count": 1273,
         "archived": null,
         "description": "Probabilistic Datatypes Module for Redis",
         "homepage": "https://redis.io/docs/stack/bloom/",
-        "fetched_at": 1663858636.956281
+        "fetched_at": 1667921502.343556
     },
     "github.com/OhBonsai/RedisTree": {
         "active": false,
@@ -3953,11 +3965,11 @@
         "license": "MIT",
         "pushed_at": 1625612451.0,
         "open_issues_count": null,
-        "stargazers_count": 62,
+        "stargazers_count": 63,
         "archived": null,
         "description": "Redis Tree (Ploytree) Structure Module ",
         "homepage": null,
-        "fetched_at": 1663858637.401424
+        "fetched_at": 1667921504.180375
     },
     "github.com/aviggiano/redis-roaring": {
         "active": false,
@@ -3965,11 +3977,11 @@
         "license": "MIT",
         "pushed_at": 1646141693.0,
         "open_issues_count": 11,
-        "stargazers_count": 275,
+        "stargazers_count": 278,
         "archived": null,
         "description": "Roaring Bitmaps for Redis",
         "homepage": null,
-        "fetched_at": 1663858637.824001
+        "fetched_at": 1667921505.024261
     },
     "github.com/sewenew/redis-protobuf": {
         "active": true,
@@ -3977,11 +3989,11 @@
         "license": "Apache-2.0",
         "pushed_at": 1655118300.0,
         "open_issues_count": 9,
-        "stargazers_count": 159,
+        "stargazers_count": 168,
         "archived": null,
         "description": "Redis module for reading and writing Protobuf messages",
         "homepage": null,
-        "fetched_at": 1663858638.329027
+        "fetched_at": 1667921505.742478
     },
     "github.com/RedisLabsModules/redex.git": {
         "active": null,
@@ -3993,31 +4005,31 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858638.764986
+        "fetched_at": 1667921507.590255
     },
     "github.com/RedisJSON/RedisJSON": {
         "active": true,
-        "forks_count": 269,
+        "forks_count": 273,
         "license": null,
-        "pushed_at": 1663820077.0,
-        "open_issues_count": 92,
-        "stargazers_count": 3314,
+        "pushed_at": 1667911476.0,
+        "open_issues_count": 99,
+        "stargazers_count": 3343,
         "archived": null,
         "description": "RedisJSON - a JSON data type for Redis",
         "homepage": "https://redis.io/docs/stack/json/",
-        "fetched_at": 1663858639.278253
+        "fetched_at": 1667921509.354813
     },
     "github.com/RedisGraph/RedisGraph": {
         "active": true,
-        "forks_count": 200,
+        "forks_count": 206,
         "license": null,
-        "pushed_at": 1663833213.0,
-        "open_issues_count": 291,
-        "stargazers_count": 1725,
+        "pushed_at": 1667908368.0,
+        "open_issues_count": 306,
+        "stargazers_count": 1751,
         "archived": null,
         "description": "A graph database as a Redis module",
         "homepage": "https://redis.io/docs/stack/graph/",
-        "fetched_at": 1663858639.782669
+        "fetched_at": 1667921509.856311
     },
     "github.com/Clement-Jean/RedisIMS": {
         "active": false,
@@ -4029,31 +4041,31 @@
         "archived": null,
         "description": "If modified since Redis cache",
         "homepage": null,
-        "fetched_at": 1663858640.231275
+        "fetched_at": 1667921510.640993
     },
     "github.com/RedBeardLab/rediSQL": {
         "active": false,
-        "forks_count": 147,
+        "forks_count": 148,
         "license": null,
         "pushed_at": 1625991424.0,
         "open_issues_count": 13,
-        "stargazers_count": 1502,
+        "stargazers_count": 1509,
         "archived": true,
         "description": "Redis module that provides a completely functional SQL database",
         "homepage": "https://redisql.com",
-        "fetched_at": 1663858640.727849
+        "fetched_at": 1667921511.180279
     },
     "github.com/sulewicz/redis-s2geo": {
         "active": false,
-        "forks_count": 2,
+        "forks_count": 3,
         "license": "MIT",
         "pushed_at": 1642119862.0,
-        "open_issues_count": 1,
-        "stargazers_count": 15,
+        "open_issues_count": 2,
+        "stargazers_count": 18,
         "archived": null,
         "description": "Simple Redis Module for geospatial queries, which utilizes S2 Region Coverer algorithm for indexing. Allows point with polygon and polygon with polygon overlap tests in constant time.",
         "homepage": null,
-        "fetched_at": 1663858641.213152
+        "fetched_at": 1667921511.645709
     },
     "github.com/brandur/redis-cell": {
         "active": true,
@@ -4061,83 +4073,83 @@
         "license": "MIT",
         "pushed_at": 1659810844.0,
         "open_issues_count": 9,
-        "stargazers_count": 1046,
+        "stargazers_count": 1050,
         "archived": null,
         "description": "A Redis module that provides rate limiting in Redis as a single command.",
         "homepage": null,
-        "fetched_at": 1663858641.645291
+        "fetched_at": 1667921512.278164
     },
     "github.com/wujunwei/redlock": {
         "active": true,
         "forks_count": 4,
         "license": "MIT",
-        "pushed_at": 1660811252.0,
+        "pushed_at": 1664230873.0,
         "open_issues_count": 1,
-        "stargazers_count": 47,
+        "stargazers_count": 49,
         "archived": null,
         "description": "a way to achieve  distributed lock by redis module",
         "homepage": null,
-        "fetched_at": 1663858642.104783
+        "fetched_at": 1667921512.920134
     },
     "github.com/alibaba/TairHash": {
         "active": true,
         "forks_count": 34,
         "license": "Apache-2.0",
-        "pushed_at": 1663634611.0,
-        "open_issues_count": 5,
-        "stargazers_count": 174,
+        "pushed_at": 1666505882.0,
+        "open_issues_count": 4,
+        "stargazers_count": 184,
         "archived": null,
-        "description": "A redis module, similar to redis hash, but you can set expiration and version for field",
+        "description": "A redis module, similar to redis hash, but you can set expiration and version for field.",
         "homepage": null,
-        "fetched_at": 1663858642.579419
+        "fetched_at": 1667921514.543968
     },
     "github.com/alibaba/TairString": {
         "active": true,
         "forks_count": 14,
         "license": "Apache-2.0",
-        "pushed_at": 1653948626.0,
+        "pushed_at": 1665271666.0,
         "open_issues_count": 1,
-        "stargazers_count": 92,
+        "stargazers_count": 97,
         "archived": null,
         "description": "A redis module, similar to redis string, but you can set expire and version for the value. It also provides many very useful commands, such as cas/cad, etc.",
         "homepage": null,
-        "fetched_at": 1663858643.469305
+        "fetched_at": 1667921515.041184
     },
     "github.com/alibaba/TairZset": {
         "active": true,
         "forks_count": 8,
         "license": "Apache-2.0",
-        "pushed_at": 1660105461.0,
-        "open_issues_count": 1,
-        "stargazers_count": 50,
+        "pushed_at": 1665271762.0,
+        "open_issues_count": 3,
+        "stargazers_count": 55,
         "archived": null,
         "description": "A redis module, similar to redis zset, but you can set multiple scores for each member to support multi-dimensional sorting",
         "homepage": null,
-        "fetched_at": 1663858643.959889
+        "fetched_at": 1667921515.545708
     },
     "github.com/kristoff-it/redis-cuckoofilter": {
         "active": false,
-        "forks_count": 20,
+        "forks_count": 22,
         "license": "MIT",
         "pushed_at": 1583435434.0,
         "open_issues_count": 2,
-        "stargazers_count": 204,
+        "stargazers_count": 206,
         "archived": null,
         "description": "Hashing-function agnostic Cuckoo filters for Redis",
         "homepage": null,
-        "fetched_at": 1663858644.492024
+        "fetched_at": 1667921516.063811
     },
     "github.com/chayim/redicrypt": {
         "active": true,
         "forks_count": 1,
         "license": "MIT",
         "pushed_at": 1659329714.0,
-        "open_issues_count": null,
+        "open_issues_count": 1,
         "stargazers_count": 24,
         "archived": null,
         "description": "An encryption module for redis",
         "homepage": null,
-        "fetched_at": 1663858645.348289
+        "fetched_at": 1667921518.597771
     },
     "github.com/poga/redis-percentile": {
         "active": false,
@@ -4149,7 +4161,7 @@
         "archived": null,
         "description": "redis module for percentile estimation",
         "homepage": null,
-        "fetched_at": 1663858646.206863
+        "fetched_at": 1667921519.494155
     },
     "github.com/poga/redis-rating": {
         "active": false,
@@ -4161,7 +4173,7 @@
         "archived": null,
         "description": "A Redis module that helps you calculate the real rating from positive/negative rating feedback.",
         "homepage": null,
-        "fetched_at": 1663858646.731358
+        "fetched_at": 1667921519.966745
     },
     "github.com/antirez/disque-module": {
         "active": false,
@@ -4169,11 +4181,11 @@
         "license": "AGPL-3.0",
         "pushed_at": 1578667459.0,
         "open_issues_count": 10,
-        "stargazers_count": 479,
+        "stargazers_count": 480,
         "archived": null,
         "description": "Disque ported as Redis module",
         "homepage": null,
-        "fetched_at": 1663858647.329813
+        "fetched_at": 1667921520.519448
     },
     "github.com/antirez/neural-redis": {
         "active": false,
@@ -4181,11 +4193,11 @@
         "license": "BSD-3-Clause",
         "pushed_at": 1532335174.0,
         "open_issues_count": 15,
-        "stargazers_count": 2219,
+        "stargazers_count": 2216,
         "archived": null,
         "description": "Neural networks module for Redis",
         "homepage": null,
-        "fetched_at": 1663858647.795548
+        "fetched_at": 1667921521.070009
     },
     "github.com/sklivvz/cthulhu": {
         "active": false,
@@ -4197,7 +4209,7 @@
         "archived": null,
         "description": "Extend Redis with JavaScript modules",
         "homepage": null,
-        "fetched_at": 1663858648.644555
+        "fetched_at": 1667921521.566279
     },
     "github.com/ogama/redis-interval-module": {
         "active": false,
@@ -4209,31 +4221,31 @@
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858649.11582
+        "fetched_at": 1667921524.375941
     },
     "github.com/RedisAI/RedisAI": {
         "active": true,
-        "forks_count": 84,
+        "forks_count": 86,
         "license": null,
-        "pushed_at": 1663085156.0,
-        "open_issues_count": 92,
-        "stargazers_count": 719,
+        "pushed_at": 1667570984.0,
+        "open_issues_count": 93,
+        "stargazers_count": 726,
         "archived": null,
         "description": "A Redis module for serving tensors and executing deep learning graphs",
         "homepage": "https://redisai.io",
-        "fetched_at": 1663858649.976676
+        "fetched_at": 1667921526.191574
     },
     "github.com/tzongw/redis-timer": {
         "active": true,
         "forks_count": 1,
         "license": "MIT",
-        "pushed_at": 1663583184.0,
+        "pushed_at": 1665323024.0,
         "open_issues_count": null,
-        "stargazers_count": 3,
+        "stargazers_count": 6,
         "archived": null,
         "description": "A timer module for Redis",
         "homepage": null,
-        "fetched_at": 1663858650.448158
+        "fetched_at": 1667921526.703062
     },
     "github.com/halaei/lqrm": {
         "active": false,
@@ -4245,10 +4257,10 @@
         "archived": null,
         "description": "Laravel Queue Redis Module",
         "homepage": null,
-        "fetched_at": 1663858650.89285
+        "fetched_at": 1667921527.226884
     },
     "github.com/fcerbell/redismodule-smartcache": {
-        "active": true,
+        "active": false,
         "forks_count": 3,
         "license": "AGPL-3.0",
         "pushed_at": 1648653103.0,
@@ -4257,7 +4269,7 @@
         "archived": null,
         "description": "Smart and autonomous cache in a redis module",
         "homepage": null,
-        "fetched_at": 1663858651.363268
+        "fetched_at": 1667921527.723825
     },
     "github.com/linfangrong/redismodule-ratelimit": {
         "active": false,
@@ -4269,7 +4281,7 @@
         "archived": null,
         "description": "Redis module that provides ratelimit",
         "homepage": null,
-        "fetched_at": 1663858651.827139
+        "fetched_at": 1667921528.216839
     },
     "github.com/danitseitlin/redis-interval-sets": {
         "active": true,
@@ -4281,7 +4293,7 @@
         "archived": null,
         "description": "Redis module for creating interval sets, handling them and filtering out relevant sets by number in range.",
         "homepage": null,
-        "fetched_at": 1663858652.324253
+        "fetched_at": 1667921529.549148
     },
     "github.com/picotera/commentDis": {
         "active": false,
@@ -4293,7 +4305,7 @@
         "archived": null,
         "description": "High throughput, High availability comments in redis ",
         "homepage": null,
-        "fetched_at": 1663858652.811644
+        "fetched_at": 1667921530.740436
     },
     "github.com/ekzhang/redis-rope": {
         "active": true,
@@ -4301,11 +4313,11 @@
         "license": "MIT",
         "pushed_at": 1662339779.0,
         "open_issues_count": null,
-        "stargazers_count": 101,
+        "stargazers_count": 102,
         "archived": null,
         "description": "\ud83e\udea2 A fast native data type for manipulating large strings in Redis",
         "homepage": null,
-        "fetched_at": 1663858654.343781
+        "fetched_at": 1667921531.235938
     },
     "github.com/cscan/dbx": {
         "active": false,
@@ -4317,19 +4329,19 @@
         "archived": null,
         "description": "Redis Module for maintaining hash by simple SQL (Support csv import/export)",
         "homepage": null,
-        "fetched_at": 1663858654.808776
+        "fetched_at": 1667921533.052971
     },
     "github.com/RedisGears/RedisGears": {
         "active": true,
-        "forks_count": 49,
+        "forks_count": 48,
         "license": null,
-        "pushed_at": 1661668138.0,
-        "open_issues_count": 96,
-        "stargazers_count": 259,
+        "pushed_at": 1667497076.0,
+        "open_issues_count": 97,
+        "stargazers_count": 262,
         "archived": null,
         "description": "Dynamic execution framework for your Redis data",
         "homepage": "https://redisgears.io",
-        "fetched_at": 1663858655.279329
+        "fetched_at": 1667921534.071167
     },
     "github.com/f0rmiga/sessiongate": {
         "active": false,
@@ -4341,7 +4353,7 @@
         "archived": null,
         "description": "\u26a1\ufe0fA Redis module that provides session management.",
         "homepage": null,
-        "fetched_at": 1663858655.760596
+        "fetched_at": 1667921534.541514
     },
     "github.com/markuman/tinywebdis": {
         "active": false,
@@ -4349,11 +4361,11 @@
         "license": "MIT",
         "pushed_at": 1547134994.0,
         "open_issues_count": 1,
-        "stargazers_count": 21,
+        "stargazers_count": 22,
         "archived": null,
         "description": "tinywebdis - a lean webdis replacement using turbo.lua",
         "homepage": null,
-        "fetched_at": 1663858656.192956
+        "fetched_at": 1667921535.025011
     },
     "github.com/Redsmin/redsmin": {
         "active": false,
@@ -4365,19 +4377,19 @@
         "archived": null,
         "description": ":satellite: Redsmin proxy deamon - Access local redis instance from Redsmin",
         "homepage": "https://redsmin.com",
-        "fetched_at": 1663858656.894829
+        "fetched_at": 1667921535.763185
     },
     "github.com/redis/redis": {
         "active": true,
-        "forks_count": 21786,
+        "forks_count": 21948,
         "license": "BSD-3-Clause",
-        "pushed_at": 1663843450.0,
-        "open_issues_count": 2206,
-        "stargazers_count": 56866,
+        "pushed_at": 1667905134.0,
+        "open_issues_count": 2218,
+        "stargazers_count": 57499,
         "archived": null,
         "description": "Redis is an in-memory database that persists on disk. The data model is key-value, but many different kind of values are supported: Strings, Lists, Sets, Sorted Sets, Hashes, Streams, HyperLogLogs, Bitmaps.",
         "homepage": "http://redis.io",
-        "fetched_at": 1663858657.724614
+        "fetched_at": 1667921537.170093
     },
     "github.com/IBM-Cloud/redli": {
         "active": true,
@@ -4385,35 +4397,35 @@
         "license": "Apache-2.0",
         "pushed_at": 1660052719.0,
         "open_issues_count": 12,
-        "stargazers_count": 185,
+        "stargazers_count": 193,
         "archived": null,
         "description": "Redli - A humane alternative to the Redis-cli and TLS",
         "homepage": null,
-        "fetched_at": 1663858658.207572
+        "fetched_at": 1667921538.222826
     },
     "github.com/laixintao/iredis": {
         "active": true,
-        "forks_count": 88,
+        "forks_count": 87,
         "license": "BSD-3-Clause",
         "pushed_at": 1663151437.0,
-        "open_issues_count": 52,
-        "stargazers_count": 2153,
+        "open_issues_count": 53,
+        "stargazers_count": 2184,
         "archived": null,
         "description": "Interactive Redis: A Terminal Client for Redis with AutoCompletion and Syntax Highlighting.",
         "homepage": "https://iredis.io",
-        "fetched_at": 1663858658.667591
+        "fetched_at": 1667921538.70876
     },
     "github.com/tiagocoutinho/qredis": {
         "active": true,
         "forks_count": 14,
         "license": "MIT",
-        "pushed_at": 1663132761.0,
+        "pushed_at": 1666926642.0,
         "open_issues_count": 1,
-        "stargazers_count": 52,
+        "stargazers_count": 56,
         "archived": null,
         "description": "Redis GUI using Qt & Python",
         "homepage": null,
-        "fetched_at": 1663858659.12568
+        "fetched_at": 1667921539.182099
     },
     "github.com/humante/redis-browser": {
         "active": false,
@@ -4425,31 +4437,31 @@
         "archived": null,
         "description": "Web-based Redis browser that can work as standalone app or mounted Rails engine",
         "homepage": null,
-        "fetched_at": 1663858659.615717
+        "fetched_at": 1667921539.693687
     },
     "github.com/RedisInsight/RedisInsight": {
         "active": true,
-        "forks_count": 105,
+        "forks_count": 118,
         "license": null,
-        "pushed_at": 1663847836.0,
-        "open_issues_count": 82,
-        "stargazers_count": 1830,
+        "pushed_at": 1667910114.0,
+        "open_issues_count": 79,
+        "stargazers_count": 2015,
         "archived": null,
         "description": "RedisInsight",
         "homepage": "https://redis.com/redis-enterprise/redis-insight/",
-        "fetched_at": 1663858660.076842
+        "fetched_at": 1667921540.961705
     },
     "github.com/luin/medis": {
         "active": true,
-        "forks_count": 816,
+        "forks_count": 815,
         "license": "MIT",
-        "pushed_at": 1655413087.0,
-        "open_issues_count": 95,
-        "stargazers_count": 11030,
+        "pushed_at": 1665521202.0,
+        "open_issues_count": 96,
+        "stargazers_count": 11083,
         "archived": null,
         "description": "\ud83d\udcbb Medis is a beautiful, easy-to-use Mac database management application for Redis.",
         "homepage": "http://getmedis.com",
-        "fetched_at": 1663858660.558622
+        "fetched_at": 1667921541.71618
     },
     "github.com/anandtrex/redis-browser": {
         "active": false,
@@ -4461,19 +4473,19 @@
         "archived": null,
         "description": "Cross platform GUI tool for redis that includes support for ReJSON",
         "homepage": "https://anandtrex.github.io/redis-browser/",
-        "fetched_at": 1663858661.016906
+        "fetched_at": 1667921542.34542
     },
     "github.com/joeferner/redis-commander": {
         "active": true,
-        "forks_count": 430,
+        "forks_count": 433,
         "license": "MIT",
-        "pushed_at": 1662448408.0,
-        "open_issues_count": 38,
-        "stargazers_count": 3099,
+        "pushed_at": 1667210244.0,
+        "open_issues_count": 41,
+        "stargazers_count": 3127,
         "archived": null,
         "description": "Redis management tool written in node.js",
         "homepage": "http://joeferner.github.io/redis-commander/",
-        "fetched_at": 1663858661.462281
+        "fetched_at": 1667921542.866073
     },
     "github.com/leegould/RedisExplorer": {
         "active": true,
@@ -4481,34 +4493,34 @@
         "license": "MIT",
         "pushed_at": 1662494374.0,
         "open_issues_count": null,
-        "stargazers_count": 41,
+        "stargazers_count": 44,
         "archived": null,
         "description": null,
         "homepage": null,
-        "fetched_at": 1663858661.899089
+        "fetched_at": 1667921543.346947
     },
     "github.com/patrikx3/redis-ui": {
         "active": true,
-        "forks_count": 55,
+        "forks_count": 58,
         "license": null,
-        "pushed_at": 1656329900.0,
+        "pushed_at": 1666271360.0,
         "open_issues_count": 4,
-        "stargazers_count": 550,
+        "stargazers_count": 565,
         "archived": null,
         "description": "\ud83d\udce1 P3X Redis UI is a very functional handy database GUI and works in your pocket on the responsive web or as a desktop app",
         "homepage": "https://www.corifeus.com/redis-ui",
-        "fetched_at": 1663858662.35027
+        "fetched_at": 1667921544.012142
     },
     "github.com/uglide/RedisDesktopManager": {
         "active": true,
-        "forks_count": 3189,
+        "forks_count": 3205,
         "license": null,
-        "pushed_at": 1663676297.0,
+        "pushed_at": 1667392602.0,
         "open_issues_count": 41,
-        "stargazers_count": 20818,
+        "stargazers_count": 21055,
         "archived": null,
         "description": ":wrench: Cross-platform Developer GUI for Redis",
         "homepage": "https://resp.app",
-        "fetched_at": 1663858662.805575
+        "fetched_at": 1667921544.95664
     }
 }
