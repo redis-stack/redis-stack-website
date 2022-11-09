@@ -35,7 +35,7 @@ class Argument:
         self._multiple: bool = data.get('multiple', False)
         self._multiple_token: bool = data.get('multiple_token', False)
         self._token: str | None = data.get('token')
-        self._display: str = data.get('display', self._name)
+        self._display: str = data.get('display_text', self._name)
         if self._token == '':
             self._token = '""'
         self._arguments: List[Argument] = [
