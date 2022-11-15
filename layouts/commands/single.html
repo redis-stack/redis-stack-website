@@ -48,7 +48,7 @@
           </dd>
           {{ end }}
           <dt class="font-semibold text-slate-900">Time complexity:</dt>
-          <dd>{{ .Params.complexity | markdownify }}</dd>
+          <dd>{{ replace .Params.complexity "*" "\\*" | markdownify }}</dd>
           {{ if .Params.acl_categories }}
           <dt class="font-semibold text-slate-900">ACL categories:</dt>
             <dd>
