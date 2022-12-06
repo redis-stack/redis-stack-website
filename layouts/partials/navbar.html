@@ -10,7 +10,7 @@
         
         {{/* Desktop */}}
         <dl class="{{ if $currentPage.HasMenuCurrent "main" . }}active {{ end }}hidden lg:flex group relative first:ml-auto ml-1 mt-3 mb-0 px-3 pt-2 pb-5 cursor-pointer">
-          <dt class="sr-only lg:not-sr-only flex items-center justify-items-center group-hover:text-white/50 group-focus-within:text-white/50 whitespace-nowrap transition-colors" href="#">
+          <dt class="sr-only uppercase lg:not-sr-only flex items-center justify-items-center group-hover:text-white/50 group-focus-within:text-white/50 whitespace-nowrap transition-colors" href="#">
             {{ if .Pre }}
               <span class="grid place-items-center w-5 h-5 mr-2.5">
                 {{ with resources.Get .Pre }}
@@ -87,7 +87,7 @@
       {{ else }}
 
         {{/* Desktop */}}
-        <a href="{{ .URL }}" class="hidden rounded-sm lg:flex items-center justify-items-center first:ml-auto ml-1 px-3 py-2 rounded bg-transparent hover:text-white/50 focus:text-white/50 whitespace-nowrap transition-colors">
+        <a href="{{ .URL }}" class="hidden uppercase rounded-sm lg:flex items-center justify-items-center first:ml-auto ml-1 px-3 py-2 rounded bg-transparent hover:text-white/50 focus:text-white/50 whitespace-nowrap transition-colors">
           {{ if .Pre }}
             {{ with resources.Get .Pre }}
               <span class="grid place-items-center w-5 h-5">
