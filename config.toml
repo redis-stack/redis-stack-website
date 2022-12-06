@@ -77,7 +77,7 @@ section = ["HTML", "RSS"] # print
 [menu]
   [[menu.main]]
     identifier = "get-started"
-    name = "GET STARTED"
+    name = "Get started"
     weight = 1
     columns = 2
   [[menu.main]]
@@ -168,17 +168,17 @@ section = ["HTML", "RSS"] # print
     weight = 6
   [[menu.main]]
     identifier = "docs"
-    name = "DOCS"
+    name = "Docs"
     url = "/docs/"
     weight = 2
   [[menu.main]]
     identifier = "commands"
-    name = "COMMANDS"
+    name = "Commands"
     url = "/commands/"
     weight = 3
   [[menu.main]]
     identifier = "resources"
-    name = "RESOURCES"
+    name = "Resources"
     weight = 4
   [[menu.main]]
     identifier = "clients"
@@ -206,12 +206,12 @@ section = ["HTML", "RSS"] # print
     weight = 4
   [[menu.main]]
     identifier = "community"
-    name = "COMMUNITY"
+    name = "Community"
     url = "/community/"
     weight = 5
   [[menu.main]]
     identifier = "support"
-    name = "SUPPORT"
+    name = "Support"
     url = "/support/"
     weight = 6
   [[menu.buttons]]
