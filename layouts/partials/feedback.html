@@ -1,8 +1,8 @@
   {{/*  Star rating adapted from https://codepen.io/chris22smith/pen/MJzLJN  */}}
-  <form name="page-feedback" method="POST" data-netlify="true">
+  <form name="page-feedback" method="POST" data-netlify="true" class="page-feedback">
     <input name="origin" value="{{ .Permalink }}" class="hidden"/>
-  <div class="flex gap-2">
-    <span>How useful is this page?</span>
+  <div class="flex gap-2 justify-center">
+    <span class="font-bold font-small">How useful is this page?</span>
     <div class="star-rating">
       <input type="radio" id="5-stars" name="rating" value="5" />
       <label for="5-stars" class="star">&#9733;</label>

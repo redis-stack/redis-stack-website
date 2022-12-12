@@ -442,6 +442,10 @@ select {
   color: inherit;
 }
 
+.page-feedback {
+  @apply flex flex-col mx-12;
+}
+
 .feedback-form {
   @apply grid gap-2;
 }
