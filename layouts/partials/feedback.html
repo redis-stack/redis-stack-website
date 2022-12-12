@@ -4,26 +4,22 @@
   <div class="flex gap-2 justify-center">
     <span class="font-bold font-small">How useful is this page?</span>
     <div class="star-rating">
-      <input type="radio" id="5-stars" name="rating" value="5" />
-      <label for="5-stars" class="star">&#9733;</label>
-      <input type="radio" id="4-stars" name="rating" value="4" />
-      <label for="4-stars" class="star">&#9733;</label>
-      <input type="radio" id="3-stars" name="rating" value="3" />
-      <label for="3-stars" class="star">&#9733;</label>
-      <input type="radio" id="2-stars" name="rating" value="2" />
-      <label for="2-stars" class="star">&#9733;</label>
-      <input type="radio" id="1-star" name="rating" value="1" />
-      <label for="1-star" class="star">&#9733;</label>
+      {{ range $num := (seq 5) }}
+      <input type="radio" id="{{ $num }}-stars" name="rating" value="{{ $num }}" onchange="document.querySelector('#feedback-form').classList.remove('hidden')"/>
+      <label for="{{ $num }}-stars" class="star">&#9733;</label>
+      {{ end }}
     </div>  
   </div>
-  <div class="feedback-form">
-    <textarea
-      name="comment"
-      class="form-textarea mt-1 block w-full h-24"
-      rows="3"
-    ></textarea>
-    <button class="button button-indigo w-min justify-self-end" type="submit">
-      Submit
-    </button>
+  <div id="feedback-form" class="hidden">
+    <div class="feedback-submit">
+      <textarea
+        name="comment"
+        class="form-textarea mt-1 block w-full h-24"
+        rows="3"
+      ></textarea>
+      <button class="button button-indigo w-min justify-self-end" type="submit">
+        Submit
+      </button>
+    </div>
   </div>
 </form>

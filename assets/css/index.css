@@ -446,7 +446,7 @@ select {
   @apply flex flex-col mx-12;
 }
 
-.feedback-form {
+.feedback-submit {
   @apply grid gap-2;
 }
 
