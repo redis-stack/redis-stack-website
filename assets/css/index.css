@@ -442,6 +442,31 @@ select {
   color: inherit;
 }
 
+.feedback-form {
+  @apply grid gap-2;
+}
+
+.star-rating {
+  @apply flex flex-row-reverse justify-around text-center text-xl; 
+}
+
+.star-rating input {
+  @apply hidden;
+}
+
+.star-rating label {
+  @apply cursor-pointer text-neutral-400;
+}
+
+.star-rating :checked ~ label {
+  @apply text-orange-400;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  @apply text-yellow-400;
+}      
+
 .download-cards {
   @apply space-y-6 lg:space-y-0 max-w-[47rem] lg:max-w-full mx-auto lg:mx-0 lg:grid grid-cols-2 gap-x-6 items-start mb-[3.25rem];
 }
