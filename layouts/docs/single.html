@@ -7,6 +7,7 @@
         <h1>{{ .Title }}</h1>
         {{ with .Params.description }}<p class="text-lg -mt-5 mb-10">{{ . | markdownify }}</p>{{ end }}
         {{ .Content }}
+        {{ partial "feedback.html" . }}
       </section>
     </div>
     {{ partial "docs-toc.html" . }}
