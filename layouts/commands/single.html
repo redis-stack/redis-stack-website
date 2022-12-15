@@ -70,17 +70,17 @@
           </ul>
         {{ end }}
 
-        {{ partial "feedback.html" . }}
       </section>
     </div>
-    
+
     <aside class="hidden xl:block w-52 h-full shrink-0">
       {{ $related := .Site.Pages.RelatedIndices . "group" | append . }}
       {{ $related = (where $related ".Params.hidden" "!=" true) }}
       {{ $this := . }}
       {{ with sort $related "Title" }}
       <dl class="w-52 z-40 hidden bg-white/75 md:block overflow-auto fixed top-28 h-full max-h-[calc(100vh-15rem)] text-[0.8125rem]">
-        <dt class="font-semibold mb-3">
+        {{ partial "meta-links.html" $this }}
+        <dt class="font-semibold my-3">
           See also
         </dt>
         {{ range . }}

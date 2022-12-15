@@ -27,12 +27,25 @@
       {{ partial "breadcrumbs" . }}
 
       <section class="prose prose-slate w-full max-w-[47rem] py-12">
+        <svg class="hidden">
+          <symbol id="heart" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+          </symbol>
+          <symbol id="lightning" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd" />
+          </symbol>
+          <symbol id="star" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+          </symbol>
+        </svg>
+
         <h1>{{ .Title }}</h1>
         {{ with .Params.description }}<p class="text-lg -mt-5 mb-10">{{ . | markdownify }}</p>{{ end }}
         {{- .Content -}}
+  
         <p>
-          Recommended repositories are marked with a {{ partial "icons/heart" (dict "class" "align-text-top inline-flex shrink-0 h-[1.125rem] w-[1.125rem] color text-red-600") }}.<br />
-          Repositories with some activity within the last six months are marked with a {{ partial "icons/lightning" (dict "class" "align-text-bottom inline-flex shrink-0 h-[1.0625rem] w-[1.0625rem] color text-green-500") }}.<br />
+          Recommended repositories are marked with a {{ template "icon" (dict "id" "heart" "class" "align-text-top inline-flex shrink-0 h-[1.125rem] w-[1.125rem] color text-red-600") }}.<br />
+          Repositories with some activity within the last six months are marked with a {{ template "icon" (dict "id" "lightning" "class" "align-text-bottom inline-flex shrink-0 h-[1.0625rem] w-[1.0625rem] color text-green-500") }}.<br />
           Want your repository listed here? Just submit a PR to the <a href="https://github.com/redis/redis-doc/pull/new" target="_blank">redis-doc repository</a>.
         </p>
 
@@ -88,12 +101,12 @@
         <a href="https://{{ .Params.repository }}" target="_blank">
           <div class="flex items-center">
             {{ if and .Params.recommended }}
-              {{ partial "icons/heart" (dict "class" "mr-1 shrink-0 h-[1.125rem] w-[1.125rem] text-red-500") }}
+            {{ template "icon" (dict "id" "heart" "class" "mr-1 shrink-0 h-[1.125rem] w-[1.125rem] text-red-600") }}
               <span class="sr-only">[recommended]</span>
             {{ end }}
             {{ if .Params.active }}
               <span class="sr-only">[active]</span>
-              {{ partial "icons/lightning" (dict "class" "mr-1 shrink-0 h-[1.0625rem] w-[1.0625rem] text-green-500") }}
+              {{ template "icon" (dict "id" "lightning" "class" "mr-1 shrink-0 h-[1.0625rem] w-[1.0625rem] text-green-500") }}
             {{- end }}
             <strong>{{ .Title }}</strong>
           </div>
@@ -105,7 +118,7 @@
         <div class="flex items-center self-start mb-1.5">
           GitHub
           <div class="h-5 w-5 flex items-center justify-center mx-1">
-            {{ partial "icons/star" (dict "class" "shrink-0 h-5 w-5 opacity-50") }}
+            {{ template "icon" (dict "id" "star" "class" "shrink-0 h-5 w-5 opacity-50") }}
           </div>
           {{ .Params.stargazers_count }}
         </div>
@@ -116,11 +129,17 @@
         {{ if .Params.homepage }}
           <a href="{{ .Params.homepage }}" class="mt-1.5 text-current hover:text-indigo-600 opacity-50 hover:opacity-100 flex"  target="_blank">
             Homepage
-            {{ partial "icons/home" (dict "class" "ml-1 shrink-0 h-[1.0625rem] w-[1.0625rem]") }}
+            {{ template "icon" (dict "id" "heart" "class" "ml-1 shrink-0 h-[1.0625rem] w-[1.0625rem]") }}
           </a>
         {{ end }}
       </div>
     </div>
   {{ end }}
 </dd>
+{{ end }}
+
+{{ define "icon" }}
+<svg class="{{ .class }}">
+  <use href="#{{ .id }}"></use>
+</svg>
 {{ end }}
