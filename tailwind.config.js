@@ -54,6 +54,7 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/typography'),
+	require('@tailwindcss/forms'),
     plugin(function({ addComponents, theme }) {
 			const buttons = {
 				'.button-xs, .button-sm, .button, .button-lg, .button-xl, .button-2xl': {
