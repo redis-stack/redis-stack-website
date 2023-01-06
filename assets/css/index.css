@@ -451,7 +451,7 @@ select {
 }
 
 .star-rating {
-  @apply flex flex-row-reverse justify-around text-center text-xl; 
+  @apply flex flex-row-reverse justify-around text-center text-xl items-center; 
 }
 
 .star-rating input {
