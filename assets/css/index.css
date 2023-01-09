@@ -1,56 +1,7 @@
 /* the contents of index.css */
-/* @import '/themes/twcss/assets/css/codeblocks.css'; */
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-
-.hljs, .hljs-operator, .hljs-punctuation, .hljs-subst {
-  @apply text-slate-300;
-}
-
-.hljs ::selection, .hljs::selection {
-  @apply bg-indigo-600 text-slate-300;
-}
-
-.hljs-comment {
-  @apply text-slate-500;
-}
-
-.hljs-tag, .hljs-attribute, .hljs-function .hljs-title, .hljs-section, .hljs-title.function_, .ruby .hljs-property {
-  @apply text-sky-500;
-}
-
-.hljs-bullet, .hljs-deletion, .hljs-name, .hljs-selector-tag, .hljs-template-variable, .hljs-variable {
-  @apply text-red-500;
-}
-
-.hljs-attr, .hljs-link, .hljs-literal, .hljs-number, .hljs-symbol, .hljs-variable.constant_ {
-  @apply text-orange-400;
-}
-
-.hljs-class .hljs-title, .hljs-title, .hljs-title.class_, .hljs-meta, .hljs-meta .hljs-keyword, .hljs-meta .hljs-string, .hljs-strong {
-  @apply text-yellow-500;
-}
-
-.hljs-addition, .hljs-code, .hljs-string, .hljs-title.class_.inherited__ {
-  @apply text-green-500;
-}
-
-.hljs-built_in, .hljs-doctag, .hljs-keyword.hljs-atrule, .hljs-quote, .hljs-regexp {
-  @apply text-teal-400;
-}
-
-.diff .hljs-meta, .hljs-keyword, .hljs-template-tag, .hljs-type, .hljs-emphasis {
-  @apply text-purple-400;
-}
-
-.hljs-emphasis {
-  font-style: italic
-}
-
-.hljs-strong, .hljs-meta .hljs-keyword, .hljs-meta-keyword {
-  font-weight: 700;
-}
 
 [class*=button-] {
   @apply transition-colors shrink-0 focus:outline-none focus:ring-2 focus:ring-offset-2;
