@@ -47,7 +47,6 @@
     {{ end -}}
     
     <script src="/js/index.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" integrity="sha512-yUUc0qWm2rhM7X0EFe82LNnv2moqArj5nro/w1bi05A09hRVeIZbN6jlMoyu0+4I/Bu4Ck/85JQIU82T82M28w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     {{ if .Params.math }}
         {{ partial "mathjax.html" }}
     {{ end }}
@@ -66,13 +65,6 @@
 
     <footer class="bg-midnight-700 relative z-50">
       {{ partial "footer.html" . }}
-
-      <script>
-        document.querySelectorAll('.prose pre code').forEach(block => {
-          hljs.highlightElement(block);
-        });
-      </script>
-
       {{ partial "toc-js.html" . }}
     </footer>
 
