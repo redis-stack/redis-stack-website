@@ -1,0 +1,30 @@
+{{/*
+    Credits:
+    * Radio tabs: https://www.codeinwp.com/snippets/accessible-pure-css-tabs/
+    * Hugo scaffold: https://blog.jverkamp.com/2021/01/27/a-tabbed-view-for-hugo/ 
+*/}}
+{{ $id := (or ($.Get "id") (substr (.Inner | md5) 0 4)) }}
+{{ $tabs := or (.Scratch.Get "tabs") (dict ("title" "default" "content" .InnerDeindent)) }}
+
+<div class="codetabs" id="{{ $id }}">
+    {{ range $i, $tab := $tabs }}
+        {{ $tid := printf "%s_%s" (index $tab "title") $id }}
+    <input class="radiotab" tabindex="1" type="radio" 
+      name="{{ $id }}"  id="{{ $tid }}"
+      {{ if eq $i 0 }}checked{{ end }} 
+    />
+    <label class="label" for="{{ $tid }}">{{ index $tab "title" }}</label>
+        {{ $pid := printf "panel_%s" $tid }}
+    <div class="panel" tabindex="1" id="{{ $pid }}">
+        {{ index $tab "content" | markdownify }}
+        <button class="clipboard-button" title="Copy to clipboard" onclick="copyCodeToClipboard('#{{ $pid }}')">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="currentColor">
+                <path d="M9 43.95q-1.2 0-2.1-.9-.9-.9-.9-2.1V10.8h3v30.15h23.7v3Zm6-6q-1.2 0-2.1-.9-.9-.9-.9-2.1v-28q0-1.2.9-2.1.9-.9 2.1-.9h22q1.2 0 2.1.9.9.9.9 2.1v28q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h22v-28H15v28Zm0 0v-28 28Z"/>
+            </svg>
+            <div class="tooltip">
+                <span class="tooltiptext">Copied!</span>
+            </div>
+        </button>
+    </div>
+    {{ end }}
+</div>

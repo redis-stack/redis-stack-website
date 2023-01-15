@@ -29,7 +29,7 @@
 }
 
 .prose pre {
-  @apply bg-slate-900 rounded-lg !important;
+  @apply bg-slate-900 rounded-lg;
 }
 
 .prose p, .prose ol, .prose ul {
@@ -421,6 +421,62 @@ select {
 .star-rating label:hover ~ label {
   @apply text-yellow-400;
 }      
+
+.codetabs {
+  @apply flex flex-wrap box-border mt-0 mb-2 mx-auto;
+}
+
+.codetabs > .radiotab {
+  @apply absolute opacity-0;
+}
+
+.codetabs > .label {
+  @apply px-2 pt-1 cursor-pointer text-white text-center bg-neutral-600 rounded-t-md border-t-2 border-x-2 border-neutral-600;
+  min-width: 4rem;
+}
+
+.codetabs > .label:hover {
+  @apply text-indigo-600 bg-transparent;
+}
+
+.codetabs > .label:active {
+  @apply text-indigo-600;
+}
+
+.codetabs > .radiotab:checked + .label {
+  /* Chroma 'github-dark' theme background */
+  background-color: #0d1117;
+  border-color: #0d1117;
+}
+
+.codetabs > .panel {
+  @apply order-last hidden w-full pt-0 rounded-md rounded-tl-none relative bg-yellow-400;
+}
+
+.codetabs > .radiotab:checked + .label + .panel {
+  @apply block;
+}
+
+.codetabs > .panel .highlight > div,
+.codetabs > .panel .highlight pre {
+  @apply m-0 rounded-md rounded-tl-none;
+}
+
+.codetabs > .panel .clipboard-button {
+  @apply text-neutral-400 bg-neutral-600 absolute top-2 right-2 h-10 w-10 p-2 rounded-md;
+}
+
+.codetabs > .panel .clipboard-button:hover {
+  @apply text-neutral-100;
+}
+
+.codetabs > .panel .tooltip {
+  @apply relative inline-block;
+}
+
+.codetabs > .panel .tooltip > .tooltiptext {
+  @apply hidden bg-neutral-200 rounded-sm text-neutral-800 text-center text-xs p-2 absolute right-8 bottom-4;
+}
 
 .download-cards {
   @apply space-y-6 lg:space-y-0 max-w-[47rem] lg:max-w-full mx-auto lg:mx-0 lg:grid grid-cols-2 gap-x-6 items-start mb-[3.25rem];
