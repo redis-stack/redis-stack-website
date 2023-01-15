@@ -1,7 +1,8 @@
 {{ if $.Page.File }}
     {{ $title := (.Get 0) }}
     {{ $rawContent := readFile (printf "%s/%s" $.Page.File.Dir (.Get 1)) }}
-    {{ $content := printf "```%s\n%s\n```" (.Get 0) $rawContent }}
+    {{ $options := default "linenos=table" (.Get 2) }}
+    {{ $content := highlight $rawContent $title $options }}
     {{ .Parent.Scratch.Add "tabs" (slice (dict "title" $title "content" $content)) }}
 {{ else }}
     {{ errorf "[sourcetab] Unable to render include %q (format: %q) for %q" (.Get 1) (.Get 0) $.Page }}

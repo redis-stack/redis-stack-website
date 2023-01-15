@@ -432,6 +432,7 @@ select {
 
 .codetabs > .label {
   @apply px-2 pt-1 cursor-pointer text-white text-center bg-neutral-600 rounded-t-md border-t-2 border-x-2 border-neutral-600;
+  min-width: 4rem;
 }
 
 .codetabs > .label:hover {
@@ -443,21 +444,22 @@ select {
 }
 
 .codetabs > .radiotab:checked + .label {
-  /* Code highlighting theme background */
+  /* Chroma 'github-dark' theme background */
   background-color: #0d1117;
   border-color: #0d1117;
 }
 
 .codetabs > .panel {
-  @apply order-last hidden w-full pt-0 rounded-md rounded-tl-none relative;
+  @apply order-last hidden w-full pt-0 rounded-md rounded-tl-none relative bg-yellow-400;
 }
 
 .codetabs > .radiotab:checked + .label + .panel {
   @apply block;
 }
 
-.codetabs > .panel pre {
-  @apply m-0 rounded-tl-none;
+.codetabs > .panel .highlight > div,
+.codetabs > .panel .highlight pre {
+  @apply m-0 rounded-md rounded-tl-none;
 }
 
 .codetabs > .panel .clipboard-button {
