@@ -1,3 +1,5 @@
+// TODO: URI-able tabs
+
 function copyCodeToClipboard(panelId) {
   const code = document.querySelector(`${panelId} code`).textContent;
   const tooltip = document.querySelector(`${panelId} .tooltiptext`);
