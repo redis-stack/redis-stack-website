@@ -6,27 +6,26 @@
 {{ $id := (or ($.Get "id") (substr (.Inner | md5) 0 4)) }}
 {{ $tabs := or (.Scratch.Get "tabs") (dict ("title" "default" "content" .InnerDeindent)) }}
 
-<div class="codetabs" id="{{ $id }}">
+<div class="codetabs flex flex-wrap box-border mt-0 mb-2 mx-auto" id="{{ $id }}">
     {{ range $i, $tab := $tabs }}
         {{ $tid := printf "%s_%s" (index $tab "title") $id }}
-    <input class="radiotab" tabindex="1" type="radio" 
-      name="{{ $id }}"  id="{{ $tid }}"
-      {{ if eq $i 0 }}checked{{ end }} 
-    />
-    <label class="label" for="{{ $tid }}">{{ index $tab "title" }}</label>
         {{ $pid := printf "panel_%s" $tid }}
-    <div class="panel" tabindex="1" id="{{ $pid }}">
-        <div class="not-prose">
-            {{ index $tab "content" | markdownify }}
-        </div>
-        <button class="clipboard-button" title="Copy to clipboard" onclick="copyCodeToClipboard('#{{ $pid }}')">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="currentColor">
-                <path d="M9 43.95q-1.2 0-2.1-.9-.9-.9-.9-2.1V10.8h3v30.15h23.7v3Zm6-6q-1.2 0-2.1-.9-.9-.9-.9-2.1v-28q0-1.2.9-2.1.9-.9 2.1-.9h22q1.2 0 2.1.9.9.9.9 2.1v28q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h22v-28H15v28Zm0 0v-28 28Z"/>
-            </svg>
-            <div class="tooltip">
-                <span class="tooltiptext">Copied!</span>
+        <input tabindex="1" type="radio" name="{{ $id }}" id="{{ $tid }}" class="radiotab w-0 h-0"
+            {{ if eq $i 0 }}checked{{ end }} 
+        />
+        <label class="label px-2 pt-1 cursor-pointer text-white text-center italic bg-slate-600 rounded-t-lg border-t-2 border-x-2 border-slate-600 hover:text-indigo-600 hover:not-italic hover:bg-transparent active:text-indigo-600 active:not-italic;" for="{{ $tid }}">{{ index $tab "title" }}</label>
+        <div class="panel order-last hidden w-full pt-0 relative" id="{{ $pid }}">
+            <div class="not-prose">
+                {{ index $tab "content" | markdownify }}
             </div>
-        </button>
-    </div>
+            <button tabindex="1" class="clipboard-button text-neutral-400 hover:text-slate-100 bg-slate-600 absolute top-2 right-2 h-10 w-10 p-2 rounded-md" title="Copy to clipboard" onclick="copyCodeToClipboard('#{{ $pid }}')">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="currentColor">
+                    <path d="M9 43.95q-1.2 0-2.1-.9-.9-.9-.9-2.1V10.8h3v30.15h23.7v3Zm6-6q-1.2 0-2.1-.9-.9-.9-.9-2.1v-28q0-1.2.9-2.1.9-.9 2.1-.9h22q1.2 0 2.1.9.9.9.9 2.1v28q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h22v-28H15v28Zm0 0v-28 28Z"/>
+                </svg>
+                <div class="tooltip relative inline-block">
+                    <span class="tooltiptext hidden bg-slate-200 rounded-sm text-slate-800 text-center text-xs p-2 absolute right-8 bottom-4">Copied!</span>
+                </div>
+            </button>
+        </div>
     {{ end }}
 </div>
