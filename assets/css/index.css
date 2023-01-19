@@ -422,40 +422,23 @@ select {
   @apply text-yellow-400;
 }      
 
-.codetabs {
-  @apply flex flex-wrap box-border mt-0 mb-2 mx-auto;
-}
-
-.codetabs > .radiotab {
-  @apply absolute opacity-0;
-}
-
-.codetabs > .label {
-  @apply px-2 pt-1 cursor-pointer text-white text-center italic bg-slate-600 rounded-t-lg border-t-2 border-x-2 border-neutral-600;
+.codetabs .label {
   min-width: 4rem;
 }
 
-.codetabs > .label:hover {
-  @apply text-indigo-600 not-italic bg-transparent;
+.codetabs .radiotab:focus + .label {
+  @apply bg-transparent text-indigo-600;
 }
 
-.codetabs > .label:active {
-  @apply text-indigo-600 not-italic;
-}
-
-.codetabs > .radiotab:checked + .label {
+.codetabs .radiotab:checked + .label {
   @apply bg-slate-900 border-slate-900 not-italic;
 }
 
-.codetabs > .panel {
-  @apply order-last hidden w-full pt-0 relative;
-}
-
-.codetabs > .radiotab:checked + .label + .panel {
+.codetabs .radiotab:checked + .label + .panel {
   @apply block;
 }
 
-.codetabs > .panel .highlight .chroma {
+.codetabs > .panel .highlight > .chroma {
   @apply rounded-tl-none m-0;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -463,22 +446,6 @@ select {
 
 .codetabs > .panel .highlight .chroma .lntd > pre {
   @apply p-0;
-}
-
-.codetabs > .panel .clipboard-button {
-  @apply text-neutral-400 bg-slate-600 absolute top-2 right-2 h-10 w-10 p-2 rounded-md;
-}
-
-.codetabs > .panel .clipboard-button:hover {
-  @apply text-slate-100;
-}
-
-.codetabs > .panel .tooltip {
-  @apply relative inline-block;
-}
-
-.codetabs > .panel .tooltip > .tooltiptext {
-  @apply hidden bg-slate-200 rounded-sm text-slate-800 text-center text-xs p-2 absolute right-8 bottom-4;
 }
 
 .download-cards {
@@ -562,6 +529,7 @@ html {
 /* Chroma syntax highlighting
 /* Background */
 .bg {
+  @apply text-slate-50 bg-slate-900;
 }
 
 /* PreWrapper */
@@ -602,12 +570,12 @@ html {
 
 /* LineNumbersTable */
 .chroma .lnt {
-  @apply text-slate-400 whitespace-pre mr-4 px-2 select-none;
+  @apply text-slate-400 whitespace-pre mr-4 px-2;
 }
 
 /* LineNumbers */
 .chroma .ln {
-  @apply text-slate-400 whitespace-pre mr-4 px-4 select-none;
+  @apply text-slate-400 whitespace-pre mr-4 px-4;
 }
 
 /* Line */

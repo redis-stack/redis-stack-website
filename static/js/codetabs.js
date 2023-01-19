@@ -1,13 +1,14 @@
 // TODO: URI-able tabs
 
 function copyCodeToClipboard(panelId) {
+  // Get the last <code>, path depends on highlighter options
   const code = [...document.querySelectorAll(`${panelId} code`)].pop().textContent;
-  const tooltip = document.querySelector(`${panelId} .tooltiptext`);
   navigator.clipboard.writeText(code);
-  tooltip.style.display = "block";
-  setTimeout(() => {
-    tooltip.style.display = "none";
-  }, 1000)
+
+  // Toggle tooltip
+  const tooltip = document.querySelector(`${panelId} .tooltiptext`);
+  tooltip.style.display = 'block';
+  setTimeout(() => tooltip.style.display = 'none', 1000);
 }
 
 function switchCodeTab(tabGroup, tabId) {
@@ -16,9 +17,7 @@ function switchCodeTab(tabGroup, tabId) {
     if (tv.id === tabGroup) continue; // Skip caller
     const trg = document.getElementById(`${tabId}_${tv.id}`);
     if (!trg) continue; // Skip tabs where there's no target
-    for (const r of tv.querySelectorAll('input[type="radio"]')) {
-      r.checked = (trg.id === r.id);
-    }
+    trg.checked = true;
   }
 
   // Persist tab selection
@@ -40,6 +39,7 @@ function onchangeCodeTab(e) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Register tab switch listeners
   for (const tvr of document.querySelectorAll('.codetabs > input[type="radio"]')) {
     tvr.addEventListener("change", (e) => onchangeCodeTab(e));
   }
@@ -51,4 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
       switchCodeTab(null, selectedTab);
     }
   }
+
+  // Work around Chroma's tabindex: https://github.com/alecthomas/chroma/issues/731
+  for (const pre of document.querySelectorAll('.highlight pre')) {
+    pre.removeAttribute('tabindex');
+  }
+
 });
