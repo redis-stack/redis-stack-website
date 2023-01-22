@@ -1,10 +1,5 @@
-{{/*
-    Credits:
-    * Radio tabs: https://www.codeinwp.com/snippets/accessible-pure-css-tabs/
-    * Hugo scaffold: https://blog.jverkamp.com/2021/01/27/a-tabbed-view-for-hugo/ 
-*/}}
-{{ $id := (or ($.Get "id") (substr (.Inner | md5) 0 4)) }}
-{{ $tabs := or (.Scratch.Get "tabs") (dict ("title" "default" "content" .InnerDeindent)) }}
+{{ $id := (or (.id) (substr (.Inner | md5) 0 4)) }}
+{{ $tabs := or (.tabs) (dict ("title" "default" "content" .InnerDeindent)) }}
 
 <div class="codetabs flex flex-wrap box-border mt-0 mb-2 mx-auto" id="{{ $id }}">
     {{ range $i, $tab := $tabs }}
@@ -16,7 +11,7 @@
         <label class="label px-2 pt-1 cursor-pointer text-white text-center italic bg-slate-600 rounded-t-lg border-t-2 border-x-2 border-slate-600 hover:text-indigo-600 hover:not-italic hover:bg-transparent active:text-indigo-600 active:not-italic;" for="{{ $tid }}">{{ index $tab "title" }}</label>
         <div class="panel order-last hidden w-full pt-0 relative" id="{{ $pid }}">
             <div class="not-prose">
-                {{ index $tab "content" | markdownify }}
+                {{ index $tab "content" }}
             </div>
             <button tabindex="1" class="clipboard-button text-neutral-400 hover:text-slate-100 bg-slate-600 absolute top-2 right-2 h-10 w-10 p-2 rounded-md" title="Copy to clipboard" onclick="copyCodeToClipboard('#{{ $pid }}')">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="currentColor">

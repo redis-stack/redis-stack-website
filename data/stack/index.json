@@ -9,6 +9,10 @@
     "docs": [
         "stack_docs"
     ],
+    "clients": [
+        "node_redis",
+        "redis_py"
+    ],
     "modules": [
         "redisearch",
         "redisjson",
@@ -24,6 +28,8 @@
     "website": {
         "path": "./",
         "content": "content/en",
+        "examples": "data/examples.json",
+        "examples_path": "examples",
         "commands": "data/commands.json",
         "groups": "data/groups.json",
         "versions": "data/versions.json",
