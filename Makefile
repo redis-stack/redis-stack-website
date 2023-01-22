@@ -4,7 +4,7 @@ LOGLEVEL ?= INFO
 ENV ?= development
 HUGO_CONTENT ?= ./content/en
 HUGO_BUILD ?= --gc
-HUGO_SERVER ?= --quiet --disableFastRender -b http://$(IP) --bind $(IP)
+HUGO_SERVER ?= --disableFastRender -b http://$(IP) --bind $(IP)
 DOCKER_IMAGE=image-redis-stack-website
 DOCKER_CONTAINER=container-$(DOCKER_IMAGE)
 DOCKER_PORT=-p 1313:1313
@@ -41,7 +41,7 @@ up:
 
 clean:
 	# @rm -f data/*.json
-	@rm -rf $(HUGO_CONTENT) public tmp
+	@rm -rf $(HUGO_CONTENT) examples public tmp
 
 ifneq ($(VOL),)
 DOCKER_VOL=-v $(VOL):$(VOL)

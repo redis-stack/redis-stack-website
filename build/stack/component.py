@@ -1,5 +1,3 @@
-from ast import dump
-from email.mime import base
 import logging
 import os
 import semver
@@ -208,8 +206,8 @@ class Component(dict):
 
     def _skip_checkout(self, obj) -> bool:
         if obj.get('git_uri') == self._repo_uri() and self._preview_mode():
-            return False
-        return True
+            return True
+        return False
     
     def _checkout(self, ref, dest, obj):
         if not self._skip_checkout(obj):
@@ -227,6 +225,7 @@ class Stack(Component):
         self._website = self.get('website')
         self._skip_clone = self.get('skip_clone')
         self._content = f'{self._website.get("path")}/{self._website.get("content")}'
+        self._examples = {}
         mkdir_p(self._content)
 
     def _persist_commands(self) -> None:
@@ -238,6 +237,11 @@ class Stack(Component):
         filepath = f'{self._website.get("path")}/{self._website.get("groups")}'
         logging.info(f'Persisting {self._id} groups: {filepath}')
         dump_dict(filepath, self._groups)
+
+    def _persist_examples(self) -> None:
+        filepath = f'{self._website.get("path")}/{self._website.get("examples")}'
+        logging.info(f'Persisting {self._id} examples: {filepath}')
+        dump_dict(filepath, self._examples)
 
     def _persist_versions(self) -> None:
         filepath = f'{self._website.get("path")}/{self._website.get("versions")}'
@@ -296,7 +300,7 @@ class Stack(Component):
             md.process_doc(self._commands)
 
     def apply(self) -> None:
-        for kind in ['core', 'docs', 'modules', 'assets']:
+        for kind in ['core', 'docs', 'modules', 'clients', 'assets']:
             for component in self.get(kind):
                 if type(component) == str:
                     basename, ext = os.path.splitext(component)
@@ -312,6 +316,8 @@ class Stack(Component):
                             c = Module(filename, self)
                         else:
                             continue
+                    elif kind == 'clients':
+                        c = Client(filename, self)
                     elif kind == 'assets':
                         c = Asset(filename, self)
                 else:
@@ -319,6 +325,7 @@ class Stack(Component):
                 c.apply()
         self._persist_commands()
         self._persist_groups()
+        self._persist_examples()
         self._persist_versions()
         self._process_commands()
         self._process_docs()
@@ -455,6 +462,45 @@ class Module(Component):
         self._get_groups()
         return files
 
+class Client(Component):
+    def __init__(self, filepath: str, root: dict = None):
+        super().__init__(filepath, root)
+
+    def _copy_examples(self):
+        if ex := self.get('examples'):
+            repo = self._git_clone(ex) 
+            dev_branch = ex.get('dev_branch')
+            self._checkout(dev_branch, repo, ex)
+            path = ex.get('path', '')
+            logging.info(f'Copying {self._id} examples')
+            src = f'{repo}/{path}/'
+            dst = f'{self._root._website.get("path")}/{self._root._website.get("examples_path")}'
+
+            _, dirs, _ = next(os.walk(src))
+            for d in dirs:
+                meta = f'{src}/{d}/example.json'
+                try:
+                    ex = load_dict(meta)
+                    exid = ex.pop('id')
+                except FileNotFoundError:
+                    logging.warn(f'Example "{meta}" not found for {self._id}: skipping.')
+                    continue
+                ex['source'] = f'{src}/{d}/{ex.get("file")}'
+                if not os.path.isfile(ex['source']):
+                    logging.warn(f'"Source {ex.get("source")}" not found for {self._id}: skipping.')
+                    continue
+
+                mkdir_p(f'{dst}/{exid}')
+                rsync(ex['source'],f'{dst}/{exid}/')
+                ex['target'] = f'{dst}/{exid}/{ex.get("file")}'
+                examples = self._root._examples
+                if not examples.get(exid):
+                    examples[exid] = {}
+                examples[exid][self.get('language')] = ex
+
+    def apply(self) -> None:
+        logging.info(f'Applying client {self._id}')
+        self._copy_examples()
 
 class Asset(Component):
     def __init__(self, filepath: str, root: dict = None):
@@ -462,9 +508,7 @@ class Asset(Component):
 
     def apply(self) -> None:
         logging.info(f'Applying asset {self._id}')
-        if not self._repository:
-            return
         repo = self._git_clone(self._repository)
         dev_branch = self._repository.get('dev_branch')
-        self._checkout(dev_branch, repo, self._repository)
+        self._checkout(dev_branch, repo, self._repository)        #
         return Component._dump_payload(repo, './', self._repository.get('payload'))

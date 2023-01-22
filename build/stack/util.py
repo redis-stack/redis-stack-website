@@ -105,9 +105,10 @@ def die(msg: str = 'aborting - have a nice day!') -> None:
     exit(1)
 
 
-def rsync(src: str, dst: str, exclude: list = ['.*']):
+def rsync(src: str, dst: str, exclude: list = ['.*'], include: list = ['*']):
     ex = [f'"{x}"' for x in exclude]
-    cmd = f'rsync -av --no-owner --no-group --exclude={{{",".join(ex)}}} {src} {dst}'
+    ix = [f'"{x}"' for x in include]
+    cmd = f'rsync -av --no-owner --no-group --include={{{",".join(ix)}}} --exclude={{{",".join(ex)}}} {src} {dst}'
     ret = run(cmd)
     return ret.split('\n')
 

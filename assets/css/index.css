@@ -444,8 +444,12 @@ select {
   line-height: 1.25rem;
 }
 
-.codetabs > .panel .highlight .chroma .lntd > pre {
-  @apply p-0;
+.codetabs > .panel .highlight .chroma > .lntable td:first-child .chroma {
+  @apply rounded-none p-0;
+}
+
+.codetabs > .panel .highlight .chroma > .lntable td:last-child .chroma {
+  @apply rounded-none p-0;
 }
 
 .download-cards {
@@ -558,24 +562,32 @@ html {
   @apply align-top p-0 m-0 border-0;
 }
 
+.chroma .lntd:last-child {
+  @apply flex-1;
+}
+
 /* LineTable */
 .chroma .lntable {
-  @apply p-0 m-0 border-0 w-auto;
+  @apply p-0 m-0 border-0 min-w-full;
 }
 
 /* LineHighlight */
 .chroma .hl {
-  @apply bg-yellow-100;
+  @apply flex bg-indigo-900/80;
 }
 
 /* LineNumbersTable */
 .chroma .lnt {
-  @apply text-slate-400 whitespace-pre mr-4 px-2;
+  @apply text-slate-400 whitespace-pre pl-2 pr-4;
 }
 
 /* LineNumbers */
 .chroma .ln {
-  @apply text-slate-400 whitespace-pre mr-4 px-4;
+  @apply text-slate-400 whitespace-pre px-4;
+}
+
+.chroma .lntable tr {
+  @apply flex items-stretch;
 }
 
 /* Line */
