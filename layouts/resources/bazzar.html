@@ -126,12 +126,6 @@
         <div>
           License: {{ .Params.license | default "Other" }}
         </div>
-        {{ if .Params.homepage }}
-          <a href="{{ .Params.homepage }}" class="mt-1.5 text-current hover:text-indigo-600 opacity-50 hover:opacity-100 flex"  target="_blank">
-            Homepage
-            {{ template "icon" (dict "id" "heart" "class" "ml-1 shrink-0 h-[1.0625rem] w-[1.0625rem]") }}
-          </a>
-        {{ end }}
       </div>
     </div>
   {{ end }}

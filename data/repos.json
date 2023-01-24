@@ -143,6 +143,14 @@
                 ],
                 "repository": "github.com/h0x91b/fast-redis-cluster"
             },
+            "metronom": {
+                "description": "User friendly Redis ORM for Node.js with asynchronous and TypeScript support.",
+                "homepage": "https://anchovycation.github.io/metronom/",
+                "twitter": [
+                    "saracaIihan"
+                ],
+                "repository": "github.com/anchovycation/metronom"
+            },
             "rebridge": {
                 "description": "Rebridge is a transparent Javascript-Redis bridge. It creates JavaScript objects that are automatically synchronized to a Redis database. (Requires Node 6)",
                 "repository": "github.com/CapacitorSet/rebridge"
@@ -357,7 +365,7 @@
                 "repository": "github.com/khamin/redisca2"
             },
             "redis-py": {
-                "description": "Mature and supported. Currently the way to go for Python.",
+                "description": "Mature and supported. The way to go for Python.",
                 "recommended": true,
                 "repository": "github.com/redis/redis-py"
             },
@@ -591,29 +599,29 @@
             }
         },
         "smalltalk": {
-            "RediStick": {
+            "Pharo-Redis": {
                 "language": "Smalltalk",
-                "repository": "github.com/RediStick/RediStick",
-                "description": "A Redis client for Pharo using Stick auto-reconnection layer.",
+                "description": "A full featured Redis client for Pharo. This was forked from svenvc/SimpleRedisClient and that simple client is still at the center of this.",
                 "authors": [
-                    "umejava"
-                ]
+                    "ToddBlanchard10"
+                ],
+                "repository": "github.com/tblanchard/Pharo-Redis"
             },
             "SimpleRedisClient": {
                 "language": "Smalltalk",
-                "repository": "github.com/SimpleRedisClient/SimpleRedisClient",
+                "repository": "github.com/svenvc/SimpleRedisClient",
                 "description": "A minimal Redis client for Pharo.",
                 "homepage": "https://medium.com/concerning-pharo/quick-write-me-a-redis-client-5fbe4ddfb13d",
                 "authors": [
                     "SvenVC"
                 ]
             },
-            "Pharo-Redis": {
+            "RediStick": {
                 "language": "Smalltalk",
-                "repository": "github.com/Pharo-Redis/Pharo-Redis",
-                "description": "A full featured Redis client for Pharo. This was forked from svenvc/SimpleRedisClient and that simple client is still at the center of this.",
+                "repository": "github.com/mumez/RediStick",
+                "description": "A Redis client for Pharo using Stick auto-reconnection layer.",
                 "authors": [
-                    "ToddBlanchard10"
+                    "umejava"
                 ]
             },
             "Redis": {
@@ -653,6 +661,10 @@
             "redis-client": {
                 "description": "A Redis client library for Rust.",
                 "repository": "github.com/AsoSunag/redis-client"
+            },
+            "rustis": {
+                "description": "An asynchronous Redis client for Rust.",
+                "repository": "github.com/dahomey-technologies/rustis"
             }
         },
         "io": {
@@ -751,7 +763,6 @@
             },
             "Redisson": {
                 "description": "distributed and scalable Java data structures on top of Redis server",
-                "recommended": true,
                 "twitter": [
                     "mrniko"
                 ],
@@ -863,13 +874,6 @@
                 ],
                 "repository": "github.com/nrk/predis"
             },
-            "Redisent": {
-                "description": "A Redis client.",
-                "twitter": [
-                    "justinpoliey"
-                ],
-                "repository": "github.com/jdp/redisent"
-            },
             "phpredis": {
                 "description": "This is a client written in C as a PHP module.",
                 "recommended": true,
@@ -960,6 +964,13 @@
                     "nkrzalic"
                 ],
                 "repository": "github.com/crypt1d/redi.sh"
+            },
+            "redis-bash": {
+                "description": "Bash library and example client to access Redis Databases",
+                "twitter": [
+                    "syshero"
+                ],
+                "repository": "github.com/caquino/redis-bash"
             }
         },
         "vb": {
@@ -1020,9 +1031,9 @@
                 ],
                 "repository": "github.com/chiradip/RedisClient"
             },
-            "finagle-redis": {
+            "finagle": {
                 "description": "Redis client based on Finagle",
-                "repository": "github.com/twitter/finagle-redis"
+                "repository": "github.com/twitter/finagle"
             },
             "scala-redis": {
                 "description": "Non-blocking, netty 4.1.x based Scala Redis client",
@@ -1110,7 +1121,6 @@
         "cpp": {
             "soce-redis": {
                 "description": "Based on hiredis, accesses the sever(single, sentinel, cluster) with the same interface, supports pipeline and async(by coroutine)",
-                "homepage": "https://github.com/wusongwei/soce/tree/master/soce-redis",
                 "repository": "github.com/wusongwei/soce-redis"
             },
             "FlyRedis": {
@@ -1245,6 +1255,11 @@
                 ],
                 "repository": "github.com/Farhaddc/Swidis"
             },
+            "SwiftyRedis": {
+                "description": "SwiftyRedis is a high level async redis library for Swift. ",
+                "homepage": "https://michaelvanstraten.github.io/swifty-redis/documentation/swiftyredis/",
+                "repository": "github.com/michaelvanstraten/Swifty-Redis"
+            },
             "PSSRedisClient": {
                 "description": "Swift redis client using the CocoaAsyncSocket library, installable via Cocoapods",
                 "twitter": [
@@ -1298,15 +1313,6 @@
                 "repository": "github.com/rebolek/prot-redis"
             }
         },
-        "fancy": {
-            "redis.fy": {
-                "description": "A Fancy Redis client library",
-                "twitter": [
-                    "bakkdoor"
-                ],
-                "repository": "github.com/bakkdoor/redis.fy"
-            }
-        },
         "csharp": {
             "StackExchange.Redis": {
                 "description": "This .NET client was developed by Stack Exchange for very high performance needs (replacement to the earlier BookSleeve).",
@@ -1327,6 +1333,11 @@
                     "matt_howlett"
                 ],
                 "repository": "github.com/mhowlett/Nhiredis"
+            },
+            "NRedisStack": {
+                "description": "This client is developed by Redis to bring RedisStack support to CSharp.",
+                "recommended": true,
+                "repository": "github.com/redis/NRedisStack"
             },
             "BeetleX.Redis": {
                 "description": "A high-performance async/non-blocking redis client components for dotnet core, default support json and protobuf data format",
@@ -1367,6 +1378,10 @@
                     "ctnstone"
                 ],
                 "repository": "github.com/ctstone/csredis"
+            },
+            "XiaoFeng.Redis": {
+                "description": "A useful Redis client that supports the .NET FRAMEWORK,.NET CORE,.NET STANDARD. A client tool that is quite convenient to operate.",
+                "repository": "github.com/zhuovi/XiaoFeng.Redis"
             },
             "Sider": {
                 "description": "Minimalistic client for C#/.NET 4.0",
@@ -1588,6 +1603,14 @@
                 "homepage": "https://github.com/hdt3213/godis",
                 "repository": "github.com/hdt3213/godis"
             },
+            "Redsync": {
+                "description": "Distributed mutual exclusion lock using Redis for Go; Redsync implements the Redlock algorithm.",
+                "homepage": "https://github.com/go-redsync/redsync",
+                "github": [
+                    "hjr265"
+                ],
+                "repository": "github.com/go-redsync/redsync"
+            },
             "Rediseen": {
                 "description": "Start a REST-like API service for your Redis database, without writing a single line of code.",
                 "homepage": "https://github.com/XD-DENG/rediseen",
@@ -1598,13 +1621,6 @@
             }
         },
         "python": {
-            "Stdnet": {
-                "description": "Redis data manager with advanced query and search API.",
-                "twitter": [
-                    "lsbardel"
-                ],
-                "repository": "github.com/lsbardel/python-stdnet"
-            },
             "Agentredrabbit": {
                 "description": "Transport agent that moves data from Redis to RabbitMQ",
                 "twitter": [
@@ -1964,15 +1980,6 @@
                 "repository": "github.com/HangfireIO/Hangfire"
             }
         },
-        "labview": {
-            "redis-in-labview": {
-                "description": "LabVIEW toolkit for Redis",
-                "twitter": [
-                    "iwac"
-                ],
-                "repository": "decibel.ni.com/content/DOC-36322"
-            }
-        },
         "javascript": {
             "Redback": {
                 "description": "Higher-level Redis constructs - social graph, full text search, rate limiting, key pairs.",
@@ -2097,7 +2104,6 @@
         "ruby": {
             "Meerkat": {
                 "description": "Rack middleware for Server Sent Events with multiple backends.",
-                "homepage": "https://carlhoerberg.github.io/meerkat/",
                 "twitter": [
                     "carlhoerberg"
                 ],
