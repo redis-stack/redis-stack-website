@@ -6,8 +6,8 @@ from urllib.parse import urlparse
 
 
 class Repository(dict):
-    _props = ['archived', 'description', 'homepage',
-              'forks_count', 'stargazers_count', 'open_issues_count', ]
+    _props = ['archived', 'description', 'forks_count', 'stargazers_count',
+              'open_issues_count', ]
 
     def __init__(self, uri, gh_token=None):
         super().__init__()
