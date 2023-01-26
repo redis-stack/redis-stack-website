@@ -1,7 +1,8 @@
 scheme = [ "http", "https" ]
 
 exclude = [
-    "github.com",
+    "github.com/.*/.*/issues/new.*",
+    "github.com/.*/.*/edit/.*",
     "twitter.com",
     "googletagmanager.com",
     "packages.redis.io",
