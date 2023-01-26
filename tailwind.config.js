@@ -38,6 +38,7 @@ module.exports = {
             },
             code: {
               fontWeight: '500',
+              'font-variant-ligatures': 'none'
             },
             pre: {
               padding: '1.25rem',
