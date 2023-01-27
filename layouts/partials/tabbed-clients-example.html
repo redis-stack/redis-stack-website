@@ -8,7 +8,7 @@
 {{ range $language := $.Site.Params.clientsexamples }}
     {{ $example := index $languages $language }}
     {{ $examplePath := index $example "target" }}
-    {{ $options := printf "linenos=table" }}
+    {{ $options := printf "linenos=false" }}
     {{ if isset $example "highlight" }}
         {{ $options = printf "%s,hl_lines=%s" $options (delimit (index $example "highlight") " ") }}
     {{ end }}
