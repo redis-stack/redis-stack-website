@@ -1,6 +1,7 @@
 {{ define "head" }}
   <script src="/js/cli.js" defer></script>
   <script src="/js/codetabs.js" defer></script>
+  <script src="/js/syntax.js" defer></script>
 {{ end }}
 
 {{ define "main" }}
@@ -33,12 +34,24 @@
         {{ end }}
         {{ if (gt (len $syntax) 0) }}
         <div class="font-semibold text-slate-900">Syntax</div>
-        <div>
-          {{ with .Resources.GetMatch "syntax.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}
+        <div class="relative">
+          <button id="syntax-button" tabindex="1" class="text-neutral-400 hover:text-slate-100 bg-slate-600 absolute top-2 right-2 h-6 w-6 p-1 rounded-md" title="Toggle syntax" data-display="syntax" onclick="toggleSyntax(this)">
+            <svg id="icon-syntax" class="hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M0 0h24v24H0V0z" fill="none"/><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+            </svg>
+            <svg id="icon-diagram" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <rect fill="none" height="24" width="24"/><path d="M14,9v2h-3V9H8.5V7H11V1H4v6h2.5v2H4v6h2.5v2H4v6h7v-6H8.5v-2H11v-2h3v2h7V9H14z M6,3h3v2H6V3z M9,21H6v-2h3V21z M9,13H6v-2 h3V13z M19,13h-3v-2h3V13z"/>
+            </svg>
+          </button>
+          <div id="display-diagram" class="hidden">
+            {{ with .Resources.GetMatch "syntax.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}
+          </div>
+          <div id="display-syntax">
+            <pre>
+              {{- $syntax -}}
+            </pre>
+          </div>
         </div>
-        <pre>
-          {{- $syntax -}}
-        </pre>
         {{ end }}
         <dl class="grid grid-cols-[auto,1fr] gap-x-2 mb-12">
           {{ if not (isset .Params "module") }}
