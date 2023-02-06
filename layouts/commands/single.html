@@ -33,7 +33,10 @@
         {{ end }}
         {{ if (gt (len $syntax) 0) }}
         <div class="font-semibold text-slate-900">Syntax</div>
-        <pre class="command-syntax">
+        <div>
+          {{ with .Resources.GetMatch "syntax.svg" }}{{ ( . | minify).Content | safeHTML }}{{ end }}
+        </div>
+        <pre>
           {{- $syntax -}}
         </pre>
         {{ end }}
