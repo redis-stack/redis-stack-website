@@ -231,6 +231,11 @@
                 "description": "A Redis Go client implementation based on the Redis RESP3 protocol.",
                 "repository": "github.com/stfnmllr/go-resp3"
             },
+            "go-redis": {
+                "description": "Redis client for Golang supporting Redis Sentinel and Redis Cluster out of the box.",
+                "recommended": true,
+                "repository": "github.com/redis/go-redis"
+            },
             "redis.go": {
                 "description": "A client for the Redis key-value store.",
                 "twitter": [
@@ -290,11 +295,6 @@
                     "gburd"
                 ],
                 "repository": "github.com/gomodule/redigo"
-            },
-            "go-redis/redis": {
-                "description": "Redis client for Golang supporting Redis Sentinel and Redis Cluster out of the box.",
-                "recommended": true,
-                "repository": "github.com/go-redis/redis"
             },
             "Tideland Go Redis Client": {
                 "description": "A flexible Go Redis client able to handle all commands",
@@ -623,16 +623,6 @@
                 "authors": [
                     "umejava"
                 ]
-            },
-            "Redis": {
-                "language": "Smalltalk",
-                "repository": "squeaksource.com/Redis/Redis",
-                "description": "Smalltalk Redis client."
-            },
-            "RedisBinaryClient": {
-                "language": "Smalltalk",
-                "repository": "squeaksource.com/RedisBinaryClient/RedisBinaryClient",
-                "description": "A fork of the RedisConnection from Redis Client."
             }
         },
         "rust": {
@@ -1004,7 +994,7 @@
                 "twitter": [
                     "antirez"
                 ],
-                "repository": "github.com/redis/redis.tcl"
+                "repository": "github.com/redis/redis"
             },
             "Retcl": {
                 "description": "Retcl is an asynchronous, event-driven Redis client library implemented as a single-file Tcl module.",
@@ -1121,7 +1111,7 @@
         "cpp": {
             "soce-redis": {
                 "description": "Based on hiredis, accesses the sever(single, sentinel, cluster) with the same interface, supports pipeline and async(by coroutine)",
-                "repository": "github.com/wusongwei/soce-redis"
+                "repository": "github.com/wusongwei/soce"
             },
             "FlyRedis": {
                 "description": "C++ Redis Client, base on Boost.asio, Easy To Use",
@@ -1518,10 +1508,6 @@
                 "description": "A simple client for Redis 6+ cluster",
                 "repository": "github.com/redis-rb/redis-cluster-client"
             },
-            "redis-clustering": {
-                "description": "A Ruby client that tries to match Redis' Cluster API one-to-one, while still providing an idiomatic interface.",
-                "repository": "github.com/redis/redis-clustering"
-            },
             "redis-rb": {
                 "description": "Very stable and mature client. Install and require the hiredis gem before redis-rb for maximum performance.",
                 "recommended": true,
@@ -1863,6 +1849,10 @@
                     "ienagatoshiyuki"
                 ],
                 "repository": "github.com/ienaga/RedisPlugin"
+            },
+            "phpCacheAdmin": {
+                "description": "A web dashboard for your favorite caching system.",
+                "repository": "github.com/RobiNN1/phpCacheAdmin"
             },
             "phpRedisAdmin": {
                 "description": "phpRedisAdmin is a simple web interface to manage Redis databases.",
@@ -2637,6 +2627,21 @@
                     "yowgi"
                 ],
                 "repository": "github.com/nicolasff/webdis"
+            }
+        },
+        "other": {
+            "Redis Operator": {
+                "description": "Redis Operator creates/configures/manages high availability Redis with Sentinel automatic failover atop Kubernetes.",
+                "repository": "github.com/spotahome/redis-operator"
+            },
+            "IBM Operator for Redis Cluster": {
+                "description": "The goal of this project is to simplify the deployment and management of a Redis cluster in a Kubernetes environment. It started internally at Amadeus in 2016, where it was initially designed to run on Openshift. This is the third version of the Redis operator, which leverages the Operator SDK framework for operators.",
+                "homepage": "https://ibm.github.io/operator-for-redis-cluster",
+                "repository": "github.com/IBM/operator-for-redis-cluster"
+            },
+            "Prometheus Redis Metrics Exporter": {
+                "description": "Prometheus exporter for Redis metrics.",
+                "repository": "github.com/oliver006/redis_exporter"
             }
         },
         "cli": {
