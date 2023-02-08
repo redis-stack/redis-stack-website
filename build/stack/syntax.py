@@ -82,26 +82,8 @@ class Argument:
 
     def diagram(self) -> DiagramItem:
         if self._type == ArgumentType.COMMAND:
-            s = []
-            i = 0
-            optionals = []
-            while i < len(self._arguments):
-                arg = self._arguments[i].diagram()
-                if type(arg) is Optional:
-                    optionals.append(arg)
-                else:
-                    if len(optionals) != 0:
-                        optionals.sort(key=lambda x: x.width)
-                        s += optionals
-                        optionals = []
-                    s.append(arg)
-                i += 1
-            if len(optionals) != 0:
-                optionals.sort(key=lambda x: x.width)
-                s += optionals
-
             self._stack.append(Sequence(Terminal(self._display)))
-            for arg in s:
+            for arg in [arg.diagram() for arg in self._arguments]:
                 if type(arg) is not Sequence:
                     items = [arg]
                 else:
@@ -176,7 +158,7 @@ class Command(Argument):
         d.writeSvg(s.write)
         # Hack: strip out the 'width' and 'height' attrs from the svg
         s = s.getvalue()
-        for attr in ['width', 'height']:
+        for attr in ['height']:
             a = f'{attr}="'
             x = s.find(a)
             y = s.find('"', x + len(a))
