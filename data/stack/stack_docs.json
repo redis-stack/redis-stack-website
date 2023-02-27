@@ -5,7 +5,7 @@
     "description": "Redis Stack docs",
     "stack_path": "docs",
     "docs": {
-        "git_uri": "https://github.com/itamarhaber/redis-stack-docs",
+        "git_uri": "https://github.com/redis-stack/redis-stack-docs",
         "dev_branch": "emb-examples",
         "path": "docs"
     },
