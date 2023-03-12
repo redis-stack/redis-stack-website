@@ -8,7 +8,7 @@ from .markdown import Markdown
 from .structured_data import load_dict, dump_dict
 from .syntax import Command
 from .util import die, mkdir_p, rsync, regex_in_file, run, rm_rf, command_filename, slugify
-
+from .example import Example
 
 def parseUri(uri: str) -> Tuple[ParseResult, str, str]:
     _uri = urlparse(uri)
@@ -493,6 +493,8 @@ class Client(Component):
                 mkdir_p(f'{dst}/{exid}')
                 rsync(ex['source'],f'{dst}/{exid}/')
                 ex['target'] = f'{dst}/{exid}/{ex.get("file")}'
+                e = Example(self.get('language'), ex['target'])
+                ex['highlight'] = e.hidden
                 examples = self._root._examples
                 if not examples.get(exid):
                     examples[exid] = {}
