@@ -15,13 +15,16 @@ class Example():
     hidden = []
 
     def __init__(self, language: str, path: str) -> None:
-        if not PREFIXES.get(language):
+        if not PREFIXES.get(language.lower()):
             logging.error(f'Unknown language "{language}" for example {path}')
             return
-        self.language = language
+        self.language = language.lower()
         self.path = path
         with open(path, 'r') as f:
             self.content = f.readlines()
+        self.make_ranges()
+        self.persist(self.path)
+        logging.error(self.content, self.hidden, self.path, self.language)
 
     def persist(self, path: str = None) -> None:
         if not path:

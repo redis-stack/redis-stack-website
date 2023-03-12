@@ -14,11 +14,6 @@
         "redis_py"
     ],
     "modules": [
-        "redisearch",
-        "redisjson",
-        "redisgraph",
-        "redistimeseries",
-        "redisbloom"
     ],
     "assets": [],
     "_assets": [
