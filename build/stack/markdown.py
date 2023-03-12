@@ -33,7 +33,10 @@ class Markdown:
             return
         with open(self.filepath, 'r') as f:
             payload = f.readlines()
-
+        if len(payload) == 0:
+            self.fm_type = self.FM_TYPES.get('---\n')
+            self.fm_ext = self.fm_type.get('ext')
+            return
         i = 0
         while i < len(payload):
             if payload[i].startswith('\ufeff'):  # BOM workaround

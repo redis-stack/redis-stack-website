@@ -243,7 +243,7 @@ class Stack(Component):
         filepath = f'{self._website.get("path")}/{self._website.get("versions")}'
         logging.info(f'Persisting {self._id} versions: {filepath}')
         for cmd in self._commands.values():
-            since = semver.parse_version_info(cmd.get('since'))
+            since = semver.VersionInfo.parse(cmd.get('since'))
             since = f'{since.major}.{since.minor}'
             if not cmd.get('module'):
                 vers = self._versions['core']
