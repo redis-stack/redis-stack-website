@@ -494,7 +494,8 @@ class Client(Component):
                 rsync(ex['source'],f'{dst}/{exid}/')
                 ex['target'] = f'{dst}/{exid}/{ex.get("file")}'
                 e = Example(self.get('language'), ex['target'])
-                ex['highlight'] = e.hidden
+                ex['highlight'] = e.highlight
+                ex['hidden'] = e.hidden
                 examples = self._root._examples
                 if not examples.get(exid):
                     examples[exid] = {}
