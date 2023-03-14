@@ -7,7 +7,7 @@
         "git_uri": "https://github.com/redis/node-redis"
     },
     "examples": {
-        "git_uri": "../node-redis",
+        "git_uri": "https://github.com/redis/node-redis",
         "dev_branch": "emb-examples",
         "path": "examples",
         "pattern": "*.js"
