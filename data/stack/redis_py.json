@@ -7,8 +7,9 @@
         "git_uri": "https://github.com/redis/redis-py"
     },
     "examples": {
-        "git_uri": "../redis-py",
+        "git_uri": "https://github.com/redis/redis-py",
         "dev_branch": "emb-examples",
-        "path": "docs/examples"
+        "path": "docs/examples",
+        "pattern": "*.py"
     }
 }
