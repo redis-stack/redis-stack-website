@@ -8,11 +8,12 @@ PREFIXES = {
     'javascript': '//',
 }
 
-class Example():
+class Example(object):
     language = None
     path = None
     content = None
-    hidden = []
+    hidden = None
+    highlight = None
 
     def __init__(self, language: str, path: str) -> None:
         if not PREFIXES.get(language.lower()):
@@ -22,9 +23,10 @@ class Example():
         self.path = path
         with open(path, 'r') as f:
             self.content = f.readlines()
+        self.hidden = []
+        self.highlight = []
         self.make_ranges()
         self.persist(self.path)
-        logging.error(self.content, self.hidden, self.path, self.language)
 
     def persist(self, path: str = None) -> None:
         if not path:
@@ -34,6 +36,7 @@ class Example():
 
     def make_ranges(self) -> None:
         curr = 0
+        highlight = 1
         hidden = None
         content = []
         start = re.compile(f'^{PREFIXES[self.language]}\\s?{START_ANCHOR}')
@@ -44,6 +47,8 @@ class Example():
                 if hidden is not None:
                     logging.error(f'Nested hidden anchor in {self.path}:L{curr+1} - aborting.')
                     return
+                if highlight < curr:
+                    self.highlight.append(f'{highlight}-{curr}')
                 hidden = len(content)
             elif re.search(end, l):
                 if hidden is None:
@@ -53,6 +58,7 @@ class Example():
                     self.hidden.append(f'{hidden+1}')
                 else:
                     self.hidden.append(f'{hidden+1}-{len(content)}')
+                highlight = curr
                 hidden = None
             else:
                 content.append(l)
@@ -60,4 +66,7 @@ class Example():
         if hidden is not None:
             logging.error(f'Unclosed hidden anchor in {self.path}:L{hidden+1} - aborting.')
             return
+        if highlight < len(content):
+            self.highlight.append(f'{highlight}-{len(content)}')
+
         self.content = content
