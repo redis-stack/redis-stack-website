@@ -8,6 +8,7 @@ exclude = [
     "packages.redis.io",
     "techstacks.io",
     "sciencedirect.com",
+    "phpscaling.com",
     "localhost",
     "127.0.0.1"
 ]
