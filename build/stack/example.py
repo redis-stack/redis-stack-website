@@ -1,8 +1,10 @@
 import logging
 import re
 
-START_ANCHOR = 'HIDE_START'
-END_ANCHOR = 'HIDE_END'
+HIDE_START = 'HIDE_START'
+HIDE_END = 'HIDE_END'
+REMOVE_START = 'REMOVE_START'
+REMOVE_END = 'REMOVE_END'
 PREFIXES = {
     'python': '#',
     'javascript': '//',
@@ -38,19 +40,22 @@ class Example(object):
         curr = 0
         highlight = 1
         hidden = None
+        remove = None
         content = []
-        start = re.compile(f'^{PREFIXES[self.language]}\\s?{START_ANCHOR}')
-        end = re.compile(f'^{PREFIXES[self.language]}\\s?{END_ANCHOR}')
+        hstart = re.compile(f'^{PREFIXES[self.language]}\\s?{HIDE_START}')
+        hend = re.compile(f'^{PREFIXES[self.language]}\\s?{HIDE_END}')
+        rstart = re.compile(f'^{PREFIXES[self.language]}\\s?{REMOVE_START}')
+        rend = re.compile(f'^{PREFIXES[self.language]}\\s?{REMOVE_END}')
         while curr < len(self.content):
             l = self.content[curr]
-            if re.search(start, l):
+            if re.search(hstart, l):
                 if hidden is not None:
                     logging.error(f'Nested hidden anchor in {self.path}:L{curr+1} - aborting.')
                     return
                 if highlight < curr:
                     self.highlight.append(f'{highlight}-{curr}')
                 hidden = len(content)
-            elif re.search(end, l):
+            elif re.search(hend, l):
                 if hidden is None:
                     logging.error(f'Closing hidden anchor w/o a start in {self.path}:L{curr+1} - aborting.')
                     return
@@ -60,6 +65,15 @@ class Example(object):
                     self.hidden.append(f'{hidden+1}-{len(content)}')
                 highlight = curr
                 hidden = None
+            elif re.search(rstart, l):
+                if remove is not None:
+                    logging.error(f'Nested remove anchor in {self.path}:L{curr+1} - aborting.')
+                    return
+            elif re.search(rend, l):
+                if remove is None:
+                    logging.error(f'Closing remove anchor w/o a start in {self.path}:L{curr+1} - aborting.')
+                    return
+                remove = None
             else:
                 content.append(l)
             curr += 1
