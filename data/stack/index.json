@@ -11,7 +11,8 @@
     ],
     "clients": [
         "node_redis",
-        "redis_py"
+        "redis_py",
+        "jedis"
     ],
     "modules": [
         "redisearch",

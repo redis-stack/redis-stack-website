@@ -8,6 +8,7 @@ REMOVE_END = 'REMOVE_END'
 PREFIXES = {
     'python': '#',
     'javascript': '//',
+    'java': '//',
 }
 
 class Example(object):
@@ -42,10 +43,10 @@ class Example(object):
         hidden = None
         remove = None
         content = []
-        hstart = re.compile(f'^{PREFIXES[self.language]}\\s?{HIDE_START}')
-        hend = re.compile(f'^{PREFIXES[self.language]}\\s?{HIDE_END}')
-        rstart = re.compile(f'^{PREFIXES[self.language]}\\s?{REMOVE_START}')
-        rend = re.compile(f'^{PREFIXES[self.language]}\\s?{REMOVE_END}')
+        hstart = re.compile(f'{PREFIXES[self.language]}\\s?{HIDE_START}')
+        hend = re.compile(f'{PREFIXES[self.language]}\\s?{HIDE_END}')
+        rstart = re.compile(f'{PREFIXES[self.language]}\\s?{REMOVE_START}')
+        rend = re.compile(f'{PREFIXES[self.language]}\\s?{REMOVE_END}')
         while curr < len(self.content):
             l = self.content[curr]
             if re.search(hstart, l):

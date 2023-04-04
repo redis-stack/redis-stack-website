@@ -1,0 +1,15 @@
+{
+  "id": "jedis",
+  "type": "client",
+  "name": "jedis",
+  "language": "Java",
+  "repository": {
+      "git_uri": "https://github.com/redis/redis-py"
+  },
+  "examples": {
+      "git_uri": "https://github.com/dmaier-redislabs/jedis",
+      "dev_branch": "master",
+      "path": "src/test/java/redis/clients/jedis",
+      "pattern": "*.java"
+  }
+}
