@@ -12,6 +12,7 @@
     "clients": [
         "node_redis",
         "redis_py",
+        "redis_py_test",
         "jedis"
     ],
     "modules": [
