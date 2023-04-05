@@ -468,7 +468,7 @@ class Client(Component):
         super().__init__(filepath, root)
 
     '''
-    Finds examples. The file name patterna and the id originate from the example.json
+    Finds examples. The file name patterns and the id originate from the example.json
     file. If the id is not 'auto', then then we just expect a single file per folder.
     If the id is 'auto' then we search for all files that are matching the file name
     pattern. The result is a list of example definitions.
