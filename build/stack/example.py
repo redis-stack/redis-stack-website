@@ -5,10 +5,12 @@ HIDE_START = 'HIDE_START'
 HIDE_END = 'HIDE_END'
 REMOVE_START = 'REMOVE_START'
 REMOVE_END = 'REMOVE_END'
+EXAMPLE = 'EXAMPLE:'
 PREFIXES = {
     'python': '#',
     'javascript': '//',
     'java': '//',
+    'go': '//',
 }
 
 class Example(object):
@@ -47,6 +49,7 @@ class Example(object):
         hend = re.compile(f'{PREFIXES[self.language]}\\s?{HIDE_END}')
         rstart = re.compile(f'{PREFIXES[self.language]}\\s?{REMOVE_START}')
         rend = re.compile(f'{PREFIXES[self.language]}\\s?{REMOVE_END}')
+        exid = re.compile(f'{PREFIXES[self.language]}\\s?{EXAMPLE}')
         while curr < len(self.content):
             l = self.content[curr]
             if re.search(hstart, l):
@@ -75,6 +78,8 @@ class Example(object):
                     logging.error(f'Closing remove anchor w/o a start in {self.path}:L{curr+1} - aborting.')
                     return
                 remove = None
+            elif re.search(exid, l):
+                pass
             else:
                 content.append(l)
             curr += 1
