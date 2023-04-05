@@ -6,6 +6,7 @@ HIDE_END = 'HIDE_END'
 REMOVE_START = 'REMOVE_START'
 REMOVE_END = 'REMOVE_END'
 EXAMPLE = 'EXAMPLE:'
+GO_OUTPUT = 'Output:'
 PREFIXES = {
     'python': '#',
     'javascript': '//',
@@ -43,22 +44,28 @@ class Example(object):
         curr = 0
         highlight = 1
         hidden = None
-        remove = None
+        remove = False
+        output = False
         content = []
         hstart = re.compile(f'{PREFIXES[self.language]}\\s?{HIDE_START}')
         hend = re.compile(f'{PREFIXES[self.language]}\\s?{HIDE_END}')
         rstart = re.compile(f'{PREFIXES[self.language]}\\s?{REMOVE_START}')
         rend = re.compile(f'{PREFIXES[self.language]}\\s?{REMOVE_END}')
         exid = re.compile(f'{PREFIXES[self.language]}\\s?{EXAMPLE}')
+        go_output = re.compile(f'{PREFIXES[self.language]}\\s?{GO_OUTPUT}')
+        go_comment = re.compile(f'{PREFIXES[self.language]}')
+
         while curr < len(self.content):
             l = self.content[curr]
+
             if re.search(hstart, l):
                 if hidden is not None:
                     logging.error(f'Nested hidden anchor in {self.path}:L{curr+1} - aborting.')
                     return
                 if highlight < curr:
-                    self.highlight.append(f'{highlight}-{curr}')
+                    self.highlight.append(f'{highlight}-{len(content)}')
                 hidden = len(content)
+                output = False
             elif re.search(hend, l):
                 if hidden is None:
                     logging.error(f'Closing hidden anchor w/o a start in {self.path}:L{curr+1} - aborting.')
@@ -67,22 +74,37 @@ class Example(object):
                     self.hidden.append(f'{hidden+1}')
                 else:
                     self.hidden.append(f'{hidden+1}-{len(content)}')
-                highlight = curr
+                highlight = len(content) + 1
                 hidden = None
+                output = False
             elif re.search(rstart, l):
-                if remove is not None:
+                if remove:
                     logging.error(f'Nested remove anchor in {self.path}:L{curr+1} - aborting.')
                     return
+                remove = True
+                output = False
             elif re.search(rend, l):
-                if remove is None:
+                if not remove:
                     logging.error(f'Closing remove anchor w/o a start in {self.path}:L{curr+1} - aborting.')
                     return
-                remove = None
+                remove = False
+                output = False
             elif re.search(exid, l):
+                output = False
+                pass
+            elif self.language == "go" and re.search(go_output, l):
+                if output:
+                    logging.error("Nested Go Output anchor in {self.path}:L{curr+1} - aborting.")
+                    return
+                output = True
+            elif self.language == "go" and re.search(go_comment, l) and output:
                 pass
             else:
+                output = False
                 content.append(l)
+
             curr += 1
+
         if hidden is not None:
             logging.error(f'Unclosed hidden anchor in {self.path}:L{hidden+1} - aborting.')
             return
