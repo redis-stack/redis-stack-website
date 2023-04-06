@@ -1,4 +1,4 @@
-{
+I{
   "id": "stack_exchange_redis",
   "type": "client",
   "name": " StackExchange.Redis",
@@ -7,9 +7,9 @@
       "git_uri": "https://github.com/StackExchange/StackExchange.Redis"
   },
   "examples": {
-      "git_uri": "https://github.com/elena-kolevska/StackExchange.Redis",
-      "dev_branch": "patch-1",
+      "git_uri": "https://github.com/dmaier-redislabs/StackExchange.Redis",
+      "dev_branch": "main",
       "path": "tests",
-      "pattern": "*Example.cs"
+      "pattern": "*.cs"
   }
 }
