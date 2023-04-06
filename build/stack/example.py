@@ -7,11 +7,13 @@ REMOVE_START = 'REMOVE_START'
 REMOVE_END = 'REMOVE_END'
 EXAMPLE = 'EXAMPLE:'
 GO_OUTPUT = 'Output:'
+CSHARP_FACT = '\[Fact\]'
 PREFIXES = {
     'python': '#',
     'javascript': '//',
     'java': '//',
     'go': '//',
+    'c#': '//',
 }
 
 class Example(object):
@@ -54,6 +56,7 @@ class Example(object):
         exid = re.compile(f'{PREFIXES[self.language]}\\s?{EXAMPLE}')
         go_output = re.compile(f'{PREFIXES[self.language]}\\s?{GO_OUTPUT}')
         go_comment = re.compile(f'{PREFIXES[self.language]}')
+        cs_fact = re.compile(f'{CSHARP_FACT}')
 
         while curr < len(self.content):
             l = self.content[curr]
@@ -98,6 +101,8 @@ class Example(object):
                     return
                 output = True
             elif self.language == "go" and re.search(go_comment, l) and output:
+                pass
+            elif self.language == "c#" and re.search(cs_fact, l):  # Removes "[Fact]" from CSharp files
                 pass
             else:
                 output = False

@@ -82,6 +82,9 @@ class Component(dict):
         git_uri = repo.get('git_uri')
         private = repo.get('private', False)
         uri, _, name, ext = parseUri(git_uri)
+        # Exception for StackExchange.Redis
+        if name == "StackExchange.Redis" and ext == ".Redis":
+            ext = ""
         to = f'{self._root._tempdir}/{name}'
         if uri.scheme == 'https' and ext in ['', '.git'] and self._repo_uri() != git_uri:
             if not self._root._skip_clone and git_uri not in self._root._clones:
@@ -301,7 +304,7 @@ class Stack(Component):
             md.process_doc(self._commands)
 
     def apply(self) -> None:
-        for kind in ['core', 'docs', 'modules', 'clients', 'assets']:
+        for kind in ['clients','core', 'docs', 'modules',  'assets']:
             for component in self.get(kind):
                 if type(component) == str:
                     basename, ext = os.path.splitext(component)
