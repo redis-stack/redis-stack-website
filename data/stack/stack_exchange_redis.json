@@ -1,0 +1,15 @@
+{
+  "id": "stack_exchange_redis",
+  "type": "client",
+  "name": " StackExchange.Redis",
+  "language": "C#",
+  "repository": {
+      "git_uri": "https://github.com/StackExchange/StackExchange.Redis"
+  },
+  "examples": {
+      "git_uri": "https://github.com/dmaier-redislabs/StackExchange.Redis",
+      "dev_branch": "main",
+      "path": "tests",
+      "pattern": "*Example.cs"
+  }
+}
