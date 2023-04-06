@@ -1,4 +1,4 @@
-I{
+{
   "id": "stack_exchange_redis",
   "type": "client",
   "name": " StackExchange.Redis",
