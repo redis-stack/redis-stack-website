@@ -106,7 +106,8 @@ class Example(object):
                 pass
             else:
                 output = False
-                content.append(l)
+                if not remove:
+                    content.append(l)
 
             curr += 1
 
