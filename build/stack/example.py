@@ -59,8 +59,7 @@ class Example(object):
         exid = re.compile(f'{PREFIXES[self.language]}\\s?{EXAMPLE}')
         go_output = re.compile(f'{PREFIXES[self.language]}\\s?{GO_OUTPUT}')
         go_comment = re.compile(f'{PREFIXES[self.language]}')
-        cs_fact = re.compile(f'{TEST_MARKER[self.language]}')
-        java_test = re.compile(f'{JAVA_TEST}')
+        test_marker = re.compile(f'{TEST_MARKER.get(self.language)}')
 
         while curr < len(self.content):
             l = self.content[curr]
@@ -106,9 +105,7 @@ class Example(object):
                 output = True
             elif self.language == "go" and re.search(go_comment, l) and output:
                 pass
-            elif self.language == "c#" and re.search(cs_fact, l):  # Removes "[Fact]" from CSharp files
-                pass
-            elif self.language == "java" and re.search(java_test, l): # Removes "@Test" from Java files 
+            elif self.language in TEST_MARKER.keys() and re.search(test_marker, l): # Removes "[Fact]" from CSharp files and "@Test" from Java files
                 pass
             else:
                 output = False

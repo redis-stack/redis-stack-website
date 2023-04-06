@@ -468,8 +468,9 @@ class Module(Component):
 
 class Client(Component):
     def __init__(self, filepath: str, root: dict = None):
+        print(str("file_path = {}".format(filepath)))
         super().__init__(filepath, root)
-
+        
     '''
     Finds examples. The file name patterns and the id originate from the example.json
     file. If the id is not 'auto', then then we just expect a single file per folder.
