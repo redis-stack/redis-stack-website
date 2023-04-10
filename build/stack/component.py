@@ -470,84 +470,49 @@ class Client(Component):
     def __init__(self, filepath: str, root: dict = None):
         print(str("file_path = {}".format(filepath)))
         super().__init__(filepath, root)
-        
-    '''
-    Finds examples. The file name patterns and the id originate from the example.json
-    file. If the id is not 'auto', then then we just expect a single file per folder.
-    If the id is 'auto' then we search for all files that are matching the file name
-    pattern. The result is a list of example definitions.
 
-    src -  Source path
-    d - Directory in which the test cases are
-    id - ID from the example.json file
-    fname_pattern - File name pattern from the example.json file
-    '''
-    def _find_example_files(self, src, d, exid, fname_pattern):
-        if exid != 'auto':
-            result = [ { 'id': exid, 'source': f'{src}/{d}/{fname_pattern}', 'file': fname_pattern }]
-        else:
-            result = []
-            for cfp in glob.glob(f'{src}/{d}/{fname_pattern}'):
-                with open(cfp) as cf:
-                    fline = cf.readline()
-                    if 'EXAMPLE:' in fline:
-                        exid = fline.split(':')[1].strip()
-                        result.append({ 'id': exid, 'source': cfp, 'file': os.path.basename(cf.name) })
-                        cf.close()
-        return result
+    def _get_example_id_from_file(self, path):
+        with open(path) as cf:
+            fline = cf.readline()
+
+        if 'EXAMPLE:' in fline:
+            return fline.split(':')[1].strip()
+
+        return None
 
     def _copy_examples(self):
         if ex := self.get('examples'):
-            # Example:
-            # {'git_uri': 'https://github.com/dmaier-redislabs/jedis', 'dev_branch': 'master', 'path': 'src/test/java/redis/clients/jedis', 'pattern': '*.java'}
             repo = self._git_clone(ex) 
             dev_branch = ex.get('dev_branch')
             self._checkout(dev_branch, repo, ex)
             path = ex.get('path', '')
-            logging.info(f'Copying {self._id} examples')
+
             src = f'{repo}/{path}/'
             dst = f'{self._root._website.get("path")}/{self._root._website.get("examples_path")}'
 
-            _, dirs, _ = next(os.walk(src))
-            for d in dirs:
-                meta = f'{src}/{d}/example.json'
-                try:
-                    # Example:
-                    # {'id': 'set_and_get', 'source': '/var/folders/0c/ztb05kn57tx4l0vzn85c9vwh0000gn/T/jedis/src/test/java/redis/clients/jedis//doc/SetGetExample.java',
-                    # 'file': 'SetGetExample.java', 'target': './/examples/set_and_get/SetGetExample.java', 'highlight': ['11-22'], 'hidden': ['2-10']}
-                    ex = load_dict(meta)
-                    exid = ex.get('id')
-                    
-                except FileNotFoundError:
-                    logging.warn(f'Example "{meta}" not found for {self._id}: skipping.')
+            logging.info(f'Copying {self._id} examples to {dst}')
+
+            for f in glob.glob(os.path.join(src, ex.get('pattern')), recursive=True):
+                example_id = self._get_example_id_from_file(f)
+
+                if not example_id:
                     continue
 
-                # Returns multiple examples
-                source_files = self._find_example_files(src, d, exid, ex.get('file'))
-                
-                print("source_files = " + str(source_files))
+                example_metadata = {'source': f}
 
-                for ex in source_files:
-                    if not os.path.isfile(ex['source']):
-                        logging.warn(f'"Source {ex.get("source")}" not found for {self._id}: skipping.')
-                        continue
+                mkdir_p(f'{dst}/{example_id}')
+                rsync(example_metadata['source'], f'{dst}/{example_id}/')
 
-                    exid = ex.pop('id')
-                    mkdir_p(f'{dst}/{exid}')
-                    rsync(ex['source'],f'{dst}/{exid}/')
-                    ex['target'] = f'{dst}/{exid}/{ex.get("file")}'
-                    e = Example(self.get('language'), ex['target'])
-                    ex['highlight'] = e.highlight
-                    ex['hidden'] = e.hidden
-                    examples = self._root._examples
-                    if not examples.get(exid):
-                        examples[exid] = {}
-                    
-                    # Example:
-                    # {'source': '/var/folders/0c/ztb05kn57tx4l0vzn85c9vwh0000gn/T/jedis/src/test/java/redis/clients/jedis//doc/SetGetExample.java', 
-                    # 'file': 'SetGetExample.java', 'target': './/examples/set_and_get/SetGetExample.java', 'highlight': ['11-22'], 'hidden': ['2-10']}   
-                    logging.info(f'Example {ex} processed successfully.')
-                    examples[exid][self.get('language')] = ex
+                example_metadata['target'] = f'{dst}/{example_id}/{os.path.basename(f)}'
+                e = Example(self.get('language'), example_metadata['target'])
+                example_metadata['highlight'] = e.highlight
+                example_metadata['hidden'] = e.hidden
+                examples = self._root._examples
+                if example_id not in examples:
+                    examples[example_id] = {}
+
+                logging.info(f'Example {example_id} processed successfully.')
+                examples[example_id][self.get('language')] = example_metadata
 
     def apply(self) -> None:
         logging.info(f'Applying client {self._id}')

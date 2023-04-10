@@ -9,7 +9,7 @@
   "examples": {
       "git_uri": "https://github.com/dmaier-redislabs/StackExchange.Redis",
       "dev_branch": "main",
-      "path": "tests",
+      "path": "tests/Doc",
       "pattern": "*.cs"
   }
 }

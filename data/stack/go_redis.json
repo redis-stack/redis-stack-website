@@ -9,7 +9,7 @@
   "examples": {
       "git_uri": "https://github.com/elena-kolevska/go-redis",
       "dev_branch": "examples",
-      "path": "example",
+      "path": "example/docs",
       "pattern": "*_test.go"
   }
 }

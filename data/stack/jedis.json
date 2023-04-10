@@ -9,7 +9,7 @@
   "examples": {
       "git_uri": "https://github.com/dmaier-redislabs/jedis",
       "dev_branch": "master",
-      "path": "src/test/java/redis/clients/jedis",
+      "path": "src/test/java/redis/clients/jedis/doc",
       "pattern": "*.java"
   }
 }
