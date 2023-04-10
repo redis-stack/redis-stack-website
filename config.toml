@@ -76,14 +76,20 @@ section = ["HTML", "RSS"] # print
   [[menu.main]]
     identifier = "get-started"
     name = "Get started"
+    url = "/docs/getting-started/"
     weight = 1
+  [[menu.main]]
+    identifier = "docs"
+    name = "Docs"
+    url = "/docs/"
+    weight = 2
     columns = 2
   [[menu.main]]
     identifier = "redis"
     name = "Redis"
     url = "/docs/about/"
     pre = "icons/redis-cube.svg"
-    parent = "get-started"
+    parent = "docs"
     weight = 1
   [[menu.main]]
     identifier = "redis-get-started"
@@ -126,7 +132,7 @@ section = ["HTML", "RSS"] # print
     name = "Redis Stack"
     url = "/docs/stack/"
     pre = "icons/stack-icon.svg"
-    parent = "get-started"
+    parent = "docs"
     weight = 2
   [[menu.main]]
     identifier = "stack-get-started"
@@ -164,11 +170,6 @@ section = ["HTML", "RSS"] # print
     url = "/docs/stack/bloom/"
     parent = "redis-stack"
     weight = 6
-  [[menu.main]]
-    identifier = "docs"
-    name = "Docs"
-    url = "/docs/"
-    weight = 2
   [[menu.main]]
     identifier = "commands"
     name = "Commands"
