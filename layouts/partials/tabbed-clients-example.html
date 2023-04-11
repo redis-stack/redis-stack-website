@@ -1,5 +1,6 @@
-{{ $step := .Scratch.Get "step" }}
 {{ $id := .Scratch.Get "example" }}
+{{ $step := .Scratch.Get "step" }}
+{{ $lang := .Scratch.Get "lang" }}
 {{ if not (isset $.Site.Data.examples $id) }}
     {{ warnf "[tabbed-clients-example] Example not found %q for %q" $id $.Page }}
 {{ end }}
@@ -8,7 +9,7 @@
 {{ $languages := index $.Site.Data.examples $id }}
 {{ range $language := $.Site.Params.clientsexamples }}
     {{ $example := index $languages $language }}
-    {{ if $example }}
+    {{ if and ($example) (or (eq $lang "") (eq $lang $language)) }}
         {{ $examplePath := index $example "target" }}
         {{ $options := printf "linenos=false" }}
 
