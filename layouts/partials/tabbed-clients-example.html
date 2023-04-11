@@ -12,7 +12,7 @@
         {{ $examplePath := index $example "target" }}
         {{ $options := printf "linenos=false" }}
 
-        {{ if and (isset $example "steps") (isset $example.steps $step) }}
+        {{ if and (ne $step "") (isset $example "steps") (isset $example.steps $step) }}
             {{ $options = printf "%s,hl_lines=%s" $options (index $example.steps $step) }}
         {{ else }}
             {{ if isset $example "highlight" }}

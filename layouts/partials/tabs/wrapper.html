@@ -1,5 +1,5 @@
 {{ $id := (or (.id) (substr (.Inner | md5) 0 4)) }}
-{{ $tabs := or (.tabs) (dict ("title" "default" "content" .InnerDeindent)) }}
+{{ $tabs := (or (.tabs) (slice (dict "title" "error" "content" "Example not found"))) }}
 
 <div class="codetabs flex flex-wrap box-border mt-0 mb-2 mx-auto" id="{{ $id }}">
     {{ range $i, $tab := $tabs }}
