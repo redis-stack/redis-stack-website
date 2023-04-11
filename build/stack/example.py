@@ -5,6 +5,8 @@ HIDE_START = 'HIDE_START'
 HIDE_END = 'HIDE_END'
 REMOVE_START = 'REMOVE_START'
 REMOVE_END = 'REMOVE_END'
+STEP_START = 'STEP_START'
+STEP_END = 'STEP_END'
 EXAMPLE = 'EXAMPLE:'
 GO_OUTPUT = 'Output:'
 TEST_MARKER = {
@@ -25,6 +27,7 @@ class Example(object):
     content = None
     hidden = None
     highlight = None
+    steps = None
 
     def __init__(self, language: str, path: str) -> None:
         if not PREFIXES.get(language.lower()):
@@ -36,6 +39,7 @@ class Example(object):
             self.content = f.readlines()
         self.hidden = []
         self.highlight = []
+        self.steps = []
         self.make_ranges()
         self.persist(self.path)
 
@@ -51,9 +55,12 @@ class Example(object):
         hidden = None
         remove = False
         output = False
+        step_start = None
         content = []
         hstart = re.compile(f'{PREFIXES[self.language]}\\s?{HIDE_START}')
         hend = re.compile(f'{PREFIXES[self.language]}\\s?{HIDE_END}')
+        sstart = re.compile(f'{PREFIXES[self.language]}\\s?{STEP_START}')
+        send = re.compile(f'{PREFIXES[self.language]}\\s?{STEP_END}')
         rstart = re.compile(f'{PREFIXES[self.language]}\\s?{REMOVE_START}')
         rend = re.compile(f'{PREFIXES[self.language]}\\s?{REMOVE_END}')
         exid = re.compile(f'{PREFIXES[self.language]}\\s?{EXAMPLE}')
@@ -95,6 +102,17 @@ class Example(object):
                     return
                 remove = False
                 output = False
+            elif re.search(sstart, l):
+                if step_start:
+                    logging.error(f'Nested step anchor in {self.path}:L{curr + 1} - aborting.')
+                    return
+                step_start = len(content)
+            elif re.search(send, l):
+                if not step_start:
+                    logging.error(f'Closing step anchor w/o a start in {self.path}:L{curr + 1} - aborting.')
+                    return
+                self.steps.append(f'{step_start}-{len(content)}')
+                step_start = None
             elif re.search(exid, l):
                 output = False
                 pass
