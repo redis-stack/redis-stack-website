@@ -10,7 +10,7 @@
         "stack_docs"
     ],
     "clients": [
-        "stack_exchange_redis",
+        "nredisstack",
         "go_redis",
         "node_redis",
         "redis_py",
