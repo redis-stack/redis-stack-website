@@ -2,7 +2,7 @@
     "id": "node_redis",
     "type": "client",
     "name": "node-redis",
-    "language": "JavaScript",
+    "language": "Node.js",
     "repository": {
         "git_uri": "https://github.com/redis/node-redis"
     },

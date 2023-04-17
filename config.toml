@@ -42,7 +42,7 @@ anchor = "smart"
 [params]
   tagManagerId = "GTM-T4MTBKP"
   # Display and sort order for client examples
-  clientsExamples = ["C#", "Go", "Java", "Node", "Python"]
+  clientsExamples = ["C#", "Go", "Java", "Node.js", "Python"]
 
 # Language configuration
 
