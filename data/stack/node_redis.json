@@ -10,6 +10,6 @@
         "git_uri": "https://github.com/uglide/node-redis",
         "dev_branch": "emb-examples",
         "path": "doctests",
-        "pattern": "*-example.js"
+        "pattern": "*.js"
     }
 }
