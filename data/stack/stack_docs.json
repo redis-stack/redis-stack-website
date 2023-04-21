@@ -6,7 +6,7 @@
     "stack_path": "docs",
     "docs": {
         "git_uri": "https://github.com/redis-stack/redis-stack-docs",
-        "dev_branch": "emb-examples",
+        "dev_branch": "main",
         "path": "docs"
     },
     "misc": {
