@@ -15,7 +15,7 @@ TEST_MARKER = {
 }
 PREFIXES = {
     'python': '#',
-    'javascript': '//',
+    'node.js': '//',
     'java': '//',
     'go': '//',
     'c#': '//',
