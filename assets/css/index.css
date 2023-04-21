@@ -464,6 +464,19 @@ select {
   @apply opacity-60;
 }
 
+.codetabs > .panel:not([aria-expanded]) .highlight .chroma > .language-Go > .hl {
+  tab-size: 3ch;
+  left: -3ch;
+  position: relative;
+}
+
+.codetabs > .panel:not([aria-expanded]) .highlight .chroma > .language-C\# > .hl,
+.codetabs > .panel:not([aria-expanded]) .highlight .chroma > .language-Java > .hl
+{
+  left: -8ch;
+  position: relative;
+}
+
 .codetabs > .panel .highlight .chroma > code > .hl,
 .codetabs > .panel .highlight .chroma > .lntable .lntd code > .hl {
   @apply bg-inherit;
@@ -602,6 +615,8 @@ html {
 .chroma .hl {
   @apply flex bg-indigo-900/80;
 }
+
+code
 
 /* LineNumbersTable */
 .chroma .lnt {
