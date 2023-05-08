@@ -30,9 +30,9 @@
         {{ end }}
         {{ $params := dict "language" $language "contentPath" $examplePath "options" $options }}
         {{ $content := partial "tabs/source.html" $params }}
-        {{ $tabs = $tabs | append (dict "title" $language "content" $content) }}
+        {{ $tabs = $tabs | append (dict "title" $language "content" $content "sourceUrl" (index $example "sourceUrl")) }}
     {{ end }}
 {{ end }}
 
-{{ $params := dict "id" (printf "%s-step%d" $id $step) "tabs" $tabs }}
+{{ $params := dict "id" (printf "%s-step%s" $id $step) "tabs" $tabs "showFooter" (eq $lang "") }}
 {{ partial "tabs/wrapper.html" $params }}
