@@ -144,7 +144,7 @@ The code example use some special comments, such as `HIDE_START` or `REMOVE_STAR
 - `HIDE_END`: End a ‘by default hidden’ code block
 - `REMOVE_START`: Starts a code block that should be entirely removed when taking the example over. This is in particular useful to remove lines of code that do not contribute to the example but are needed to embed the code into a proper test case. Good examples of such code blocks are imports of external libraries or test assertions.
 - `REMOVE_END`: End of a code block that should be removed from the example
-- `STEP_START`: Starts a code block that can be referenced as a step in a step-by-step guide. See step 6 for short code usage examples. 
+- `STEP_START $stepName`: Starts a code block that can be referenced as a step in a step-by-step guide. See step 6 for short code usage examples. 
 - `STEP_END`: End of a code block that can be referenced as a step in step-by-step guides.
 
 ## Add your example to the content page
@@ -152,24 +152,35 @@ The code example use some special comments, such as `HIDE_START` or `REMOVE_STAR
 In order to add a multi-language code example to a content page, the following Hugo shortcode needs to be added:
 
 ```
-{{< clients-example $id >}}
+{{< clients-example $id />}}
 ```
 
 The ID is the same one as specified with `EXAMPLE: $id` in the first line of your code example.
 
-In  order to refer to a particular step placed in between `STEP_START` and `STEP_END` comments in the code example, you can use the second argument to define the zero-based index of the step:
+When converting existing content with redis-cli examples to the new format, you can wrap the existing redis-cli example:
 
 ```
-{{< clients-example $id $stepIndex >}}
+{{< clients-example set_and_get >}}
+> set mykey somevalue
+OK
+> get mykey
+"somevalue"
+{{< /clients-example >}}
+```
+
+In  order to refer to a particular step placed in between `STEP_START $stepName` and `STEP_END` comments in the code example, you should use the second argument to define the name of the step:
+
+```
+{{< clients-example $id $stepName />}}
 ```
 
 If you need to embed an example for a specific programming language, the third argument should be defined:
 ```
-{{< clients-example $id $stepIndex $lang >}}
+{{< clients-example $id $stepName $lang />}}
 ```
-The following example shows the first step of the Python example:
+The following example shows the `connect` step of the Python example:
 ```
-{{< clients-example set_and_get 0 Python >}}
+{{< clients-example set_and_get connect Python />}}
 ```
 The programming language name should match with configuration explained in the "Configure Hugo" section.
 

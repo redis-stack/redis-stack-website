@@ -27,7 +27,7 @@ class Example(object):
     content = None
     hidden = None
     highlight = None
-    steps = None
+    named_steps = None
 
     def __init__(self, language: str, path: str) -> None:
         if not PREFIXES.get(language.lower()):
@@ -39,7 +39,7 @@ class Example(object):
             self.content = f.readlines()
         self.hidden = []
         self.highlight = []
-        self.steps = []
+        self.named_steps = {}
         self.make_ranges()
         self.persist(self.path)
 
@@ -56,6 +56,7 @@ class Example(object):
         remove = False
         output = False
         step_start = None
+        step_name = None
         content = []
         hstart = re.compile(f'{PREFIXES[self.language]}\\s?{HIDE_START}')
         hend = re.compile(f'{PREFIXES[self.language]}\\s?{HIDE_END}')
@@ -106,13 +107,23 @@ class Example(object):
                 if step_start:
                     logging.error(f'Nested step anchor in {self.path}:L{curr + 1} - aborting.')
                     return
-                step_start = len(content)
+                step_start = len(content) + 1
+                try:
+                    step_name = l.split(STEP_START)[1].strip()
+                except IndexError:
+                    step_name = None
             elif re.search(send, l):
                 if not step_start:
                     logging.error(f'Closing step anchor w/o a start in {self.path}:L{curr + 1} - aborting.')
                     return
-                self.steps.append(f'{step_start}-{len(content)}')
+
+                if step_name in self.named_steps:
+                    logging.error(f'Duplicate step name "{step_name}" in {self.path}:L{curr + 1} - aborting.')
+                    return
+
+                self.named_steps[step_name] = f'{step_start}-{len(content)}'
                 step_start = None
+                step_name = None
             elif re.search(exid, l):
                 output = False
                 pass

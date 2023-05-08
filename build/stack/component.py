@@ -504,7 +504,7 @@ class Client(Component):
                 e = Example(self.get('language'), example_metadata['target'])
                 example_metadata['highlight'] = e.highlight
                 example_metadata['hidden'] = e.hidden
-                example_metadata['steps'] = e.steps
+                example_metadata['named_steps'] = e.named_steps
                 examples = self._root._examples
                 if example_id not in examples:
                     examples[example_id] = {}
