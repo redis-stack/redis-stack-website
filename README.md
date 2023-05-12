@@ -168,6 +168,21 @@ OK
 {{< /clients-example >}}
 ```
 
+If redis-cli example is too long you can hide some lines by specifying the limit as the fourth argument:
+
+```
+{{< clients-example set_and_get "" "" 2 >}}
+> set mykey somevalue
+OK
+> get mykey <-- this line will be hidden
+"somevalue" <-- this line will be hidden
+{{< /clients-example >}}
+```
+
+
+```
+{{< clients-example set_and_get 10 >}}
+
 In  order to refer to a particular step placed in between `STEP_START $stepName` and `STEP_END` comments in the code example, you should use the second argument to define the name of the step:
 
 ```
