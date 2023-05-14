@@ -417,6 +417,10 @@
                 ],
                 "repository": "github.com/Grokzen/redis-py-cluster"
             },
+            "aioredis-cluster": {
+                "description": "Redis Cluster client implementation based on aioredis v1.x.x",
+                "repository": "github.com/DriverX/aioredis-cluster"
+            },
             "walrus": {
                 "description": "Lightweight Python utilities for working with Redis.",
                 "recommended": true,
@@ -1069,6 +1073,11 @@
             "redis-client-scala-netty": {
                 "description": "A Redis client.",
                 "repository": "github.com/andreyk0/redis-client-scala-netty"
+            },
+            "redicl": {
+                "description": "A lean and mean redis client implementation that uses only the Scala standard library. Available for the JVM and native.",
+                "homepage": "https://github.com/jodersky/redicl",
+                "repository": "github.com/jodersky/redicl"
             },
             "sedis": {
                 "description": "a thin scala wrapper for the popular Redis Java client, Jedis",
@@ -2356,6 +2365,15 @@
                 ],
                 "repository": "github.com/sewenew/redis-protobuf"
             },
+            "RedisStateMachine": {
+                "license": "Redis Source Available License",
+                "description": "A module for storing state machines, and transitioning them in Redis",
+                "github": [
+                    "chayim",
+                    "RedisLabs"
+                ],
+                "repository": "github.com/RedisLabsModules/redis-state-machine"
+            },
             "redex": {
                 "license": "AGPL-3.0",
                 "description": "Extension modules to Redis' native data types and commands",
@@ -2503,6 +2521,14 @@
                 ],
                 "repository": "github.com/sklivvz/cthulhu"
             },
+            "RedisCBOR": {
+                "license": "MIT",
+                "description": "A CBOR data type for Redis",
+                "github": [
+                    "dahomey-technologies"
+                ],
+                "repository": "github.com/dahomey-technologies/RedisCBOR"
+            },
             "redis-interval-module": {
                 "license": "MIT",
                 "description": "Redis module for creation and manipulation of interval set.",
@@ -2630,9 +2656,17 @@
             }
         },
         "other": {
+            "redis-rdb-cli": {
+                "description": "A tool that can parse, filter, split, merge rdb and analyze memory usage offline. It can also sync 2 redis data and allow user define there own sink service to migrate redis data to somewhere.",
+                "repository": "github.com/leonchen83/redis-rdb-cli"
+            },
             "Redis Operator": {
                 "description": "Redis Operator creates/configures/manages high availability Redis with Sentinel automatic failover atop Kubernetes.",
                 "repository": "github.com/spotahome/redis-operator"
+            },
+            "redis-shake": {
+                "description": "redis-shake is a tool for Redis data migration and data filtering.",
+                "repository": "github.com/alibaba/RedisShake"
             },
             "IBM Operator for Redis Cluster": {
                 "description": "The goal of this project is to simplify the deployment and management of a Redis cluster in a Kubernetes environment. It started internally at Amadeus in 2016, where it was initially designed to run on Openshift. This is the third version of the Redis operator, which leverages the Operator SDK framework for operators.",
@@ -2642,6 +2676,10 @@
             "Prometheus Redis Metrics Exporter": {
                 "description": "Prometheus exporter for Redis metrics.",
                 "repository": "github.com/oliver006/redis_exporter"
+            },
+            "RIOT": {
+                "description": "Redis Input/Output Tools (RIOT) is a series of utilities designed to help you get data in and out of Redis.",
+                "repository": "github.com/redis-developer/riot"
             }
         },
         "cli": {
