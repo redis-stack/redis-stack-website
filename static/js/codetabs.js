@@ -11,6 +11,11 @@ function copyCodeToClipboard(panelId) {
   setTimeout(() => tooltip.style.display = 'none', 1000);
 }
 
+function toggleVisibleLines(evt) {
+  document.getElementById(evt.getAttribute('aria-controls'))
+    .toggleAttribute('aria-expanded');
+}
+
 function switchCodeTab(tabGroup, tabId) {
   // Synchronize tab selection to relevant page tabs
   for (const tv of document.querySelectorAll('.codetabs')) {
