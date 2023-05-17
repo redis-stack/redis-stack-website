@@ -179,10 +179,6 @@ OK
 {{< /clients-example >}}
 ```
 
-
-```
-{{< clients-example set_and_get 10 >}}
-
 In  order to refer to a particular step placed in between `STEP_START $stepName` and `STEP_END` comments in the code example, you should use the second argument to define the name of the step:
 
 ```
