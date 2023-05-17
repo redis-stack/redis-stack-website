@@ -22,6 +22,7 @@ public/**
 resources/**
 tmp/**
 content/**
+examples/**
 
 # Local Netlify folder
 .netlify

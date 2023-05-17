@@ -51,6 +51,9 @@ module.exports = {
           },
         },
       }),
+		rounded: {
+			mx: '0.25rem',
+		},
     },
   },
   plugins: [
