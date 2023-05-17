@@ -12,7 +12,7 @@
         {{ $tid := printf "%s_%s" (replace (replace (index $tab "title") "#" "sharp") "." "") $id }}
         {{ $pid := printf "panel_%s" $tid }}
         {{ $quickStartSlug := (replace (replace (index $tab "title") "." "") "C#" "dotnet" | lower) }}
-        <input tabindex="1" type="radio" name="{{ $id }}" id="{{ $tid }}" class="radiotab w-0 h-0"
+        <input tabindex="1" type="radio" name="{{ $id }}" id="{{ $tid }}" data-lang="{{ $quickStartSlug }}" class="radiotab w-0 h-0"
                {{ if eq $i 0 }}checked{{ end }}
         />
         <label class="justify-left label ml-4 pt-3.5 px-3 pb-1 cursor-pointer text-sm text-center bg-slate-900
