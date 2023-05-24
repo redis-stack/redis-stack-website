@@ -23,6 +23,7 @@ resources/**
 tmp/**
 content/**
 examples/**
+docsbuild/**
 
 # Local Netlify folder
 .netlify

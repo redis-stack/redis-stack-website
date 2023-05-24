@@ -1,0 +1,6 @@
+site_name: Redis Stack Website Documentation
+theme:
+  name: material
+nav:
+    - How to add a code example: index.md
+    - Code examples index: examples.md

@@ -36,6 +36,10 @@ build:
 	@cp -R data/*.json $(HUGO_CONTENT)
 	@hugo $(HUGO_DEBUG) $(HUGO_BUILD)
 
+docs: build
+	@python3 build/generate_examples_index.py
+	@mkdocs build -d docsbuild
+
 up:
 	hugo server $(HUGO_DEBUG) $(HUGO_SERVER) -w --environment $(ENV)
 
