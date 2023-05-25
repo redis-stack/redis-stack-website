@@ -1,4 +1,8 @@
-# Prereqs
+## Documentation
+- [How to add a multi-language code example to redis.io](https://redis-stack.github.io/redis-stack-website/)
+- [Code examples index](https://redis-stack.github.io/redis-stack-website/examples/)
+
+## Prereqs
 `pip install -r requirements.txt`
 `npm install`
 `brew install hugo`
