@@ -4,8 +4,8 @@
     "type": "module",
     "name": "Search",
     "description": "Secondary index operations",
-    "stack_path": "docs/stack/search",
-    "stack_weight": 10,
+    "stack_path": "docs/query-and-search",
+    "stack_weight": 40,
     "repository": {
         "git_uri": "https://github.com/redisearch/redisearch"
     },
