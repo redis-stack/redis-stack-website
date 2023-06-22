@@ -5,12 +5,12 @@
     "description": "Redis Stack docs",
     "stack_path": "docs",
     "docs": {
-        "git_uri": "https://github.com/redis-stack/redis-stack-docs",
+        "git_uri": "https://github.com/elena-kolevska/redis-stack-docs",
         "dev_branch": "main",
         "path": "docs"
     },
     "misc": {
-        "git_uri": "https://github.com/redis-stack/redis-stack-docs",
+        "git_uri": "https://github.com/elena-kolevska/redis-stack-docs",
         "dev_branch": "main",
         "payload": [
             {
@@ -28,6 +28,10 @@
             {
                 "src": "about/",
                 "dst": "docs/about/"
+            },
+            {
+                "src": "docs/stack/get-started/install-stack",
+                "dst": "docs/getting-started"
             }
         ]
     }

@@ -4,8 +4,8 @@
     "type": "module",
     "name": "Bloom",
     "description": "Probabilistic Data Structures",
-    "stack_path": "docs/stack/bloom",
-    "stack_weight": 15,
+    "stack_path": "docs/data-types/probabilistic",
+    "stack_weight": 140,
     "repository": {
         "git_uri": "https://github.com/redisbloom/redisbloom"
     },
@@ -38,7 +38,7 @@
         }
     },
     "docs": {
-        "git_uri": "https://github.com/redisbloom/redisbloom",
+        "git_uri": "https://github.com/elena-kolevska/RedisBloom",
         "dev_branch": "master",
         "path": "docs/docs"
     },
