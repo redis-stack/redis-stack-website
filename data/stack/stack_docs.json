@@ -11,7 +11,7 @@
     },
     "misc": {
         "git_uri": "https://github.com/elena-kolevska/redis-stack-docs",
-        "dev_branch": "main",
+        "dev_branch": "docs-reorg",
         "payload": [
             {
                 "src": "community/"
