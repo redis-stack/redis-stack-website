@@ -1033,4 +1033,5 @@ input[type="radio"] {
     display: inline;
     max-height: 1em;
     padding: 0 0.1em;
+    width: 2em;
 }
