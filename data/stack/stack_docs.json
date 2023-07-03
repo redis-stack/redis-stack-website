@@ -29,12 +29,16 @@
                 "dst": "docs/getting-started"
             },
             {
-                "src": "docs/stack/get-started/clients",
-                "dst": "docs"
+                "src": "docs/stack/get-started/om-clients",
+                "dst": "docs/clients/"
             },
             {
                 "src": "docs/stack/about",
                 "dst": "docs"
+            },
+            {
+                "src": "docs/ui/insight",
+                "dst": "docs/ui"
             }
         ]
     }
