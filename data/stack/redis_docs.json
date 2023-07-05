@@ -103,8 +103,8 @@
         }
     },
     "docs": {
-        "git_uri": "https://github.com/elena-kolevska/redis-doc",
-        "dev_branch": "taxonomy-reorg-1",
+        "git_uri": "https://github.com/redis/redis-doc",
+        "dev_branch": "master",
         "path": "docs"
     },
     "data": {
