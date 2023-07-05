@@ -1027,3 +1027,11 @@ input[type="radio"] {
   -moz-appearance: none;
   appearance: none;
 }
+
+
+.stack-logo-inline {
+    display: inline;
+    max-height: 1em;
+    padding: 0 0.1em;
+    width: 2em;
+}

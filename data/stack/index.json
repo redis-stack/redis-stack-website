@@ -19,7 +19,6 @@
     "modules": [
         "redisearch",
         "redisjson",
-        "redisgraph",
         "redistimeseries",
         "redisbloom"
     ],

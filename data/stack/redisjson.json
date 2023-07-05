@@ -4,7 +4,7 @@
     "type": "module",
     "name": "JSON",
     "description": "JSON data structure",
-    "stack_path": "docs/stack/json",
+    "stack_path": "docs/data-types/json",
     "stack_weight": 11,
     "repository": {
         "git_uri": "https://github.com/redisjson/redisjson"
