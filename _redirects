@@ -63,3 +63,19 @@
 /docs/stack/graph/path_algorithm/ https://docs.redis.com/latest/stack/previous-features/graph/
 /docs/stack/graph/references/ https://docs.redis.com/latest/stack/previous-features/graph/
 /docs/stack/graph/known_limitations/ https://docs.redis.com/latest/stack/previous-features/graph/
+/commands/?group=graph https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.config-get/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.config-set/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.delete/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.constraint-create/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.constraint-drop/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.explain/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.list/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.profile/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.query/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.ro_query/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.slowlog/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+
+
+
+
