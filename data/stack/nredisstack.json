@@ -7,7 +7,7 @@
       "git_uri": "https://github.com/redis/NRedisStack"
   },
   "examples": {
-      "git_uri": "https://github.com/redis/NRedisStack",
+      "git_uri": "https://github.com/elena-kolevska/NRedisStack",
       "dev_branch": "master",
       "path": "tests/Doc",
       "pattern": "*.cs"
