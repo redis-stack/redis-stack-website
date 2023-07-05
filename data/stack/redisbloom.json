@@ -38,7 +38,7 @@
         }
     },
     "docs": {
-        "git_uri": "https://github.com/elena-kolevska/RedisBloom",
+        "git_uri": "https://github.com/redisbloom/redisbloom",
         "dev_branch": "master",
         "path": "docs/docs"
     },

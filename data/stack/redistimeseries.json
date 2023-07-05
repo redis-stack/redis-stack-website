@@ -22,7 +22,7 @@
         }
     },
     "docs": {
-        "git_uri": "https://github.com/elena-kolevska/RedisTimeSeries",
+        "git_uri": "https://github.com/redistimeseries/redistimeseries",
         "dev_branch": "master",
         "path": "docs/docs"
     },

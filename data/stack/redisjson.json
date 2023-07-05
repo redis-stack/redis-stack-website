@@ -22,7 +22,7 @@
         }
     },
     "docs": {
-        "git_uri": "https://github.com/elena-kolevska/RedisJSON",
+        "git_uri": "https://github.com/redisjson/redisjson",
         "dev_branch": "master",
         "path": "docs/docs"
     },
