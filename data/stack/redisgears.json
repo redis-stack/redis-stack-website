@@ -1,0 +1,37 @@
+{
+	"id": "redisgears",
+	"module_id": "RedisGears",
+	"type": "module",
+	"name": "RedisGears",
+	"description": "React to database events and execute functions",
+	"stack_path": "docs/interact/programmability/triggers-and-functions",
+	"stack_weight": 16,
+	"repository": {
+		"git_uri": "https://github.com/RedisGears/RedisGears"
+	},
+	"commands": {
+		"git_uri": "https://github.com/RedisGears/RedisGears",
+		"dev_branch": "master",
+		"defs": "commands.json",
+		"path": "docs/commands"
+	},
+	"groups": {
+		"gears": {
+			"display": "Gears",
+			"description": "React to database events and execute functions"
+		}
+	},
+	"docs": {
+		"git_uri": "https://github.com/RedisGears/RedisGears",
+		"dev_branch": "master",
+		"path": "docs/docs"
+	},
+	"release": {
+		"source": "docs",
+		"tags": true,
+		"include_tag_regex": "v([0-9]+\\.[0-9]+\\.[0-9]+)",
+		"exclude_tag_regexes": [],
+		"include_branch_regex": "([0-9]+\\.[0-9])",
+		"exclude_branch_regexes": []
+	}
+}
