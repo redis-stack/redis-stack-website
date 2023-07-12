@@ -23,6 +23,9 @@
             {{- end }}
           </div>
         {{ end }}
+        {{ if .Params.bannerText }}
+          {{ partial "banner-article.html" . }}
+        {{ end }}
         {{ $syntax := .Params.syntax_fmt }}
         {{ if isset .Params "syntax" }}
           {{ if .Params.syntax }}
