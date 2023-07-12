@@ -19,9 +19,9 @@
     "modules": [
         "redisearch",
         "redisjson",
-        "redisgraph",
         "redistimeseries",
-        "redisbloom"
+        "redisbloom",
+        "redisgears"
     ],
     "assets": [],
     "_assets": [

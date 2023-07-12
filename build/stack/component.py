@@ -169,6 +169,9 @@ class Component(dict):
 
     def _get_docs(self) -> list:
         docs = self.get('docs')
+        if docs is None:
+            return []
+
         repo = self._git_clone(docs)
         branch = Component._get_dev_branch(docs)
         self._checkout(branch, repo, docs)

@@ -4,11 +4,6 @@
     "name": "Redis Stack",
     "description": "Redis Stack docs",
     "stack_path": "docs",
-    "docs": {
-        "git_uri": "https://github.com/redis-stack/redis-stack-docs",
-        "dev_branch": "main",
-        "path": "docs"
-    },
     "misc": {
         "git_uri": "https://github.com/redis-stack/redis-stack-docs",
         "dev_branch": "main",
@@ -28,6 +23,22 @@
             {
                 "src": "about/",
                 "dst": "docs/about/"
+            },
+            {
+                "src": "docs/stack/get-started/install-stack",
+                "dst": "docs/getting-started"
+            },
+            {
+                "src": "docs/stack/get-started/om-clients",
+                "dst": "docs/clients/"
+            },
+            {
+                "src": "docs/stack/about",
+                "dst": "docs"
+            },
+            {
+                "src": "docs/ui/insight",
+                "dst": "docs/ui"
             }
         ]
     }

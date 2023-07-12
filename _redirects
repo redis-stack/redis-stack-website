@@ -50,3 +50,32 @@
 /topics/transactions        /docs/manual/transactions/
 /topics/twitter-clone       /docs/reference/patterns/twitter-clone/
 /topics/whos-using-redis    /about/users/
+/docs/stack/graph/          https://docs.redis.com/latest/stack/previous-features/graph/
+/docs/stack/graph/commands/ https://docs.redis.com/latest/stack/previous-features/graph/
+/docs/stack/graph/clients/  https://docs.redis.com/latest/stack/previous-features/graph/
+/docs/stack/graph/configuration/ https://docs.redis.com/latest/stack/previous-features/graph/
+/docs/stack/graph/design/   https://docs.redis.com/latest/stack/previous-features/graph/
+/docs/stack/graph/design/client_spec/ https://docs.redis.com/latest/stack/previous-features/graph/
+/docs/stack/graph/design/result_structure/ https://docs.redis.com/latest/stack/previous-features/graph/
+/docs/stack/graph/design/bulk_spec/ https://docs.redis.com/latest/stack/previous-features/graph/
+/docs/stack/graph/datatypes/ https://docs.redis.com/latest/stack/previous-features/graph/
+/docs/stack/graph/cypher_support/ https://docs.redis.com/latest/stack/previous-features/graph/
+/docs/stack/graph/path_algorithm/ https://docs.redis.com/latest/stack/previous-features/graph/
+/docs/stack/graph/references/ https://docs.redis.com/latest/stack/previous-features/graph/
+/docs/stack/graph/known_limitations/ https://docs.redis.com/latest/stack/previous-features/graph/
+/commands/?group=graph https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.config-get/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.config-set/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.delete/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.constraint-create/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.constraint-drop/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.explain/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.list/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.profile/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.query/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.ro_query/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+/commands/graph.slowlog/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
+
+
+
+

@@ -102,13 +102,13 @@ section = ["HTML", "RSS"] # print
   [[menu.main]]
     identifier = "data-types"
     name = "Data types"
-    url = "/docs/manual/data-types/"
+    url = "/docs/data-types/"
     parent = "redis"
     weight = 2
   [[menu.main]]
     identifier = "redis-cli"
     name = "Redis CLI"
-    url = "/docs/manual/cli/"
+    url = "/docs/ui/cli/"
     parent = "redis"
     weight = 3
   [[menu.main]]
@@ -120,13 +120,13 @@ section = ["HTML", "RSS"] # print
   [[menu.main]]
     identifier = "persistence"
     name = "Persistence"
-    url = "/docs/manual/persistence/"
+    url = "/docs/management/persistence/"
     parent = "redis"
     weight = 5
   [[menu.main]]
     identifier = "scaling"
     name = "Scaling"
-    url = "/docs/manual/scaling/"
+    url = "/docs/management/scaling/"
     parent = "redis"
     weight = 6
   [[menu.main]]
@@ -139,13 +139,13 @@ section = ["HTML", "RSS"] # print
   [[menu.main]]
     identifier = "stack-get-started"
     name = "Get started"
-    url = "/docs/stack/get-started/"
+    url = "/docs/getting-started/install-stack/"
     parent = "redis-stack"
     weight = 1
   [[menu.main]]
     identifier = "stack-clients"
     name = "Stack clients"
-    url = "/docs/stack/get-started/clients/"
+    url = "/docs/clients/"
     parent = "redis-stack"
     weight = 2
   [[menu.main]]
@@ -157,19 +157,19 @@ section = ["HTML", "RSS"] # print
   [[menu.main]]
     identifier = "json"
     name = "JSON"
-    url = "/docs/stack/json/"
+    url = "/docs/data-types/json/"
     parent = "redis-stack"
     weight = 4
   [[menu.main]]
     identifier = "search-stack"
     name = "Search"
-    url = "/docs/stack/search/"
+    url = "/docs/interact/search-and-query/"
     parent = "redis-stack"
     weight = 5
   [[menu.main]]
     identifier = "probabilistic"
     name = "Probabilistic"
-    url = "/docs/stack/bloom/"
+    url = "/docs/data-types/probabilistic/"
     parent = "redis-stack"
     weight = 6
   [[menu.main]]
