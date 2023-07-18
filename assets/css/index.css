@@ -507,10 +507,15 @@ select {
   position: relative;
 }
 
-.codetabs > .panel:not([aria-expanded]) .highlight .chroma > .language-C\# > .hl,
-.codetabs > .panel:not([aria-expanded]) .highlight .chroma > .language-Java > .hl
+.codetabs > .panel:not([aria-expanded]) .highlight .chroma > .language-C\# > .hl
 {
   left: -8ch;
+  position: relative;
+}
+
+.codetabs > .panel:not([aria-expanded]) .highlight .chroma > .language-Java > .hl
+{
+  left: -4ch;
   position: relative;
 }
 
