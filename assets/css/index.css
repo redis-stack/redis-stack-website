@@ -1040,3 +1040,10 @@ input[type="radio"] {
     padding: 0 0.1em;
     width: 2em;
 }
+
+.site-banner {
+  @apply my-2 text-base
+}
+.site-banner a {
+  @apply text-indigo-400
+}

@@ -1,0 +1,25 @@
+{{ if isset $.Site.Params "bannercontent" }}
+  {{ $content := $.Site.Params.bannercontent }}
+  {{ $between := slice }}
+  {{ if isset $.Site.Params "bannerfromdate" }}
+    {{ $from := printf "(Date.parse('%s') <= Date.now())" (time $.Site.Params.bannerfromdate) }}
+    {{ $between = $between | append $from }}
+  {{ end }}
+  {{ if isset $.Site.Params "banneruntildate" }}
+    {{ $until := printf "(Date.parse('%s') >= Date.now())" (time $.Site.Params.banneruntildate) }}
+    {{ $between = $between | append $until }}
+  {{ end }}
+  {{ $cond := printf "(%s)" (delimit $between " && ") }}
+  {{ if eq (len $between) 0 }}
+    {{ $cond = "(true)" }}
+  {{ end }}
+<div class="site-banner hidden">
+  <script>
+    const el = document.querySelector('.site-banner');
+    if {{ $cond | safeJS }} {
+      el.classList.remove('hidden');
+    }
+  </script>
+  {{ $content | emojify | markdownify }}
+</div>
+{{ end }}

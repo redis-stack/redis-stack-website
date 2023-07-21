@@ -43,6 +43,10 @@ anchor = "smart"
   tagManagerId = "GTM-T4MTBKP"
   # Display and sort order for client examples
   clientsExamples = ["C#", "Go", "Java", "Node.js", "Python"]
+  # Banner parameters
+  bannerContent = "I **am** a _banner_, short and sweet :heart: Appreciate my visuals and click [my link](https://acme.com)."
+  bannerFromDate = 2023-07-18
+  bannerUntilDate = 2023-07-23
 
 # Language configuration
 

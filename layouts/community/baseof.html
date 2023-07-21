@@ -57,7 +57,8 @@
         height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     {{ end -}}
 
-    <header class="sticky top-0 z-50 flex items-center w-full text-xs lg:text-sm font-semibold lg:font-medium text-white shadow bg-midnight-700">
+    <header class="sticky flex-col top-0 z-50 flex items-center w-full text-xs lg:text-sm font-semibold lg:font-medium text-white shadow bg-midnight-700">
+      {{ partial "banner.html" . }}
       {{ partial "navbar.html" . }}
     </header>
 
