@@ -1042,8 +1042,6 @@ input[type="radio"] {
 }
 
 .site-banner {
-  @apply my-2 text-base
-}
-.site-banner a {
-  @apply text-indigo-400
+  background: radial-gradient(#F2F3FC,#D2D7FE);
+  @apply w-full py-2 text-center font-medium text-base text-midnight-700
 }
