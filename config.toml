@@ -44,9 +44,10 @@ anchor = "smart"
   # Display and sort order for client examples
   clientsExamples = ["C#", "Go", "Java", "Node.js", "Python"]
   # Banner parameters
-  bannerContent = "I **am** a _banner_, short and sweet :heart: Appreciate my visuals and click [my link](https://acme.com)."
+  bannerContent = "I'm a banner, short and sweet"
+  bannerLink = "https://redis.io/download"
   bannerFromDate = 2023-07-18
-  bannerUntilDate = 2023-07-23
+  bannerUntilDate = 2023-07-28
 
 # Language configuration
 
@@ -54,10 +55,11 @@ anchor = "smart"
 
 [languages.en]
 title = "Redis"
-description = "Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker"
 languageName ="English"
 # Weight used for sorting.
 weight = 1
+[languages.en.params]
+description = "Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker"
 
 [markup]
   [markup.goldmark]
