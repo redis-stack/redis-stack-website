@@ -2,11 +2,11 @@
   {{ $content := $.Site.Params.bannercontent }}
   {{ $between := slice }}
   {{ if isset $.Site.Params "bannerfromdate" }}
-    {{ $from := printf "(Date.parse('%s') <= Date.now())" (time $.Site.Params.bannerfromdate) }}
+    {{ $from := printf "(Date.parse('%s') <= Date.now())" (dateFormat "2006-01-02T15:04:05Z0700" (time $.Site.Params.bannerfromdate)) }}
     {{ $between = $between | append $from }}
   {{ end }}
   {{ if isset $.Site.Params "banneruntildate" }}
-    {{ $until := printf "(Date.parse('%s') >= Date.now())" (time $.Site.Params.banneruntildate) }}
+    {{ $until := printf "(Date.parse('%s') >= Date.now())" (dateFormat "2006-01-02T15:04:05Z0700" (time $.Site.Params.banneruntildate)) }}
     {{ $between = $between | append $until }}
   {{ end }}
   {{ $cond := printf "(%s)" (delimit $between " && ") }}
