@@ -36,20 +36,25 @@ class Component(dict):
         self._repository = self.get('repository', None)
 
     @staticmethod
-    def _dump_payload(spath: str, dpath: str, payload: list) -> None:
+    def _dump_payload(spath: str, dpath: str, payload: list, repo: str = None, repo_branch: str = None) -> None:
         if not payload:
             return []
         files = []
         for dump in payload:
             src = dump.get('src')
             dst = dump.get('dst', src)
-            s = f'{spath}/{src}'
-            d = f'{dpath}/{dst}'
+            proc_md = dump.get('proc_md')
+            s = os.path.join(spath, src)
+            d = os.path.join(dpath, dst)
             if os.path.isfile(s):
                 mkdir_p(os.path.dirname(d))
             else:
                 mkdir_p(d)
             files += rsync(s, d)
+
+            if proc_md:
+                Component._add_meta_fm(repo, repo_branch, d, src)
+
             search = dump.get('search', None)
             replace = dump.get('replace', None)
             if search:
@@ -70,12 +75,16 @@ class Component(dict):
     def _add_meta_fm(repo: str, branch: str, base: str, path: str) -> None:
         _, dirs, files = next(os.walk(base))
         for d in dirs:
-            Component._add_meta_fm(repo, branch, f'{base}/{d}', f'{path}/{d}')
+            spath = path.split('/')[-1]
+            if spath == d:
+                Component._add_meta_fm(repo, branch, os.path.join(base, d), path)
+            else:
+                Component._add_meta_fm(repo, branch, os.path.join(base, d), os.path.join(path, d))
         for f in files:
             if not f.endswith('.md'):
                 continue
-            md = Markdown(f'{base}/{f}')
-            md.add_github_metadata(repo, branch, f'{path}/{f}')
+            md = Markdown(os.path.join(base, f))
+            md.add_github_metadata(repo, branch, os.path.join(path, f))
             md.persist()
 
     def _git_clone(self, repo) -> str:
@@ -187,10 +196,11 @@ class Component(dict):
 
     def _get_misc(self) -> None:
         misc = self.get('misc')
+        payload = misc.get('payload')
         repo = self._git_clone(misc)
         branch = Component._get_dev_branch(misc)
         self._checkout(branch, repo, misc)
-        Component._dump_payload(repo, self._root._content, misc.get('payload'))
+        Component._dump_payload(repo, self._root._content, payload, misc.get('git_uri'), branch)
         return
     
     def _repo_env_dir(self) -> str:

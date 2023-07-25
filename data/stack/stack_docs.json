@@ -22,23 +22,28 @@
             },
             {
                 "src": "about/",
-                "dst": "docs/about/"
+                "dst": "docs/about/",
+                "proc_md": true
             },
             {
                 "src": "docs/stack/get-started/install-stack",
-                "dst": "docs/getting-started"
+                "dst": "docs/getting-started",
+                "proc_md": true
             },
             {
                 "src": "docs/stack/get-started/om-clients",
-                "dst": "docs/clients/"
+                "dst": "docs/clients/",
+                "proc_md": true
             },
             {
                 "src": "docs/stack/about",
-                "dst": "docs"
+                "dst": "docs",
+                "proc_md": true
             },
             {
                 "src": "docs/ui/insight",
-                "dst": "docs/ui"
+                "dst": "docs/ui",
+                "proc_md": true
             }
         ]
     }
