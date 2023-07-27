@@ -2,6 +2,7 @@ import logging
 import glob
 import os
 import semver
+import uuid
 from typing import Tuple
 from urllib.parse import urlparse, ParseResult
 
@@ -281,9 +282,14 @@ class Stack(Component):
                 mkdir_p(path)
                 for pname, project in group.items():
                     filename = f'{path}/{slugify(gname)}_{slugify(pname)}.md'
+                    # cheap hack to workaround two (or more) clients that resolve to the same filename
+                    if kname == 'clients' and os.path.isfile(filename):
+                        uu = uuid.uuid4().hex[0:7]
+                        filename = f'{path}/{slugify(gname)}_{slugify(pname)}{uu}.md'
                     md = Markdown(filename, True)
                     md.payload = ''
                     md.fm_data['recommended'] = False
+                    md.fm_data['official'] = False
                     md.fm_data.update(project)
                     md.fm_data.update({'title': pname})
                     md.fm_data.update({'group': gname})
