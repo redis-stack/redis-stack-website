@@ -4,6 +4,8 @@
 {{ end }}
 
 {{ define "main" }}
+  {{ $isModule := isset .Params "module" }}
+  {{ $component := cond $isModule .Params.module "Redis" }}
   <main class="docs w-full max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 md:flex gap-16">
     {{ partial "docs-nav.html" . }}
     <div class="w-full max-w-[47rem] py-12">
@@ -17,7 +19,7 @@
         </h1>
         {{ if (isset .Params "deprecated_since") }}
           <div class="border-l-8 pl-4">
-            <p>As of Redis version {{ .Params.deprecated_since }}, this command is regarded as deprecated.</p>
+            <p>As of {{ $component }} version {{ .Params.deprecated_since }}, this command is regarded as deprecated.</p>
             {{- if (isset .Params "replaced_by") }}
             <p>It can be replaced by {{ .Params.replaced_by | markdownify }} when migrating or writing new code.</p>
             {{- end }}
@@ -38,7 +40,7 @@
         </pre>
         {{ end }}
         <dl class="grid grid-cols-[auto,1fr] gap-x-2 mb-12">
-          {{ if not (isset .Params "module") }}
+          {{ if not $isModule }}
           <dt class="font-semibold text-slate-900">Available since:</dt>
           <dd>{{ .Params.since }}</dd>
           {{ else }}
