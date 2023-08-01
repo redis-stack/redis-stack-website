@@ -1,8 +1,8 @@
 {
 	"id": "redisgears",
-	"module_id": "RedisGears",
+	"module_id": "triggersandfunctions",
 	"type": "module",
-	"name": "RedisGears",
+	"name": "Triggers and Functions",
 	"description": "React to database events and execute functions",
 	"stack_path": "docs/interact/programmability/triggers-and-functions",
 	"stack_weight": 16,
@@ -16,8 +16,8 @@
 		"path": "docs/commands"
 	},
 	"groups": {
-		"gears": {
-			"display": "Gears",
+		"triggersandfunctions": {
+			"display": "Triggers and functions",
 			"description": "React to database events and execute functions"
 		}
 	},

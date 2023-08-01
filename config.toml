@@ -173,6 +173,12 @@ section = ["HTML", "RSS"] # print
     parent = "redis-stack"
     weight = 6
   [[menu.main]]
+    identifier = "triggersandfunctions"
+    name = "Triggers and functions"
+    url = "/docs/interact/programmability/triggers-and-functions/"
+    parent = "redis-stack"
+    weight = 7
+  [[menu.main]]
     identifier = "commands"
     name = "Commands"
     url = "/commands/"
