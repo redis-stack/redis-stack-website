@@ -1,6 +1,6 @@
 {
 	"id": "redisgears",
-	"module_id": "triggersandfunctions",
+	"module_id": "triggers-and-functions",
 	"type": "module",
 	"name": "Triggers and Functions",
 	"description": "React to database events and execute functions",
@@ -16,7 +16,7 @@
 		"path": "docs/commands"
 	},
 	"groups": {
-		"triggersandfunctions": {
+		"triggers-and-functions": {
 			"display": "Triggers and functions",
 			"description": "React to database events and execute functions"
 		}
