@@ -2,7 +2,7 @@
 	"id": "redisgears",
 	"module_id": "triggers-and-functions",
 	"type": "module",
-	"name": "Triggers and Functions",
+	"name": "Triggers and functions",
 	"description": "React to database events and execute functions",
 	"stack_path": "docs/interact/programmability/triggers-and-functions",
 	"stack_weight": 16,
