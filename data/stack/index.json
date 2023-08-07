@@ -20,7 +20,8 @@
         "redisearch",
         "redisjson",
         "redistimeseries",
-        "redisbloom"
+        "redisbloom",
+        "redisgears"
     ],
     "assets": [],
     "_assets": [
