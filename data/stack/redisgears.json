@@ -16,7 +16,7 @@
 		"path": "docs/commands"
 	},
 	"groups": {
-		"triggers-and-functions": {
+		"triggers_and_functions": {
 			"display": "Triggers and functions",
 			"description": "React to database events and execute functions"
 		}
