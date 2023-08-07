@@ -3,7 +3,7 @@
     "module_id": "timeseries",
     "type": "module",
     "name": "TimeSeries",
-    "description": "Time Series data structure",
+    "description": "Time series data structure",
     "stack_path": "docs/data-types/timeseries",
     "stack_weight": 150,
     "repository": {
@@ -17,8 +17,8 @@
     },
     "groups": {
         "timeseries": {
-            "display": "Time Series",
-            "description": "Operations on the Time Series data type"
+            "display": "Time series",
+            "description": "Operations on the time series data type"
         }
     },
     "docs": {
