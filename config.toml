@@ -44,10 +44,10 @@ anchor = "smart"
   # Display and sort order for client examples
   clientsExamples = ["C#", "Go", "Java", "Node.js", "Python"]
   # Banner parameters
-  bannerContent = "I'm a banner, short and sweet"
-  bannerLink = "https://redis.io/download"
-  bannerFromDate = 2023-07-18
-  bannerUntilDate = 2023-07-28
+  bannerContent = "Announcing Redis 7.2 and Enhanced Vector DB"
+  bannerLink = "https://redis.com/blog/introducing-redis-7-2/"
+  bannerFromDate = 2023-08-15
+  bannerUntilDate = 2023-08-30
 
 # Language configuration
 
