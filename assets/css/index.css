@@ -1033,7 +1033,6 @@ input[type="radio"] {
   appearance: none;
 }
 
-
 .stack-logo-inline {
     display: inline;
     max-height: 1em;
@@ -1041,7 +1040,27 @@ input[type="radio"] {
     width: 2em;
 }
 
+
 .site-banner {
   background: radial-gradient(#F2F3FC,#D2D7FE);
   @apply w-full py-2 text-center font-medium text-base text-midnight-700
 }
+
+.banner-article {
+  /*background-color: #f7f7f7;*/
+  background-color: #fff8dc;
+  padding: 1px;
+  margin-left: -3px;
+  z-index: 998;
+}
+
+.banner-article p {
+  text-align: left;
+  font-size: 16px !important;
+  padding: 0 1em;
+}
+
+.banner-article a {
+  text-decoration: underline;
+}
+

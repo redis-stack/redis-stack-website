@@ -42,8 +42,126 @@
         <h1>{{ .Title }}</h1>
         {{ with .Params.description }}<p class="text-lg -mt-5 mb-10">{{ . | markdownify }}</p>{{ end }}
         {{- .Content -}}
+
+        {{ if eq $bazzar "clients"}}
+        <h2>Official Clients</h2>
+        <dl class="mt-8">
+          <dd>
+            <div class="grid grid-cols-[repeat(16,1fr)] items-start gap-4 py-4 border-t border-slate-200/75 text-sm">
+              <div class="col-span-12 flex flex-col">
+                <a href="https://github.com/redis/NRedisStack" target="_blank">
+                  <div class="flex items-center">
+                    {{ template "icon" (dict "id" "star" "class" "mr-1 shrink-0 h-[1.125rem] w-[1.125rem] text-amber-400") }}
+                      <span class="sr-only">[official]</span>
+                    <strong>NRedisStack</strong>
+                  </div>
+                  <p class="ml-1 mt-1 mb-0">Redis Stack .Net client</p>
+                </a>
+              </div>
+              <div class="col-span-4 mr-auto">
+                <div>
+                  License: MIT
+                  <br>
+                  <a href="/docs/clients/dotnet/">.Net quickstart guide</a>
+                </div>
+              </div>
+            </div>
+          </dd>
+          <dd>
+            <div class="grid grid-cols-[repeat(16,1fr)] items-start gap-4 py-4 border-t border-slate-200/75 text-sm">
+              <div class="col-span-12 flex flex-col">
+                <a href="https://github.com/redis/go-redis" target="_blank">
+                  <div class="flex items-center">
+                    {{ template "icon" (dict "id" "star" "class" "mr-1 shrink-0 h-[1.125rem] w-[1.125rem] text-amber-400") }}
+                      <span class="sr-only">[official]</span>
+                    <strong>go-redis</strong>
+                  </div>
+                  <p class="ml-1 mt-1 mb-0">Redis Go client</p>
+                </a>
+              </div>
+              <div class="col-span-4 mr-auto">
+                <div>
+                  License: BSD-2-Clause
+                  <br>
+                  <a href="/docs/clients/go/">Go quickstart guide</a>
+                </div>
+              </div>
+            </div>
+          </dd>
+          <dd>
+            <div class="grid grid-cols-[repeat(16,1fr)] items-start gap-4 py-4 border-t border-slate-200/75 text-sm">
+              <div class="col-span-12 flex flex-col">
+                <a href="https://github.com/redis/jedis" target="_blank">
+                  <div class="flex items-center">
+                    {{ template "icon" (dict "id" "star" "class" "mr-1 shrink-0 h-[1.125rem] w-[1.125rem] text-amber-400") }}
+                      <span class="sr-only">[official]</span>
+                    <strong>Jedis</strong>
+                  </div>
+                  <p class="ml-1 mt-1 mb-0">Redis Java client</p>
+                </a>
+              </div>
+              <div class="col-span-4 mr-auto">
+                <div>
+                  License: MIT
+                  <br>
+                  <a href="/docs/clients/java/">Java quickstart guide</a>
+                </div>
+              </div>
+            </div>
+          </dd>
+          <dd>
+            <div class="grid grid-cols-[repeat(16,1fr)] items-start gap-4 py-4 border-t border-slate-200/75 text-sm">
+              <div class="col-span-12 flex flex-col">
+                <a href="https://github.com/redis/node-redis" target="_blank">
+                  <div class="flex items-center">
+                    {{ template "icon" (dict "id" "star" "class" "mr-1 shrink-0 h-[1.125rem] w-[1.125rem] text-amber-400") }}
+                      <span class="sr-only">[official]</span>
+                    <strong>node-redis</strong>
+                  </div>
+                  <p class="ml-1 mt-1 mb-0">Redis Node.js client</p>
+                </a>
+              </div>
+              <div class="col-span-4 mr-auto">
+                <div>
+                  License: MIT
+                  <br>
+                  <a href="/docs/clients/nodejs/">Node.js quickstart guide</a>
+                </div>
+              </div>
+            </div>
+          </dd>
+          <dd>
+            <div class="grid grid-cols-[repeat(16,1fr)] items-start gap-4 py-4 border-t border-slate-200/75 text-sm">
+              <div class="col-span-12 flex flex-col">
+                <a href="https://github.com/redis/redis-py" target="_blank">
+                  <div class="flex items-center">
+                    {{ template "icon" (dict "id" "star" "class" "mr-1 shrink-0 h-[1.125rem] w-[1.125rem] text-amber-400") }}
+                      <span class="sr-only">[official]</span>
+                    <strong>redis-py</strong>
+                  </div>
+                  <p class="ml-1 mt-1 mb-0">Redis Python client</p>
+                </a>
+              </div>
+              <div class="col-span-4 mr-auto">
+                <div>
+                  License: MIT
+                  <br>
+                  <a href="/docs/clients/python/">Python quickstart guide</a>
+                </div>
+              </div>
+            </div>
+          </dd>
+
+          <div class="mb-8"></div>
+        </dl>
+
+        <h2>Other Clients</h2>
+        {{ end }}
   
         <p>
+          {{ if eq $bazzar "clients"}}
+          Offical repositories are marked with a {{ template "icon" (dict "id" "star" "class" "align-text-top inline-flex shrink-0 h-[1.125rem] w-[1.125rem] color text-amber-400") }}.<br />
+          {{ end }}
           Recommended repositories are marked with a {{ template "icon" (dict "id" "heart" "class" "align-text-top inline-flex shrink-0 h-[1.125rem] w-[1.125rem] color text-red-600") }}.<br />
           Repositories with some activity within the last six months are marked with a {{ template "icon" (dict "id" "lightning" "class" "align-text-bottom inline-flex shrink-0 h-[1.0625rem] w-[1.0625rem] color text-green-500") }}.<br />
           Want your repository listed here? Just submit a PR to the <a href="https://github.com/redis/redis-doc/pull/new" target="_blank">redis-doc repository</a>.
@@ -53,10 +171,11 @@
           {{ $pages := .Resources.ByType "page" }}
           {{ range $id, $name := $groups }}
             {{ $repos := (where $pages ".Params.group" $id) }}
-            {{ $active := sort (where (where $repos ".Params.recommended" true) ".Params.active" true) ".Params.stargazers_count" "desc" }}
-            {{ $active = $active | append (sort (where (where $repos ".Params.recommended" false) ".Params.active" true) ".Params.stargazers_count" "desc") }}
-            {{ $inactive := sort (where (where $repos ".Params.recommended" true) ".Params.active" "!=" true) ".Params.stargazers_count" "desc" }}
-            {{ $inactive = $inactive | append (sort (where (where $repos ".Params.recommended" false) ".Params.active" "!=" true) ".Params.stargazers_count" "desc") }}
+            {{ $active := (where $repos ".Params.official" true) }}
+            {{ $active = $active | append (sort (where (where (where $repos ".Params.official" false) ".Params.recommended" true) ".Params.active" true) ".Params.stargazers_count" "desc") }}
+            {{ $active = $active | append (sort (where (where (where $repos ".Params.official" false) ".Params.recommended" false) ".Params.active" true) ".Params.stargazers_count" "desc") }}
+            {{ $inactive := sort (where (where (where $repos ".Params.official" false) ".Params.recommended" true) ".Params.active" "!=" true) ".Params.stargazers_count" "desc" }}
+            {{ $inactive = $inactive | append (sort (where (where (where $repos ".Params.official" false) ".Params.recommended" false) ".Params.active" "!=" true) ".Params.stargazers_count" "desc") }}
             {{ if $has_groups }}
               <dt id="{{ $id }}" class="font-semibold text-slate-900 pb-3">
                 {{- $name -}}
@@ -75,8 +194,8 @@
     </div>
 
     {{ if $has_groups }}
-      <section class="hidden xl:block w-52 h-full shrink-0">
-        <div class="w-52 z-40 hidden bg-white/75 md:block overflow-auto fixed top-28 h-full max-h-[calc(100vh-15rem)] text-[0.8125rem]">
+      <section class="hidden xl:block w-60 h-full shrink-0">
+        <div class="w-60 z-40 hidden bg-white/75 md:block overflow-auto fixed top-28 h-full max-h-[calc(100vh-15rem)] text-[0.8125rem]">
           <h1 class="font-semibold mb-3">Browse by {{ $group_name }}</h1>
           <nav class="text-redis-neutral-800">
             <ul id="TableOfContents">
@@ -100,7 +219,11 @@
       <div class="col-span-12 flex flex-col">
         <a href="https://{{ .Params.repository }}" target="_blank">
           <div class="flex items-center">
-            {{ if and .Params.recommended }}
+            {{ if .Params.official }}
+            {{ template "icon" (dict "id" "star" "class" "mr-1 shrink-0 h-[1.125rem] w-[1.125rem] text-amber-400") }}
+              <span class="sr-only">[recommended]</span>
+            {{ end }}
+            {{ if .Params.recommended }}
             {{ template "icon" (dict "id" "heart" "class" "mr-1 shrink-0 h-[1.125rem] w-[1.125rem] text-red-600") }}
               <span class="sr-only">[recommended]</span>
             {{ end }}

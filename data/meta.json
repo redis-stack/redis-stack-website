@@ -3549,7 +3549,7 @@
         "open_issues_count": 117,
         "stargazers_count": 843,
         "archived": null,
-        "description": "Time Series data structure for Redis",
+        "description": "Time series data structure for Redis",
         "fetched_at": 1684063838.017459
     },
     "github.com/starkdg/Redis-ImageScout.git": {
