@@ -43,6 +43,11 @@ anchor = "smart"
   tagManagerId = "GTM-T4MTBKP"
   # Display and sort order for client examples
   clientsExamples = ["C#", "Go", "Java", "Node.js", "Python"]
+  # Banner parameters
+  bannerContent = "Announcing Redis 7.2 and Enhanced Vector DB"
+  bannerLink = "https://redis.com/blog/introducing-redis-7-2/"
+  bannerFromDate = 2023-08-15
+  bannerUntilDate = 2023-08-30
 
 # Language configuration
 
@@ -50,10 +55,11 @@ anchor = "smart"
 
 [languages.en]
 title = "Redis"
-description = "Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker"
 languageName ="English"
 # Weight used for sorting.
 weight = 1
+[languages.en.params]
+description = "Redis is an open source (BSD licensed), in-memory data structure store, used as a database, cache, and message broker"
 
 [markup]
   [markup.goldmark]
