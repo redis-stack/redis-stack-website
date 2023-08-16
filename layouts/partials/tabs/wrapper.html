@@ -7,6 +7,7 @@
 {{ $footerText := "Are you tired of using redis-cli? Try RedisInsight - the developer GUI for Redis." }}
 {{ $showFooter := (.showFooter) }}
 
+<!-- spellchecker-disable -->
 <div class="codetabs cli group flex justify-start items-center flex-wrap box-border rounded-lg mt-0 mb-0 mx-auto bg-slate-900" id="{{ $id }}">
     {{ range $i, $tab := $tabs }}
         {{ $tid := printf "%s_%s" (replace (replace (index $tab "title") "#" "sharp") "." "") $id }}
@@ -94,3 +95,4 @@ group-hover:opacity-100 group-hover:visible">
     {{ end }}
 
 </div>
+<!-- spellchecker-enable -->
