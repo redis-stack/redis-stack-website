@@ -149,12 +149,6 @@ section = ["HTML", "RSS"] # print
     parent = "redis-stack"
     weight = 1
   [[menu.main]]
-    identifier = "stack-clients"
-    name = "Stack clients"
-    url = "/docs/clients/"
-    parent = "redis-stack"
-    weight = 2
-  [[menu.main]]
     identifier = "insight"
     name = "RedisInsight"
     url = "/docs/ui/insight/"
