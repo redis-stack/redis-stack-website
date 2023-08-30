@@ -75,7 +75,5 @@
 /commands/graph.query/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
 /commands/graph.ro_query/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
 /commands/graph.slowlog/ https://docs.redis.com/latest/stack/previous-features/graph/commands/
-
-
-
+/docs/stack/search/commands/ /commands/?group=search
 
