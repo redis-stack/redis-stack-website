@@ -104,7 +104,7 @@
     },
     "docs": {
         "git_uri": "https://github.com/redis/redis-doc",
-        "dev_branch": "master",
+        "dev_branch": "doc-dmaier-quickstarts",
         "path": "docs"
     },
     "data": {
