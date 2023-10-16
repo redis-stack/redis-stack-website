@@ -37,7 +37,7 @@
             },
             {
                 "src": "docs/stack/clients/om-clients",
-                "dst": "docs/clients/",
+                "dst": "docs/connect/clients/",
                 "proc_md": true
             },
             {
