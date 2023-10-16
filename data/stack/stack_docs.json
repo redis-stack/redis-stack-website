@@ -27,7 +27,7 @@
             },
             {
                 "src": "docs/stack/get-started",
-                "dst": "docs/get-started/",
+                "dst": "docs/",
                 "proc_md": true
             },
             {
@@ -42,12 +42,12 @@
             },
             {
                 "src": "docs/stack/about",
-                "dst": "docs",
+                "dst": "docs/",
                 "proc_md": true
             },
             {
                 "src": "docs/ui/insight",
-                "dst": "docs/ui",
+                "dst": "docs/connect",
                 "proc_md": true
             }
         ]

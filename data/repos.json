@@ -111,7 +111,7 @@
             },
             "node-redis": {
                 "description": "Recommended client for node.",
-                "recommended": true,
+                "official": true,
                 "repository": "github.com/redis/node-redis"
             },
             "thunk-redis": {
@@ -233,7 +233,7 @@
             },
             "go-redis": {
                 "description": "Redis client for Golang supporting Redis Sentinel and Redis Cluster out of the box.",
-                "recommended": true,
+                "official": true,
                 "repository": "github.com/redis/go-redis"
             },
             "redis.go": {
@@ -366,7 +366,7 @@
             },
             "redis-py": {
                 "description": "Mature and supported. The way to go for Python.",
-                "recommended": true,
+                "official": true,
                 "repository": "github.com/redis/redis-py"
             },
             "pyredis": {
@@ -757,6 +757,7 @@
             },
             "Redisson": {
                 "description": "distributed and scalable Java data structures on top of Redis server",
+                "recommended": true,
                 "twitter": [
                     "mrniko"
                 ],
@@ -775,7 +776,7 @@
             },
             "Jedis": {
                 "description": "A blazingly small and sane Redis Java client",
-                "recommended": true,
+                "official": true,
                 "twitter": [
                     "xetorthio",
                     "g_korland"
@@ -855,10 +856,6 @@
                     "arminas"
                 ],
                 "repository": "github.com/ziogas/PHP-Redis-implementation"
-            },
-            "redis-async": {
-                "description": "Asynchronous redis client library for PHP.",
-                "repository": "github.com/swoole/redis-async"
             },
             "Predis": {
                 "description": "Mature and supported",
@@ -1335,7 +1332,7 @@
             },
             "NRedisStack": {
                 "description": "This client is developed by Redis to bring RedisStack support to CSharp.",
-                "recommended": true,
+                "official": true,
                 "repository": "github.com/redis/NRedisStack"
             },
             "BeetleX.Redis": {
@@ -1542,13 +1539,6 @@
                     "madsimian"
                 ],
                 "repository": "github.com/madsimian/em-redis"
-            },
-            "oxblood": {
-                "description": "Straightforward Ruby client.",
-                "twitter": [
-                    "etehtsea"
-                ],
-                "repository": "github.com/etehtsea/oxblood"
             },
             "em-hiredis": {
                 "description": "An EventMachine Redis client (uses hiredis).",
@@ -2250,15 +2240,6 @@
     },
     "modules": {
         "community": {
-            "RedisStateMachine": {
-                "license": "Redis Source Available License",
-                "description": "A module for storing state machines in",
-                "github": [
-                    "chayim",
-                    "RedisLabs"
-                ],
-                "repository": "github.com/RedisStateMachine/RedisStateMachine"
-            },
             "redis-fpn": {
                 "license": "Apache 2.0",
                 "description": "Redis module for Fixed Point Number data type",
@@ -2374,6 +2355,14 @@
                 ],
                 "repository": "github.com/sewenew/redis-protobuf"
             },
+            "redis-llm": {
+                "license": "Apache-2.0",
+                "description": "Redis module integrating LLM (Large Language Model) with Redis",
+                "github": [
+                    "sewenew"
+                ],
+                "repository": "github.com/sewenew/redis-llm"
+            },
             "RedisStateMachine": {
                 "license": "Redis Source Available License",
                 "description": "A module for storing state machines, and transitioning them in Redis",
@@ -2409,14 +2398,6 @@
                 ],
                 "repository": "github.com/RedisGraph/RedisGraph"
             },
-            "redisims": {
-                "license": "MIT",
-                "description": "A lightweight Redis module following the If Modified Since (IMS) pattern for caching",
-                "github": [
-                    "Clement-Jean"
-                ],
-                "repository": "github.com/Clement-Jean/RedisIMS"
-            },
             "rediSQL": {
                 "license": "AGPL-3.0",
                 "description": "A redis module that provides a full SQL capabilities embedding SQLite",
@@ -2433,6 +2414,14 @@
                     "sulewicz"
                 ],
                 "repository": "github.com/sulewicz/redis-s2geo"
+            },
+            "RedisMMap": {
+                "license": "MIT",
+                "description": "Redis module for accessing values on mmapped file.",
+                "github": [
+                    "t-fuchi"
+                ],
+                "repository": "github.com/t-fuchi/RedisMMap"
             },
             "redis-cell": {
                 "license": "MIT",
@@ -2738,6 +2727,14 @@
                     "medisclient"
                 ],
                 "repository": "github.com/luin/medis"
+            },
+            "Another Redis Desktop Manager": {
+                "description": "\ud83d\ude80\ud83d\ude80\ud83d\ude80A faster, better and more stable Redis desktop manager [GUI client], compatible with Linux, Windows, Mac.",
+                "homepage": "https://github.com/qishibo/AnotherRedisDesktopManager",
+                "twitter": [
+                    "qii404"
+                ],
+                "repository": "github.com/qishibo/AnotherRedisDesktopManager"
             },
             "redis-browser": {
                 "description": "Cross platform GUI tool for redis that includes support for ReJSON",
