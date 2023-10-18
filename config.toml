@@ -84,7 +84,7 @@ section = ["HTML", "RSS"] # print
   [[menu.main]]
     identifier = "get-started"
     name = "Get started"
-    url = "/docs/getting-started/"
+    url = "/docs/get-started/"
     weight = 1
   [[menu.main]]
     identifier = "docs"
@@ -102,7 +102,7 @@ section = ["HTML", "RSS"] # print
   [[menu.main]]
     identifier = "redis-get-started"
     name = "Get started"
-    url = "/docs/getting-started/"
+    url = "/docs/get-started/data-store/"
     parent = "redis"
     weight = 1
   [[menu.main]]
@@ -114,13 +114,13 @@ section = ["HTML", "RSS"] # print
   [[menu.main]]
     identifier = "redis-cli"
     name = "Redis CLI"
-    url = "/docs/ui/cli/"
+    url = "/docs/connect/cli/"
     parent = "redis"
     weight = 3
   [[menu.main]]
     identifier = "redis-clients"
     name = "Redis clients"
-    url = "/docs/clients/"
+    url = "/docs/connect/clients/"
     parent = "redis"
     weight = 4
   [[menu.main]]
@@ -138,20 +138,20 @@ section = ["HTML", "RSS"] # print
   [[menu.main]]
     identifier = "redis-stack"
     name = "Redis Stack"
-    url = "/docs/stack/"
+    url = "/docs/about/about-stack/"
     pre = "icons/stack-icon.svg"
     parent = "docs"
     weight = 2
   [[menu.main]]
     identifier = "stack-get-started"
     name = "Get started"
-    url = "/docs/getting-started/install-stack/"
+    url = "/docs/get-started/document-database/"
     parent = "redis-stack"
     weight = 1
   [[menu.main]]
     identifier = "insight"
     name = "RedisInsight"
-    url = "/docs/ui/insight/"
+    url = "/docs/connect/insight/"
     parent = "redis-stack"
     weight = 3
   [[menu.main]]
@@ -174,7 +174,7 @@ section = ["HTML", "RSS"] # print
     weight = 6
   [[menu.main]]
     identifier = "triggersandfunctions"
-    name = "Triggers and functions"
+    name = "Programmability"
     url = "/docs/interact/programmability/triggers-and-functions/"
     parent = "redis-stack"
     weight = 7
