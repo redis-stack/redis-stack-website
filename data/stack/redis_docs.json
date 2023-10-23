@@ -11,7 +11,7 @@
     "config_file_template": "management/config-file.md",
     "commands": {
         "git_uri": "https://github.com/redis/redis-doc",
-        "dev_branch": "master",
+        "dev_branch": "doc-dmaier-quickstarts",
         "defs": "commands.json",
         "path": "commands",
         "payload": [
@@ -104,12 +104,12 @@
     },
     "docs": {
         "git_uri": "https://github.com/redis/redis-doc",
-        "dev_branch": "master",
+        "dev_branch": "doc-dmaier-quickstarts",
         "path": "docs"
     },
     "data": {
         "git_uri": "https://github.com/redis/redis-doc",
-        "dev_branch": "master",
+        "dev_branch": "doc-dmaier-quickstarts",
         "languages": "languages.json",
         "tool_types": "tool_types.json",
         "clients": "clients/",
@@ -119,7 +119,7 @@
     },
     "misc": {
         "git_uri": "https://github.com/redis/redis-doc",
-        "dev_branch": "master",
+        "dev_branch": "doc-dmaier-quickstarts",
         "payload": [
             {
                 "src": "_index.md"
