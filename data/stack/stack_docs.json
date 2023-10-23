@@ -6,7 +6,7 @@
     "stack_path": "docs",
     "misc": {
         "git_uri": "https://github.com/redis-stack/redis-stack-docs",
-        "dev_branch": "doc-dmaier-quickstarts",
+        "dev_branch": "main",
         "payload": [
             {
                 "src": "community/"
