@@ -390,7 +390,7 @@ class Core(Component):
         branch = Component._get_dev_branch(data)
         self._checkout(branch, repo, data)
         logging.info(f'Getting {self._id} data')
-        for src in ['languages', 'tool_types']:
+        for src in ['languages', 'tool_types', 'resp2_replies', 'resp3_replies']:
             filename = data.get(src)
             filepath = f'{repo}/{filename}'
             rsync(filepath, 'data/')

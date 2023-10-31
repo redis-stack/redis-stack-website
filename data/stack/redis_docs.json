@@ -111,6 +111,8 @@
         "git_uri": "https://github.com/redis/redis-doc",
         "dev_branch": "master",
         "languages": "languages.json",
+        "resp2_replies": "resp2_replies.json",
+        "resp3_replies": "resp3_replies.json",
         "tool_types": "tool_types.json",
         "clients": "clients/",
         "libraries": "libraries/",
