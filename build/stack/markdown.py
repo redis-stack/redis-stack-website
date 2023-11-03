@@ -166,18 +166,26 @@ class Markdown:
 
     @staticmethod
     def convert_reply_shortcuts(payload):
-        """ Convert RESP2 reply type shortcuts to links """
+        """ Convert RESP reply type shortcuts to links """
         def reply(x):
-            resp2 = {
-                'nil': ('resp-bulk-strings', 'Null reply'),
-                'simple-string': ('resp-simple-strings', 'Simple string reply'),
-                'integer': ('resp-integers', 'Integer reply'),
-                'bulk-string': ('resp-bulk-strings', 'Bulk string reply'),
-                'array': ('resp-arrays', 'Array reply'),
-                'error': ('resp-errors', 'Error reply'),
-
+            resp = {
+                'simple-string': ('simple-strings', 'Simple string reply'),
+                'simple-error': ('simple-errors', 'Simple error reply'),
+                'integer': ('integers', 'Integer reply'),
+                'bulk-string': ('bulk-strings', 'Bulk string reply'),
+                'array': ('arrays', 'Array reply'),
+                'nil': ('bulk-strings', 'Nil reply'),
+                'null': ('nulls', 'Null reply'),
+                'boolean': ('booleans', 'Boolean reply'),
+                'double': ('doubles', 'Double reply'),
+                'big-number': ('big-numbers', 'Big number reply'),
+                'bulk-error': ('bulk-errors', 'Bulk error reply'),
+                'verbatim-string': ('verbatim-strings', 'Verbatim string reply'),
+                'map': ('maps', 'Map reply'),
+                'set': ('sets', 'Set reply'),
+                'push': ('pushes', 'Push reply')
             }
-            rep = resp2.get(x.group(1), None)
+            rep = resp.get(x.group(1), None)
             if rep:
                 return f'[{rep[1]}](/docs/reference/protocol-spec#{rep[0]})'
             return f'[]'
