@@ -10,13 +10,14 @@
     {{ partial "docs-nav.html" . }}
     <div class="w-full max-w-[47rem] py-12">
       {{ partial "breadcrumbs" . }}
-      <section class="prose prose-slate pt-10">
+      <section class="prose prose-slate pt-10" aria-describedby="summary">
         <h1 class="command-name">
           {{- .Title }}
           {{- if (isset .Params "deprecated_since") }}
           <span class="text-base">(deprecated)</span>
           {{- end }}
         </h1>
+        <p id="summary">{{- .Params.summary -}}</p>
         {{ if (isset .Params "deprecated_since") }}
           <div class="border-l-8 pl-4">
             <p>As of {{ $component }} version {{ .Params.deprecated_since }}, this command is regarded as deprecated.</p>
