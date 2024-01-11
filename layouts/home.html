@@ -9,7 +9,7 @@
         <div class="text-center lg:text-left">
           <h1 class="font-display text-6xl leading-none font-medium mb-4 text-slate-900">Redis</h1>
           <p class="text-redis-neutral-800 text-xl mb-7 max-w-2xl mx-auto lg:mx-0">
-            The open source, in-memory data store used by millions of developers as a database, cache, streaming engine, and message&nbsp;broker.
+            The open-source, <a class="hover:text-indigo-600 font-semibold" href="/docs/get-started/data-store/">in-memory data store</a> used by millions of developers as a <span class="font-semibold">cache</span>, <a class="hover:text-indigo-600 font-semibold" href="/docs/get-started/vector-database/">vector database</a>, <a class="hover:text-indigo-600 font-semibold" href="/docs/get-started/document-database/">document database</a>, <a class="hover:text-indigo-600 font-semibold" href="/docs/data-types/streams/">streaming engine</a>, and <span class="font-semibold">message broker</span>.
           </p>
           <a href="/docs/get-started/" class="button-xl button-indigo">Get Started</a>
           <a href="/docs/" class="button-xl button-outline ml-2">Read the docs</a>
@@ -35,14 +35,60 @@
       </div>
     </header>
     <article class="">
-      <section class="text-center pb-28 container max-w-[85rem] mx-auto px-4 sm:px-8">
+      <div class="container max-w-[60rem] mx-auto px-4 sm:px-8 pb-28">
+        <h2 class="text-center font-display text-4xl leading-tight text-slate-900 font-semibold mb-10 -mt-4">
+          Featured content
+        </h2>
+        <ul class="flex flex-col sm:grid md:grid-cols-2 xl:grid-cols-3 gap-14">
+          <li class="flex flex-col h-full">
+            <h3 class="font-semibold text-xl mb-2 pt-5 border-t-2 border-indigo-500 text-slate-900">
+             Vector search
+            </h3>
+            <a class="group inline-flex items-center text-midnight-700 hover:text-indigo-600 font-medium mt-auto self-start pb-3" href="/docs/get-started/vector-database/">
+              Vector database quick start guide
+              <span class="ml-1.5 text-indigo-600 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+            <a class="group inline-flex items-center text-midnight-700 hover:text-indigo-600 font-medium mt-auto self-start pb-3" href="/docs/interact/search-and-query/query/vector-search/">
+              Query for data based on vector embeddings
+              <span class="ml-1.5 text-indigo-600 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+          </li>
+          <li class="flex flex-col h-full">
+            <h3 class="font-semibold text-xl mb-2 pt-5 border-t-2 border-indigo-500 text-slate-900">
+             Search and query
+            </h3>
+            <a class="group inline-flex items-center text-midnight-700 hover:text-indigo-600 font-medium mt-auto self-start pb-3" href="/docs/get-started/document-database/">
+              Document database quick start guide
+              <span class="ml-1.5 text-indigo-600 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+            <a class="group inline-flex items-center text-midnight-700 hover:text-indigo-600 font-medium mt-auto self-star pb-3t" href="/docs/interact/search-and-query/query/">
+              Query, search, and aggregate Redis data
+              <span class="ml-1.5 text-indigo-600 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+          </li>
+          <li class="flex flex-col h-full">
+            <h3 class="font-semibold text-xl mb-2 pt-5 border-t-2 border-indigo-500 text-slate-900">
+             Programmability
+            </h3>
+            <a class="group inline-flex items-center text-midnight-700 hover:text-indigo-600 font-medium mt-auto self-start pb-3" href="/docs/interact/programmability/triggers-and-functions/quick_start_ri/">
+              Trigger and execute JavaScript functions
+              <span class="ml-1.5 text-indigo-600 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+            <a class="group inline-flex items-center text-midnight-700 hover:text-indigo-600 font-medium mt-auto self-start pb-3" href="/docs/interact/programmability/triggers-and-functions/debugging/">
+              Methods for debugging Redis Stack functions
+              <span class="ml-1.5 text-indigo-600 opacity-50 group-hover:opacity-100 transition group-hover:translate-x-1">&rarr;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <section class="text-center py-28 bg-gradient-to-b from-indigo-50/30 via-indigo-50/30 to-white">
         <h2 class="font-display text-4xl leading-tight text-slate-900 font-semibold mb-4 -mt-4">
-          A vibrant, open source database
+          A vibrant, open-source database
         </h2>
         <p class="text-redis-neutral-800 text-lg max-w-2xl mx-auto mb-12">
-          Voted the most-loved database for 5 years running, Redis is at the
-          center of an engaged community of developers, architects, and open
-          source contributors.
+          Voted the most-loved database, Redis is at the
+          center of an engaged community of developers, architects, and open-source contributors.
         </p>
         <ul class="flex flex-col md:grid grid-cols-3 gap-5 text-redis-neutral-800 max-w-2xl mx-auto">
           <li class="w-full text-sm font-semibold text-slate-900 p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-lg flex flex-col justify-center">
@@ -50,12 +96,12 @@
             Docker pulls
           </li>
           <li class="w-full text-sm font-semibold text-slate-900 p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-lg flex flex-col justify-center">
-            <span class="mb-1 text-teal-400 font-display text-5xl">50K+</span>
+            <span class="mb-1 text-teal-400 font-display text-5xl">60K+</span>
             Github stars
           </li>
           <li class="w-full text-sm font-semibold text-slate-900 p-6 bg-white border border-slate-900/10 bg-clip-padding shadow-md shadow-slate-900/5 rounded-lg flex flex-col justify-center">
             <span class="mb-1 text-teal-400 font-display text-5xl">50+</span>
-            Supported programing languages
+            Supported programming languages
           </li>
         </ul>
       </section>
