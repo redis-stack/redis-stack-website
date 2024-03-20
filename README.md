@@ -1,4 +1,7 @@
 ## Documentation
+
+OPEN SOURCE LICENSE VS. TRADEMARKS. The three-clause BSD license gives you the right to redistribute and use the software in source and binary forms, with or without modification, under certain conditions. However, open source licenses like the three-clause BSD license do not address trademarks. For further details please read the [Redis Trademark Policy](https://www.redis.com/legal/trademark-policy)."
+
 - [How to add a multi-language code example to redis.io](https://redis-stack.github.io/redis-stack-website/)
 - [Code examples index](https://redis-stack.github.io/redis-stack-website/examples/)
 
