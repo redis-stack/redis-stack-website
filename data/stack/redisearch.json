@@ -11,7 +11,7 @@
     },
     "commands": {
         "git_uri": "https://github.com/redisearch/redisearch",
-        "dev_branch": "master",
+        "dev_branch": "doc-dmaier-query-reorg",
         "defs": "commands.json",
         "path": "docs/commands"
     },
@@ -27,7 +27,7 @@
     },
     "docs": {
         "git_uri": "https://github.com/redisearch/redisearch",
-        "dev_branch": "master",
+        "dev_branch": "doc-dmaier-query-reorg",
         "path": "docs/docs"
     },
     "releases": {
